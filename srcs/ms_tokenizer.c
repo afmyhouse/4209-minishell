@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer.c                                        :+:      :+:    :+:   */
+/*   ms_tokenizer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: antoda-s <antoda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 19:10:37 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/11/29 19:48:14 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/11/30 10:28:24 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,12 @@ int	token_setter(char *str, t_token **head)
 	{
 		curr = search_token_type(str);
 		if (curr.op != 0 && prev != str)
-		{
 			add_token(head, create_token(prev, str - prev, TOKEN_NAME));
+		if (curr.op != 0)
+		{
+			str += curr.size;
+			if (curr.type != TOKEN_EMPTY)
+				add_token(head)
 		}
 	}
 }

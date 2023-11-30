@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   ms_parser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: antoda-s <antoda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:28:14 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/11/29 19:05:46 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/11/30 10:12:22 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,14 +130,39 @@ static int	tokenize(char **line, t_token **head, t_script *script)
 	return (show_func(__func__, SUCCESS));
 }
 
-int	minishel_parser(t_script *script, char **line_buffer)
+int	parser(t_script *script, char **line_buffer)
 {
 	t_token	*head;
 
 	head = NULL;
 	if (!line_buffer)
 		return (show_func(__func__, ERROR));
+
 	add_history(*line_buffer);
-	if (tokenize(line_buffer, &head, script))
+
+	if (token_setter(line_buffer, &head, script))
 		return (free_tokens(&head));
+
+	remove_blanks_tokens(head);
+
+	if (check_syntax(head))
+		return (free_tokens(&head))
+
+	script->cmd_count = get_cmd_count(head);
+	script->commands = malloc(sizeof(t_command) * script->cmd_count);
+	
+	if (!script->commands || script->cmd_count <= 0)
+		return (free_tokens(&head));
+		
+	trim_spaces(head);
+	
+	get_num_args(head, script);
+	
+	set_filenames_null(script->commands, script->cmd_count, head);
+	
+	if (parse_commands(head, script->commands, 0, 0))
+		return (free_tokens(&head));
+	free_tokens(&head);
+	return (0);
+	
 }

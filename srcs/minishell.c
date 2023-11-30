@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: antoda-s <antoda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:27:05 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/11/29 13:48:22 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/11/30 09:34:53 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,6 @@ char	**envp_getter(char **envp)
 	return (new_envp);
 }
 
-void	minishel_signals(void)
-{
-	signal(SIGINT, sig_handler);
-	signal(SIGQUIT, SIG_IGN);
-}
 
 
 /// @brief 				Initializes the shell and keeps looping until exit
@@ -53,7 +48,7 @@ int	minishell_loop(t_script *script, char **line_buffer)
 	while (1)
 	{
 		script->cmd_count = 0;
-		minishell_signals();
+		sig_setter();
 		result = parse(script, line_buffer);
 		free(line_buffer);
 		if (result == 1)
@@ -88,7 +83,7 @@ int	main(int argc, char **argv, char **envp)
 	line_buffer = NULL;
 	(void)argc;
 	(void)argv;
-	script.envp = envpgetter(envp);
+	script.envp = envp_getter(envp);
 	tcgetattr(STDIN_FILENO, &script.termios_p);
 	minishel_loop(&script, &line_buffer);
 	free_envp(script.envp);
