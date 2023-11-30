@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 11:04:53 by sgoffaux          #+#    #+#             */
-/*   Updated: 2023/11/29 19:17:09 by antoda-s         ###   ########.fr       */
+/*   Updated: 2021/10/08 14:36:38 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ t_token			*create_token(const char *string, int size, t_token_type type);
 void			add_token(t_token **head, t_token *new_token);
 t_operations	search_token_type(const char *s);
 char			*remove_quotes(char *str);
-int				token_setter(char *str, t_token **head);
+int				tokenizer(char *str, t_token **head);
 void			remove_blank_tokens(t_token *head);
 void			fill_heredoc(t_redirection *file);
 

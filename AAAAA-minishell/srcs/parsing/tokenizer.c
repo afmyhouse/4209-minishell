@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: rvan-aud <rvan-aud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 14:54:35 by sgoffaux          #+#    #+#             */
-/*   Updated: 2023/11/29 19:42:00 by antoda-s         ###   ########.fr       */
+/*   Updated: 2021/10/07 16:34:38 by rvan-aud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ static void	copy_in_quotes(char *start, char *end, char **str, int *i)
 /*
 treat_quotes(char **str):
 	This function advances the given pointer to the next character that it is on.
-	For example, if the function is called with the pointer pointing at a quotation
-	mark, it will advance the pointer in the string to the next occurence of that
-	same quotation mark. The function returns 0 if this character is never met,
+	For example, if the function is called with the pointer pointing at a quotation 
+	mark, it will advance the pointer in the string to the next occurence of that 
+	same quotation mark. The function returns 0 if this character is never met, 
 	which would signify an unclosed quotation mark.
 */
 static int	treat_quotes(char **str)
@@ -56,7 +56,7 @@ static char	*end_remove_quotes(char *tmp, char *copy, int i)
 
 /*
 remove_quotes(char *str):
-	This function removes any redundant quotation marks
+	This function removes any redundant quotation marks 
 */
 char	*remove_quotes(char *str)
 {
@@ -86,11 +86,11 @@ char	*remove_quotes(char *str)
 }
 
 /*
-token_setter(char *str, t_token **head):
-	This function iterates over the line buffer read by readline and
+tokenizer(char *str, t_token **head):
+	This function iterates over the line buffer read by readline and 
 	splits it into tokens based on the operations it encounters.
 */
-int	token_setter(char *str, t_token **head)
+int	tokenizer(char *str, t_token **head)
 {
 	t_operations	curr;
 	char			*prev;

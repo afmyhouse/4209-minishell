@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rvan-aud <rvan-aud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 16:15:17 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/10/07 16:34:28 by rvan-aud         ###   ########.fr       */
+/*   Updated: 2023/11/30 18:58:12 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
 first_quote(char *str):
-	This function returns 1 if the outer quotation marks around a point in a 
+	This function returns 1 if the outer quotation marks around a point in a
 	string are single quotes and returns 0 otherwise.
 */
 static int	first_quote(char *str)
@@ -60,7 +60,7 @@ static char	*replace_loop(char *str, char **envp, int *i)
 
 /*
 init_split_before(char *line_buf, char **before, int *i):
-	This function splits our given line buffer on '$' and accounts for the 
+	This function splits our given line buffer on '$' and accounts for the
 	possibility that the string may begin with a '$'.
 */
 static char	**init_split_before(char *line_buf, char **before, int *i)
@@ -80,9 +80,9 @@ static char	**init_split_before(char *line_buf, char **before, int *i)
 
 /*
 replace_env_var(char *line_buf, char **envp, int i, int j):
-	This function splits our given line buffer into one or more environment 
-	variables, determines whether or not they need to be replaced based on 
-	the quotation marks that surround each one, and rebuilds the line buffer 
+	This function splits our given line buffer into one or more environment
+	variables, determines whether or not they need to be replaced based on
+	the quotation marks that surround each one, and rebuilds the line buffer
 	with these replacements and returns the new string.
 */
 char	*replace_env_var(char *line_buf, char **envp, int i, int j)

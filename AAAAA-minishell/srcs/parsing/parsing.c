@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 14:38:46 by sgoffaux          #+#    #+#             */
-/*   Updated: 2023/11/29 19:17:09 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/11/30 22:22:05 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static int	tokenize(char **line, t_token **head, t_script *s)
 	t_token	*tmp;
 	char	*bis;
 
-	if (!token_setter(*line, head))
+	if (!tokenizer(*line, head))
 		return (return_error("Syntax Error", 0));
 	tmp = *head;
 	while (tmp)
@@ -123,7 +123,7 @@ static void	trim_spaces(t_token *head)
 parse:
 	This function calls readline to wait for an input from the user, adds the
 	command to the history, then goes on to parse the string.
-	The parsing is done in multiple steps, starting with a lexer (token_setter)
+	The parsing is done in multiple steps, starting with a lexer (tokenizer)
 	that will split the string into workable tokens that can be parsed into
 	our command structure.
 */
@@ -141,6 +141,7 @@ int	parse(t_script *script, char **line_buf)
 	remove_blank_tokens(head);
 	if (check_syntax(head))
 		return (free_tokens(&head));
+/* ************************************************************************** */
 	script->cmd_count = get_cmd_count(head);
 	script->commands = malloc(sizeof(t_command) * script->cmd_count);
 	if (!script->commands || script->cmd_count <= 0)

@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   2ms_signal.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antoda-s <antoda-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:38:24 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/11/30 09:37:34 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/11/30 17:37:35 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/// @brief 		Signal processing functions setter
-/// @param  	No parameter required
+/// @brief		Signal processing functions setter
+/// @param		No parameter required
 void	sig_setter(void)
 {
 	signal(SIGINT, sig_handler);
