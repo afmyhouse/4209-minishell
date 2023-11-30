@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:28:06 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/11/29 21:33:09 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/11/30 18:11:12 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 int	g_exit_status;
 
 /// @brief 				Enum to hold the token types
-/// @param TOKEN_WS	Empty token
+/// @param TOKEN_WS		Empty token
 /// @param TOKEN_PIPE	Pipe token
 /// @param TOKEN_R_IN	Redirection input token
 /// @param TOKEN_R_OUT	Redirection output token
@@ -135,6 +135,10 @@ typedef struct s_script
 /* ************************************************************************** */
 ///	signal.c
 /* ************************************************************************** */
+
+/// @brief 		Signal processing functions setter
+/// @param  	No parameter required
+void	sig_setter(void);
 
 /// @brief 			Handles signal SIGINT (Ctrl+C) and SIGQUIT (Ctrl+\)
 ///					Instead of exiting, the sig handler provides a new line

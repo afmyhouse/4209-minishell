@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_stuff.c                                       :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/29 12:26:48 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/11/29 12:28:30 by antoda-s         ###   ########.fr       */
+/*   Created: 2021/03/30 15:51:21 by sgoffaux          #+#    #+#             */
+/*   Updated: 2021/04/12 11:26:34 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include <stddef.h>
 
-void	free_envp(char **my_envp)
+void	*ft_memset(void *s, int c, size_t n)
 {
-	int	i;
+	size_t			i;
+	unsigned char	*ptr;
 
 	i = 0;
-	while (my_envp[i])
-	{
-		free(my_envp[i]);
-		i++;
-	}
-	free(my_envp);
+	ptr = (unsigned char *)s;
+	while (i < n)
+		ptr[i++] = (unsigned char)c;
+	return (s);
 }
