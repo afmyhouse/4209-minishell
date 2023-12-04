@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: antoda-s <antoda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 18:49:28 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/11/29 18:46:53 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/12/04 14:49:00 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@
 # ifndef LINE_ERROR
 #  define LINE_ERROR 50
 # endif
-# ifndef MLX_ERROR
-#  define MLX_ERROR 51
-# endif
+
 # ifndef ARGS_ERROR
 #  define ARGS_ERROR 52
 # endif
