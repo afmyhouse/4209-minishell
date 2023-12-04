@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   5ms_env.c                                          :+:      :+:    :+:   */
+/*   6ms_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: antoda-s <antoda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 19:00:01 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/11/30 21:52:28 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/12/04 11:39:36 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 /// @param envp	Environment variables
 /// @param i	Index start
 /// @return		replace variable
-static char	*replace_loop(char *str, char **envp, int *i)
+char	*replace_loop(char *str, char **envp, int *i)
 {
 	char	*tmp;
 	char	c;
@@ -48,7 +48,7 @@ static char	*replace_loop(char *str, char **envp, int *i)
 /// @param before	Pointer to the string before the first '$'
 /// @param i		Index start
 /// @return			Split string
-static char	**init_split_before(char *line_buf, char **before, int *i)
+char	**init_split_before(char *line_buf, char **before, int *i)
 {
 	char	**split;
 
@@ -103,7 +103,7 @@ char	*replace_env_var(char *line_buf, char **envp, int i, int j)
 /// @brief		This function replaces multiple spaces with a single space
 /// @param str	String to be parsed
 /// @return		String with multiple spaces replaced by a single space
-static char	*replace_multiple_space(char *str)
+char	*replace_multiple_space(char *str)
 {
 	char	**split;
 	char	*tmp;

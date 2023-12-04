@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: antoda-s <antoda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:28:06 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/11/30 18:11:12 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/12/04 13:38:06 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,20 @@ typedef struct s_script
 ///	main.c
 /* ************************************************************************** */
 
+/// @brief 		Creates array from system environment variables
+/// @param envp system environment variables from main (... char **envp)
+/// @return 	array copy of system environment variables
+char	**envp_getter(char **envp);
 
+/// @brief 				Gets the terminal settings
+/// @param termios_p	Pointer to the termios settings structure
+void	termios_getter(struct termios *termios_p);
+
+/// @brief 				Initializes the shell and keeps looping until exit
+/// @param script		Script structure (see minishell struct)
+/// @param line_buffer	Line buffer
+/// @return				void
+int	ms_loop(t_script *script, char **line_buffer);
 
 /* ************************************************************************** */
 ///	signal.c
@@ -162,31 +175,221 @@ void	sig_handler_heredoc(int signum);
 ///	parser.c
 /* ************************************************************************** */
 
-/// @brief 			Checks if the number of arguments is valid
-/// @param argc		Number of arguments
-/// @return			SUCCESS if valid, ERROR if invalid
-int		invalid_argc(int argc);
+/// @brief		This function checks whether the given linked list, of tokens,
+///				is a valid command syntaxically.
+/// @param head	Head of the token list
+/// @return		0 if success, 1 if failure
+int	check_syntax(t_token *head);
 
-/// @brief 			Checks if str has paired quotes and double quotes
-/// @param str		String to parse
-/// @param c		Character to check
+/// @brief			This function simply counts the number of pipes in our
+///					linked list of tokens to determine the number of chained
+///					commands are in the line buffer.
+/// @param head		Head of the token list
+/// @return			Number of commands
+int	get_cmd_count(t_token *head);
+
+/// @brief		This function simply trims the leading and trailing whitespace
+///				that can be found when replacing an environment variable.
+/// @param head	Head of the token list
+/// @return		Trimmed content
+void	trim_spaces(t_token *head);
+
+/// @brief			This function determines the amount of arguments each command
+///					has so the argv can be malloced to the right size in the
+///					following steps.
+/// @param head		Head of the token list
+/// @param script	Script pointer
+/// @return			Trimmed content
+void	get_num_args(t_token *head, t_script *script);
+
+/// @brief 			Iniatilzes file names direction and remove quotes from names
+/// @param commands Struct witj info about files
+/// @param max 		max number of files
+/// @param head 	pointert o command struct hed
+void	set_filenames_null(t_command *commands, int max, t_token *head);
+
+/// @brief 		This function iterates through a linked list of tokens and
+///				fills the command structure based on the type of token it
+///				encounters.
+/// @param head	Head of the token list
+/// @param cmd	Command structure
+/// @param i	Index
+/// @param j	Index
+/// @return		0 if success, 1 if failure
+int	parse_commands(t_token *head, t_command *cmd, int i, int j);
+
+/// @brief 			This function sets the open flags and opens the files
+///					based on the type of redirection token it encounters
+///					('<', '<<', '>', '>>').
+/// @param head		Head of the token list
+/// @param file		Redirection file structure
+/// @return			0 if success, 1 if failure
+int	redir(t_token *head, t_redirection *file);
+
+/// @brief 		Creates a node in the file linked list withe file name
+///				and adds it to the back of list
+/// @param file	Struct linked list node
+void	fill_heredoc(t_redirection *file);
+
+/// @brief 				The script parser main function. All parsing starts here
+/// @param script		The script pointer
+/// @param line_buffer	The line buffer to parse
 /// @return
-int		invalid_pair(char *str, char *c);
+int	parser(t_script *script, char **line_buffer);
 
-/// @brief 				Checks if the quotes are valid
-/// @param cmdline		Command line
+/* ************************************************************************** */
+///	quotes.c
+/* ************************************************************************** */
+
+/// @brief 		check if estring enclosing quotes are single or double
+/// @param str	string to check
+/// @return		1 if single quotes (' '), 0 if double quotes (" ")
+///				MISLEADING CHANGE STATUS
+int	first_quote(char *str);
+
+/// @brief 		Check if the #quotation marks before index is odd or even.
+/// @param str	string to check
+/// @param i	termination index
+/// @param c	quotation mark to check
+/// @return		1 if #quotation before index i is odd, 0 if even
+///				MISLEADING CHANGE STATUS
+int	odd_before(char **str, int i, char c);
+
+/// @brief 		Check if the #quotation marks after index is odd or even.
+/// @param str	string to check
+/// @param i	termination index
+/// @param c	quotation mark to check
+/// @return		1 if is odd, 0 if even
+///				MISLEADING CHANGE STATUS
+int	odd_after(char **str, int i, char c);
+
+/// @brief 			Copies string contents between quotes
+/// @param start 	Pointer at start quote
+/// @param end 		pointer at end quote
+/// @param str 		destination string
+/// @param i 		destination index ?? 
+///					NEEDS REFACTOR with LIBFT
+void	copy_in_quotes(char *start, char *end, char **str, int *i);
+
+/// @brief 		advances the given pointer to the next character that it is on
+///				For example, if the function is called with the pointer pointing
+///				at a quotation mark, it will advance the pointer in the string
+///				to the next occurence of that same quotation mark. The function
+///				returns 0 if this character is never met, which would signify
+///				an unclosed quotation mark.
+/// @param str	string to advance
+/// @return		0 if unclosed quotation mark (error), 1 otherwise (success)
+///				MISLEADING CHANGE STATUS
+int	treat_quotes(char **str);
+
+/// @brief 		cleanup after removing redundant quotes and frees up alloc
+/// @param tmp	string to clean up
+/// @param copy	string to clean up
+/// @param i	termination index
+/// @return		resulting cleanded string
+char	*end_remove_quotes(char *tmp, char *copy, int i);
+
+/// @brief 		removes redundant quotes
+/// @param str	string to remove quotes
+/// @return		string clean of quotes
+char	*remove_quotes(char *str);
+
+/* ************************************************************************** */
+///	ms_tokens.c
+/* ************************************************************************** */
+
+/// @brief 		This function is here to treat off cases where a $ expansion
+///				would lead to empty name tokens with the exception for an empty
+///				token after a pipe.
+/// @param head Head of the token list
+/// @return		clean content
+void	remove_blank_tokens(t_token *head);
+
+/// @brief 				Creates a new token
+/// @param string		String to be tokenized
+/// @param size			Token size
+/// @param type			Token type (as per enum t_token_type)
+/// @return				New token
+t_token	*create_token(const char *string, int size, t_token_type type);
+
+/// @brief 			Adds new token to token list end
+/// @param head		Head of the token list
+/// @param new		New token to be added
+void	add_token(t_token **head, t_token *new);
+
+/// @brief 			Searches for a token type by token char set
+/// @param s		String to be searched for token char set
+/// @return			Struct with token type information: token char set, size
+///					and token type
+t_operations	search_token_type(const char *s);
+
+/// @brief 				Initializes the token_getter
+/// @param str			String to be tokenized
+/// @param head			Head of the token list
+/// @return				1 if success, 0 if error
+int	token_getter(char *str, t_token **head);
+
+/// @brief 				Trims the token command from whitespaces
+/// @param line_buffer	string input with script
+/// @param head			pointer to the head of the token list
+/// @param script		script structure
 /// @return				SUCCESS if valid, ERROR if invalid
-int		invalid_quotes(char *line);
+int	tokenize(char **line, t_token **head, t_script *script);
 
-/// @brief 			Checks if the argument is valid
-/// @param argv		Argument
-/// @return			SUCCESS if valid, ERROR if invalid
-int		invalid_line(char *line);
+/* ************************************************************************** */
+///	ms_envp.c
+/* ************************************************************************** */
 
+/// @brief 		This function gets the environment variable name after a $ and
+///				returns its corresponding value in the environment.
+/// @param str	String to be parsed
+/// @param envp	Environment variables
+/// @param i	Index start
+/// @return		replace variable
+char	*replace_loop(char *str, char **envp, int *i);
+
+/// @brief 			Splits the string on '$' and accounts for the possibility
+///					that the string may begin with a '$'
+/// @param line_buf	String to be split
+/// @param before	Pointer to the string before the first '$'
+/// @param i		Index start
+/// @return			Split string
+char	**init_split_before(char *line_buf, char **before, int *i);
+
+/// @brief 				Replaces ARGS in a given string by the environment vars
+///						by iterating through the string and replacing each
+///						environment variable with its value.
+/// @param line_buf		String to be parsed
+/// @param envp			Environment variables
+/// @param i			Index start
+/// @param j			Index end
+/// @return				String with ARGS replaced by envp vars
+char	*replace_env_var(char *line_buf, char **envp, int i, int j);
+
+/// @brief		This function replaces multiple spaces with a single space
+/// @param str	String to be parsed
+/// @return		String with multiple spaces replaced by a single space
+char	*replace_multiple_space(char *str);
+
+/// @brief		This function iterates over the environment variables to
+///				find whether or not the given variable (str) is defined and
+///				returns the content or an empty freeable string.
+/// @param str	Variable to be found
+/// @param envp	Environment variables
+/// @return		Content of the variable
+char	*get_env_content(char *str, char **envp);
+
+/* ************************************************************************** */
+///	ms_exec.c
+/* ************************************************************************** */
+
+/// @brief 			Script exec function
+/// @param script 	Script contents
+int execute(t_script *script);
 
 
 /* ************************************************************************** */
-///	error.c
+///	ms_error.c
 /* ************************************************************************** */
 
 /// @brief 			Shows error and program sourcing it
@@ -196,6 +399,28 @@ int		invalid_line(char *line);
 int		return_error(const char *msg, int system);
 
 
+/* ************************************************************************** */
+///	ms_free.c
+/* ************************************************************************** */
+
+/// @brief 			Frees the environment variables
+/// @param my_envp	Environment variables
+void	free_envp(char **my_envp);
+
+/// @brief 			Frees the content of a split string
+/// @param split	Split string to be freed
+void	free_split(char **split);
+
+/// @brief 		Frees the token list
+/// @param head	Head of the token list
+/// @return		1 if success, 0 if failure
+int	free_tokens(t_token **head);
+
+/// @brief 			Clears args on commands struct list and frees nodes
+/// @param cmd 		list pointer
+/// @param cmd_idx 	quantity of nodes to clear and free
+/// @return 		SUCCESS or ERROR ?? needs coherence check
+int	free_commands(t_command *cmd, int cmd_idx);
 
 /* ************************************************************************** */
 ///	debug.c
@@ -207,37 +432,5 @@ int		return_error(const char *msg, int system);
 /// @return				Status of the function
 int		show_func(const char *func_name, int status);
 
-/* ************************************************************************** */
-///	trimmer.c
-/* ************************************************************************** */
-
-/// @brief 				Trims the token command from whitespaces
-/// @param token		Token to be trimmed
-/// @param trimmer		Trimmer characters
-char	*trimmer(char *line, const char *trimmer);
-
-/* ************************************************************************** */
-///	xxxxx.c
-/* ************************************************************************** */
-
-
-// ft_tokenize
-
-//char *    ft_tokenize(char *input);
-char	*ft_tokenize(const char *input, size_t *nbr_tokens);
-
-// ft_strtok
-
-char	*ft_strtok(char *src_str, char *delim);
-
-//ft_execmd.c
-void	ft_execmd(char **Token_list, int tokens_nbr);
-
-//get_location.c
-
-char	*get_location(char *command);
-
-//ft_cd.c
-int		cd_command(char **args);
 
 #endif

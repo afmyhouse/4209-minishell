@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   4ms_quotes.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: antoda-s <antoda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 19:10:37 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/11/30 19:30:50 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/12/04 11:35:04 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 /// @param str	string to check
 /// @return		1 if single quotes (' '), 0 if double quotes (" ")
 ///				MISLEADING CHANGE STATUS
-static int	first_quote(char *str)
+int	first_quote(char *str)
 {
 	int	i;
 
@@ -79,6 +79,11 @@ int	odd_after(char **str, int i, char c)
 	return (count % 2);
 }
 
+/// @brief 			Copies string contents between quotes
+/// @param start 	Pointer at start quote
+/// @param end 		pointer at end quote
+/// @param str 		destination string
+/// @param i 		destination index ?? NEEDS REFACTOR with LIBFT
 void	copy_in_quotes(char *start, char *end, char **str, int *i)
 {
 	while (start != end)

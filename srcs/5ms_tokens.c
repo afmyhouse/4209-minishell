@@ -1,16 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   4ms_tokenizer.c                                    :+:      :+:    :+:   */
+/*   5ms_tokens.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: antoda-s <antoda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 19:10:37 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/11/30 18:48:47 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/12/04 11:36:47 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+/// @brief 		This function is here to treat off cases where a $ expansion
+///				would lead to empty name tokens with the exception for an empty
+///				token after a pipe.
+/// @param head Head of the token list
+/// @return		clean content
+void	remove_blank_tokens(t_token *head)
+{
+	t_token	*tmp;
+
+	while (head)
+	{
+		if (head->type != TOKEN_PIPE && head->next && !head->next->content[0])
+		{
+			tmp = head->next->next;
+			free(head->next->content);
+			free(head->next);
+			head->next = tmp;
+		}
+		else
+			head = head->next;
+	}
+}
 
 /// @brief 				Creates a new token
 /// @param string		String to be tokenized
@@ -80,11 +103,11 @@ t_operations	search_token_type(const char *s)
 	return (blank);
 }
 
-/// @brief 				Initializes the tokenizer
+/// @brief 				Initializes the token_getter
 /// @param str			String to be tokenized
 /// @param head			Head of the token list
 /// @return				1 if success, 0 if error
-int	tokenizer(char *str, t_token **head)
+int	token_getter(char *str, t_token **head)
 {
 	t_operations	curr;
 	char			*prev;
@@ -117,12 +140,12 @@ int	tokenizer(char *str, t_token **head)
 /// @param head			pointer to the head of the token list
 /// @param script		script structure
 /// @return				SUCCESS if valid, ERROR if invalid
-static int	tokenize(char **line, t_token **head, t_script *script)
+int	tokenize(char **line, t_token **head, t_script *script)
 {
 	t_token	*tmp;
 	char	*bis;
 
-	if (!tokenizer(*line, head))
+	if (!token_getter(*line, head))
 		return (return_error("1 TOKENIZE Error", 0));
 	tmp = *head;
 	while (tmp)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   999ms_free.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: antoda-s <antoda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:26:48 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/11/30 22:49:44 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/12/04 10:51:21 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,10 @@ int	free_tokens(t_token **head)
 	return (1);
 }
 
+/// @brief 			Clears args on commands struct list and frees nodes
+/// @param cmd 		list pointer
+/// @param cmd_idx 	quantity of nodes to clear and free
+/// @return 		SUCCESS or ERROR ?? needs coherence check
 int	free_commands(t_command *cmd, int cmd_idx)
 {
 	int	i;

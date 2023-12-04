@@ -3,16 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   1ms_main.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: antoda-s <antoda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:27:05 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/11/30 17:39:57 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/12/04 10:57:04 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static char	**envp_getter(char **envp)
+/// @brief 		Creates array from system environment variables
+/// @param envp system environment variables from main (... char **envp)
+/// @return 	array copy of system environment variables
+char	**envp_getter(char **envp)
 {
 	char	**ms_envp;
 	int		i;
@@ -35,44 +38,9 @@ static char	**envp_getter(char **envp)
 	return (ms_envp);
 }
 
-
-
-/// @brief 				Initializes the shell and keeps looping until exit
-/// @param script		Script structure (see minishell struct)
-/// @param line_buffer	Line buffer
-/// @return				void
-static int	ms_loop(t_script *script, char **line_buffer)
-{
-	int	result;
-
-	while (1)
-	{
-		script->cmd_count = 0;
-		sig_setter();
-		result = parse(script, line_buffer);
-		free(line_buffer);
-		if (result == 1)
-			continue ;
-		else if (result == 2)
-		{
-			ft_putendl_fd("exit", 2);
-			break ;
-		}
-		if (script->cmd_count > 0)
-		{
-			if (execute(script))
-				break ;
-		}
-		free_commands(script->commands, script->cmd_count);
-	}
-	if (script->cmd_count > 0)
-		free_commands(script->commands, script->cmd_count);
-	return (0);
-}
-
 /// @brief 				Gets the terminal settings
 /// @param termios_p	Pointer to the termios settings structure
-static void	termios_getter(struct termios *termios_p)
+void	termios_getter(struct termios *termios_p)
 {
 	if (tcgetattr(STDIN_FILENO, termios_p) != 0)
 		perror("tcgetattr() error");
@@ -92,6 +60,39 @@ static void	termios_getter(struct termios *termios_p)
 			ft_putstr("ECHO is not set");
 		printf("The end-of-file character is x'%02x'\n", termios_p->c_cc[VEOF]);
 	}
+}
+
+/// @brief 				Initializes the shell and keeps looping until exit
+/// @param script		Script structure (see minishell struct)
+/// @param line_buffer	Line buffer
+/// @return				void
+int	ms_loop(t_script *script, char **line_buffer)
+{
+	int	result;
+
+	while (1)
+	{
+		script->cmd_count = 0;
+		sig_setter();
+		result = parser(script, line_buffer);
+		free(line_buffer);
+		if (result == 1)
+			continue ;
+		else if (result == 2)
+		{
+			ft_putendl_fd("exit", 2);
+			break ;
+		}
+		if (script->cmd_count > 0)
+		{
+			if (execute(script))
+				break ;
+		}
+		free_commands(script->commands, script->cmd_count);
+	}
+	if (script->cmd_count > 0)
+		free_commands(script->commands, script->cmd_count);
+	return (0);
 }
 
 /// @brief 			Main function MINISHELL
