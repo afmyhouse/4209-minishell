@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   4ms_quotes.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antoda-s <antoda-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 19:10:37 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/12/04 11:35:04 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/12/04 23:36:11 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@ int	first_quote(char *str)
 {
 	int	i;
 
+	show_func(__func__, MY_START);
 	i = 0;
 	while (str[i] && !(str[i] == '\'' || str[i] == '\"'))
 		i++;
 	if (str[i] == '\'')
 		return (1);
+	show_func(__func__, SUCCESS);
 	return (0);
 }
 
@@ -39,6 +41,7 @@ int	odd_before(char **str, int i, char c)
 	int	count;
 	int	j;
 
+	show_func(__func__, MY_START);
 	count = 0;
 	while (i--)
 	{
@@ -50,6 +53,7 @@ int	odd_before(char **str, int i, char c)
 			j++;
 		}
 	}
+	show_func(__func__, SUCCESS);
 	return (count % 2);
 }
 
@@ -64,6 +68,7 @@ int	odd_after(char **str, int i, char c)
 	int	count;
 	int	j;
 
+	show_func(__func__, MY_START);
 	count = 0;
 	while (str[i])
 	{
@@ -76,6 +81,7 @@ int	odd_after(char **str, int i, char c)
 		}
 		i++;
 	}
+	show_func(__func__, SUCCESS);
 	return (count % 2);
 }
 
@@ -86,12 +92,14 @@ int	odd_after(char **str, int i, char c)
 /// @param i 		destination index ?? NEEDS REFACTOR with LIBFT
 void	copy_in_quotes(char *start, char *end, char **str, int *i)
 {
+	show_func(__func__, MY_START);
 	while (start != end)
 	{
 		(*str)[*i] = *start;
 		start++;
 		(*i)++;
 	}
+	show_func(__func__, SUCCESS);
 }
 
 /// @brief 		advances the given pointer to the next character that it is on
@@ -107,12 +115,14 @@ int	treat_quotes(char **str)
 {
 	char	open_quote;
 
+	show_func(__func__, MY_START);
 	open_quote = **str;
 	++(*str);
 	while (**str && **str != open_quote)
 		++(*str);
 	if (!**str || (**str != open_quote))
 		return (0);
+	show_func(__func__, SUCCESS);
 	return (1);
 }
 
@@ -125,10 +135,12 @@ char	*end_remove_quotes(char *tmp, char *copy, int i)
 {
 	char	*ret;
 
+	show_func(__func__, MY_START);
 	tmp[i] = '\0';
 	ret = ft_strdup(tmp);
-	free(tmp);
-	free(copy);
+	ft_free(tmp);
+	ft_free(copy);
+	show_func(__func__, SUCCESS);
 	return (ret);
 }
 
@@ -142,6 +154,7 @@ char	*remove_quotes(char *str)
 	char	*start;
 	int		i;
 
+	show_func(__func__, MY_START);
 	i = 0;
 	copy = str;
 	tmp = malloc(sizeof(char) * (ft_strlen(str) + 1));
@@ -159,6 +172,7 @@ char	*remove_quotes(char *str)
 			tmp[i++] = *str;
 		str++;
 	}
+	show_func(__func__, SUCCESS);
 	return (end_remove_quotes(tmp, copy, i));
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antoda-s <antoda-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:28:06 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/12/04 13:38:06 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/12/04 22:34:58 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@
 # include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "../lib/libft/libft.h"
+# include "../libft/libft.h"
 # include "../include/error.h"
 # include "../include/colors.h"
 # include "../include/debug.h"
 
+extern int g_exit_status;
+
 /* ************************************************************************** */
 ///	STRUCTS
 /* ************************************************************************** */
-
-int	g_exit_status;
 
 /// @brief 				Enum to hold the token types
 /// @param TOKEN_WS		Empty token
@@ -143,7 +143,7 @@ void	termios_getter(struct termios *termios_p);
 /// @param script		Script structure (see minishell struct)
 /// @param line_buffer	Line buffer
 /// @return				void
-int	ms_loop(t_script *script, char **line_buffer);
+int		ms_loop(t_script *script, char **line_buffer);
 
 /* ************************************************************************** */
 ///	signal.c
@@ -179,14 +179,14 @@ void	sig_handler_heredoc(int signum);
 ///				is a valid command syntaxically.
 /// @param head	Head of the token list
 /// @return		0 if success, 1 if failure
-int	check_syntax(t_token *head);
+int		check_syntax(t_token *head);
 
 /// @brief			This function simply counts the number of pipes in our
 ///					linked list of tokens to determine the number of chained
 ///					commands are in the line buffer.
 /// @param head		Head of the token list
 /// @return			Number of commands
-int	get_cmd_count(t_token *head);
+int		get_cmd_count(t_token *head);
 
 /// @brief		This function simply trims the leading and trailing whitespace
 ///				that can be found when replacing an environment variable.
@@ -194,7 +194,7 @@ int	get_cmd_count(t_token *head);
 /// @return		Trimmed content
 void	trim_spaces(t_token *head);
 
-/// @brief			This function determines the amount of arguments each command
+/// @brief			Determines the amount of arguments each command
 ///					has so the argv can be malloced to the right size in the
 ///					following steps.
 /// @param head		Head of the token list
@@ -216,7 +216,7 @@ void	set_filenames_null(t_command *commands, int max, t_token *head);
 /// @param i	Index
 /// @param j	Index
 /// @return		0 if success, 1 if failure
-int	parse_commands(t_token *head, t_command *cmd, int i, int j);
+int		parse_commands(t_token *head, t_command *cmd, int i, int j);
 
 /// @brief 			This function sets the open flags and opens the files
 ///					based on the type of redirection token it encounters
@@ -224,7 +224,7 @@ int	parse_commands(t_token *head, t_command *cmd, int i, int j);
 /// @param head		Head of the token list
 /// @param file		Redirection file structure
 /// @return			0 if success, 1 if failure
-int	redir(t_token *head, t_redirection *file);
+int		redir(t_token *head, t_redirection *file);
 
 /// @brief 		Creates a node in the file linked list withe file name
 ///				and adds it to the back of list
@@ -235,7 +235,7 @@ void	fill_heredoc(t_redirection *file);
 /// @param script		The script pointer
 /// @param line_buffer	The line buffer to parse
 /// @return
-int	parser(t_script *script, char **line_buffer);
+int		parser(t_script *script, char **line_buffer);
 
 /* ************************************************************************** */
 ///	quotes.c
@@ -245,7 +245,7 @@ int	parser(t_script *script, char **line_buffer);
 /// @param str	string to check
 /// @return		1 if single quotes (' '), 0 if double quotes (" ")
 ///				MISLEADING CHANGE STATUS
-int	first_quote(char *str);
+int		first_quote(char *str);
 
 /// @brief 		Check if the #quotation marks before index is odd or even.
 /// @param str	string to check
@@ -253,7 +253,7 @@ int	first_quote(char *str);
 /// @param c	quotation mark to check
 /// @return		1 if #quotation before index i is odd, 0 if even
 ///				MISLEADING CHANGE STATUS
-int	odd_before(char **str, int i, char c);
+int		odd_before(char **str, int i, char c);
 
 /// @brief 		Check if the #quotation marks after index is odd or even.
 /// @param str	string to check
@@ -261,13 +261,13 @@ int	odd_before(char **str, int i, char c);
 /// @param c	quotation mark to check
 /// @return		1 if is odd, 0 if even
 ///				MISLEADING CHANGE STATUS
-int	odd_after(char **str, int i, char c);
+int		odd_after(char **str, int i, char c);
 
 /// @brief 			Copies string contents between quotes
 /// @param start 	Pointer at start quote
 /// @param end 		pointer at end quote
 /// @param str 		destination string
-/// @param i 		destination index ?? 
+/// @param i 		destination index ??
 ///					NEEDS REFACTOR with LIBFT
 void	copy_in_quotes(char *start, char *end, char **str, int *i);
 
@@ -280,7 +280,7 @@ void	copy_in_quotes(char *start, char *end, char **str, int *i);
 /// @param str	string to advance
 /// @return		0 if unclosed quotation mark (error), 1 otherwise (success)
 ///				MISLEADING CHANGE STATUS
-int	treat_quotes(char **str);
+int		treat_quotes(char **str);
 
 /// @brief 		cleanup after removing redundant quotes and frees up alloc
 /// @param tmp	string to clean up
@@ -327,14 +327,14 @@ t_operations	search_token_type(const char *s);
 /// @param str			String to be tokenized
 /// @param head			Head of the token list
 /// @return				1 if success, 0 if error
-int	token_getter(char *str, t_token **head);
+int		token_getter(char *str, t_token **head);
 
 /// @brief 				Trims the token command from whitespaces
 /// @param line_buffer	string input with script
 /// @param head			pointer to the head of the token list
 /// @param script		script structure
 /// @return				SUCCESS if valid, ERROR if invalid
-int	tokenize(char **line, t_token **head, t_script *script);
+int		tokenize(char **line, t_token **head, t_script *script);
 
 /* ************************************************************************** */
 ///	ms_envp.c
@@ -385,7 +385,7 @@ char	*get_env_content(char *str, char **envp);
 
 /// @brief 			Script exec function
 /// @param script 	Script contents
-int execute(t_script *script);
+int		execute(t_script *script);
 
 
 /* ************************************************************************** */
@@ -414,13 +414,13 @@ void	free_split(char **split);
 /// @brief 		Frees the token list
 /// @param head	Head of the token list
 /// @return		1 if success, 0 if failure
-int	free_tokens(t_token **head);
+int		free_tokens(t_token **head);
 
 /// @brief 			Clears args on commands struct list and frees nodes
 /// @param cmd 		list pointer
 /// @param cmd_idx 	quantity of nodes to clear and free
 /// @return 		SUCCESS or ERROR ?? needs coherence check
-int	free_commands(t_command *cmd, int cmd_idx);
+int		free_commands(t_command *cmd, int cmd_idx);
 
 /* ************************************************************************** */
 ///	debug.c

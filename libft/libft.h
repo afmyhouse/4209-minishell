@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 15:21:17 by hmaciel-          #+#    #+#             */
-/*   Updated: 2023/11/29 00:03:36 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/12/04 22:15:14 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ char			**ft_split(char const *s, char c);
 char			**ft_split_set(char *str, char *charset);
 char			*ft_strchr(const char *s, int c);
 char			*ft_strdup(const char *s);
+char			*ft_strjoin_free(char *s1, char *s2);
 char			*ft_strjoin(char const *s1, char const *s2);
 size_t			ft_strlcat(char *dst, const char *src, size_t size);
 size_t			ft_strlcpy(char *dst, const char *src, size_t size);

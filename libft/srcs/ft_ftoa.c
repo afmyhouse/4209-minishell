@@ -6,12 +6,17 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 20:53:41 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/11/04 11:31:15 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/12/04 22:09:40 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
+/// @see		malloc
+/// @brief 		Converts a decimal to a string
+/// @param n	The decimal to be converted
+/// @param p	The precision of the decimal
+/// @return		The string representation of the decimal
 static char	*ft_decitoa(float n, int p)
 {
 	char	*res;
@@ -33,6 +38,7 @@ static char	*ft_decitoa(float n, int p)
 	return (res);
 }
 
+/// @see		ft_itoa, ft_strjoin, ft_decitoa, ft_strjoin_free, free
 /// @brief 		Converts a float to a string
 /// @param f	The float to be converted
 /// @return		The string representation of the float
@@ -58,8 +64,6 @@ char	*ft_ftoa(float f, int p)
 	tmp = ft_strjoin(part, ".");
 	free(part);
 	part = ft_decitoa(fpart, p);
-	res = ft_strjoin(tmp, part);
-	free(tmp);
-	free(part);
+	res = ft_strjoin_free(tmp, part);
 	return (res);
 }

@@ -6,12 +6,13 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 12:54:38 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/10/26 11:51:45 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/12/04 22:02:52 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
+/// @see		ft_isspace, ft_issign, ft_isdigit
 /// @brief 		Converts the initial portion of the string pointed to by nptr
 /// @param nptr	Pointer to string
 /// @return		The converted integer

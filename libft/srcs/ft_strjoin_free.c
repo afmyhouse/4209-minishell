@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_str.c                                      :+:      :+:    :+:   */
+/*   ft_strjoin_free.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/27 04:12:07 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/11/02 21:30:50 by antoda-s         ###   ########.fr       */
+/*   Created: 2022/11/14 00:28:11 by antoda-s          #+#    #+#             */
+/*   Updated: 2023/12/04 22:14:44 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-/// @brief 		Free allocated memory of a string and inicialize pointer to NULL
-/// @param str	Pointer to string
-void	ft_free_str(char **str)
+/// @brief 			Concatenate strings NO SEPARATOR and free the two strings
+/// @param s1		FIRST string
+/// @param s2		SECOND string
+/// @return			The new string
+char	*ft_strjoin_free(char *s1, char *s2)
 {
-	if (*str)
-	{
-		free(*str);
-		*str = NULL;
-	}
+	char	*ret;
+
+	ret = ft_strjoin(s1, s2);
+	free(s1);
+	free(s2);
+	return (ret);
 }

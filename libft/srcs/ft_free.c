@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   99ms_error.c                                       :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/28 22:37:00 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/12/04 23:14:37 by antoda-s         ###   ########.fr       */
+/*   Created: 2023/02/27 04:12:07 by antoda-s          #+#    #+#             */
+/*   Updated: 2023/12/04 23:33:41 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../libft.h"
 
-/// @brief 			Shows error and program sourcing it
-/// @param msg		Message to show
-/// @param system	Shows system error if true
-/// @return			SUCCESS
-int	return_error(const char *msg, int system)
+/// @see		free
+/// @brief 		Free allocated memory of a string and inicialize pointer to NULL
+/// @param str	Pointer to string
+void	ft_free(char *str)
 {
-	show_func(__func__, MY_START);
-	ft_putstr_fd("Minishell: ", 2);
-	if (system)
-		perror(msg);
-	else
-		ft_putendl_fd(msg, 2);
-	return (1);
+	if (str)
+	{
+		free(str);
+		str = NULL;
+	}
 }

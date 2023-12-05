@@ -6,12 +6,13 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 00:28:11 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/10/26 11:53:06 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/12/04 22:04:22 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
+/// @see		ft_calloc, ft_strlen
 /// @brief		Allocates (with malloc(3)) and returns a new string, which is
 ///				the result of the concatenation of ’s1’ and the char ’c’.
 /// @param s1	The prefix string.

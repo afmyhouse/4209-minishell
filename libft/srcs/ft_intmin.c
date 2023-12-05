@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   99ms_error.c                                       :+:      :+:    :+:   */
+/*   ft_intmin.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/28 22:37:00 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/12/04 23:14:37 by antoda-s         ###   ########.fr       */
+/*   Created: 2023/12/04 21:52:04 by antoda-s          #+#    #+#             */
+/*   Updated: 2023/12/04 21:53:26 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../libft.h"
 
-/// @brief 			Shows error and program sourcing it
-/// @param msg		Message to show
-/// @param system	Shows system error if true
-/// @return			SUCCESS
-int	return_error(const char *msg, int system)
+int	ft_max(int a, int b)
 {
-	show_func(__func__, MY_START);
-	ft_putstr_fd("Minishell: ", 2);
-	if (system)
-		perror(msg);
-	else
-		ft_putendl_fd(msg, 2);
-	return (1);
+	if (a < b)
+		return (a);
+	return (b);
 }

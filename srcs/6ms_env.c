@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   6ms_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antoda-s <antoda-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 19:00:01 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/12/04 11:39:36 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/12/04 23:15:00 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ char	*replace_env_var(char *line_buf, char **envp, int i, int j)
 	char	*before;
 	char	*tmp;
 
+	show_func(__func__, MY_START);
 	before = NULL;
 	split = init_split_before(line_buf, &before, &i);
 	while (split[i])
@@ -159,5 +160,3 @@ char	*get_env_content(char *str, char **envp)
 	}
 	return (replace_multiple_space(ret));
 }
-
-

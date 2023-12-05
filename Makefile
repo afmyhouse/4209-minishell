@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: antoda-s <antoda-s@student.42.fr>          +#+  +:+       +#+         #
+#    By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/24 21:23:27 by antoda-s          #+#    #+#              #
-#    Updated: 2023/12/04 09:51:14 by antoda-s         ###   ########.fr        #
+#    Updated: 2023/12/04 22:21:11 by antoda-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ NAMET 		= test
 LIBFT 		= libft.a
 
 
-LFT_PATH 	= ./lib/libft/
+LFT_PATH 	= ./libft/
 
 # includes dir
 INCLUDES 	= ./include/
@@ -38,8 +38,10 @@ FILES	+=	3ms_parser.c
 FILES 	+=	4ms_quotes.c
 FILES 	+=	5ms_tokens.c
 FILES 	+=	6ms_env.c
-FILES	+=	98ms_error.c
-FILES	+=	99ms_free.c
+FILES 	+=	7ms_exec.c
+FILES	+=	99ms_error.c
+FILES	+=	999ms_free.c
+FILES	+=	9999ms_debug.c
 
 TEST	=	test.c
 TEST	+=	test1.c

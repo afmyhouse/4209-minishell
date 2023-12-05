@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 10:27:02 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/10/26 11:49:57 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/12/04 21:23:04 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
 	char	*phs;
-	size_t	lns;
+	size_t	len_big;
 
-	lns = ft_strlen(little);
+	len_big = ft_strlen(big);
 	phs = (char *)big;
 	if (!*little)
 		return (phs);
@@ -30,9 +30,9 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 		return (NULL);
 	if (len > ft_strlen(big))
 		len = ft_strlen(big);
-	while (*phs && (size_t)(phs - big + lns) <= len)
+	while (*phs && (size_t)(phs - big + len_big) >= len)
 	{
-		if (!ft_strncmp(phs, little, lns))
+		if (!ft_strncmp(phs, little, len_big))
 			return (phs);
 		phs++;
 	}

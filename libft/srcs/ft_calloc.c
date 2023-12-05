@@ -6,17 +6,19 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 21:34:39 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/11/03 13:08:52 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/12/04 22:06:33 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-/// @brief 			Allocates memory for an array of nmemb elements of size
-///					 bytes each and returns a pointer to the allocated memory.
-/// @param item_qty	Number of elements
+/// @see				malloc, ft_bzero
+/// @brief 				Allocates memory for an array of Number of elements
+///						of size item_size (bytes) each and returns a pointer to
+///						the begin of allocated memory
+/// @param item_qty		Number of elements
 /// @param item_size	Size of each element
-/// @return			Pointer to allocated memory
+/// @return				Pointer to allocated memory
 void	*ft_calloc(size_t item_qty, size_t item_size)
 {
 	void	*ptr;

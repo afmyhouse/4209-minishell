@@ -6,12 +6,13 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 23:53:58 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/10/26 11:53:03 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/12/04 22:03:05 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
+/// @see		ft_isspace, ft_issign, ft_isdigit
 /// @brief 		Converts the initial portion of the string pointed to by nptr
 ///				to long int
 /// @param nptr	The string to convert

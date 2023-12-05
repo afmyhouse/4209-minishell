@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:38:24 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/11/30 17:37:35 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/12/04 23:02:36 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@
 /// @param		No parameter required
 void	sig_setter(void)
 {
+	show_func(__func__, MY_START);
 	signal(SIGINT, sig_handler);
 	signal(SIGQUIT, SIG_IGN);
+	show_func(__func__, SUCCESS);
 }
 
 /// @brief 			Handles signal SIGINT (Ctrl+C) and SIGQUIT (Ctrl+\)

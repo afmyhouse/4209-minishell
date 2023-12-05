@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   20ms_execute.c                                     :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antoda-s <antoda-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/04 09:55:51 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/12/04 10:53:07 by antoda-s         ###   ########.fr       */
+/*   Created: 2022/11/08 16:12:42 by antoda-s          #+#    #+#             */
+/*   Updated: 2023/12/04 22:03:17 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../libft.h"
 
-/// @brief 			Script exec function
-/// @param script 	Script contents
-int execute(t_script *script)
+/// @see		ft_memset
+/// @brief 		Fills a byte string with zeros.
+/// @param s	Pointer to string
+/// @param n	Number of bytes to fill
+void	ft_bzero(void *s, size_t n)
 {
-	(void)script;
-	return (SUCCESS);
+	ft_memset(s, 0, n);
+	return ;
 }
