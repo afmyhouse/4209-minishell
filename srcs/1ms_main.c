@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   1ms_main.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: antoda-s <antoda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:27:05 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/12/05 00:00:13 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/12/05 10:17:11 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	termios_getter(struct termios *termios_p)
 			ft_putstr("ECHO is not set");
 		printf("The end-of-file character is x'%02x'\n", termios_p->c_cc[VEOF]);
 	}
+	show_func(__func__, SUCCESS);
 }
 
 /// @brief 				Initializes the shell and keeps looping until exit

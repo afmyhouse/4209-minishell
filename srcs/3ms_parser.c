@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   3ms_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: antoda-s <antoda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:28:14 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/12/04 23:57:54 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/12/07 10:37:58 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,10 @@ void	trim_spaces(t_token *head)
 	show_func(__func__, MY_START);
 	while (head)
 	{
+	// if (s)
+	// 	printf("s token = %s\n", s);
+	// else
+	// 	printf("s is empry\n");
 		tmp = head->content;
 		head->content = ft_strtrim(tmp, " \t\v\r\n\f");
 		free(tmp);
@@ -99,6 +103,10 @@ void	get_num_args(t_token *head, t_script *script)
 	show_func(__func__, MY_START);
 	i = 0;
 	while (i < script->cmd_count)
+	// if (s)
+	// 	printf("s token = %s\n", s);
+	// else
+	// 	printf("s is empry\n");
 	{
 		script->commands[i].argc = 0;
 		tmp = head;
@@ -259,6 +267,11 @@ int	parser(t_script *script, char **line_buffer)
 	if (!*line_buffer)
 		return (show_func(__func__, MALLOC_ERROR));
 	add_history(*line_buffer);
+	/*********************************/
+	printf("(>) %s : line buffer = %s\n",__func__, *line_buffer);
+	if (!ft_strncmp(*line_buffer, "exit", 5))
+		exit(0);
+	/*********************************/
 	if (tokenize(line_buffer, &head, script))
 		return (free_tokens(&head));
 	remove_blank_tokens(head);

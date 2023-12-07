@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+         #
+#    By: antoda-s <antoda-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/22 12:51:39 by myoung            #+#    #+#              #
-#    Updated: 2023/12/04 23:32:36 by antoda-s         ###   ########.fr        #
+#    Updated: 2023/12/06 10:41:45 by antoda-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -135,7 +135,8 @@ build:
 	@mkdir -p build/
 
 build/%.o: srcs/%.c | build
-	@printf "$(RED)█$(WHT)"
+		@printf "\033[0;33mGenerating libft objects... %-33.33s\r" $@
+#	@printf "$(RED)█$(WHT)"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 .PHONY: all clean fclean re

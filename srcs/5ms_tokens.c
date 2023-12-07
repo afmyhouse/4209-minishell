@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   5ms_tokens.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: antoda-s <antoda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 19:10:37 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/12/04 23:27:27 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/12/07 10:20:14 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,18 +98,26 @@ t_operations	search_token_type(const char *s)
 	ex_ops[3] = (t_operations){">", 1, TOKEN_R_OUT};
 	ex_ops[4] = (t_operations){"<", 1, TOKEN_R_IN};
 	ex_ops[5] = (t_operations){" ", 1, TOKEN_WS};
+	ex_ops[6] = (t_operations){"\n", 1, TOKEN_WS};
 	ex_ops[7] = (t_operations){"\v", 1, TOKEN_WS};
 	ex_ops[8] = (t_operations){"\t", 1, TOKEN_WS};
 	ex_ops[9] = (t_operations){"\r", 1, TOKEN_WS};
 	ex_ops[10] = (t_operations){"\f", 1, TOKEN_WS};
 	ex_ops[11] = (t_operations){NULL, 1, 0};
 	i = -1;
+
+	// if (s)
+	// 	printf("s token = %s\n", s);
+	// else
+	// 	printf("s is empry\n");
 	while (ex_ops[++i].op)
+	{
 		if (!ft_strncmp(s, ex_ops[i].op, ex_ops[i].size))
 		{
 			show_func(__func__, SUCCESS);
 			return (ex_ops[i]);
 		}
+	}
 	show_func(__func__, ERROR);
 	return (blank);
 }
