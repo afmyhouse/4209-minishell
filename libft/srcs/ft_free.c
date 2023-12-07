@@ -1,13 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   af-minishell.c                                     :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antoda-s <antoda-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/22 13:11:26 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/12/04 09:47:49 by antoda-s         ###   ########.fr       */
+/*   Created: 2023/02/27 04:12:07 by antoda-s          #+#    #+#             */
+/*   Updated: 2023/12/04 23:33:41 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*teste de merge branch*/
+#include "../libft.h"
+
+/// @see		free
+/// @brief 		Free allocated memory of a string and inicialize pointer to NULL
+/// @param str	Pointer to string
+void	ft_free(char *str)
+{
+	if (str)
+	{
+		free(str);
+		str = NULL;
+	}
+}

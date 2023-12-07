@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   99error.c                                          :+:      :+:    :+:   */
+/*   99ms_error.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 22:37:00 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/11/30 20:31:06 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/12/04 23:14:37 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 /// @return			SUCCESS
 int	return_error(const char *msg, int system)
 {
+	show_func(__func__, MY_START);
 	ft_putstr_fd("Minishell: ", 2);
 	if (system)
 		perror(msg);

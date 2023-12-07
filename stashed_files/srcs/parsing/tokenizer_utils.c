@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rvan-aud <rvan-aud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: antoda-s <antoda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 16:12:47 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/10/07 16:34:33 by rvan-aud         ###   ########.fr       */
+/*   Updated: 2023/12/07 10:11:29 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ t_operations	search_token_type(const char *s)
 	};
 	const t_operations		blank = {0, 0, 0};
 	int						i;
-
 	i = -1;
 	while (ex_ops[++i].op)
 		if (!ft_strncmp(s, ex_ops[i].op, ex_ops[i].size))

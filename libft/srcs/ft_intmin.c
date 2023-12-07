@@ -1,13 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   af-minishell.c                                     :+:      :+:    :+:   */
+/*   ft_intmin.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antoda-s <antoda-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/22 13:11:26 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/12/04 09:47:49 by antoda-s         ###   ########.fr       */
+/*   Created: 2023/12/04 21:52:04 by antoda-s          #+#    #+#             */
+/*   Updated: 2023/12/04 21:53:26 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*teste de merge branch*/
+#include "../libft.h"
+
+int	ft_max(int a, int b)
+{
+	if (a < b)
+		return (a);
+	return (b);
+}

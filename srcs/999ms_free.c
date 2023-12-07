@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:26:48 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/11/30 22:49:44 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/12/05 00:04:00 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	free_envp(char **my_envp)
 {
 	int	i;
 
+	show_func(__func__, MY_START);
 	i = 0;
 	while (my_envp[i])
 	{
@@ -25,6 +26,7 @@ void	free_envp(char **my_envp)
 		i++;
 	}
 	free(my_envp);
+	show_func(__func__, SUCCESS);
 }
 
 /// @brief 			Frees the content of a split string
@@ -33,6 +35,7 @@ void	free_split(char **split)
 {
 	int	i;
 
+	show_func(__func__, MY_START);
 	i = 0;
 	while (split[i])
 	{
@@ -40,6 +43,7 @@ void	free_split(char **split)
 		i++;
 	}
 	free(split);
+	show_func(__func__, SUCCESS);
 }
 
 /// @brief 		Frees the token list
@@ -49,6 +53,7 @@ int	free_tokens(t_token **head)
 {
 	t_token	*tmp;
 
+	show_func(__func__, MY_START);
 	while (*head)
 	{
 		tmp = (*head)->next;
@@ -56,14 +61,20 @@ int	free_tokens(t_token **head)
 		free(*head);
 		*head = tmp;
 	}
+	show_func(__func__, SUCCESS);
 	return (1);
 }
 
+/// @brief 			Clears args on commands struct list and frees nodes
+/// @param cmd 		list pointer
+/// @param cmd_idx 	quantity of nodes to clear and free
+/// @return 		SUCCESS or ERROR ?? needs coherence check
 int	free_commands(t_command *cmd, int cmd_idx)
 {
 	int	i;
 	int	j;
 
+	show_func(__func__, MY_START);
 	i = -1;
 	while (++i < cmd_idx)
 	{
@@ -80,6 +91,7 @@ int	free_commands(t_command *cmd, int cmd_idx)
 		free(cmd[i].argv);
 	}
 	free(cmd);
+	show_func(__func__, SUCCESS);
 	return (1);
 }
 

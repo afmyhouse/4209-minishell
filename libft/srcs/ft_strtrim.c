@@ -6,12 +6,13 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 00:28:11 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/10/26 11:49:57 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/12/04 21:57:58 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
+/// @functions	ft_strchar, ft_substr, ft_strdup, ft_strlen
 /// @brief 		Allocates (with malloc(3)) and returns a copy of `s1` with the
 /// 			characters specified in `set` removed from the beginning and the
 /// 			end of the string.

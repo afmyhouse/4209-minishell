@@ -3,23 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: antoda-s <antoda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 13:44:02 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/11/27 17:15:20 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/12/04 14:58:36 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-#include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
 
 /// @brief 		Creates a new philosofer and initializes it
 /// @param id	Philosofer's id
 /// @param info	Pointer to the t_info structure
 /// @return		Pointer to the new philosofer
-t_cmd	*new_cmd(int id, t_info *info)
+t_cmd	*new_cmd(t_command cmd, t_info *info)
 {
 	t_cmd	*c;
 
@@ -29,10 +26,24 @@ t_cmd	*new_cmd(int id, t_info *info)
 	ft_bzero(p, sizeof(t_philo));
 	p->id = id;
 	p->info = info;
-	if (info->phqty > 2 && id % 2 == 0)
+	if (info->phqty > 2 && cmd->cmd_count % 2 == 0)
 		p->go = 1;
 	return (p);
 }
+// t_cmd	*new_cmd(int id, t_info *info)
+// {
+// 	t_cmd	*c;
+
+// 	p = malloc(sizeof(t_philo));
+// 	if (!p)
+// 		return (NULL);
+// 	ft_bzero(p, sizeof(t_philo));
+// 	p->id = id;
+// 	p->info = info;
+// 	if (info->phqty > 2 && id % 2 == 0)
+// 		p->go = 1;
+// 	return (p);
+// }
 
 /// @brief 		Adds a new created philosofer to the list
 /// @param p	Pointer to the list of philosofers
@@ -115,20 +126,21 @@ t_info	*init_info(char **argv)
 /// @brief 		Initializes the forks
 /// @param p	Pointer to the list of philosofers
 /// @return		Poiter to the fork structure
-t_fork	*init_fork(t_philo *p)
+t_fork	*init_fork(int a, int b, char c)
+// t_fork	*init_fork(t_script s)
 {
 	t_fork	*f;
 	int		i;
 
-	f = malloc(sizeof(t_fork) * p->info->phqty);
+	f = malloc(sizeof(t_fork) * s->a);
 	if (!f)
 		return (NULL);
-	ft_bzero(f, sizeof(t_fork) * p->info->phqty);
+	ft_bzero(f, sizeof(t_fork) * s->a);
 	i = 0;
-	while (++i <= p->info->phqty)
+	while (++i <= a)
 	{
 		f[i - 1].mtx = malloc(sizeof(pthread_mutex_t));
-		if (!f[i - 1].mtx)
+		if (!f[b - 1].mtx)
 		{
 			free_philo(p, f);
 			return (NULL);
@@ -143,3 +155,31 @@ t_fork	*init_fork(t_philo *p)
 	}
 	return (f);
 }
+// t_fork	*init_fork(t_philo *p)
+// {
+// 	t_fork	*f;
+// 	int		i;
+
+// 	f = malloc(sizeof(t_fork) * p->info->phqty);
+// 	if (!f)
+// 		return (NULL);
+// 	ft_bzero(f, sizeof(t_fork) * p->info->phqty);
+// 	i = 0;
+// 	while (++i <= p->info->phqty)
+// 	{
+// 		f[i - 1].mtx = malloc(sizeof(pthread_mutex_t));
+// 		if (!f[i - 1].mtx)
+// 		{
+// 			free_philo(p, f);
+// 			return (NULL);
+// 		}
+// 		if (pthread_mutex_init(f[i - 1].mtx, NULL) != 0)
+// 		{
+// 			printf("Error: pthread_mutex_init\n");
+// 			free_philo(p, f);
+// 			return (NULL);
+// 		}
+// 		f[i - 1].id = i;
+// 	}
+// 	return (f);
+// }

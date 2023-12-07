@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+         #
+#    By: antoda-s <antoda-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/24 21:23:27 by antoda-s          #+#    #+#              #
-#    Updated: 2023/11/29 00:10:59 by antoda-s         ###   ########.fr        #
+#    Updated: 2023/12/06 10:47:51 by antoda-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ NAMET 		= test
 LIBFT 		= libft.a
 
 
-LFT_PATH 	= ./lib/libft/
+LFT_PATH 	= ./libft/
 
 # includes dir
 INCLUDES 	= ./include/
@@ -32,23 +32,20 @@ OBJDIRT 	= builder/
 
 # sources and objects base project
 # FILES	=	main.c 				# Top level function
-FILES 	=	minishell.c
-FILES	+=	parser.c
-FILES	+=	trimmer.c
-FILES	+=	error.c
-FILES	+=	debug.c
-# FILES	+=	ft_tokenize.c
-# FILES	+=	ft_strtok.c
-# FILES	+=	ft_execmd.c
-# FILES	+=	ft_cd.c
-# # FILES	+=	pipelines.c
-# FILES	+=	ft_get_location.c
+FILES 	=	1ms_main.c
+FILES	+=	2ms_signal.c
+FILES	+=	3ms_parser.c
+FILES 	+=	4ms_quotes.c
+FILES 	+=	5ms_tokens.c
+FILES 	+=	6ms_env.c
+FILES 	+=	7ms_exec.c
+FILES	+=	99ms_error.c
+FILES	+=	999ms_free.c
+FILES	+=	9999ms_debug.c
 
 TEST	=	test.c
 TEST	+=	test1.c
 TEST	+=	test2.c
-
-
 
 SRC = $(addprefix $(SRCDIR), $(FILES))
 OBJ = $(addprefix $(OBJDIR), $(FILES:.c=.o))
