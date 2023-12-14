@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   1ms_main.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antoda-s <antoda-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:27:05 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/12/05 10:17:11 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/12/14 14:05:20 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,17 +58,41 @@ void	termios_getter(struct termios *termios_p)
 	else
 	{
 		if (termios_p->c_iflag & BRKINT)
-			ft_putstr("BRKINT is set");
+			ft_putstr("BRKINT is set\n");
 		else
-			ft_putstr("BRKINT is not set");
+			ft_putstr("BRKINT is not set\n");
 		if (termios_p->c_cflag & PARODD)
-			ft_putstr("Odd parity is used");
+			ft_putstr("Odd parity is used\n");
 		else
-			puts("Even parity is used");
+			puts("Even parity is used\n");
 		if (termios_p->c_lflag & ECHO)
-			ft_putstr("ECHO is set");
+			ft_putstr("ECHO is set\n");
 		else
-			ft_putstr("ECHO is not set");
+			ft_putstr("ECHO is not set\n");
+		printf("The end-of-file character is x'%02x'\n", termios_p->c_cc[VEOF]);
+	}
+	show_func(__func__, SUCCESS);
+}
+
+void 	termios_setter(struct termios *termios_p)
+{
+	show_func(__func__, MY_START);
+	if (tcsetattr(STDIN_FILENO, TCSAFLUSH, termios_p) != 0)
+		perror("tcsetattr() error");
+	else
+	{
+		if (termios_p->c_iflag & BRKINT)
+			ft_putstr("BRKINT is set\n");
+		else
+			ft_putstr("BRKINT is not set\n");
+		if (termios_p->c_cflag & PARODD)
+			ft_putstr("Odd parity is used\n");
+		else
+			puts("Even parity is used\n");
+		if (termios_p->c_lflag & ECHO)
+			ft_putstr("ECHO is set\n");
+		else
+			ft_putstr("ECHO is not set\n");
 		printf("The end-of-file character is x'%02x'\n", termios_p->c_cc[VEOF]);
 	}
 	show_func(__func__, SUCCESS);
@@ -87,20 +111,22 @@ int	ms_loop(t_script *script, char **line_buffer)
 	{
 		script->cmd_count = 0;
 		sig_setter();
-		printf("1 ***************************\n");
+		printf("%s : 1 ***************************\n", __func__);
 		result = parser(script, line_buffer);
-		printf("2 ***************************\n");
+		printf("%s : 2 ***************************\n", __func__);
 		ft_free_str(line_buffer);
-		printf("3 ***************************\n");
+		printf("%s : 3 ***************************\n", __func__);
 		if (result == 1)
 			continue ;
 		else if (result == 2)
 		{
+			printf("%s : X ***************************\n", __func__);
 			ft_putendl_fd("exit", 2);
 			break ;
 		}
 		if (script->cmd_count > 0)
 		{
+			printf("%s : 4 ***************************\n", __func__);
 			if (execute(script))
 				break ;
 		}
@@ -108,6 +134,7 @@ int	ms_loop(t_script *script, char **line_buffer)
 	}
 	if (script->cmd_count > 0)
 		free_commands(script->commands, script->cmd_count);
+	show_func(__func__, SUCCESS);
 	return (0);
 }
 
@@ -118,6 +145,7 @@ int	ms_loop(t_script *script, char **line_buffer)
 /// @return
 int	main(int argc, char **argv, char **envp)
 {
+	show_func(__func__, MY_START);
 	t_script	script;
 	char		*line_buffer;
 
@@ -128,5 +156,6 @@ int	main(int argc, char **argv, char **envp)
 	termios_getter(&script.termios_p);
 	ms_loop(&script, &line_buffer);
 	free_envp(script.envp);
+	show_func(__func__, SUCCESS);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 19:10:37 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/12/07 10:57:02 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/12/13 23:10:39 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,26 +84,26 @@ void	add_token(t_token **head, t_token *new)
 /// @param s		String to be searched for token char set
 /// @return			Struct with token type information: token char set, size
 ///					and token type
-t_operations	search_token_type(const char *s)
+t_ops	search_token_type(const char *s)
 {
-	t_operations	ex_ops[12];
-	t_operations	blank;
+	t_ops	ex_ops[12];
+	t_ops	blank;
 	int				i;
 
 	show_func(__func__, MY_START);
-	blank = (t_operations){0, 0, 0};
-	ex_ops[0] = (t_operations){">>", 2, TOKEN_R_OUT};
-	ex_ops[1] = (t_operations){"<<", 2, TOKEN_R_IN};
-	ex_ops[2] = (t_operations){"|", 1, TOKEN_PIPE};
-	ex_ops[3] = (t_operations){">", 1, TOKEN_R_OUT};
-	ex_ops[4] = (t_operations){"<", 1, TOKEN_R_IN};
-	ex_ops[5] = (t_operations){" ", 1, TOKEN_WS};
-	ex_ops[6] = (t_operations){"\n", 1, TOKEN_WS};
-	ex_ops[7] = (t_operations){"\v", 1, TOKEN_WS};
-	ex_ops[8] = (t_operations){"\t", 1, TOKEN_WS};
-	ex_ops[9] = (t_operations){"\r", 1, TOKEN_WS};
-	ex_ops[10] = (t_operations){"\f", 1, TOKEN_WS};
-	ex_ops[11] = (t_operations){NULL, 1, 0};
+	blank = (t_ops){0, 0, 0};
+	ex_ops[0] = (t_ops){">>", 2, TOKEN_R_OUT};
+	ex_ops[1] = (t_ops){"<<", 2, TOKEN_R_IN};
+	ex_ops[2] = (t_ops){"|", 1, TOKEN_PIPE};
+	ex_ops[3] = (t_ops){">", 1, TOKEN_R_OUT};
+	ex_ops[4] = (t_ops){"<", 1, TOKEN_R_IN};
+	ex_ops[5] = (t_ops){" ", 1, TOKEN_WS};
+	ex_ops[6] = (t_ops){"\n", 1, TOKEN_WS};
+	ex_ops[7] = (t_ops){"\v", 1, TOKEN_WS};
+	ex_ops[8] = (t_ops){"\t", 1, TOKEN_WS};
+	ex_ops[9] = (t_ops){"\r", 1, TOKEN_WS};
+	ex_ops[10] = (t_ops){"\f", 1, TOKEN_WS};
+	ex_ops[11] = (t_ops){NULL, 1, 0};
 	i = -1;
 
 	// if (s)
@@ -128,10 +128,10 @@ t_operations	search_token_type(const char *s)
 /// @return				1 if success, 0 if error
 int	token_getter(char *str, t_token **head)
 {
-	t_operations	curr;
-	char			*prev;
-
 	show_func(__func__, MY_START);
+	t_ops	curr;
+	char	*prev;
+
 	prev = str;
 	while (str && *str)
 	{
@@ -146,13 +146,15 @@ int	token_getter(char *str, t_token **head)
 			prev = str;
 		}
 		else if ((*str == '\"' || *str == '\'') && !treat_quotes(&str))
+		{
+			show_func(__func__, ERROR);
 			return (0);
+		}	//	return (0);
 		else
 			++str;
 	}
 	if (prev != str)
 		add_token(head, create_token(prev, str - prev, TOKEN_NAME));
-	show_func(__func__, MY_START);
 	show_func(__func__, SUCCESS);
 	return (1);
 }
@@ -169,7 +171,10 @@ int	tokenize(char **line, t_token **head, t_script *script)
 
 	show_func(__func__, MY_START);
 	if (!token_getter(*line, head))
-		return (return_error("1 TOKENIZE Error", 0));
+	{
+		show_func(__func__, ERROR);
+		return (return_error("Syntax Error", 0));
+	}
 	tmp = *head;
 	while (tmp)
 	{

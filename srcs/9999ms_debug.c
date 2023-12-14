@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debug.c                                            :+:      :+:    :+:   */
+/*   9999ms_debug.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:29:02 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/11/28 23:29:37 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/12/13 22:07:38 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ int	show_func(const char *func_name, int status)
 		else if (status == SUCCESS)
 			printf("%s(X)%s %s : SUCCESS%s\n",SYLW, SGRN, func_name, SWHT);
 		else if (status == MY_START)
-			printf("%s(>)%s %s : START%s\n",SYLW, SYLW, func_name, SWHT);
+			printf("\n%s(>)%s %s : START%s\n",SYLW, SYLW, func_name, SWHT);
+		else if (status == MALLOC_ERROR)
+			printf("%s(>)%s %s : MALLOC_ERROR%s\n",SYLW, SYLW, func_name, SWHT);
+		else if (status == FILE_ERROR)
+			printf("%s(>)%s %s : FILE_ERROR%s\n",SYLW, SYLW, func_name, SWHT);
 	}
 	return (status);
 }

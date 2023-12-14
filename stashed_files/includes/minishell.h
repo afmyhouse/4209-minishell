@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
+/*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 11:04:53 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/10/08 14:36:38 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2023/12/13 21:31:11 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_operations
 	const char		*op;
 	int				size;
 	t_token_type	type;
-}				t_operations;
+}				t_ops;
 
 typedef struct s_token
 {
@@ -131,7 +131,7 @@ char			*replace_env_var(char *line_buf, char **envp, int i, int j);
 char			*get_env_content(char *str, char **envp);
 t_token			*create_token(const char *string, int size, t_token_type type);
 void			add_token(t_token **head, t_token *new_token);
-t_operations	search_token_type(const char *s);
+t_ops	search_token_type(const char *s);
 char			*remove_quotes(char *str);
 int				tokenizer(char *str, t_token **head);
 void			remove_blank_tokens(t_token *head);
