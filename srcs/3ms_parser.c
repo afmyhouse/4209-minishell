@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   3ms_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antoda-s <antoda-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:28:14 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/12/07 10:37:58 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/12/13 23:25:01 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ int	check_syntax(t_token *head)
 /// @return			Number of commands
 int	get_cmd_count(t_token *head)
 {
+	show_func(__func__, MY_START);
 	int	count;
 
-	show_func(__func__, MY_START);
 	count = 0;
 	while (head)
 	{
@@ -263,9 +263,12 @@ int	parser(t_script *script, char **line_buffer)
 
 	show_func(__func__, MY_START);
 	head = NULL;
-	*line_buffer = readline("\001\033[1;36m\002Minishell ᐅ \001\033[0m\002");
+	*line_buffer = readline("\001\033[1;35m\002\001\033[1;1m\002Minishell ᐅ \001\033[0m\002");
 	if (!*line_buffer)
-		return (show_func(__func__, MALLOC_ERROR));
+	{
+		show_func(__func__, MALLOC_ERROR);
+		return (2);
+	}
 	add_history(*line_buffer);
 	/*********************************/
 	printf("(>) %s : line buffer = %s\n",__func__, *line_buffer);
@@ -290,7 +293,7 @@ int	parser(t_script *script, char **line_buffer)
 		show_func(__func__, SUCCESS);
 		return (free_tokens(&head));
 	}
+	free_tokens(&head);
 	show_func(__func__, SUCCESS);
-	//free_tokens(&head);
 	return (0);
 }

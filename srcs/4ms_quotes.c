@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 19:10:37 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/12/04 23:36:11 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/12/13 22:57:49 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,10 @@ int	treat_quotes(char **str)
 	while (**str && **str != open_quote)
 		++(*str);
 	if (!**str || (**str != open_quote))
+	{
+		show_func(__func__, ERROR);
 		return (0);
+	}	//	return (0);
 	show_func(__func__, SUCCESS);
 	return (1);
 }

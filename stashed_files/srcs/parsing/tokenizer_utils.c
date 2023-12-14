@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antoda-s <antoda-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 16:12:47 by sgoffaux          #+#    #+#             */
-/*   Updated: 2023/12/07 10:11:29 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/12/13 21:31:11 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
 create_token(const char *string, int size, t_token_type type):
-	This function simply mallocs and creates a token with the given type, size 
+	This function simply mallocs and creates a token with the given type, size
 	and content and returns it.
 */
 t_token	*create_token(const char *string, int size, t_token_type type)
@@ -33,7 +33,7 @@ t_token	*create_token(const char *string, int size, t_token_type type)
 
 /*
 add_token(t_token **head, t_token *new_token):
-	This function takes a token list node (new_token) and adds it to the end 
+	This function takes a token list node (new_token) and adds it to the end
 	of the linked list pointed to by head.
 */
 void	add_token(t_token **head, t_token *new_token)
@@ -56,12 +56,12 @@ void	add_token(t_token **head, t_token *new_token)
 
 /*
 search_token_type(const char *s):
-	This function compares the character(s) given to some possible operations and 
+	This function compares the character(s) given to some possible operations and
 	returns either the given operation if found, or a blank operation.
 */
-t_operations	search_token_type(const char *s)
+t_ops	search_token_type(const char *s)
 {
-	const t_operations		ex_ops[12] =
+	const t_ops		ex_ops[12] =
 	{
 		{">>", 2, TOKEN_REDIR_OUT},
 		{"<<", 2, TOKEN_REDIR_IN},
@@ -76,7 +76,7 @@ t_operations	search_token_type(const char *s)
 		{"\f", 1, TOKEN_EAT},
 		{NULL, 1, 0}
 	};
-	const t_operations		blank = {0, 0, 0};
+	const t_ops		blank = {0, 0, 0};
 	int						i;
 	i = -1;
 	while (ex_ops[++i].op)

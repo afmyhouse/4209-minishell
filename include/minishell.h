@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:28:06 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/12/04 22:34:58 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/12/14 15:04:16 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct s_operations
 	const char		*op;
 	int				size;
 	t_token_type	type;
-}				t_operations;
+}				t_ops;
 
 /// @brief 				Struct to hold the token variables
 /// @param content		Token content
@@ -138,6 +138,11 @@ char	**envp_getter(char **envp);
 /// @brief 				Gets the terminal settings
 /// @param termios_p	Pointer to the termios settings structure
 void	termios_getter(struct termios *termios_p);
+
+/// @brief 				Sets the terminal settings. Main use is to FLUSH or
+/// 					DRAIN any data remaining after missexecuting
+/// @param termios_p	Pointer to the termios settings structure
+void	termios_setter(struct termios *termios_p);
 
 /// @brief 				Initializes the shell and keeps looping until exit
 /// @param script		Script structure (see minishell struct)
@@ -321,7 +326,7 @@ void	add_token(t_token **head, t_token *new);
 /// @param s		String to be searched for token char set
 /// @return			Struct with token type information: token char set, size
 ///					and token type
-t_operations	search_token_type(const char *s);
+t_ops	search_token_type(const char *s);
 
 /// @brief 				Initializes the token_getter
 /// @param str			String to be tokenized

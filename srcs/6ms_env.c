@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 19:00:01 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/12/04 23:15:00 by antoda-s         ###   ########.fr       */
+/*   Updated: 2023/12/13 22:03:37 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 /// @return		replace variable
 char	*replace_loop(char *str, char **envp, int *i)
 {
+	show_func(__func__, MY_START);
 	char	*tmp;
 	char	c;
 
@@ -39,6 +40,7 @@ char	*replace_loop(char *str, char **envp, int *i)
 	str[*i] = '\0';
 	tmp = get_env_content(str, envp); // envp_getter.c
 	str[*i] = c;
+	show_func(__func__, SUCCESS);
 	return (tmp);
 }
 
@@ -50,6 +52,7 @@ char	*replace_loop(char *str, char **envp, int *i)
 /// @return			Split string
 char	**init_split_before(char *line_buf, char **before, int *i)
 {
+	show_func(__func__, MY_START);
 	char	**split;
 
 	split = ft_split(line_buf, '$');
@@ -60,6 +63,7 @@ char	**init_split_before(char *line_buf, char **before, int *i)
 	}
 	else
 		*before = ft_strdup("");
+	show_func(__func__, SUCCESS);
 	return (split);
 }
 
@@ -98,6 +102,7 @@ char	*replace_env_var(char *line_buf, char **envp, int i, int j)
 	if (line_buf[ft_strlen(line_buf) - 1] == '$')
 		before = ft_strjoin_free(before, ft_strdup("$"));
 	free_split(split);
+	show_func(__func__, SUCCESS);
 	return (before);
 }
 
@@ -106,6 +111,7 @@ char	*replace_env_var(char *line_buf, char **envp, int i, int j)
 /// @return		String with multiple spaces replaced by a single space
 char	*replace_multiple_space(char *str)
 {
+	show_func(__func__, MY_START);
 	char	**split;
 	char	*tmp;
 	int		i;
@@ -124,6 +130,7 @@ char	*replace_multiple_space(char *str)
 	}
 	free(split);
 	free(str);
+	show_func(__func__, SUCCESS);
 	return (tmp);
 }
 
@@ -135,6 +142,7 @@ char	*replace_multiple_space(char *str)
 /// @return		Content of the variable
 char	*get_env_content(char *str, char **envp)
 {
+	show_func(__func__, MY_START);
 	char	*tmp;
 	char	*ret;
 	int		len;
@@ -158,5 +166,6 @@ char	*get_env_content(char *str, char **envp)
 		if (!ret)
 			return (NULL);
 	}
+	show_func(__func__, SUCCESS);
 	return (replace_multiple_space(ret));
 }
