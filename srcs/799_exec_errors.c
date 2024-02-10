@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   799_exec_errors.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 22:56:59 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/01/26 10:53:41 by antoda-s         ###   ########.fr       */
+/*   Created: 2024/02/09 23:43:45 by antoda-s          #+#    #+#             */
+/*   Updated: 2024/02/10 00:06:53 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "minishell.h"
 
-/// @brief 		checks if a char is a decimal digit
-/// @param c the char to check
-/// @return 1 if true 0 otherwise
-int	ft_isdigit(int c)
+int	fork_error(char **path)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
+	//show_func(__func__, MY_START, NULL);
+	write(2, "Error: fork failed\n", 19);
+	g_exit_status = 1;
+	free_array(path);
+	return (1);
+}
+
+int	pipe_error(char **path)
+{
+	//show_func(__func__, MY_START, NULL);
+	write(2, "Error: pipe failed\n", 19);
+	g_exit_status = 1;
+	free_array(path);
+	return (1);
 }

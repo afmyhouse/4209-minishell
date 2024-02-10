@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: fpinho-d <fpinho-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 09:54:43 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/11/21 23:23:00 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/01/02 15:40:38 by fpinho-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,7 @@
 #  define MAXLIST 100 // max number of commands to be supported
 # endif
 
-
-
 // Clearing the shell using escape sequences
-
 
 /* ************************************************************************** */
 ///	FUNCTIONS
@@ -72,10 +69,10 @@ void		print_dir_path(void);
 /// @brief 			Execute the command
 /// @param parsed	Pointer to the command to be executed
 void		exec_args(char **parsed);
+
 /// @brief 				Execute 2 piped the command with pipe
 /// @param parsed		Pointer to the first command to be executed
 /// @param parsedpipe	Pointer to the second command to be executed
-void		exec_args_piped(char **parsed, char **parsedpipe)
-
+void		exec_args_piped(char **parsed, char **parsedpipe);
 
 #endif

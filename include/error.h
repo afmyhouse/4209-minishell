@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antoda-s <antoda-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 18:49:28 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/12/04 14:49:00 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/01/10 21:45:22 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,36 @@
 # ifndef COLOR_ERROR
 #  define COLOR_ERROR 55
 # endif
-
+# ifndef CHILD_EXIT
+#  define CHILD_EXIT 56
+# endif
+# ifndef SHOW_MSG
+#  define SHOW_MSG 70
+# endif
+/* ************************************************************************** */
+///	EXIT CODES
+/* ************************************************************************** */
+# ifndef PERMISSION_DENIED
+#  define PERMISSION_DENIED 126
+# endif
+# ifndef COMMAND_NOT_FOUND
+#  define COMMAND_NOT_FOUND 127
+# endif
 
 /* ************************************************************************** */
 ///	MALLOC ERROR CODES
 /* ************************************************************************** */
 # ifndef MALLOC_ERROR
-#  define MALLOC_ERROR 100
+#  define MALLOC_ERROR 900
 # endif
 # ifndef MALLOC_NOT_ALLOCATED
-#  define MALLOC_NOT_ALLOCATED 101
+#  define MALLOC_NOT_ALLOCATED 901
 # endif
 # ifndef MALLOC_NOT_FREED
-#  define MALLOC_NOT_FREED 102
+#  define MALLOC_NOT_FREED 902
 # endif
 # ifndef MALLOC_NOT_REALLOCATED
-#  define MALLOC_NOT_REALLOCATED 103
+#  define MALLOC_NOT_REALLOCATED 903
 # endif
 
 /* ************************************************************************** */
@@ -108,34 +122,34 @@
 ///	PIPE ERROR CODES and STATUS
 /* ************************************************************************** */
 # ifndef PIPE_ERROR
-#  define PIPE_ERROR 300
+#  define PIPE_ERROR 30
 # endif
 # ifndef PIPE_OPEN
-#  define PIPE_OPEN 301
+#  define PIPE_OPEN 31
 # endif
 # ifndef PIPE_CLOSED
-#  define PIPE_CLOSED 302
+#  define PIPE_CLOSED 32
 # endif
 # ifndef PIPE_NOT_OPEN
-#  define PIPE_NOT_OPEN 303
+#  define PIPE_NOT_OPEN 33
 # endif
 # ifndef PIPE_NOT_CLOSED
-#  define PIPE_NOT_CLOSED 304
+#  define PIPE_NOT_CLOSED 34
 # endif
 # ifndef PIPE_NOT_CREATED
-#  define PIPE_NOT_CREATED 305
+#  define PIPE_NOT_CREATED 35
 # endif
 # ifndef PIPE_NOT_DELETED
-#  define PIPE_NOT_DELETED 306
+#  define PIPE_NOT_DELETED 36
 # endif
 # ifndef PIPE_NOT_RENAMED
-#  define PIPE_NOT_RENAMED 307
+#  define PIPE_NOT_RENAMED 37
 # endif
 # ifndef PIPE_NOT_COPIED
-#  define PIPE_NOT_COPIED 308
+#  define PIPE_NOT_COPIED 38
 # endif
 # ifndef PIPE_NOT_MOVED
-#  define PIPE_NOT_MOVED 309
+#  define PIPE_NOT_MOVED 39
 # endif
 # ifndef PIPE_NOT_EXECUTABLE
 #  define PIPE_NOT_EXECUTABLE 310
@@ -221,7 +235,6 @@
 #  define FORK_NOT_EXECUTED 511
 # endif
 
-
 /* ************************************************************************** */
 ///	EXEC ERROR CODES and STATUS
 /* ************************************************************************** */
@@ -261,7 +274,6 @@
 # ifndef EXEC_NOT_EXECUTED
 #  define EXEC_NOT_EXECUTED 611
 # endif
-
 
 /* ************************************************************************** */
 ///	CD ERROR CODES and STATUS
@@ -306,6 +318,5 @@
 // # ifndef FILE_ERROR
 // #  define FILE_ERROR 21
 // # endif
-
 
 #endif

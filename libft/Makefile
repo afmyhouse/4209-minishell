@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: antoda-s <antoda-s@student.42.fr>          +#+  +:+       +#+         #
+#    By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/22 12:51:39 by myoung            #+#    #+#              #
-#    Updated: 2023/12/06 10:41:45 by antoda-s         ###   ########.fr        #
+#    Updated: 2024/02/02 20:26:05 by antoda-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ FILES	+= ft_memcpy.c
 FILES	+= ft_memmove.c
 FILES	+= ft_memset.c
 FILES	+= ft_bzero.c
-FILES	+= ft_free_str.c
+FILES	+= ft_free_arr.c
 FILES	+= ft_free.c
 # PUT STDOUT & FD FUNCTIONS
 FILES	+= ft_charjoin.c
@@ -111,7 +111,7 @@ CYN		:= \33[1;36m
 RESET	:= \033[0m
 BOLD	:= \033[1m
 
-_INFO		=	$(WTH)[$(YLW)INFO$(WTH)]
+_INFO		=	$(WTH)[$(YLW) INFO$(WTH)]
 _SUCCESS	=	$(WTH)[$(GRN)READY$(WTH)]
 
 all: $(NAME)
@@ -126,8 +126,8 @@ re: fclean all
 
 $(NAME): $(OBJECTS)
 	@echo
-	@echo "$(_SUCCESS) $(GRN)$@ objects ready!$(WTH)"
-	@echo "$(_INFO) $(CYN)Creating $@"
+	@echo "$(_SUCCESS) $(GRN)$@ objects ready!                          $(WTH)"
+#	@echo "$(_INFO) $(CYN)Creating $@"
 	@$(AR) crs $@ $(OBJECTS)
 	@echo "$(_SUCCESS) $(GRN)$(NAME) ready!!$(WTH)"
 
@@ -135,8 +135,8 @@ build:
 	@mkdir -p build/
 
 build/%.o: srcs/%.c | build
-		@printf "\033[0;33mGenerating libft objects... %-33.33s\r" $@
-#	@printf "$(RED)█$(WHT)"
+#	@printf "$(CYN)Generating libft objects... %-33.33s\r" $@
+	@printf "$(RED)█$(WHT)"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 .PHONY: all clean fclean re

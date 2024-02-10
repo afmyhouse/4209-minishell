@@ -53,6 +53,7 @@ Makefile.gen
 
 # Debug files
 *.dSYM/
+*.vscode/
 *.su
 *.idb
 *.pdb

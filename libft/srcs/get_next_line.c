@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 04:12:07 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/10/26 11:53:37 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/01/31 12:35:42 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	gnl_check_reading(t_fd_lst *node, char *buff)
 
 	if (node->ret < 0)
 	{
-		ft_free_str(&buff);
+		ft_free_arr(&buff);
 		node->ret = 0;
 	}
 	else
@@ -91,7 +91,7 @@ void	gnl_check_reading(t_fd_lst *node, char *buff)
 		{
 			tmp = node->raw;
 			node->raw = ft_strjoin(node->raw, buff);
-			ft_free_str(&tmp);
+			ft_free_arr(&tmp);
 		}
 	}
 	return ;
@@ -116,7 +116,7 @@ int	gnl_new_reading(t_fd_lst *node)
 		node->ret = read(node->fd, buff, BUFFER_SIZE);
 		gnl_check_reading(node, buff);
 	}
-	ft_free_str(&buff);
+	ft_free_arr(&buff);
 	return (1);
 }
 
@@ -144,7 +144,7 @@ int	gnl_next_line(t_fd_lst *node)
 			node->nl = ft_substr(node->raw, 0, i);
 			node->raw = ft_substr(node->raw, i, ft_strlen(node->raw) - i);
 			if (!*node->raw)
-				ft_free_str(&node->raw);
+				ft_free_arr(&node->raw);
 			free(tmp);
 			return (1);
 		}

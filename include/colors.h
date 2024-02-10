@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 15:25:51 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/10/29 17:54:20 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/01/09 11:54:50 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,34 @@
 # define SYLW "\033[0;33m"
 # define SBLU "\033[0;34m"
 # define SPPL "\033[0;35m"
-# define SCYN "\033[1;36m"
-# define SWHT "\033[0m"
+# define SCYN "\033[0;36m"
+# define SWHT "\033[0;37m"
+# define SRST "\033[0m"
+/// Bold format by color
 # define SBOLD "\033[1;1m"
-
+# define SBRED "\033[1;31m"
+# define SBGRN "\033[1;32m"
+# define SBYLW "\033[1;33m"
+# define SBBLU "\033[1;34m"
+# define SBPPL "\033[1;35m"
+# define SBCYN "\033[1;36m"
+# define SBWHT "\033[1;37m"
+/// Hight intensity by color
+# define SHRED "\033[0;91m"
+# define SHGRN "\033[0;92m"
+# define SHYLW "\033[0;93m"
+# define SHBLU "\033[0;94m"
+# define SHPPL "\033[0;95m"
+# define SHCYN "\033[0;96m"
+# define SHWHT "\033[0;97m"
+/// Bold format, hight intensity by color
+# define SBHRED "\033[1;91m"
+# define SBHGRN "\033[1;92m"
+# define SBHYLW "\033[1;93m"
+# define SBHBLU "\033[1;94m"
+# define SBHPPL "\033[1;95m"
+# define SBHCYN "\033[1;96m"
+# define SBHWHT "\033[1;97m"
 /* ************************************************************************** */
 ///	MLX PIXEL COLORS
 /* ************************************************************************** */
