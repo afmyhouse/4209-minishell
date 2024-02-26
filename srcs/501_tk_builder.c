@@ -21,6 +21,7 @@
 void	tk_rm_blank(t_token *head)
 {
 	t_token	*tmp;
+	show_func(__func__, MY_START, NULL);
 
 	while (head)
 	{
@@ -51,6 +52,7 @@ t_ops	tk_type_getter(const char *s)
 	{" ", 1, TK_WS}, {"\n", 1, TK_WS}, {"\v", 1, TK_WS},
 	{"\t", 1, TK_WS}, {"\r", 1, TK_WS}, {"\f", 1, TK_WS},
 	{"||", 2, TK_OR}, {"&&", 2, TK_AND}, {NULL, 1, 0}};
+	show_func(__func__, MY_START, NULL);
 
 	blank = (t_ops){0, 0, 0};
 	i = -1;
@@ -71,6 +73,7 @@ int	tk_getter(char *str, t_token **tk_lst)
 {
 	t_ops	ptr;
 	char	*prev;
+	show_func(__func__, MY_START, NULL);
 
 	prev = str;
 	while (str && *str)
@@ -108,10 +111,12 @@ int	tk_builder(char **line, t_token **tk, t_script *s)
 {
 	t_token	*tk_ptr;
 	char	*content;
+	show_func(__func__, MY_START, NULL);
 
 	if (tk_getter(*line, tk) == ERROR)
 	{
-		return (return_error("Syntax Error", 1, 0));
+		return_error("Syntax Error", 1, 0);
+		return (ERROR);
 	}
 	tk_ptr = *tk;
 	while (tk_ptr)
@@ -121,5 +126,5 @@ int	tk_builder(char **line, t_token **tk, t_script *s)
 		free(content);
 		tk_ptr = tk_ptr->next;
 	}
-	return (0);
+	return (SUCCESS);
 }

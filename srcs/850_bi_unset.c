@@ -18,7 +18,7 @@
 /// @return			Updated environment variables
 int	bi_unset(t_script *s, int n)
 {
-	//show_func(__func__, MY_START, NULL);
+	show_func(__func__, MY_START, NULL);
 	int		i;
 	int		j;
 	char	*var;
@@ -53,7 +53,7 @@ int	bi_unset(t_script *s, int n)
 /// @return			Updated environment variables
 int	bi_unset_envt(t_script *s, int n)
 {
-	//show_func(__func__, MY_START, NULL);
+	show_func(__func__, MY_START, NULL);
 
 	int		i;
 	int		j;

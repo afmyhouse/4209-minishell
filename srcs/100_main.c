@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:27:05 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/02/09 23:47:21 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/02/25 23:41:12 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	g_exit_status;
 /// @return 	array copy of system environment variables
 char	**envp_init(char **envp)
 {
+	show_func(__func__, MY_START, NULL);
 	char	**ms_envp;
 	int		i;
 
@@ -28,6 +29,7 @@ char	**envp_init(char **envp)
 	ms_envp = malloc(sizeof(char *) * (i + 1));
 	if (!ms_envp)
 	{
+		return_error("", errno, 1);
 		return (NULL);
 	}
 	i = 0;
@@ -35,11 +37,15 @@ char	**envp_init(char **envp)
 	{
 		ms_envp[i] = ft_strdup(envp[i]);
 		if (!ms_envp[i])
+		{
+			return_error("", errno, 1); // adicionada Filipe 19fev
 			return (NULL);
+		}
 		i++;
 	}
 	ms_envp[i] = NULL;
 	return (ms_envp);
+
 }
 
 /// @brief 		Initialize basic int
@@ -57,6 +63,7 @@ void	struct_init(t_script *s)
 /// @return				void
 int	ms_loop(t_script *s)
 {
+	show_func(__func__, MY_START, NULL);
 	int		status;
 	char	*line_buffer;
 
@@ -66,6 +73,7 @@ int	ms_loop(t_script *s)
 		struct_init(s);
 		signal_setter();
 		status = parser(s, &line_buffer);
+		show_func(__func__, SHOW_MSG, "parser returned");
 		ft_free_arr(&line_buffer);
 		if (status == 1)
 			continue ;
@@ -96,7 +104,13 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	s.envp = envp_init(envp);
-	s.envt = NULL;
+	s.envt = malloc(sizeof(char *) * (1));
+	if (!s.envt)
+	{
+		return_error("", errno, 1);
+		return (1);
+	}
+	s.envt[0] = NULL;
 	termios_getter(&s.termios_p);
 	ms_loop(&s);
 	free_array(s.envp);

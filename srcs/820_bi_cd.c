@@ -18,7 +18,7 @@
 /// @return 		SUCCESS or ERROR
 int	change_dir(char *path, char ***envp)
 {
-	//show_func(__func__, MY_START, path);
+	show_func(__func__, MY_START, path);
 	int		ret;
 	char	*pwd;
 
@@ -40,7 +40,7 @@ int	change_dir(char *path, char ***envp)
 /// @return			SUCCESS or ERROR
 int	bi_cd(t_script *s, int n)
 {
-	//show_func(__func__, MY_START, ft_strjoin("execute bi: ", s->cmds[n].argv[0]));
+	show_func(__func__, MY_START, ft_strjoin("execute bi: ", s->cmds[n].argv[0]));
 	char	*home;
 	int		status;
 
@@ -49,11 +49,12 @@ int	bi_cd(t_script *s, int n)
 	{
 		//env_var_setter("cd","_", &s->envp);
 		home = env_var_getter("HOME", s->envp, NULL);
+		printf("HOME:%s\n", home); // este teste é pq se fizermos unset HOME, cd nao está a entrar no caso abaixo e deveria
 		if (home == NULL)
 		{
-			ft_putendl_fd("Minishell: cd: HOME not set", 2);
+			//ft_putendl_fd("Minishell: cd: HOME not set", 2);
 			free(home);
-			return (1);
+			return (return_error("Minishell: cd: HOME not set", 1, 0));
 		}
 		status = change_dir(home, &s->envp);
 		free(home);
@@ -62,9 +63,9 @@ int	bi_cd(t_script *s, int n)
 	if (s->cmds[n].argc > 2)
 	{
 		//env_var_setter(s->cmds[n].argv[1],"_", &s->envp);
-		ft_putendl_fd("Minishell: cd: too many arguments", 2);
+		// ft_putendl_fd("Minishell: cd: too many arguments", 2);
 		//show_func(__func__, ERROR, NULL);
-		return (1);
+		return (return_error("Minishell: cd: too many arguments", 1, 0));
 	}
 	if (s->cmds[n].argv[1][0] == '\0')
 	{

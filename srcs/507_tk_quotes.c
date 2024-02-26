@@ -20,11 +20,12 @@
 ///				or sets str pointer to the end {\0}
 ///				@malloc	: NOTHING
 ///				@free	: NOTHING
-/// @param str	addres of teh string to seek, that starts with a quotation mark
+/// @param str	addres of the string to seek, that starts with a quotation mark
 /// @return		ERROR (unclosed), SUCCES (closed)
 int	tk_quotes_checker(char **str)
 {
 	char	*tmp;
+	show_func(__func__, MY_START, NULL);
 
 	tmp = *str;
 	(*str) = ft_strchr((*str) + 1, **str);
@@ -49,6 +50,7 @@ char	*tk_xpd_unquote(char *str)
 {
 	char	*ret;
 	int		len;
+	show_func(__func__, MY_START, NULL);
 
 	ret = NULL;
 	len = ft_strlen(str);
@@ -73,6 +75,7 @@ char	*tk_xpd_unquote(char *str)
 void	tk_trim_spaces(t_token *tk)
 {
 	char	*tmp;
+	show_func(__func__, MY_START, NULL);
 
 	while (tk)
 	{

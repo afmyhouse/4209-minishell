@@ -16,6 +16,7 @@
 /// @param		No parameter required
 void	signal_setter(void)
 {
+	show_func(__func__, MY_START, NULL);
 	signal(SIGINT, sig_handler);
 	signal(SIGQUIT, SIG_IGN);
 }
@@ -26,7 +27,7 @@ void	signal_setter(void)
 /// @return			void
 void	sig_handler(int signum)
 {
-	//show_func(__func__, MY_START, NULL);
+	show_func(__func__, MY_START, NULL);
 	if (signum == SIGQUIT)
 	{
 		write(1, "Quit: 3\n", 8);
@@ -50,7 +51,7 @@ void	sig_handler(int signum)
 /// @return			void
 void	sig_handler_fork(int signum)
 {
-	//show_func(__func__, MY_START, NULL);
+	show_func(__func__, MY_START, NULL);
 	if (signum == SIGQUIT)
 	{
 		write(1, "Quit: 3\n", 8);
@@ -71,7 +72,7 @@ void	sig_handler_fork(int signum)
 /// @return			void
 void	sig_handler_heredoc(int signum)
 {
-	//show_func(__func__, MY_START, NULL);
+	show_func(__func__, MY_START, NULL);
 	if (signum == SIGINT)
 		exit(130);
 	//show_func(__func__, SUCCESS, NULL);

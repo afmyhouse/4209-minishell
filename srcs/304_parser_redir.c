@@ -39,12 +39,13 @@ void	fnames_clear(t_command *cmds, int max, t_token *tk)
 /// @return			0 if success, 1 if failure
 int	redir(t_token *tk, t_redirection *file)
 {
+	show_func(__func__, MY_START, NULL);
 	int		ret;
 
 	if (file->name)
 		free(file->name);
 	if (!tk->next || tk->next->type != TK_NAME)
-		return (0);
+		return (SUCCESS);
 	file->name = ft_strdup(tk->next->content);
 	if (!ft_strncmp(tk->content, ">>", 2))
 		file->flag = (O_CREAT | O_APPEND | O_RDWR);
@@ -55,10 +56,10 @@ int	redir(t_token *tk, t_redirection *file)
 	else if (!ft_strncmp(tk->content, "<", 1))
 		file->flag = O_RDONLY;
 	if (file->flag == -1)
-		return (0);
+		return (SUCCESS);
 	ret = open(file->name, file->flag, 0644);
 	if (ret == -1)
 		return (return_error(file->name, 0, 1));
 	close(ret);
-	return (0);
+	return (SUCCESS);
 }

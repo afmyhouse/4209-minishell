@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 19:00:01 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/02/10 00:26:13 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/02/26 01:27:10 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 /// @return			Index of the variable
 int	env_var_index_getter(char *var, char **envx)
 {
-	//show_func(__func__, MY_START, NULL);
+	show_func(__func__, MY_START, NULL);
 	int		i;
 
 	if (!envx)
@@ -44,6 +44,8 @@ int	env_var_setter(char *val, char *var, char ***envx)
 	int		i;
 	char	*var_new;
 	char	*old_record;
+	char	**new_array;
+	show_func(__func__, MY_START, NULL);
 
 	if (val)
 		var_new = ft_strjoin_free(ft_strjoin(var, "="), ft_strdup(val));
@@ -55,12 +57,29 @@ int	env_var_setter(char *val, char *var, char ***envx)
 		i = 0;
 		while ((*envx)[i])
 			i++;
-		(*envx)[i] = ft_strjoin_free(var_new, ft_strdup(""));
-		(*envx)[i + 1] = NULL;
+		new_array = malloc(sizeof(char *) * (i + 2));
+		if (!new_array)
+		{
+			return_error("", errno, 1);
+			return (ERROR);
+		}
+		i = -1;
+		while ((*envx)[++i])
+			new_array[i] = ft_strdup((*envx)[i]);
+		new_array[i] = ft_strjoin_free(var_new, ft_strdup(""));
+		new_array[i + 1] = NULL;
+		free(*envx);
+		*envx = new_array;
+		show_array(*envx, "envx");
 	}
 	else if (i == -1 && !*envx)
 	{
 		*envx = malloc(sizeof(char *) * (1 + 1));
+		if (!*envx)
+		{
+			return_error("", errno, 1);
+			return (ERROR);
+		}
 		(*envx)[0] = ft_strjoin_free(var_new, ft_strdup(""));
 		(*envx)[1] = NULL;
 	}
@@ -70,7 +89,8 @@ int	env_var_setter(char *val, char *var, char ***envx)
 		(*envx)[i] = ft_strjoin_free(var_new, ft_strdup(""));
 		free(old_record);
 	}
-	return (0);
+	show_func(__func__, SUCCESS, NULL);
+	return (SUCCESS);
 }
 
 /// @brief		This function iterates over the environment variables to
@@ -79,57 +99,28 @@ int	env_var_setter(char *val, char *var, char ***envx)
 /// @param var	Variable to be found
 /// @param envp	Environment variables
 /// @return		Content of the variable
-char	*envp_var_getter(char *var, char **envp)
+char	*envx_var_getter(char *var, char **envx)
 {
 	char	*tmp;
 	char	*ret;
 	int		len;
+	//int i;
+	show_func(__func__, MY_START, NULL);
 
-	if (!envp)
+	if (!envx || !var)
 		return (NULL);
 	tmp = ft_strjoin(var, "=");
 	len = ft_strlen(tmp);
 	ret = NULL;
-	while (*envp)
+	//i = -1;
+	while (*envx)
 	{
-		if (!ft_strncmp(tmp, *envp, len))
+		if (!ft_strncmp(tmp, *envx, len))
 		{
-			ret = ft_strdup(*envp + len);
+			ret = ft_strdup(*envx + len);
 			break ;
 		}
-		envp++;
-	}
-	free(tmp);
-	if (!ret)
-		return (NULL);
-	return (ret);
-}
-
-/// @brief		This function iterates over the environment variables to
-///				find whether or not the given variable (str) is defined and
-///				returns the content or an empty freeable string.
-/// @param var	Variable to be found
-/// @param envp	Environment variables
-/// @return		Content of the variable
-char	*envt_var_getter(char *var, char **envp)
-{
-	char	*tmp;
-	char	*ret;
-	int		len;
-
-	if (!envp)
-		return (NULL);
-	tmp = ft_strjoin(var, "=");
-	len = ft_strlen(tmp);
-	ret = NULL;
-	while (*envp)
-	{
-		if (!ft_strncmp(tmp, *envp, len))
-		{
-			ret = ft_strdup(*envp + len);
-			break ;
-		}
-		envp++;
+		envx++;
 	}
 	free(tmp);
 	if (!ret)
@@ -147,15 +138,25 @@ char	*env_var_getter(char *var, char **envp, char **envt)
 {
 	char	*retp;
 	char	*rett;
+	show_func(__func__, MY_START, NULL);
 
 	retp = NULL;
 	rett = NULL;
 	if (envp)
-		retp = envp_var_getter(var, envp);
+	{
+
+		show_func(__func__, SHOW_MSG, "envp calling");
+		retp = envx_var_getter(var, envp);
+		show_func(__func__, SHOW_MSG, "envp return");
+	}
 	if (envt)
-		rett = envt_var_getter(var, envt);
+	{
+		show_func(__func__, SHOW_MSG, "envt calling");
+		rett = envx_var_getter(var, envt);
+		show_func(__func__, SHOW_MSG, "envt return");
+	}
 	if (!retp && !rett)
-		return (ft_strdup(""));
+		return (NULL);
 	else if (!retp && rett)
 		return (rett);
 	else if (retp)

@@ -6,76 +6,50 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 00:26:42 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/02/10 00:40:41 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/02/15 20:05:40 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*add_forw_slash(char *str)
+static int	get_path_index(char **envp)
 {
-	char	*tmp;
-	int		i;
+	// show_func(__func__, MY_START, NULL);
+	int	i;
 
 	i = 0;
-	tmp = ft_strdup(str);
-	free(str);
-	str = (char *)malloc(sizeof(char) * (ft_strlen(tmp) + 2));
-	if (!str)
+	while (envp[i])
 	{
+		if (!ft_strncmp(envp[i], "PATH=", 5))
+		{
+			// show_func(__func__, SUCCESS, ft_strjoin("PATH index = ", ft_itoa(i)));
+			return (i);
+		}
+		i++;
+	}
+	// show_func(__func__, ERROR, NULL);
+	return (-1);
+}
+
+char	**split_path(char **envp)
+{
+	// show_func(__func__, MY_START, NULL);
+	int		i;
+	char	**path;
+
+	i = get_path_index(envp);
+	if (i == -1)
 		return (NULL);
-	}
-	while (tmp[i])
+	path = ft_split(envp[i] + 5, ':');
+
+	i = -1;
+	while (path[++i])
 	{
-		str[i] = tmp[i];
-		i++;
+		path[i] = ft_strjoin(path[i], "/");
+		//show_func(__func__, SHOW_MSG, path[i]);
 	}
-	str[i++] = '/';
-	str[i] = '\0';
-	free(tmp);
-	return (str);
-}
-
-char	**path_fill(char **env, int p_line)
-{
-	char	**path;
-	char	*tmp;
-	int		i;
-
-	i = 0;
-	path = ft_split(env[p_line], ':');
-	tmp = ft_strdup(path[0] + 5);
-	free(path[0]);
-	path[0] = tmp;
-	i = 0;
-	while (path[i])
-	{
-		tmp = ft_strdup(path[i]);
-		free(path[i]);
-		path[i] = add_forw_slash(tmp);
-		i++;
-	}
-	return (path);
-}
-
-char	**split_paths(char **env)
-{
-	char	**path;
-	int		i;
-
-	i = 0;
-	while (env[i] && ft_strncmp(env[i], "PATH=", 5))
-		i++;
-
-	if (env[i] != NULL)
-		path = path_fill(env, i);
-	else
-	{
-		path = malloc(sizeof(char *));
-		if (!path)
-			return (NULL);
-		path[0] = NULL;
-	}
+	// show_array(path, "path");
+	// show_func(__func__, SUCCESS, NULL);
 	return (path);
 }
 
@@ -84,21 +58,20 @@ char	**split_paths(char **env)
 /// @return 		SUCCESS or ERROR
 int execute(t_script *s)
 {
-	//show_func(__func__, MY_START, NULL);
+	show_func(__func__, MY_START, NULL);
 	char	**path;
 
 	execute_show(s);
-	path = split_paths(s->envp);
+	path = split_path(s->envp);
 	if (s->cmd_count == 1)
 	{
 		if (exec_one(s, path))
-			return (1);
+			return (ERROR); // estava return (1) filipe 20fev
 	}
 	else if (exec_many(s, path))
-		return (1);
+		return (ERROR); // estava return (1) filipe 20fev
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &s->termios_p);
-	//show_func(__func__, SUCCESS, NULL);
-	//show_array(s->envp);
-	return (0);
+	show_func(__func__, SUCCESS, NULL);
+	return (SUCCESS);
 }
 

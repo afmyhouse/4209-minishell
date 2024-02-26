@@ -22,7 +22,7 @@
 /// @param path Commands execution path
 void	in_redir(t_script *s, int i, char **path)
 {
-	//show_func(__func__, MY_START, NULL);
+	show_func(__func__, MY_START, NULL);
 	int	fdin;
 
 	if (s->cmds[i].in.flag >= 0)
@@ -48,7 +48,7 @@ void	in_redir(t_script *s, int i, char **path)
 /// @param path Commands execution path
 void	out_redir(t_script *s, int i, char **path)
 {
-	//show_func(__func__, MY_START, NULL);
+	show_func(__func__, MY_START, NULL);
 	int	fdout;
 
 	fdout = open(s->cmds[i].out.name, s->cmds[i].out.flag, 0644);

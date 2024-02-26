@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:28:06 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/02/26 01:50:17 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/02/13 19:12:01 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,7 @@ typedef enum e_cmd_type
 	CMD_EXPORT,
 	CMD_UNSET,
 	CMD_ENV,
-	CMD_EXIT,
-	CMD_EQ
+	CMD_EXIT
 }			t_cmd_type;
 
 /// @brief 				Struct to hold errors from execve
@@ -654,7 +653,15 @@ int		env_var_setter(char *val, char *var, char ***envx);
 /// @param var	Variable to be found
 /// @param envp	Environment variables
 /// @return		Content of the variable
-char	*envx_var_getter(char *var, char **envx);
+char	*envp_var_getter(char *var, char **envp);
+
+/// @brief		This function iterates over the environment variables to
+///				find whether or not the given variable (str) is defined and
+///				returns the content or an empty freeable string.
+/// @param var	Variable to be found
+/// @param envp	Environment variables
+/// @return		Content of the variable
+char	*envt_var_getter(char *var, char **envp);
 
 /// @brief		This function iterates over the environment variables to
 ///				find whether or not the given variable (str) is defined and
@@ -691,10 +698,6 @@ int		execute(t_script *s);
 /* ************************************************************************** */
 ///	705exec_type.c
 /* ************************************************************************** */
-
-int		bi_equal_check(t_script *s, int n, int i);
-
-
 /// @brief 			Detects the type of commando to execute : a builtin and
 /// 				what kind builtin or a system comand CMD_EX
 /// @param cmd 		Command to execute
@@ -970,14 +973,6 @@ void	bi_export_new_var(t_script *s, int n, int i);
 /// @return 		SUCCESS or ERROR
 int		bi_export(t_script *s, int n);
 
-/// @brief 		Alphatecially ordered array from start n of the string till the
-/// 			terminator t, order after j strings
-/// @param a 	Array to order
-/// @param t 	Order seg terminator
-/// @param n 	Order seg starting Index
-/// @param j 	Order seg compare starting Index
-/// @return 	Ordered array
-char	**ordered_array(char **d, char t, int n, int j);
 
 /* ************************************************************************** */
 ///	850bi_unset.c
@@ -1114,7 +1109,7 @@ int		return_error(const char *msg, int errms, int errbash);
 /// @brief 		Alphatecially ordered array
 /// @param src 	Array to order
 /// @return 	Ordered array
-//char	**ordered_array(char **s, char t);
+char	**ordered_array(char **s, char t);
 
 /* ************************************************************************** */
 ///	999_debug.c

@@ -6,7 +6,7 @@
 #    By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/22 12:51:39 by myoung            #+#    #+#              #
-#    Updated: 2024/02/02 20:26:05 by antoda-s         ###   ########.fr        #
+#    Updated: 2024/02/25 21:41:35 by antoda-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,7 @@ FILES	+= ft_putstr_fd.c
 FILES	+= ft_split_set.c\
 # STRING MANIPULATION FUNCTIONS
 FILES	+= ft_split.c
+FILES	+= ft_strswap.c
 FILES	+= ft_strchr.c
 FILES	+= ft_strdup.c
 FILES	+= ft_striteri.c

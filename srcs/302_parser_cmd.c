@@ -19,6 +19,7 @@
 /// @return		Number of cmds
 int	cmds_counter(t_token *tk)
 {
+	show_func(__func__, MY_START, NULL);
 	int	count;
 
 	count = 0;

@@ -21,6 +21,7 @@
 char	*tk_var_xpd_dolar(char *otk, int *i)
 {
 	int	j;
+	show_func(__func__, MY_START, NULL);
 
 	j = *i;
 	(*i)++;
@@ -45,6 +46,7 @@ void	tk_var_xpd_dquote(char *otk, char ***ntks, int *spl, int *i)
 {
 	int	j;
 	int	xpd;
+	show_func(__func__, MY_START, NULL);
 
 	xpd = 0;
 	j = *i;
@@ -81,6 +83,7 @@ void	tk_var_xpd_dquote(char *otk, char ***ntks, int *spl, int *i)
 void	tk_var_xpd_squote(char *otk, char ***ntks, int *spl, int *i)
 {
 	int	j;
+	show_func(__func__, MY_START, NULL);
 
 	j = *i;
 	(*i)++;
@@ -100,6 +103,7 @@ void	tk_var_xpd_squote(char *otk, char ***ntks, int *spl, int *i)
 void	tk_var_xpd_else(char *otk, char ***ntks, int *spl, int *i)
 {
 	int	j;
+	show_func(__func__, MY_START, NULL);
 
 	j = *i;
 	(*i)++;

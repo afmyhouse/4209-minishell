@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 00:14:30 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/02/10 00:14:38 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/02/26 00:43:48 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ void	bi_equal_new(t_script *s, int n, int i)
 /// @return 		SUCCESS or ERROR
 int	bi_equal(t_script *s, int n)
 {
-	//show_func(__func__, MY_START, NULL);
+	show_func(__func__, MY_START, NULL);
 	int		i;
 	int		index_tp;
 
-	env_var_setter("","_", &s->envp);
 	if (!s->envp || !s->cmds[n].argv[0])
 		return (ERROR);
+	env_var_setter("","_", &s->envp);
 	i = -1;
 	while (s->cmds[n].argv[++i])
 	{
@@ -68,6 +68,7 @@ int	bi_equal(t_script *s, int n)
 		else
 			export_error(s->cmds[n].argv[i], 1);
 	}
+	show_array(s->envt, "envt");
 	//show_func(__func__, SUCCESS, NULL);
 	return (SUCCESS);
 }

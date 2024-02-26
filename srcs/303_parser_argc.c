@@ -20,6 +20,7 @@
 /// @return		Trimmed content
 void	args_counter(t_token *tk, t_script *s)
 {
+	show_func(__func__, MY_START, NULL);
 	t_token	*tmp;
 	int		i;
 

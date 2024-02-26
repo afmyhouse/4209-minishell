@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 15:21:17 by hmaciel-          #+#    #+#             */
-/*   Updated: 2024/01/31 12:34:29 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/02/25 21:42:33 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void			ft_putnbr_fd(int n, int fd);
 void			ft_putnbr(int n);
 void			ft_putstr_fd(const char *s, int fd);
 void			ft_putstr(const char *str);
-
+void			ft_strswap(char **s1, char **s2);
 char			*ft_strrev(char *str, int j);
 char			**ft_split(char const *s, char c);
 char			**ft_split_set(char *str, char *charset);
@@ -123,6 +123,8 @@ char			*ft_strrchr(const char *s, int c);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
 char			*ft_strtrim(char const *s1, char const *set);
 char			*ft_strtrim_free(char *line, char const *set);
+char			*ft_strtrim_leading(char const *s1, char const *set);
+char			*ft_strtrim_trailing(char const *s1, char const *set);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void			ft_striteri(char *s, void (*f)(unsigned int, char*));
 int				ft_tolower(int c);

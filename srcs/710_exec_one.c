@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:25:54 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/02/10 00:49:13 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/02/26 01:52:25 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,25 @@
 /// @return 		SUCCESS or ERROR
 int	exec_bi(int id, t_script *s, int i)
 {
-	//show_func(__func__, MY_START, NULL);
-	if (id == 1)
+	show_func(__func__, MY_START, NULL);
+	if (id == CMD_EQ)
+		g_exit_status = bi_equal(s, i);
+	else if (id == CMD_ECHO)
 		g_exit_status = bi_echo(s, i);
-	if (id == 2)
+	else if (id == CMD_CD)
 		g_exit_status = bi_cd(s, i);
-	if (id == 3)
+	else if (id == CMD_PWD)
 		g_exit_status = bi_pwd(s, i);
-	if (id == 4)
+	else if (id == CMD_EXPORT)
 		g_exit_status = bi_export(s, i);
-	if (id == 5)
+	else if (id == CMD_UNSET)
 		g_exit_status = bi_unset(s, i);
-	if (id == 6)
+	else if (id == CMD_ENV)
 		g_exit_status = bi_env(s, i);
-	if (id == 7)
+	else if (id == CMD_EXIT)
 		return (bi_exit(s, i));
-	return (0);
+	show_func(__func__, SUCCESS, "bi executed");
+	return (SUCCESS);
 }
 
 /// @brief 			Executes a command using the absolute path or the PATH
@@ -43,7 +46,7 @@ int	exec_bi(int id, t_script *s, int i)
 /// @param env 		Environment variables
 void	exec_ve(char **path, char **cmd, char **env)
 {
-	//show_func(__func__, MY_START, NULL);
+	show_func(__func__, MY_START, NULL);
 	char	*tmp;
 	int		i;
 	int		ret;
@@ -52,9 +55,10 @@ void	exec_ve(char **path, char **cmd, char **env)
 	i = 0;
 	if (tmp[0] == '.' || tmp[0] == '/')
 	{
+		// falta atualizar a variável de ambiente SHLVL (o valor de SHLVL é incrementado em 1.)
 		execve(*cmd, cmd, env);
-		free(tmp);
-		return ;
+		free(tmp); // se entrar no execve este free já nao acontece
+		return ; // se entrar no execve este return já nao acontece
 	}
 	ret = -1;
 	while (ret == -1 && path[i])
@@ -77,8 +81,9 @@ void	exec_ve(char **path, char **cmd, char **env)
 /// @return			SUCCESS or ERROR
 int	exec_one_fork(t_script *s, char **path)
 {
-	//show_func(__func__, MY_START, NULL);
+	show_func(__func__, MY_START, NULL);
 	int	pid;
+	int	status;
 
 	if (s->cmds[0].in.flag == -1)
 		signal(SIGQUIT, SIG_IGN);
@@ -88,13 +93,25 @@ int	exec_one_fork(t_script *s, char **path)
 
 	pid = fork();
 	if (pid == -1)
-		return (fork_error(path));
+	{
+		// return (fork_error(path));
+		//free_array(path); // estava a ser feito no fork error mas o exec_one tb o faz if exec_one_fork
+		return (return_error("", errno, 1)); // alterado filipe 20 fev
+	}
 	if (pid == 0)
+	{
+		show_func(__func__, SHOW_MSG,
+			ft_strjoin("Exit_status antes de ex child: ", ft_itoa(g_exit_status)));
 		ex_child_1(s, path, NULL);
-	wait(&g_exit_status);
-	if (WIFSIGNALED(g_exit_status))
-		g_exit_status = 128 + WTERMSIG(g_exit_status);
-	//show_func(__func__, SUCCESS, NULL);
+	}
+	wait(&status);
+	if (WIFEXITED(status))
+		g_exit_status = WEXITSTATUS(status);
+	//printf("Exit_status apos wait exec_one_fork: %d\n", g_exit_status);
+	// if (WIFSIGNALED(status))
+	// 	g_exit_status = 128 + WTERMSIG(status);
+	//printf("Exit_status apos IF exec_one_fork: %d\n", g_exit_status);
+	show_func(__func__, SUCCESS, "Parent ended");
 	return (SUCCESS);
 }
 
@@ -107,36 +124,43 @@ int	exec_one_fork(t_script *s, char **path)
 /// @return 		SUCCESS or ERROR
 int	exec_one(t_script *s, char **path)
 {
-	//show_func(__func__, MY_START, NULL);
+	show_func(__func__, MY_START, NULL);
 	int	id;
 
 	id = CMD_EX;
 	if (s->cmds[0].argv[0])
 		id = exec_type(s->cmds[0].argv[0]);
-	if (id == CMD_CD || (id == CMD_UNSET && s->cmds[0].argv[1])
-		|| (id == CMD_EXPORT && s->cmds[0].argv[1]) || id == CMD_EXIT)
+	if (id == CMD_EQ)
 	{
-		printf("exec_one parent : cd, unset, export with args, exit\n");
+		show_func(__func__, SHOW_MSG, "<equal> checker");
+		id = bi_equal_check(s, 0, 0);
+		show_func(__func__, SHOW_MSG, "<equal> checker end");
+	}
+	if (id == CMD_CD || (id == CMD_UNSET && s->cmds[0].argv[1])
+		|| (id == CMD_EXPORT && s->cmds[0].argv[1]) || id == CMD_EXIT
+		|| id == CMD_EQ)
+	{
+		show_func(__func__, SHOW_MSG,  "exec_one parent : <cd>, <unset>, <export with args>, <exit>");
 		if (exec_bi(id, s, 0))
 		{
 			free_array(path);
-			//show_func(__func__, ERROR, "exec_bi execution error");
+			show_func(__func__, ERROR, "exec_bi execution error");
 			return (ERROR);
 		}
 	}
 	else
 	{
-		printf("exec_one child : export without args, echo, env, pwd, execve \n");
+		show_func(__func__, SHOW_MSG, "exec_one child : <export without args>, <echo>, <env>, <pwd>, <execve>");
 		if (exec_one_fork(s, path))
 		{
-			free_array(path);
-			//show_func(__func__, ERROR, "exec_one_fork execution error");
+			free_array(path); // o exec_one_forks faz free a path no fork_error se pid == -1, dava double free no env e pwd e deixou de dar
+			show_func(__func__, ERROR, "exec_one_fork execution error");
 			return (ERROR);
 		}
 	}
 	bi_env_upd(s, 0);
 	free_array(path);
-	//show_func(__func__, SUCCESS, "execute one succefully completed");
+	show_func(__func__, SUCCESS, "execute one succefully completed");
 	return (SUCCESS);
 }
 

@@ -18,6 +18,7 @@
 /// @return		SUCCESS or ERROR
 int	var_name_checker(char c)
 {
+	show_func(__func__, MY_START, NULL);
 	if (ft_isalnum(c) || c == '_')
 		return (SUCCESS);
 	return (ERROR);
@@ -29,6 +30,7 @@ int	var_name_checker(char c)
 /// @return		SUCCESS or ERROR
 int	var_firstchar(char c)
 {
+	show_func(__func__, MY_START, NULL);
 	if (ft_isalpha(c) || c == '_')
 		return (SUCCESS);
 	return (ERROR);
@@ -46,7 +48,10 @@ t_token	*tk_addnew(const char *str, int size, t_token_type type)
 
 	tk = (t_token *)malloc(sizeof(t_token));
 	if (!tk)
+	{
+		return_error("", errno, 1);
 		return (NULL);
+	}		
 	tk->content = ft_substr(str, 0, size);
 	tk->size = size;
 	tk->type = type;
@@ -60,6 +65,7 @@ t_token	*tk_addnew(const char *str, int size, t_token_type type)
 /// @return			last token list node
 t_token	*tk_lst_last_getter(t_token *ltk)
 {
+	show_func(__func__, MY_START, NULL);
 	if (!ltk)
 		return (NULL);
 	while (ltk)
@@ -78,6 +84,7 @@ t_token	*tk_lst_last_getter(t_token *ltk)
 void	tk_lst_addback(t_token **ltk, t_token *ntk)
 {
 	t_token	*token_lst_last;
+	show_func(__func__, MY_START, NULL);
 
 	if (*ltk)
 	{

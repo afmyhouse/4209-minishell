@@ -19,7 +19,7 @@ void	fill_heredoc(t_redirection *file)
 {
 	t_list	*tmp;
 
-	//show_func(__func__, MY_START, NULL);
+	show_func(__func__, MY_START, NULL);
 	tmp = ft_lstnew(ft_strdup(file->name));
 	if (file->heredoc == NULL)
 		file->heredoc = tmp;

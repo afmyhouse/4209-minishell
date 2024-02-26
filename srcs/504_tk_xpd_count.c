@@ -19,6 +19,7 @@
 /// @return		addressed memory arg <i> is updated
 void	tk_var_xpd_dolar_c(char *otk, int *i)
 {
+	show_func(__func__, MY_START, NULL);
 	(*i)++;
 	if (otk[*i] && var_firstchar(otk[*i]) == SUCCESS)
 		while (otk[*i] && var_name_checker(otk[*i]) == SUCCESS)
@@ -38,6 +39,7 @@ void	tk_var_xpd_dolar_c(char *otk, int *i)
 void	tk_var_xpd_dquote_c(char *otk, int *spl, int *i)
 {
 	int	xpd;
+	show_func(__func__, MY_START, NULL);
 
 	xpd = 0;
 	(*i)++;
@@ -70,6 +72,7 @@ void	tk_var_xpd_dquote_c(char *otk, int *spl, int *i)
 /// @return		addressed memory arg <i> is updated
 void	tk_var_xpd_squote_c(char *otk, int *i)
 {
+	show_func(__func__, MY_START, NULL);
 	(*i)++;
 	while (otk[*i] && otk[*i] != '\'')
 		(*i)++;
@@ -84,6 +87,7 @@ void	tk_var_xpd_squote_c(char *otk, int *i)
 /// @return		addressed memory arg <i> is updated
 void	tk_var_xpd_else_c(char *otk, int *i)
 {
+	show_func(__func__, MY_START, NULL);
 	(*i)++;
 	while (otk[*i] && otk[*i] != '$'
 		&& otk[*i] != '\"' && otk[*i] != '\'')

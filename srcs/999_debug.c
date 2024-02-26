@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:29:02 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/02/10 00:24:29 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/02/26 00:25:56 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ void	execute_show(t_script *s)
 
 	i = -1;
 	j = -1;
-	//show_func(__func__, MY_START, NULL);
+	if (!s || !DEBUG_ARRAY)
+		return ;
+	show_func(__func__, MY_START, NULL);
 	printf("%s**********************************************************%s\n", SBHGRN, SRST);
 	printf("%s(->)  s->com_count: \t%i\n", SBHYLW, s->cmd_count);
 	while (++j < s->cmd_count)
@@ -50,7 +52,7 @@ void	execute_show(t_script *s)
 
 void	show_func_msg(const char *msg)
 {
-	if (MY_DEBUG)
+	if (DEBUG_ALL)
 	{
 		if (!msg)
 			write(STDERR_FILENO, "\n", 2);
@@ -84,7 +86,7 @@ int	show_func(const char *func_name, int status, char *msg)
 	{" FILE_NOT_DELETED", FILE_NOT_DELETED, 17, "(xx) ", SBHRED},
 	{NULL, 0, 0, NULL, NULL}};
 
-	if (MY_DEBUG)
+	if (DEBUG_ALL)
 	{
 		i = -1;
 		while (debug_msg[++i].status != status && debug_msg[i].msg)
@@ -92,7 +94,7 @@ int	show_func(const char *func_name, int status, char *msg)
 			if (debug_msg[i].status == status)
 				break ;
 		}
-		if (MY_DEBUG_COLOR)
+		if (DEBUG_COLOR)
 		{
 			printf("%s%s%s%s%s%s%s", SBHWHT, debug_msg[i].msg_header, SBWHT, func_name,
 				debug_msg[i].color, debug_msg[i].msg, SRST);
@@ -115,16 +117,16 @@ int	show_func(const char *func_name, int status, char *msg)
 /// @brief 				This function prints the environment variables
 /// @param envp			Environment variables
 /// @return				void
-void	show_array(char **envp)
+void	show_array(char **envp, const char *name)
 {
-	//show_func(__func__, MY_START, NULL);
+	show_func(__func__, MY_START, NULL);
 	int i = -1;
 
-	if (!envp)
+	if (!envp || !DEBUG_ARRAY)
 		return ;
 	while (envp[++i])
 	{
-		printf("envp[%i] = %s\n", i, envp[i]);
+		printf("%s[%i] = %s\n", name, i, envp[i]);
 	}
 	//show_func(__func__, SUCCESS, NULL);
 }
@@ -134,6 +136,8 @@ void show_token_list(t_token *token)
 	t_token *tk_ptr;
 
 	tk_ptr = token;
+	if (!tk_ptr || !DEBUG_ARRAY)
+		return ;
 	printf("%s**********************************************************%s\n", SBHGRN, SRST);
 	while (tk_ptr)
 	{

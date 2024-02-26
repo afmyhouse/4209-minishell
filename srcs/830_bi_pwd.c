@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 23:46:04 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/02/10 00:34:19 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/02/25 20:05:05 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 /// @return			SUCCESS or ERROR
 int	bi_pwd(t_script *s, int n)
 {
-	//show_func(__func__, MY_START, ft_strjoin("execute bi: ", "pwd"));
+	show_func(__func__, MY_START, ft_strjoin("execute bi: ", "pwd"));
 	char	*buf;
 
 	(void) n;
@@ -32,8 +32,8 @@ int	bi_pwd(t_script *s, int n)
 	}
 	else
 		ft_putendl_fd(buf, STDOUT_FILENO);
-	//show_func(__func__, SUCCESS, buf);
 	free(buf);
-	free_commands(s->cmds, 0);
-	return (0);
+	//free_commands(s->cmds, n);
+	show_func(__func__, SUCCESS, buf);
+	return (SUCCESS);
 }
