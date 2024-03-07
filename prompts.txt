@@ -45,3 +45,6 @@ $HOSTNAME - The hostname of the machine the script is running on.
 $SECONDS - The number of seconds since the script was started.
 $RANDOM - Returns a different random number each time is it referred to.
 $LINENO - Returns the current line number in the Bash script.
+
+mv1=1 mv2=2 mv3=3 mv4=4
+echo $mv1 $mv2 $mv3 $mv4

@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:27:05 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/02/09 23:48:31 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/02 01:13:53 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	termios_getter(struct termios *termios_p)
 {
 	int err;
 
-	show_func(__func__, MY_START, NULL);
+	// show_func(__func__, MY_START, NULL);
 	err = tcgetattr(STDIN_FILENO, termios_p);
 	if (err != 0)
 		return_error("tcgetattr() error", err, 1);
@@ -29,8 +29,8 @@ void	termios_getter(struct termios *termios_p)
 void	termios_setter(struct termios *termios_p)
 {
 	int err;
-	show_func(__func__, MY_START, NULL);
-	
+	// show_func(__func__, MY_START, NULL);
+
 	err = tcsetattr(STDIN_FILENO, TCSAFLUSH, termios_p);
 	if (err != 0)
 		return_error("tcsetattr() error", err, 1);

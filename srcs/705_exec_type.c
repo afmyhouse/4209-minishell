@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:25:54 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/02/26 02:02:06 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/06 22:03:11 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	bi_equal_check(t_script *s, int n, int i)
 	char	**new_array;
 	int		j;
 
-	show_func(__func__, MY_START, NULL);
+	// show_func(__func__, MY_START, NULL);
 	j = 0;
 	while (s->cmds[n].argv[i])
 	{
@@ -25,22 +25,20 @@ int	bi_equal_check(t_script *s, int n, int i)
 		{
 			new_array = malloc(sizeof(char *) * (s->cmds[n].argc - i + 1));
 			while (s->cmds[n].argv[i])
-			{
-				new_array[j] = ft_strdup(s->cmds[n].argv[i]);
-				i++;
-				j++;
-			}
+				new_array[j++] = ft_strdup(s->cmds[n].argv[i++]);
 			new_array[j] = NULL;
 			s->cmds[n].argc = j;
 			free_array(s->cmds[n].argv);
 			s->cmds[n].argv = new_array;
-			execute_show(s);
 			break ;
 		}
 		i++;
 	}
-	show_func(__func__, SUCCESS, s->cmds[n].argv[0]);
-	return (exec_type(s->cmds[n].argv[0]));
+	if (exec_type(s->cmds[n].argv[0]) != CMD_EQ)
+		return (exec_type(s->cmds[n].argv[0]));
+	bi_append(s, n, 0);
+		return (CMD_EQ);
+	// show_func(__func__, SUCCESS, ft_strdup(s->cmds[n].argv[0]));
 }
 
 /// @brief 			Detects the type of commando to execute : a builtin and
@@ -49,7 +47,7 @@ int	bi_equal_check(t_script *s, int n, int i)
 /// @return 		Command id
 int exec_type(char *cmd)
 {
-	show_func(__func__, MY_START, NULL);
+	// show_func(__func__, MY_START, NULL);
 	int id;
 
 	id = CMD_EX;

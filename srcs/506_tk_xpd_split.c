@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 19:00:01 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/02/10 00:12:55 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/05 18:16:49 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@
 ///				alloced string with identifier name
 char	*tk_var_xpd_dolar(char *otk, int *i)
 {
-	int	j;
-	show_func(__func__, MY_START, NULL);
+	int		j;
+	char	*res;
+	// show_func(__func__, MY_START, NULL);
 
 	j = *i;
 	(*i)++;
@@ -30,7 +31,9 @@ char	*tk_var_xpd_dolar(char *otk, int *i)
 			(*i)++;
 	else if (otk[*i] != '\"' && otk[*i] != '\'')
 		(*i)++;
-	return (ft_substr(otk, j, *i - j));
+	res = ft_substr(otk, j, *i - j);
+	// show_func(__func__, SUCCESS, NULL);
+	return (res);
 }
 
 /// @attention	>token builder< set of functions
@@ -46,7 +49,7 @@ void	tk_var_xpd_dquote(char *otk, char ***ntks, int *spl, int *i)
 {
 	int	j;
 	int	xpd;
-	show_func(__func__, MY_START, NULL);
+	// show_func(__func__, MY_START, NULL);
 
 	xpd = 0;
 	j = *i;
@@ -69,6 +72,7 @@ void	tk_var_xpd_dquote(char *otk, char ***ntks, int *spl, int *i)
 	}
 	(*i)++;
 	(*ntks)[*spl] = ft_substr(otk, j, *i - j);
+	// show_func(__func__, SUCCESS, NULL);
 }
 
 /// @attention	>token builder< set of functions
@@ -83,7 +87,7 @@ void	tk_var_xpd_dquote(char *otk, char ***ntks, int *spl, int *i)
 void	tk_var_xpd_squote(char *otk, char ***ntks, int *spl, int *i)
 {
 	int	j;
-	show_func(__func__, MY_START, NULL);
+	// show_func(__func__, MY_START, NULL);
 
 	j = *i;
 	(*i)++;
@@ -91,6 +95,7 @@ void	tk_var_xpd_squote(char *otk, char ***ntks, int *spl, int *i)
 		(*i)++;
 	(*i)++;
 	(*ntks)[*spl] = ft_substr(otk, j, *i - j);
+	// show_func(__func__, SUCCESS, NULL);
 }
 
 /// @attention	>token builder< set of functions
@@ -103,7 +108,7 @@ void	tk_var_xpd_squote(char *otk, char ***ntks, int *spl, int *i)
 void	tk_var_xpd_else(char *otk, char ***ntks, int *spl, int *i)
 {
 	int	j;
-	show_func(__func__, MY_START, NULL);
+	// show_func(__func__, MY_START, NULL);
 
 	j = *i;
 	(*i)++;
@@ -111,4 +116,5 @@ void	tk_var_xpd_else(char *otk, char ***ntks, int *spl, int *i)
 		&& otk[*i] != '\"' && otk[*i] != '\'')
 		(*i)++;
 	(*ntks)[*spl] = ft_substr(otk, j, *i - j);
+	// show_func(__func__, SUCCESS, NULL);
 }

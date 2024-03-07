@@ -6,7 +6,7 @@
 #    By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/24 21:23:27 by antoda-s          #+#    #+#              #
-#    Updated: 2024/02/09 23:26:39 by antoda-s         ###   ########.fr        #
+#    Updated: 2024/03/07 22:43:05 by antoda-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,8 @@ FILES	+=	504_tk_xpd_count.c
 FILES	+=	505_tk_xpd_filler.c
 FILES	+=	506_tk_xpd_split.c
 FILES	+=	507_tk_quotes.c
-FILES	+=	600_env.c
+FILES	+=	600_env_setter.c
+FILES	+=	610_env_getter.c
 FILES	+=	700_exec_start.c
 FILES	+=	705_exec_type.c
 FILES	+=	710_exec_one.c
@@ -66,6 +67,7 @@ FILES	+=	850_bi_unset.c
 FILES	+=	860_bi_env.c
 FILES	+=	870_bi_exit.c
 FILES	+=	880_bi_equal.c
+FILES	+=	890_bi_append.c
 FILES	+=	900_free.c
 FILES	+=	910_errors.c
 FILES	+=	999_debug.c
@@ -82,7 +84,9 @@ OBJT = $(addprefix $(OBJDIRT), $(TEST:.c=.o))
 
 #compilation
 CC 			= cc
-CF 			= -Wall -Wextra -Werror -g
+#CF 			= -Wall -Wextra -Werror -g
+#CF 			= -Wall -Wextra -Werror -g -fsanitize=address
+CF 			= -Wall -Wextra -Werror -g -fsanitize=leak
 I_HEADER	= -I include
 I_LIBFT 	= -I libft
 LNK_LIBFT 	= -L $(LFT_PATH) -lft

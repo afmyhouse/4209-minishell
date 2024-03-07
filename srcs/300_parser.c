@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:28:14 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/02/26 00:27:36 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/05 20:11:48 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,14 @@
 /// @return		0 if success, 1 if failure
 int	parse_commands(t_token *tk, t_command *cmd, int i, int j)
 {
-	show_func(__func__, MY_START, NULL);
+	// show_func(__func__, MY_START, NULL);
 	int errors;
 
 	errors = 0;
 	while (tk)
 	{
-		cmd[i].argv = malloc(sizeof(char *) * (cmd[i].argc + 1));
+		// cmd[i].argv = malloc(sizeof(char *) * (cmd[i].argc + 1));
+		cmd[i].argv = ft_calloc((cmd[i].argc + 1), sizeof(char *));
 		if (!cmd[i].argv)
 		{
 			return_error("", errno, 1); // adicionada Filipe 19fev
@@ -64,7 +65,7 @@ int	parse_commands(t_token *tk, t_command *cmd, int i, int j)
 /// @return
 int	parser(t_script *s, char **line_buffer)
 {
-	show_func(__func__, MY_START, NULL);
+	// show_func(__func__, MY_START, NULL);
 	t_token	*tk;
 
 	tk = NULL;
@@ -78,7 +79,9 @@ int	parser(t_script *s, char **line_buffer)
 	if (syntax_checker(tk))
 		return (free_tokens(&tk));
 	s->cmd_count = cmds_counter(tk);
-	s->cmds = malloc(sizeof(t_command) * s->cmd_count);
+	s->cmds = ft_calloc(s->cmd_count, sizeof(t_command));
+	// s->cmds = malloc(sizeof(t_command) * s->cmd_count);
+	show_pointer(__func__, D_MALLOC, "s->cmds", s->cmds);
 	if (!s->cmds || s->cmd_count <= 0)
 	{
 		return_error("", errno, 1);
@@ -86,7 +89,7 @@ int	parser(t_script *s, char **line_buffer)
 	}
 	//tk_trim_spaces(tk);
 
-	show_token_list(tk);
+	// show_token_list(tk);
 
 	args_counter(tk, s);
 	fnames_clear(s->cmds, s->cmd_count, tk);

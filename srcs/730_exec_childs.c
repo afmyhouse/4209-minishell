@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:11:17 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/02/25 19:54:23 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/02 01:13:53 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 /// @param pipeout	Pointer to the pipe to output result
 void	ex_child_1(t_script *s, char **path, int *pipeout)
 {
-	show_func(__func__, MY_START, NULL);
+	// show_func(__func__, MY_START, NULL);
 	if (s->cmds[0].in.name)
 		in_redir(s, 0, path);
 	if (s->cmds[0].out.name)
@@ -36,7 +36,7 @@ void	ex_child_1(t_script *s, char **path, int *pipeout)
 	if (s->cmds[0].argv[0])
 		exec_go(s, path, exec_type(s->cmds[0].argv[0]), 0);
 	free_cmds_path(s, path);
-	show_func(__func__, SUCCESS, NULL);
+	// show_func(__func__, SUCCESS, NULL);
 	exit(0);
 }
 
@@ -47,7 +47,7 @@ void	ex_child_1(t_script *s, char **path, int *pipeout)
 /// @param i 		Index of the command to execute
 void	ex_child_i(t_script *s, char **path, int **pipes, int i)
 {
-	show_func(__func__, MY_START, NULL);
+	// show_func(__func__, MY_START, NULL);
 	if (s->cmds[i].in.name)
 		in_redir(s, i, path);
 	else if (pipe_std_setter(pipes[0], STDIN_FILENO) == -1)
@@ -77,7 +77,7 @@ void	ex_child_i(t_script *s, char **path, int **pipes, int i)
 /// @param i
 void	ex_child_n(t_script *s, char **path, int *pipein, int i)
 {
-	show_func(__func__, MY_START, NULL);
+	// show_func(__func__, MY_START, NULL);
 	if (s->cmds[i].in.name)
 		in_redir(s, i, path);
 	else if (pipe_std_setter(pipein, STDIN_FILENO) == -1)
@@ -102,19 +102,19 @@ void	ex_child_n(t_script *s, char **path, int *pipein, int i)
 /// @param i 		Index of the command to execute
 void exec_go(t_script *s, char **path, int id, int i)
 {
-	show_func(__func__, MY_START, NULL);
+	// show_func(__func__, MY_START, NULL);
 	char *tmp;
 	char *msg;
 	struct stat buf;
 
 	if (id == CMD_EX)
 	{
-		show_func(__func__, SHOW_MSG, "execve cmd");
+		// show_func(__func__, SHOW_MSG, ft_strdup("execve cmd"));
 		tmp = s->cmds[i].argv[0];
 		msg = ft_strjoin("Minishell: ", s->cmds[i].argv[0]);
 		if (!tmp[0])
 			return ;
-		show_func(__func__, SHOW_MSG, ft_strjoin("exec ve cmd => ", tmp));
+		// show_func(__func__, SHOW_MSG, ft_strjoin("exec ve cmd => ", tmp));
 		stat(tmp, &buf);
 		exec_ve(path, s->cmds[i].argv, s->envp);
 		if (S_ISDIR(buf.st_mode))
@@ -139,5 +139,5 @@ void exec_go(t_script *s, char **path, int id, int i)
 	}
 	else
 		exec_bi(id, s, i);
-	show_func(__func__, SUCCESS, NULL);
+	// show_func(__func__, SUCCESS, NULL);
 }

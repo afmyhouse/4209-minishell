@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 23:46:39 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/02/26 00:16:10 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/07 21:55:19 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 /// @return		SUCCESS or ERROR
 int	var_name_check(char *var)
 {
-	show_func(__func__, MY_START, NULL);
+	// show_func(__func__, MY_START, NULL);
 	int	i;
 
 	i = 0;
-	//show_func(__func__, SHOW_MSG, var);
+	//show_func(__func__, SHOW_MSG, ft_strdup(var));
 	if (var[i] && (!ft_isalpha(var[i]) || var[i] == '_'))
 		return (ERROR);
-	while (var[i] && var[i] != '=')
+	while (var[i] && var[i] != '=' && var[i] != '+')
 	{
 		if (!ft_isalnum(var[i]) && var[i] != '_')
 		{
@@ -43,20 +43,17 @@ int	var_name_check(char *var)
 /// @param i 	Index of argument to be checked
 void	bi_export_upd_var(t_script *s, int n, int i)
 {
-	show_func(__func__, MY_START, NULL);
+	// show_func(__func__, MY_START, NULL);
 	char	*val;
 	char	*var;
 
-	var = ft_substr(s->cmds[n].argv[i], 0,
-			ft_strlen(s->cmds[n].argv[i])
+	var = ft_substr(s->cmds[n].argv[i], 0, ft_strlen(s->cmds[n].argv[i])
 			- ft_strlen(ft_strchr(s->cmds[n].argv[i], '=')));
-	//show_func(__func__, SHOW_MSG, ft_strjoin("var -> ", var));
-	val = ft_strchr(s->cmds[n].argv[i], '=') + 1;
-	//show_func(__func__, SHOW_MSG, ft_strjoin("val -> ", val));
-
+	val = ft_strdup(ft_strchr(s->cmds[n].argv[i], '=') + 1);
 	env_var_setter(val, var, &s->envp);
 	if (env_var_index_getter(var, s->envt) != -1)
 		bi_unset_envt(s, n);
+	free (var);
 	//show_func(__func__, SUCCESS, NULL);
 }
 
@@ -68,51 +65,55 @@ void	bi_export_upd_var(t_script *s, int n, int i)
 /// @param i 	Index of argument to be checked
 void	bi_export_new_var(t_script *s, int n, int i)
 {
-	show_func(__func__, MY_START, NULL);
+	// show_func(__func__, MY_START, NULL);
 	char	*val;
 	char	*var;
+	int		j;
 
 	var = s->cmds[n].argv[i];
-	//show_func(__func__, SHOW_MSG, var);
-	if (env_var_index_getter(var, s->envp) >= 0)
+	printf("%s%s : %s%s\n", SBHCYN, __func__, var, SRST);
+	j = env_var_index_getter(var, s->envp);
+	if (j >= 0)
 	{
-		//show_func(__func__, SHOW_MSG, "var existes in P: exporting...\n");
+		//printf("%s%s : %s FOUND @ envp[%i] = %s %s\n", SBHRED, __func__, var, j, s->envp[j],SRST);
 		return ;
 	}
-	else if (s->envt && env_var_index_getter(var, s->envt) >= 0)
+	j = env_var_index_getter(var, s->envt);
+		//printf("%s%s : %s FOUND @ envt[%i] = %s %s\n", SBHRED, __func__, var, j, s->envt[j],SRST);
+	if (j >= 0)
 	{
-		//show_func(__func__, SHOW_MSG, "var existes in T: exporting...\n");
 		val = env_var_getter(var, NULL, s->envt);
+
+		//printf("%s%s : %s = %s%s\n", SBHRED, __func__, var, val, SRST);
+
 		env_var_setter(val, var, &s->envp);
-		bi_unset_envt(s, n);
+		s->envt = env_del_one(var, s->envt, 0);
+		free(val);
 	}
 	else
-	{
-		//show_func(__func__, SHOW_MSG, "NEW var : creating without value");
 		env_var_setter(NULL, var, &s->envp);
-	}
 	//show_func(__func__, SUCCESS, NULL);
 }
-void	export_print(char *s)
+void	export_print(char *str)
 {
 	char	*s1;
 	char	*s2;
 
-	if (!(s[0] == '_' && s[1] == '='))
+	if (!(str[0] == '_' && str[1] == '='))
 	{
 		ft_putstr_fd("declare -x ", STDOUT_FILENO);
-		if (!ft_strchr(s, '='))
-			ft_putstr_fd(s, STDOUT_FILENO);
+		if (!ft_strchr(str, '='))
+			ft_putstr_fd(str, STDOUT_FILENO);
 		else
 		{
-			s2 = ft_strjoin_free(ft_strdup(ft_strchr(s, '=') + 1),
+			s2 = ft_strjoin_free(ft_strdup(ft_strchr(str, '=') + 1),
 					ft_strdup("\""));
-			s1 = ft_strjoin_free(ft_substr(s, 0, ft_strlen(s)
+			s1 = ft_strjoin_free(ft_substr(str, 0, ft_strlen(str)
 						- ft_strlen(s2) + 1), ft_strdup("\""));
 			ft_putstr_fd(s1, STDOUT_FILENO);
 			ft_putstr_fd(s2, STDOUT_FILENO);
-			free(s1);
-			free(s2);
+			ft_free(s1);
+			ft_free(s2);
 		}
 		ft_putstr_fd("\n", STDOUT_FILENO);
 	}
@@ -127,15 +128,17 @@ int	export_status(t_script *s, int n)
 	{
 		if (!s->envp)
 			return (1);
-		i = -1;
 		order = envp_init(s->envp);
 		order = ordered_array(order, '=', 0, 0);
+		i = -1;
 		while (order[++i])
 			export_print(order[i]);
 		free_array(order);
+		// free_array_name(order, "order");
 	}
 	else if (s->cmds[n].argv[1][0] == '\0')
 		return (return_error("Syntax error", 1, 2));
+	// show_func(__func__, SUCCESS, NULL);
 	return (SUCCESS);
 }
 
@@ -145,11 +148,12 @@ int	export_status(t_script *s, int n)
 /// @return 		SUCCESS or ERROR
 int	bi_export(t_script *s, int n)
 {
-	show_func(__func__, MY_START, NULL);
+	// show_func(__func__, MY_START, NULL);
 	int	i;
 
 	if (!s->envp || !s->cmds[n].argv[1] || !s->cmds[n].argv[1][0])
 		return (export_status(s, n));
+	bi_append(s, n, 1);
 	i = 1;
 	while (s->cmds[n].argv[i])
 	{
@@ -178,7 +182,7 @@ char	**ordered_array(char **d, char t, int n, int j)
 	int	len_j;
 	int	res_cmp;
 
-	show_func(__func__, MY_START, "Ordering Array...");
+	// show_func(__func__, MY_START, ft_strdup("Ordering Array..."));
 	while (d[n] && d[n + 1])
 	{
 		j = n;
@@ -193,6 +197,6 @@ char	**ordered_array(char **d, char t, int n, int j)
 		}
 		ft_strswap(&d[n++], &d[i]);
 	}
-	show_func(__func__, SUCCESS, "Array ordered...");
+	// show_func(__func__, SUCCESS, ft_strdup("Array ordered..."));
 	return (d);
 }

@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 18:49:28 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/11/17 18:19:15 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/02/27 22:48:43 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,16 @@
 
 # ifndef UMYTIME
 #  define UMYTIME 10000
+# endif
+
+
+/// Var sizes
+
+# ifndef __LONG_LONG_MAX__
+#  define __LONG_LONG_MAX__ 9223372036854775807
+# endif
+# ifndef __LONG_LONG_MIN__
+#  define __LONG_LONG_MIN__ -9223372036854775808
 # endif
 
 /* ************************************************************************** */

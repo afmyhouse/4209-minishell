@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:28:06 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/02/26 01:50:17 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/07 22:38:46 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # include "../include/error.h"
 # include "../include/colors.h"
 # include "../include/debug.h"
+# include "../include/settings.h"
 
 # define MAX_PATH_LEN 4096
 
@@ -635,6 +636,11 @@ void	tk_trim_spaces(t_token *tk);
 ///	600ms_env.c
 /* ************************************************************************** */
 
+char	**env_del_one(char *del, char **envx, int i);
+// char	**env_del_one(char **envx, char *del);
+char	**env_add_one(char **envx, char *add);
+
+
 /// @brief 		This function gets the environment variable index
 /// @param var 	variable to be found
 /// @param envp Environment variables
@@ -899,7 +905,7 @@ int		pipe_error(char **path_env);
 /* ************************************************************************** */
 
 /* ************************************************************************** */
-///	810bi_echo.c
+///	810_bi_echo.c
 /* ************************************************************************** */
 /// @brief  		Checks if the echo command has the flag '-n'
 /// @param str 		Argument string
@@ -920,7 +926,7 @@ int		bi_env_upd(t_script *s, int n);
 
 
 /* ************************************************************************** */
-///	820bi_cd.c
+///	820_bi_cd.c
 /* ************************************************************************** */
 // @brief 			Changes the current directory and updates env var PWD OLDPWD
 /// @param path 	New directory path
@@ -934,7 +940,7 @@ int		change_dir(char *path, char ***envp);
 int		bi_cd(t_script *s, int n);
 
 /* ************************************************************************** */
-///	830bi_pwd.c
+///	830_bi_pwd.c
 /* ************************************************************************** */
 /// @brief 			Builtin pwd command
 /// @param void		Builtin command arguments not required
@@ -943,7 +949,7 @@ int		bi_pwd(t_script *s, int n);
 
 
 /* ************************************************************************** */
-///	840bi_export.c
+///	840_bi_export.c
 /* ************************************************************************** */
 /// @brief		Test validity of shell variables name
 /// @param var	Variable name to be tested
@@ -980,7 +986,7 @@ int		bi_export(t_script *s, int n);
 char	**ordered_array(char **d, char t, int n, int j);
 
 /* ************************************************************************** */
-///	850bi_unset.c
+///	850_bi_unset.c
 /* ************************************************************************** */
 /// @brief 			Remove a variable from the PERMANENT environment
 /// @param s 		Arguments passed to unset command
@@ -996,7 +1002,7 @@ int		bi_unset_envt(t_script *s, int n);
 
 
 /* ************************************************************************** */
-///	860bi_env.c
+///	860_bi_env.c
 /* ************************************************************************** */
 /// @brief 			Builtin env command
 /// @param args		Builtin command arguments
@@ -1006,7 +1012,7 @@ int		bi_env(t_script *s, int n);
 
 
 /* ************************************************************************** */
-///	870bi_exit.c
+///	870_bi_exit.c
 /* ************************************************************************** */
 /// @brief 			Builtin 'exit' command argument checker
 /// @param str		Builtin 'exit' argument string
@@ -1032,7 +1038,7 @@ int		bi_exit(t_script *s, int n);
 
 
 /* ************************************************************************** */
-///	880bi_equal.c
+///	880_bi_equal.c
 /* ************************************************************************** */
 /// @brief 			Update EXISTING TEMPORARY environment variables
 /// @param s 		Script structure with commans and args
@@ -1052,6 +1058,14 @@ void	bi_equal_new(t_script *s, int n, int i);
 /// @return 		SUCCESS or ERROR
 int		bi_equal(t_script *s, int n);
 
+/* ************************************************************************** */
+///	890_bi_append.c
+/* ************************************************************************** */
+/// @brief 			Looks for += embedded signs and call bi_append_new
+/// @param s 		Script structure with commans and args
+/// @param n 		Index of command to be executed
+/// @return 		SUCCESS or ERROR
+int		bi_append(t_script *s, int n, int i);
 
 /* ************************************************************************** */
 //																			  */
@@ -1071,6 +1085,7 @@ int		bi_equal(t_script *s, int n);
 /// @brief 			Frees the environment variables
 /// @param my_envp	Environment variables
 void	free_array(char **array);
+void	free_array_name(char **array, char *name);
 
 /// @brief 		Frees the token list
 /// @param head	Head of the token list
@@ -1135,5 +1150,10 @@ int		show_func(const char *func_name, int status, char *msg);
 void	show_array(char **array, const char *name);
 
 void	show_token_list(t_token *token);
+
+char *ft_var_address(const char *varname, void *var);
+
+void show_pointer(const char *func, int status, const char *msg, void *ptr);
+
 
 #endif

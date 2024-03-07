@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:26:48 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/02/25 20:13:48 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/05 22:15:53 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 void	free_array(char **array)
 {
 
-	show_func(__func__, MY_START, NULL);
+	// show_pointer(__func__, MY_START, "", array);
 	int	i;
 
 	if (!array)
@@ -29,24 +29,43 @@ void	free_array(char **array)
 		i++;
 	}
 	free(array);
-	show_func(__func__, SUCCESS, "Array freed");
+	// show_func(__func__, SUCCESS, ft_strdup("Array freed"));
+}
+void	free_array_name(char **array, char *name)
+{
+
+	show_pointer(__func__, MY_START, name, array);
+	int	i;
+
+	if (!array)
+		return ;
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+	// show_func(__func__, SUCCESS, ft_strdup("Array freed"));
 }
 
 /// @brief 		Frees the token list
 /// @param head	Head of the token list
 /// @return		1 if success, 0 if failure
-int	free_tokens(t_token **head)
+int	free_tokens(t_token **tk)
 {
 	t_token	*tmp;
 
-	if (!head)
+	if (!tk)
 		return (ERROR);
-	while (*head)
+	while (*tk)
 	{
-		tmp = (*head)->next;
-		free((*head)->content);
-		free(*head);
-		*head = tmp;
+		tmp = (*tk)->next;
+		show_pointer(__func__, D_FREE, "(*tk)->content -> ", (*tk)->content);
+		free((*tk)->content);
+		show_pointer(__func__, D_FREE, "*tk -> ", *tk);
+		free(*tk);
+		*tk = tmp;
 	}
 	return (1);
 }
@@ -57,8 +76,8 @@ int	free_tokens(t_token **head)
 /// @return 		SUCCESS or ERROR ?? needs coherence check
 int	free_commands(t_command *cmd, int cmd_idx)
 {
-	show_func(__func__, MY_START, NULL);
-	show_func(__func__, SHOW_MSG, ft_strjoin("cmd_idx = ", ft_itoa(cmd_idx)));
+	// show_func(__func__, MY_START, NULL);
+	show_pointer(__func__, D_FREE, "", cmd);
 	int	i;
 	int	j;
 
@@ -68,7 +87,6 @@ int	free_commands(t_command *cmd, int cmd_idx)
 		j = -1;
 		while (++j < cmd[i].argc)
 		{
-			show_func(__func__, SHOW_MSG, ft_strjoin("cmd = ", cmd[i].argv[j] ));
 			if (cmd[i].argv[j])
 				ft_free(cmd[i].argv[j]);
 		}
@@ -81,7 +99,7 @@ int	free_commands(t_command *cmd, int cmd_idx)
 			ft_lstclear(&cmd[i].in.heredoc, free);
 	}
 	free(cmd);
-	show_func(__func__, SUCCESS, NULL);
+	// show_func(__func__, SUCCESS, NULL);
 	return (1);
 }
 
@@ -90,10 +108,11 @@ int	free_commands(t_command *cmd, int cmd_idx)
 /// @param path 	Path to be freed
 void	free_cmds_path(t_script *script, char **path)
 {
-	show_func(__func__, MY_START, NULL);
+	// show_func(__func__, MY_START, NULL);
 	free_commands(script->cmds, script->cmd_count);
 	free_array(path);
-	show_func(__func__, SUCCESS, NULL);
+	// free_array_name(path, "path");
+	// show_func(__func__, SUCCESS, NULL);
 }
 
 /// @brief 			Shows error and program sourcing it and exit(1) freeing
@@ -104,7 +123,7 @@ void	free_cmds_path(t_script *script, char **path)
 /// @param path 	Path to be freed
 void	exit_forks(char *msg, int errms, t_script *s, char **path)
 {
-	show_func(__func__, MY_START, NULL);
+	// show_func(__func__, MY_START, NULL);
 	return_error(msg, errms, 1);
 	free_cmds_path(s, path);
 	//show_func(__func__, SUCCESS, NULL);
