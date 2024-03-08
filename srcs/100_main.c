@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:27:05 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/02/09 23:47:21 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/07 23:56:45 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,21 @@ char	**envp_init(char **envp)
 	i = 0;
 	while (envp[i])
 		i++;
-	ms_envp = malloc(sizeof(char *) * (i + 1));
+	ms_envp = ft_calloc(i + 1, sizeof(char *));
 	if (!ms_envp)
 	{
+		return_error("", errno, 1);
 		return (NULL);
 	}
-	i = 0;
-	while (envp[i])
+	i = -1;
+	while (envp[++i])
 	{
 		ms_envp[i] = ft_strdup(envp[i]);
 		if (!ms_envp[i])
+		{
+			return_error("", errno, 1);
 			return (NULL);
-		i++;
+		}
 	}
 	ms_envp[i] = NULL;
 	return (ms_envp);
@@ -66,7 +69,7 @@ int	ms_loop(t_script *s)
 		struct_init(s);
 		signal_setter();
 		status = parser(s, &line_buffer);
-		ft_free_arr(&line_buffer);
+		ft_free(line_buffer);
 		if (status == 1)
 			continue ;
 		else if (status == 2)
@@ -96,9 +99,14 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	s.envp = envp_init(envp);
-	s.envt = NULL;
+	s.envt = ft_calloc(1, sizeof(char *));
+	if (!s.envt)
+	{
+		return_error("", errno, 1);
+		return (1);
+	}
+	s.envt[0] = NULL;
 	termios_getter(&s.termios_p);
 	ms_loop(&s);
-	free_array(s.envp);
-	return (0);
+	return (free_array(s.envp, 0));
 }

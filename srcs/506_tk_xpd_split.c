@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 19:00:01 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/02/10 00:12:55 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/07 23:48:54 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 ///				alloced string with identifier name
 char	*tk_var_xpd_dolar(char *otk, int *i)
 {
-	int	j;
+	int		j;
+	char	*res;
 
 	j = *i;
 	(*i)++;
@@ -29,7 +30,8 @@ char	*tk_var_xpd_dolar(char *otk, int *i)
 			(*i)++;
 	else if (otk[*i] != '\"' && otk[*i] != '\'')
 		(*i)++;
-	return (ft_substr(otk, j, *i - j));
+	res = ft_substr(otk, j, *i - j);
+	return (res);
 }
 
 /// @attention	>token builder< set of functions

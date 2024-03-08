@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 19:10:37 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/02/10 00:13:44 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/07 23:01:51 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,15 +111,16 @@ int	tk_builder(char **line, t_token **tk, t_script *s)
 
 	if (tk_getter(*line, tk) == ERROR)
 	{
-		return (return_error("Syntax Error", 1, 0));
+		return_error("Syntax Error", 1, 0);
+		return (ERROR);
 	}
 	tk_ptr = *tk;
 	while (tk_ptr)
 	{
 		content = tk_ptr->content;
 		tk_ptr->content = tk_env_var_expander(content, s);
-		free(content);
+		ft_free(content);
 		tk_ptr = tk_ptr->next;
 	}
-	return (0);
+	return (SUCCESS);
 }

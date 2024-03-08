@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:38:24 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/02/09 23:49:06 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/07 22:50:57 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	signal_setter(void)
 /// @return			void
 void	sig_handler(int signum)
 {
-	//show_func(__func__, MY_START, NULL);
 	if (signum == SIGQUIT)
 	{
 		write(1, "Quit: 3\n", 8);
@@ -41,7 +40,6 @@ void	sig_handler(int signum)
 		rl_redisplay();
 		g_exit_status = 130;
 	}
-	//show_func(__func__, SUCCESS, NULL);
 }
 
 /// @brief 			Handles signal SIGINT (Ctrl+C) and SIGQUIT (Ctrl+\)
@@ -50,7 +48,6 @@ void	sig_handler(int signum)
 /// @return			void
 void	sig_handler_fork(int signum)
 {
-	//show_func(__func__, MY_START, NULL);
 	if (signum == SIGQUIT)
 	{
 		write(1, "Quit: 3\n", 8);
@@ -62,7 +59,6 @@ void	sig_handler_fork(int signum)
 		write(1, "\n", 1);
 		rl_on_new_line();
 	}
-	//show_func(__func__, SUCCESS, NULL);
 }
 
 /// @brief 			Handles the signal SIGINT (Ctrl + C) when in heredoc
@@ -71,8 +67,6 @@ void	sig_handler_fork(int signum)
 /// @return			void
 void	sig_handler_heredoc(int signum)
 {
-	//show_func(__func__, MY_START, NULL);
 	if (signum == SIGINT)
 		exit(130);
-	//show_func(__func__, SUCCESS, NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 18:49:28 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/01/10 21:45:22 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/02/28 10:24:26 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,12 @@
 # ifndef MALLOC_NOT_REALLOCATED
 #  define MALLOC_NOT_REALLOCATED 903
 # endif
-
+# ifndef D_MALLOC
+#  define D_MALLOC 904
+# endif
+# ifndef D_FREE
+#  define D_FREE 905
+# endif
 /* ************************************************************************** */
 ///	FILE ERROR CODES and STATUS
 /* ************************************************************************** */

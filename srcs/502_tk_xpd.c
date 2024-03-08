@@ -6,14 +6,14 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 19:00:01 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/02/10 00:13:35 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/07 23:02:23 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /// @attention	>token builder< set of functions
-/// @brief 		it takes a char sequence and cpounts the number of splits needed
+/// @brief 		it takes a char sequence and counts the number of splits needed
 ///				to build an array based of the splitter char '\"',  '\'',  '$'
 /// @param otk 	char sequance to evaluate
 /// @return		number of splits needed to properly create an array
@@ -47,16 +47,17 @@ int	tk_var_xpd_splits_count(char *otk)
 /// @return		pointer to the newly created array
 char	**tk_var_xpd_init(char *otk)
 {
-	int		j;
 	char	**ntks;
 	int		spl;
 
 	spl = tk_var_xpd_splits_count(otk);
-	ntks = (char **)malloc(sizeof(char *) * (spl + 1));
+	ntks = ft_calloc(spl + 1, sizeof(char *));
+	if (!ntks)
+	{
+		return_error("", errno, 1);
+		return (NULL);
+	}
 	ntks[spl] = NULL;
-	j = -1;
-	while (++j < spl)
-		ntks[j] = NULL;
 	return (ntks);
 }
 

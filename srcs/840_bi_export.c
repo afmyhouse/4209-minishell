@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 23:46:39 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/02/10 00:34:48 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/08 00:12:04 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,19 @@
 /// @return		SUCCESS or ERROR
 int	var_name_check(char *var)
 {
-	//show_func(__func__, MY_START, NULL);
 	int	i;
 
 	i = 0;
-	//show_func(__func__, SHOW_MSG, var);
-	while (var[i] && var[i] != '=')
+	if (var[i] && (!ft_isalpha(var[i]) || var[i] == '_'))
+		return (ERROR);
+	while (var[i] && var[i] != '=' && var[i] != '+')
 	{
 		if (!ft_isalnum(var[i]) && var[i] != '_')
 		{
-			//show_func(__func__, ERROR, NULL);
 			return (ERROR);
 		}
 		i++;
 	}
-	//show_func(__func__, SUCCESS, NULL);
 	return (SUCCESS);
 }
 
@@ -41,21 +39,16 @@ int	var_name_check(char *var)
 /// @param i 	Index of argument to be checked
 void	bi_export_upd_var(t_script *s, int n, int i)
 {
-	//show_func(__func__, MY_START, NULL);
 	char	*val;
 	char	*var;
 
-	var = ft_substr(s->cmds[n].argv[i], 0,
-			ft_strlen(s->cmds[n].argv[i])
+	var = ft_substr(s->cmds[n].argv[i], 0, ft_strlen(s->cmds[n].argv[i])
 			- ft_strlen(ft_strchr(s->cmds[n].argv[i], '=')));
-	//show_func(__func__, SHOW_MSG, ft_strjoin("var -> ", var));
-	val = ft_strchr(s->cmds[n].argv[i], '=') + 1;
-	//show_func(__func__, SHOW_MSG, ft_strjoin("val -> ", val));
-
+	val = ft_strdup(ft_strchr(s->cmds[n].argv[i], '=') + 1);
 	env_var_setter(val, var, &s->envp);
 	if (env_var_index_getter(var, s->envt) != -1)
-		bi_unset_envt(s, n);
-	//show_func(__func__, SUCCESS, NULL);
+		s->envt = env_del_one(var, s->envt, 0);
+	free (var);
 }
 
 /// @brief  	Checks if export NEW environment variables or update existing
@@ -66,30 +59,24 @@ void	bi_export_upd_var(t_script *s, int n, int i)
 /// @param i 	Index of argument to be checked
 void	bi_export_new_var(t_script *s, int n, int i)
 {
-	//show_func(__func__, MY_START, NULL);
 	char	*val;
 	char	*var;
+	int		j;
 
 	var = s->cmds[n].argv[i];
-	//show_func(__func__, SHOW_MSG, var);
-	if (env_var_index_getter(var, s->envp) >= 0)
-	{
-		//show_func(__func__, SHOW_MSG, "var existes in P: exporting...\n");
+	j = env_var_index_getter(var, s->envp);
+	if (j >= 0)
 		return ;
-	}
-	else if (s->envt && env_var_index_getter(var, s->envt) >= 0)
+	j = env_var_index_getter(var, s->envt);
+	if (j >= 0)
 	{
-		//show_func(__func__, SHOW_MSG, "var existes in T: exporting...\n");
 		val = env_var_getter(var, NULL, s->envt);
 		env_var_setter(val, var, &s->envp);
-		bi_unset_envt(s, n);
+		s->envt = env_del_one(var, s->envt, 0);
+		free(val);
 	}
 	else
-	{
-		//show_func(__func__, SHOW_MSG, "NEW var : creating without value");
 		env_var_setter(NULL, var, &s->envp);
-	}
-	//show_func(__func__, SUCCESS, NULL);
 }
 
 /// @brief 			Export PERMANENT environment variables
@@ -98,11 +85,11 @@ void	bi_export_new_var(t_script *s, int n, int i)
 /// @return 		SUCCESS or ERROR
 int	bi_export(t_script *s, int n)
 {
-	//show_func(__func__, MY_START, NULL);
-	int		i;
+	int	i;
 
 	if (!s->envp || !s->cmds[n].argv[1] || !s->cmds[n].argv[1][0])
-		return (ERROR);
+		return (export_status(s, n));
+	bi_append(s, n, 1);
 	i = 1;
 	while (s->cmds[n].argv[i])
 	{
@@ -117,7 +104,5 @@ int	bi_export(t_script *s, int n)
 			export_error(s->cmds[n].argv[i], 1);
 		i++;
 	}
-	//env_var_setter(s->cmds[n].argv[--i],"_", &s->envp);
-	//show_func(__func__, SUCCESS, NULL);
 	return (SUCCESS);
 }

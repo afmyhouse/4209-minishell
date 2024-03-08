@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:28:06 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/02/09 23:59:11 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/08 00:08:59 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # include "../include/error.h"
 # include "../include/colors.h"
 # include "../include/debug.h"
+# include "../include/settings.h"
 
 # define MAX_PATH_LEN 4096
 
@@ -66,7 +67,8 @@ typedef enum e_cmd_type
 	CMD_EXPORT,
 	CMD_UNSET,
 	CMD_ENV,
-	CMD_EXIT
+	CMD_EXIT,
+	CMD_EQ
 }			t_cmd_type;
 
 /// @brief 				Struct to hold errors from execve
@@ -256,6 +258,13 @@ void	sig_handler_heredoc(int signum);
 /* ************************************************************************** */
 ///	300_parser.c
 /* ************************************************************************** */
+/// @brief 				Builds an error message string to be displayed and
+///						frees the tokens list, cmds list and returns 1.
+/// @param cmds 		Commands list
+/// @param cmd_count 	Number of commands
+/// @param tk 			Head of the token list
+/// @return 			1
+int		back_to_loop(t_command *cmds, int cmd_count, t_token **tk);
 
 /// @brief 		This function iterates through a linked list of tokens and
 ///				fills the command structure based on the type of token it
@@ -634,6 +643,11 @@ void	tk_trim_spaces(t_token *tk);
 ///	600ms_env.c
 /* ************************************************************************** */
 
+char	**env_del_one(char *del, char **envx, int i);
+// char	**env_del_one(char **envx, char *del);
+char	**env_add_one(char **envx, char *add);
+
+
 /// @brief 		This function gets the environment variable index
 /// @param var 	variable to be found
 /// @param envp Environment variables
@@ -653,15 +667,7 @@ int		env_var_setter(char *val, char *var, char ***envx);
 /// @param var	Variable to be found
 /// @param envp	Environment variables
 /// @return		Content of the variable
-char	*envp_var_getter(char *var, char **envp);
-
-/// @brief		This function iterates over the environment variables to
-///				find whether or not the given variable (str) is defined and
-///				returns the content or an empty freeable string.
-/// @param var	Variable to be found
-/// @param envp	Environment variables
-/// @return		Content of the variable
-char	*envt_var_getter(char *var, char **envp);
+char	*envx_var_getter(char *var, char **envx);
 
 /// @brief		This function iterates over the environment variables to
 ///				find whether or not the given variable (str) is defined and
@@ -698,6 +704,10 @@ int		execute(t_script *s);
 /* ************************************************************************** */
 ///	705exec_type.c
 /* ************************************************************************** */
+
+int		bi_equal_check(t_script *s, int n, int i);
+
+
 /// @brief 			Detects the type of commando to execute : a builtin and
 /// 				what kind builtin or a system comand CMD_EX
 /// @param cmd 		Command to execute
@@ -830,10 +840,10 @@ void	in_redir(t_script *s, int i, char **path);
 /// @param path Commands execution path
 void	out_redir(t_script *s, int i, char **path);
 
+
 /* ************************************************************************** */
 ///	750exec_heredoc.c
 /* ************************************************************************** */
-
 /// @brief 			This function notifies heredoc error message
 /// @param msg 		Content to be printed
 void	error_message_heredoc(char *msg);
@@ -852,10 +862,10 @@ void	error_message_heredoc(char *msg);
 /// @param path Commands execution path
 void	heredoc(t_script *s, int i, char **path);
 
+
 /* ************************************************************************** */
 ///	760exec_pipes.c
 /* ************************************************************************** */
-
 //// @brief 		This function initializes pipes needed to redirect the
 ///					output of the previous cmd into the next one.
 /// 				It initializes a pipe for the next result of a command and
@@ -881,6 +891,7 @@ void	pipe_closer(int *pa, int *pb);
 /// @return
 int		pipe_std_setter(int *pipe, int end);
 
+
 /* ************************************************************************** */
 ///	799exec_errors.c
 /* ************************************************************************** */
@@ -901,9 +912,8 @@ int		pipe_error(char **path_env);
 /* ************************************************************************** */
 
 /* ************************************************************************** */
-///	810bi_echo.c
+///	810_bi_echo.c
 /* ************************************************************************** */
-
 /// @brief  		Checks if the echo command has the flag '-n'
 /// @param str 		Argument string
 /// @return 		1 if true, 0 if false
@@ -923,9 +933,8 @@ int		bi_env_upd(t_script *s, int n);
 
 
 /* ************************************************************************** */
-///	820bi_cd.c
+///	820_bi_cd.c
 /* ************************************************************************** */
-
 // @brief 			Changes the current directory and updates env var PWD OLDPWD
 /// @param path 	New directory path
 /// @param envp 	Environment variables
@@ -938,9 +947,8 @@ int		change_dir(char *path, char ***envp);
 int		bi_cd(t_script *s, int n);
 
 /* ************************************************************************** */
-///	830bi_pwd.c
+///	830_bi_pwd.c
 /* ************************************************************************** */
-
 /// @brief 			Builtin pwd command
 /// @param void		Builtin command arguments not required
 /// @return			SUCCESS or ERROR
@@ -948,9 +956,8 @@ int		bi_pwd(t_script *s, int n);
 
 
 /* ************************************************************************** */
-///	840bi_export.c
+///	840_bi_export.c
 /* ************************************************************************** */
-
 /// @brief		Test validity of shell variables name
 /// @param var	Variable name to be tested
 /// @return		SUCCESS or ERROR
@@ -968,8 +975,8 @@ void	bi_export_upd_var(t_script *s, int n, int i);
 /// @param s 	Script structure with commans and args
 /// @param n 	Index of command to be executed
 /// @param i 	Index of argument to be checked
-void	bi_export_new_var(t_script *s, int n, int i);
 
+void	bi_export_new_var(t_script *s, int n, int i);
 /// @brief 			Export PERMANENT environment variables
 /// @param s 		Script structure with commans and args
 /// @param n 		Index of command to be executed
@@ -977,9 +984,28 @@ void	bi_export_new_var(t_script *s, int n, int i);
 int		bi_export(t_script *s, int n);
 
 /* ************************************************************************** */
-///	850bi_unset.c
+///	845_bi_export_status.c
 /* ************************************************************************** */
 
+
+/// @brief 		Export array method : ordered and declare statement
+/// @param str 	Variable to be printed
+void	export_print(char *str);
+
+/// @brief 		Alphatecially ordered array
+/// @param src 	Array to order
+/// @return 	Ordered array
+char	**ordered_array(char **d, char t, int n, int j);
+
+/// @brief 		Export the environment variables
+/// @param s 	Script structure with commans and args
+/// @param n 	Index of command to be executed
+/// @return 	SUCCESS or ERROR
+int		export_status(t_script *s, int n);
+
+/* ************************************************************************** */
+///	850_bi_unset.c
+/* ************************************************************************** */
 /// @brief 			Remove a variable from the PERMANENT environment
 /// @param s 		Arguments passed to unset command
 /// @param n 		Current argument (variable)
@@ -992,24 +1018,25 @@ int		bi_unset(t_script *s, int n);
 /// @return			Updated environment variables
 int		bi_unset_envt(t_script *s, int n);
 
-/* ************************************************************************** */
-///	860bi_env.c
-/* ************************************************************************** */
 
+/* ************************************************************************** */
+///	860_bi_env.c
+/* ************************************************************************** */
 /// @brief 			Builtin env command
 /// @param args		Builtin command arguments
 /// @param envp		Environment variables
 /// @return			SUCCESS or ERROR
 int		bi_env(t_script *s, int n);
 
-/* ************************************************************************** */
-///	870bi_exit.c
-/* ************************************************************************** */
 
+/* ************************************************************************** */
+///	870_bi_exit.c
+/* ************************************************************************** */
 /// @brief 			Builtin 'exit' command argument checker
 /// @param str		Builtin 'exit' argument string
 /// @return			SUCSESS or ERROR
 int		ft_is_str_digit(char *str);
+
 /// @brief 			Shows error and program sourcing it
 /// @param msg		Message to show
 /// @param system	Shows system error if true
@@ -1027,10 +1054,10 @@ int		exit_error_notnum(const char *msg, int system);
 /// @return			exit status or ERROR
 int		bi_exit(t_script *s, int n);
 
-/* ************************************************************************** */
-///	880bi_equal.c
-/* ************************************************************************** */
 
+/* ************************************************************************** */
+///	880_bi_equal.c
+/* ************************************************************************** */
 /// @brief 			Update EXISTING TEMPORARY environment variables
 /// @param s 		Script structure with commans and args
 /// @param n 		Index of command to be executed
@@ -1050,20 +1077,13 @@ void	bi_equal_new(t_script *s, int n, int i);
 int		bi_equal(t_script *s, int n);
 
 /* ************************************************************************** */
-///	ms_error.c
+///	890_bi_append.c
 /* ************************************************************************** */
-/// @brief 			Shows error and program sourcing it
-/// @param msg		Message to show
-/// @param system	Shows system error if true
-/// @return			SUCCESS
-int		export_error(const char *msg, int system);
-
-/// @brief 			Shows error and program sourcing it
-/// @param msg		Message to show
-/// @param system	Shows system error if true
-/// @return			SUCCESS
-int		return_error(const char *msg, int errms, int errbash);
-
+/// @brief 			Looks for += embedded signs and call bi_append_new
+/// @param s 		Script structure with commans and args
+/// @param n 		Index of command to be executed
+/// @return 		SUCCESS or ERROR
+int		bi_append(t_script *s, int n, int i);
 
 /* ************************************************************************** */
 //																			  */
@@ -1080,10 +1100,9 @@ int		return_error(const char *msg, int errms, int errbash);
 /* ************************************************************************** */
 ///	900free.c
 /* ************************************************************************** */
-
 /// @brief 			Frees the environment variables
 /// @param my_envp	Environment variables
-void	free_array(char **array);
+int		free_array(char **array, int err);
 
 /// @brief 		Frees the token list
 /// @param head	Head of the token list
@@ -1112,7 +1131,6 @@ void	exit_forks(char *msg, int errms, t_script *s, char **path);
 /* ************************************************************************** */
 ///	910errors.c
 /* ************************************************************************** */
-
 /// @brief 			Shows error and program sourcing it
 /// @param msg		Message to show
 /// @param system	Shows system error if true
@@ -1127,23 +1145,10 @@ int		return_error(const char *msg, int errms, int errbash);
 
 
 /* ************************************************************************** */
-///	ms_bi_***.c
+///	999_debug.c
 /* ************************************************************************** */
-
-/// @brief 		Selects and Executes built in functions
-/// @param s 	Parsed script with command(s) to execute
-/// @param n 	Index of the command to be executed
-/// @return		0 if success, 1 if failure,...
-int		bi_go(t_script *s, int n);
-
-/* ************************************************************************** */
-///	debug.c
-/* ************************************************************************** */
-
 void	execute_show(t_script *s);
-
 void	show_func_msg(const char *msg);
-
 /// @brief 				Shows the function name and status
 /// @param func_name	Name of the function
 /// @param status		Status of the function
@@ -1152,8 +1157,9 @@ int		show_func(const char *func_name, int status, char *msg);
 /// @brief 				This function prints the environment variables
 /// @param envp			Environment variables
 /// @return				void
-void	show_array(char **array);
-
+void	show_array(char **array, const char *name);
 void	show_token_list(t_token *token);
+char	*ft_var_address(const char *varname, void *var);
+void	show_pointer(const char *func, int status, const char *msg, void *ptr);
 
 #endif

@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   799_exec_errors.c                                  :+:      :+:    :+:   */
+/*   ft_strswap.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/09 23:43:45 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/08 00:02:56 by antoda-s         ###   ########.fr       */
+/*   Created: 2024/02/25 21:39:52 by antoda-s          #+#    #+#             */
+/*   Updated: 2024/02/25 21:40:50 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <libft.h>
 
-int	fork_error(char **path)
+/// @brief 			Swaps two strings
+/// @param s1 		First string
+/// @param s2 		Second string
+void	ft_strswap(char **s1, char **s2)
 {
-	write(2, "Error: fork failed\n", 19);
-	g_exit_status = 1;
-	return (free_array(path, ERROR));
-}
+	char	*tmp;
 
-int	pipe_error(char **path)
-{
-	write(2, "Error: pipe failed\n", 19);
-	g_exit_status = 1;
-	return (free_array(path, ERROR));
+	if (!s1 || !s2)
+		return ;
+	tmp = *s1;
+	*s1 = *s2;
+	*s2 = tmp;
 }

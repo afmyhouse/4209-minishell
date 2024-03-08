@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 16:48:24 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/02/10 00:06:17 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/08 00:14:53 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,10 @@
 /// @param msg 		Content to be printed
 void	error_message_heredoc(char *msg)
 {
-	//show_func(__func__, MY_START, NULL);
 	ft_putstr_fd("Minishell: warning: here-document delimited", 2);
 	ft_putstr_fd(" by end-of-file (wanted '", 2);
 	ft_putstr_fd(msg, 2);
 	ft_putendl_fd("\')", 2);
-	//show_func(__func__, SUCCESS, NULL);
 }
 
 /// @brief		This function reads the user's input until it finds the
@@ -32,7 +30,6 @@ void	error_message_heredoc(char *msg)
 /// @param pipe Pointer to the pipe to output result
 void	loop_heredoc(t_list *h, int pipe)
 {
-	//show_func(__func__, MY_START, NULL);
 	char	*tmp;
 	char	*bis;
 
@@ -67,14 +64,12 @@ void	loop_heredoc(t_list *h, int pipe)
 /// @param path Commands execution path
 void	heredoc(t_script *s, int i, char **path)
 {
-	//show_func(__func__, MY_START, NULL);
 	int		pipe_tmp[2];
 
 	if (pipe(pipe_tmp) == -1)
 	{
-		write(2, "Error: pipe failed\n", 19);
 		free_cmds_path(s, path);
-		exit(1);
+		exit((return_error("", errno, 1)));
 	}
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, sig_handler_heredoc);
@@ -86,7 +81,7 @@ void	heredoc(t_script *s, int i, char **path)
 			write(2, "Error: dup2 failed\n", 19);
 			pipe_closer(pipe_tmp, NULL);
 			free_cmds_path(s, path);
-			exit(1);
+			exit(ERROR);
 		}
 	}
 	close(pipe_tmp[0]);

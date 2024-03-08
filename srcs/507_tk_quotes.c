@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 19:10:37 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/02/10 00:12:48 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/07 23:49:26 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 ///				or sets str pointer to the end {\0}
 ///				@malloc	: NOTHING
 ///				@free	: NOTHING
-/// @param str	addres of teh string to seek, that starts with a quotation mark
+/// @param str	addres of the string to seek, that starts with a quotation mark
 /// @return		ERROR (unclosed), SUCCES (closed)
 int	tk_quotes_checker(char **str)
 {
@@ -35,7 +35,6 @@ int	tk_quotes_checker(char **str)
 	}
 	return (SUCCESS);
 }
-
 
 /// @brief 		Unquotes a string. Special rules applies
 ///				- removes ' from limits = 'string'

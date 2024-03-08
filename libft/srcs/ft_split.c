@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 20:36:34 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/10/26 11:49:55 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/02 01:04:52 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*ft_split_slice(const char *s, char c)
 	split_len = 0;
 	while (s[split_len] && s[split_len] != c)
 		split_len++;
-	split = (char *)malloc((split_len + 1) * sizeof(char));
+	split = ft_calloc((split_len + 1), sizeof(char));
 	if (!split)
 	{
 		free (split);
@@ -75,7 +75,7 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	i_split = 0;
 	splits = ft_split_count(s, c);
-	array = (char **)malloc(sizeof(char *) * (splits + 1));
+	array = ft_calloc((splits + 1), sizeof(char *));
 	if (!array)
 	{
 		free (array);

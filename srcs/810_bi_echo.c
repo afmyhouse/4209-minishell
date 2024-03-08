@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:43:00 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/02/10 00:11:50 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/08 00:13:08 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	bi_echo_flag(char *str)
 	int	i;
 
 	i = 1;
+	if (str[0] != '-')
+		return (0);
 	while (str[i])
 	{
 		if (str[i] != 'n')
@@ -35,28 +37,24 @@ int	bi_echo_flag(char *str)
 //int	bi_echo(t_command cmds)
 int	bi_echo(t_script *s, int n)
 {
-	//show_func(__func__, MY_START, ft_strjoin("bi: ", s->cmds[n].argv[0]));
-	int	i;
-	int	flag;
+	int		i;
+	char	term;
 
 	i = 1;
-	flag = 0;
-	if (s->cmds[n].argv[i] && s->cmds[n].argv[i][0] == '-')
+	term = '\n';
+	while (s->cmds[n].argv[i] && bi_echo_flag(s->cmds[n].argv[i]))
 	{
-		flag = bi_echo_flag(s->cmds[n].argv[i]);
-		if (flag)
-			i++;
+		term = '\0';
+		i++;
 	}
 	while (s->cmds[n].argv[i])
 	{
 		ft_putstr_fd(s->cmds[n].argv[i], STDOUT_FILENO);
 		i++;
-		if (s->cmds[n].argv[i])
+		if (s->cmds[n].argv[i] && s->cmds[n].argv[i - 1][0] != '\0')
 			write (STDOUT_FILENO, " ", 1);
 	}
-	if (!flag)
-		write (STDOUT_FILENO, "\n", 1);
-	//show_func(__func__, SUCCESS, NULL);
+	ft_putchar_fd(term, STDOUT_FILENO);
 	return (SUCCESS);
 }
 
@@ -66,13 +64,11 @@ int	bi_echo(t_script *s, int n)
 /// @return			SUCCESS if success, ERROR if error
 int	bi_env_upd(t_script *s, int n)
 {
-	//show_func(__func__, MY_START, NULL);
-	if (!s->cmds[n].argv[1])
-		env_var_setter(s->cmds[n].argv[0],"_", &s->envp);
-	if (s->cmds[n].argc > 1 && !bi_echo_flag(s->cmds[n].argv[1]))
-		env_var_setter(s->cmds[n].argv[s->cmds[n].argc - 1],"_", &s->envp);
-	else if (s->cmds[n].argc == 2 && bi_echo_flag(s->cmds[n].argv[1]))
-		env_var_setter("", "_", &s->envp);
-	//show_func(__func__, SUCCESS, NULL);
+	int	i;
+
+	i = s->cmds[n].argc - 1;
+	while (!ft_strncmp(s->cmds[n].argv[i], "", 1) && i > 0)
+		i--;
+	env_var_setter(s->cmds[n].argv[i], "_", &s->envp);
 	return (SUCCESS);
 }

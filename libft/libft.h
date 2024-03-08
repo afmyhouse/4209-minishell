@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 15:21:17 by hmaciel-          #+#    #+#             */
-/*   Updated: 2024/01/31 12:34:29 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/02/28 13:12:08 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,15 @@
 # endif
 # ifndef FALSE
 #  define FALSE 0
+# endif
+
+/// Var sizes
+
+# ifndef __LONG_LONG_MAX__
+#  define __LONG_LONG_MAX__ 9223372036854775807
+# endif
+# ifndef __LONG_LONG_MIN__
+#  define __LONG_LONG_MIN__ -9223372036854775808
 # endif
 
 /**********************
@@ -81,7 +90,13 @@ void			ft_free_arr(char **str);
 void			ft_free(char *str);
 int				ft_atoi(const char *nptr);
 long			ft_atol(const char *nptr);
+long double		ft_atoll(const char *nptr);
 char			*ft_ftoa(float f, int p);
+/// @brief 		Converts the integer n to a string
+/// @param n	The integer to convert
+///
+/// @return		The string representation of the integer
+char			*ft_itoa_base(const long int n, char base);
 void			ft_bzero(void *s, size_t n);
 char			*ft_itoa(int n);
 void			*ft_calloc(size_t nmemb, size_t size);
@@ -106,7 +121,7 @@ void			ft_putnbr_fd(int n, int fd);
 void			ft_putnbr(int n);
 void			ft_putstr_fd(const char *s, int fd);
 void			ft_putstr(const char *str);
-
+void			ft_strswap(char **s1, char **s2);
 char			*ft_strrev(char *str, int j);
 char			**ft_split(char const *s, char c);
 char			**ft_split_set(char *str, char *charset);
@@ -123,6 +138,8 @@ char			*ft_strrchr(const char *s, int c);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
 char			*ft_strtrim(char const *s1, char const *set);
 char			*ft_strtrim_free(char *line, char const *set);
+char			*ft_strtrim_leading(char const *s1, char const *set);
+char			*ft_strtrim_trailing(char const *s1, char const *set);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void			ft_striteri(char *s, void (*f)(unsigned int, char*));
 int				ft_tolower(int c);

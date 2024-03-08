@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 18:49:28 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/01/31 11:46:36 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/05 18:35:05 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 #  define _SHOW_KEY_ 0
 # endif
 # ifndef MY_DEBUG
-#  define MY_DEBUG 1
+#  define MY_DEBUG 0
 # endif
 # ifndef MY_DEBUG_COLOR
 #  define MY_DEBUG_COLOR 0
@@ -47,6 +47,19 @@
 # ifndef _MOUSE_TEST_
 #  define _MOUSE_TEST_ 1
 # endif
+# ifndef DEBUG_FREE
+#  define DEBUG_FREE 0
+# endif
+# ifndef DEBUG_ALL
+#  define DEBUG_ALL 1
+# endif
+# ifndef DEBUG_COLOR
+#  define DEBUG_COLOR 0
+# endif
+# ifndef DEBUG_ARRAY
+#  define DEBUG_ARRAY 1
+# endif
+
 
 /* ************************************************************************** */
 typedef struct s_debug_msg
