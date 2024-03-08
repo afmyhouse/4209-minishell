@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:43:00 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/02 01:13:53 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/08 00:13:08 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	bi_echo_flag(char *str)
 //int	bi_echo(t_command cmds)
 int	bi_echo(t_script *s, int n)
 {
-	// show_func(__func__, MY_START, ft_strjoin("bi: ", s->cmds[n].argv[0]));
 	int		i;
 	char	term;
 
@@ -56,7 +55,6 @@ int	bi_echo(t_script *s, int n)
 			write (STDOUT_FILENO, " ", 1);
 	}
 	ft_putchar_fd(term, STDOUT_FILENO);
-	// show_func(__func__, SUCCESS, NULL);
 	return (SUCCESS);
 }
 
@@ -66,13 +64,11 @@ int	bi_echo(t_script *s, int n)
 /// @return			SUCCESS if success, ERROR if error
 int	bi_env_upd(t_script *s, int n)
 {
-	// show_func(__func__, MY_START, NULL);
-	int i;
+	int	i;
 
 	i = s->cmds[n].argc - 1;
 	while (!ft_strncmp(s->cmds[n].argv[i], "", 1) && i > 0)
 		i--;
-	env_var_setter(s->cmds[n].argv[i],"_", &s->envp);
-	// show_func(__func__, SUCCESS, NULL);
+	env_var_setter(s->cmds[n].argv[i], "_", &s->envp);
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 #    By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/24 21:23:27 by antoda-s          #+#    #+#              #
-#    Updated: 2024/03/07 22:43:05 by antoda-s         ###   ########.fr        #
+#    Updated: 2024/03/07 23:20:45 by antoda-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,6 +63,7 @@ FILES	+=	810_bi_echo.c
 FILES	+=	820_bi_cd.c
 FILES	+=	830_bi_pwd.c
 FILES	+=	840_bi_export.c
+FILES	+=	845_bi_export_status.c
 FILES	+=	850_bi_unset.c
 FILES	+=	860_bi_env.c
 FILES	+=	870_bi_exit.c

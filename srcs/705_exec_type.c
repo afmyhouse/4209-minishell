@@ -6,18 +6,23 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:25:54 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/06 22:03:11 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/08 00:29:08 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/// @brief 		Checks is a script started with bi_equal is not followed by
+/// 			a valid command or naything different from var=value
+/// @param s	Struct with the script to execute
+/// @param n 	Index of the script to check
+/// @param i 	Index of the script argument to check
+/// @return		Command id validated
 int	bi_equal_check(t_script *s, int n, int i)
 {
 	char	**new_array;
 	int		j;
 
-	// show_func(__func__, MY_START, NULL);
 	j = 0;
 	while (s->cmds[n].argv[i])
 	{
@@ -28,7 +33,7 @@ int	bi_equal_check(t_script *s, int n, int i)
 				new_array[j++] = ft_strdup(s->cmds[n].argv[i++]);
 			new_array[j] = NULL;
 			s->cmds[n].argc = j;
-			free_array(s->cmds[n].argv);
+			free_array(s->cmds[n].argv, 0);
 			s->cmds[n].argv = new_array;
 			break ;
 		}
@@ -37,18 +42,16 @@ int	bi_equal_check(t_script *s, int n, int i)
 	if (exec_type(s->cmds[n].argv[0]) != CMD_EQ)
 		return (exec_type(s->cmds[n].argv[0]));
 	bi_append(s, n, 0);
-		return (CMD_EQ);
-	// show_func(__func__, SUCCESS, ft_strdup(s->cmds[n].argv[0]));
+	return (CMD_EQ);
 }
 
 /// @brief 			Detects the type of commando to execute : a builtin and
 /// 				what kind builtin or a system comand CMD_EX
 /// @param cmd 		Command to execute
 /// @return 		Command id
-int exec_type(char *cmd)
+int	exec_type(char *cmd)
 {
-	// show_func(__func__, MY_START, NULL);
-	int id;
+	int	id;
 
 	id = CMD_EX;
 	if (ft_strchr(cmd, '='))
@@ -67,8 +70,5 @@ int exec_type(char *cmd)
 		id = CMD_ENV;
 	else if (ft_strncmp(cmd, "exit", 5) == SUCCESS)
 		id = CMD_EXIT;
-	//show_func(__func__, SUCCESS, ft_itoa(id));
 	return (id);
 }
-
-

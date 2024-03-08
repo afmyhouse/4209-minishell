@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 00:14:30 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/07 22:45:21 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/07 23:28:43 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int	bi_append(t_script *s, int n, int i)
 		return (ERROR);
 	while (s->cmds[n].argv[i])
 	{
-		printf("%s%s : %s%s\n", SBHYLW, __func__, s->cmds[n].argv[i], SRST);
 		if ((ft_strchr(s->cmds[n].argv[i], '+')
 				&& ft_strchr(s->cmds[n].argv[i], '='))
 			&& ((ft_strchr(s->cmds[n].argv[i], '=')

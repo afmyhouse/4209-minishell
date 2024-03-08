@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 19:00:01 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/07 22:42:22 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/07 23:58:29 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	**env_del_one(char *del, char **envx, int j)
 		free(tmp);
 	}
 	new_array[j] = NULL;
-	free_array(envx);
+	free_array(envx, 0);
 	return (new_array);
 }
 
@@ -72,7 +72,7 @@ char	**env_add_one(char **envx, char *new)
 		new_array[i] = ft_strdup(envx[i]);
 	new_array[i] = new;
 	new_array[++i] = NULL;
-	free_array(envx);
+	free_array(envx, 0);
 	return (new_array);
 }
 

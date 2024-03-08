@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:26:05 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/05 21:26:09 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/08 00:25:32 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,18 @@
 /// @return 		SUCCESS or ERROR
 int	exec_cmd_1(t_script *s, char **path, int *pipeout)
 {
-	// show_func(__func__, MY_START, NULL);
 	int	pid;
 
 	if (pipe(pipeout) == -1)
 	{
 		free (path);
 		return (return_error("", errno, 1));
-		//return (pipe_error(path));
 	}
 	pid = fork();
 	if (pid == -1)
 	{
 		free (path);
 		return (return_error("", errno, 1));
-		//return (fork_error(path));
 	}
 	if (pid == 0)
 		ex_child_1(s, path, pipeout);
@@ -49,7 +46,6 @@ int	exec_cmd_1(t_script *s, char **path, int *pipeout)
 /// @param pid 		NOTHING
 int	exec_cmd_i(t_script *s, char **path, int **pipes, int i)
 {
-	// show_func(__func__, MY_START, NULL);
 	int	pid;
 
 	if (!pipes)
@@ -57,9 +53,8 @@ int	exec_cmd_i(t_script *s, char **path, int **pipes, int i)
 	pid = fork();
 	if (pid == -1)
 	{
-		free (path); // a funçao fork_error dá free a path
+		free(path);
 		return (return_error("", errno, 1));
-		//return (fork_error(path));
 	}
 	if (pid == 0)
 		ex_child_i(s, path, pipes, i);
@@ -77,24 +72,20 @@ int	exec_cmd_i(t_script *s, char **path, int **pipes, int i)
 //void	exec_cmd_n(t_script *s, char **path, int *pipein, int pid)
 int	exec_cmd_n(t_script *s, char **path, int *pipein)
 {
-	// show_func(__func__, MY_START, NULL);
 	int	i;
-	int pid;//
+	int	pid;
 
 	i = s->cmd_count - 1;
-	pid = fork();//
-	if (pid == -1)//
+	pid = fork();
+	if (pid == -1)
 	{
-		free (path); // a funçao fork_error dá free a path
+		free (path);
 		return (return_error("", errno, 1));
-		//return (fork_error(path));
 	}
 	if (pid == 0)
 		ex_child_n(s, path, pipein, i);
 	pipe_closer(pipein, NULL);
-	free_array(path);
-	// free_array_name(path, "path");
-	return (0);
+	return (free_array(path, SUCCESS));
 }
 
 /// @brief 			Selects the pipe for each inbetween command "i" and calls
@@ -106,7 +97,6 @@ int	exec_cmd_n(t_script *s, char **path, int *pipein)
 /// @return 		SUCCESS or ERROR
 int	exec_cmd_loop(t_script *s, char **path, int *pipe1, int *pipe2)
 {
-	// show_func(__func__, MY_START, NULL);
 	int	i;
 	int	cmd_idx;
 	int	**pipes;
@@ -118,13 +108,13 @@ int	exec_cmd_loop(t_script *s, char **path, int *pipe1, int *pipe2)
 		if (cmd_idx % 2 == 0)
 		{
 			pipes = pipe_init(path, pipe1, pipe2);
-			if (exec_cmd_i(s, path, pipes, i) == 1) // em caso de erro no exec_cmd_i
+			if (exec_cmd_i(s, path, pipes, i) == 1)
 				return (-1);
 		}
 		else
 		{
 			pipes = pipe_init(path, pipe2, pipe1);
-			if (exec_cmd_i(s, path, pipes, i) == 1) // em caso de erro no exec_cmd_i
+			if (exec_cmd_i(s, path, pipes, i) == 1)
 				return (-1);
 		}
 		cmd_idx++;
@@ -142,7 +132,6 @@ int	exec_cmd_loop(t_script *s, char **path, int *pipe1, int *pipe2)
 /// @return 		SUCCESS or ERROR
 int	exec_many(t_script *s, char **path)
 {
-	// show_func(__func__, MY_START, NULL);
 	int	pipe1[2];
 	int	pipe2[2];
 	int	cmd;
@@ -165,4 +154,3 @@ int	exec_many(t_script *s, char **path)
 		g_exit_status = 128 + WTERMSIG(g_exit_status);
 	return (SUCCESS);
 }
-

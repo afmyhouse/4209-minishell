@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:25:54 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/05 21:25:59 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/08 00:26:00 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 /// @return 		SUCCESS or ERROR
 int	exec_bi(int id, t_script *s, int i)
 {
-	// show_func(__func__, MY_START, NULL);
 	if (id == CMD_EQ)
 		g_exit_status = bi_equal(s, i);
 	else if (id == CMD_ECHO)
@@ -36,7 +35,6 @@ int	exec_bi(int id, t_script *s, int i)
 		g_exit_status = bi_env(s, i);
 	else if (id == CMD_EXIT)
 		return (bi_exit(s, i));
-	// show_func(__func__, SUCCESS, ft_strdup("bi executed"));
 	return (SUCCESS);
 }
 
@@ -46,7 +44,6 @@ int	exec_bi(int id, t_script *s, int i)
 /// @param env 		Environment variables
 void	exec_ve(char **path, char **cmd, char **env)
 {
-	// show_func(__func__, MY_START, NULL);
 	char	*tmp;
 	int		i;
 	int		ret;
@@ -55,10 +52,9 @@ void	exec_ve(char **path, char **cmd, char **env)
 	i = 0;
 	if (tmp[0] == '.' || tmp[0] == '/')
 	{
-		// falta atualizar a variável de ambiente SHLVL (o valor de SHLVL é incrementado em 1.)
 		execve(*cmd, cmd, env);
-		free(tmp); // se entrar no execve este free já nao acontece
-		return ; // se entrar no execve este return já nao acontece
+		free(tmp);
+		return ;
 	}
 	ret = -1;
 	while (ret == -1 && path[i])
@@ -72,7 +68,6 @@ void	exec_ve(char **path, char **cmd, char **env)
 	}
 	if (tmp)
 		free(tmp);
-	//show_func(__func__, SUCCESS, NULL);
 }
 
 /// @brief 			Executes a single command script in a fork
@@ -89,7 +84,6 @@ int	exec_one_fork(t_script *s, char **path)
 	else
 		signal(SIGQUIT, sig_handler_fork);
 	signal(SIGINT, sig_handler_fork);
-
 	pid = fork();
 	if (pid == -1)
 		return (return_error("", errno, 1));
@@ -117,48 +111,21 @@ int	exec_one(t_script *s, char **path)
 		id = exec_type(s->cmds[0].argv[0]);
 	if (id == CMD_EXIT)
 	{
-		free_array(path);
-		// free_array_name(path, "path");
+		free_array(path, 0);
 		if (exec_bi(id, s, 0))
-		{
-			// show_func(__func__, ERROR, ft_strdup("exec_bi execution error"));
 			return (ERROR);
-		}
 	}
 	else if (id == CMD_EQ)
-	{
-		// show_func(__func__, SHOW_MSG, ft_strdup("<equal> checker"));
 		id = bi_equal_check(s, 0, 0);
-		// show_func(__func__, SHOW_MSG, ft_strdup("<equal> checker end"));
-	}
 	if (id == CMD_CD || (id == CMD_UNSET && s->cmds[0].argv[1])
 		|| (id == CMD_EXPORT && s->cmds[0].argv[1]) || id == CMD_EXIT
 		|| id == CMD_EQ)
 	{
-		// show_func(__func__, SHOW_MSG,  ft_strdup("exec_one parent : <cd>, <unset>, <export with args>, <exit>"));
 		if (exec_bi(id, s, 0))
-		{
-			free_array(path);
-			// free_array_name(path, "path");
-			// show_func(__func__, ERROR, ft_strdup("exec_bi execution error"));
-			return (ERROR);
-		}
+			return (free_array(path, ERROR));
 	}
-	else
-	{
-		// show_func(__func__, SHOW_MSG, ft_strdup("exec_one child : <export without args>, <echo>, <env>, <pwd>, <execve>"));
-		if (exec_one_fork(s, path))
-		{
-			free_array(path);
-			// free_array_name(path, "path");
-			// show_func(__func__, ERROR, ft_strdup("exec_one_fork execution error"));
-			return (ERROR);
-		}
-	}
+	else if (exec_one_fork(s, path))
+		return (free_array(path, ERROR));
 	bi_env_upd(s, 0);
-	free_array(path);
-	// free_array_name(path, "path");
-	// show_func(__func__, SUCCESS, ft_strdup("execute one succefully completed"));
-	return (SUCCESS);
+	return (free_array(path, SUCCESS));
 }
-

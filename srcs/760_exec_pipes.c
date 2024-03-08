@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:26:05 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/02 01:13:53 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/08 00:13:56 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 /// @return 		Pointer to the pipes array x 2 pipes
 int	**pipe_init(char **path, int *pipe1, int *pipe2)
 {
-	// show_func(__func__, MY_START, NULL);
 	int	**pipes;
 
 	pipes = malloc(sizeof(int *) * 2);
@@ -45,7 +44,6 @@ int	**pipe_init(char **path, int *pipe1, int *pipe2)
 /// @param pb 	pipe b, initial pipe of an even cmd i (in a list from 1 to n-1)
 void	pipe_closer(int *pa, int *pb)
 {
-	// show_func(__func__, MY_START, NULL);
 	if (pa)
 	{
 		close(pa[0]);
@@ -56,7 +54,6 @@ void	pipe_closer(int *pa, int *pb)
 		close(pb[0]);
 		close(pb[1]);
 	}
-	//show_func(__func__, SUCCESS, NULL);
 }
 
 /// @brief 			This function is called every time we have to dup2 a pipe.
@@ -67,9 +64,7 @@ void	pipe_closer(int *pa, int *pb)
 /// @return
 int	pipe_std_setter(int *pipe, int end)
 {
-	// show_func(__func__, MY_START, NULL);
 	if (pipe[end] != end)
 		return (dup2(pipe[end], end));
-	//show_func(__func__, SUCCESS, NULL);
 	return (SUCCESS);
 }

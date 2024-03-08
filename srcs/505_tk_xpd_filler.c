@@ -6,20 +6,19 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 19:00:01 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/05 20:09:05 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/07 23:06:02 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/// @attention	>token builder< set of functions
-/// @brief
-/// @param ntk
-/// @param s
-/// @return
+/// @attention		>token builder< set of functions
+/// @brief 			PART 1: replaces var and removes quotes from a string
+/// @param ntk 		array of strings to be processed
+/// @param s 		struct with pparams to initialize
+/// @return 		pointer to the newly created array
 char	*tk_xpd_var_filler(char *ntk, t_script *s)
 {
-	// show_func(__func__, MY_START, NULL);
 	int		i;
 	char	*tmp;
 
@@ -41,19 +40,16 @@ char	*tk_xpd_var_filler(char *ntk, t_script *s)
 	else
 		tmp = ft_strdup(ntk);
 	free(ntk);
-	// show_func(__func__, SUCCESS, NULL);
-	// printf("%sALERT!! %s%s : dupped : address = %s%p%s\n", SBHRED, SRST, __func__, SHBLU, tmp, SRST);
 	return (tmp);
 }
 
 /// @attention	>token builder< set of functions
-/// @brief
-/// @param ntk
-/// @param s
-/// @return
+/// @brief 		PART 1: replaces var and removes quotes from a string
+/// @param ntk 	array of strings to be processed
+/// @param s 	struct with pparams to initialize
+/// @return 	pointer to the newly created array
 char	*tk_xpd_filler(char ***ntks, t_script *s)
 {
-	// show_func(__func__, MY_START, NULL);
 	int		i;
 	char	*tmp;
 	char	*tmp2;
@@ -71,35 +67,7 @@ char	*tk_xpd_filler(char ***ntks, t_script *s)
 		}
 		else
 			(*ntks)[i] = tk_xpd_unquote(tmp2);
-		// printf("%sALERT!! %s%s : dupped : address = %s%p%s\n", SBHRED, SRST, __func__, SHBLU, (*ntks)[i], SRST);
 		tmp = ft_strjoin_free(tmp, (*ntks)[i]);
-		// printf("%sALERT!! %s%s : dupped : address = %s%p%s\n", SBHRED, SRST, __func__, SHBLU, (*ntks)[i], SRST);
-		// printf("tmp = '%s'\n", tmp);
-		// printf("nkts = '%s'\n", (*ntks)[i]);
 	}
-	// show_func(__func__, SUCCESS, NULL);
 	return (tmp);
 }
-// char	*tk_xpd_filler(char ***ntks, t_script *s)
-// {
-// 	int		split;
-// 	char	*tmp;
-// 	show_func(__func__, MY_START, NULL);
-
-// 	tmp = ft_strdup("");
-// 	split = -1;
-// 	while ((*ntks)[++split])
-// 	{
-// 		if ((*ntks)[split][0] == '$'
-// 			&& ((*ntks)[split][1] || (*ntks)[split + 1]))
-// 		{
-// 			(*ntks)[split] = tk_xpd_var_filler((*ntks)[split], s);
-// 			if (!(*ntks)[split])
-// 				(*ntks)[split] = ft_strdup("");
-// 		}
-// 		else
-// 			(*ntks)[split] = tk_xpd_unquote((*ntks)[split]);
-// 		tmp = ft_strjoin_free(tmp, (*ntks)[split]);
-// 	}
-// 	return (tmp);
-// }

@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:26:48 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/05 22:15:53 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/08 00:06:58 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,12 @@
 
 /// @brief 			Frees the environment variables
 /// @param my_envp	Environment variables
-void	free_array(char **array)
+int	free_array(char **array, int err)
 {
-
-	// show_pointer(__func__, MY_START, "", array);
 	int	i;
 
 	if (!array)
-		return ;
+		return (err);
 	i = 0;
 	while (array[i])
 	{
@@ -29,24 +27,7 @@ void	free_array(char **array)
 		i++;
 	}
 	free(array);
-	// show_func(__func__, SUCCESS, ft_strdup("Array freed"));
-}
-void	free_array_name(char **array, char *name)
-{
-
-	show_pointer(__func__, MY_START, name, array);
-	int	i;
-
-	if (!array)
-		return ;
-	i = 0;
-	while (array[i])
-	{
-		free(array[i]);
-		i++;
-	}
-	free(array);
-	// show_func(__func__, SUCCESS, ft_strdup("Array freed"));
+	return (err);
 }
 
 /// @brief 		Frees the token list
@@ -61,9 +42,7 @@ int	free_tokens(t_token **tk)
 	while (*tk)
 	{
 		tmp = (*tk)->next;
-		show_pointer(__func__, D_FREE, "(*tk)->content -> ", (*tk)->content);
 		free((*tk)->content);
-		show_pointer(__func__, D_FREE, "*tk -> ", *tk);
 		free(*tk);
 		*tk = tmp;
 	}
@@ -76,8 +55,6 @@ int	free_tokens(t_token **tk)
 /// @return 		SUCCESS or ERROR ?? needs coherence check
 int	free_commands(t_command *cmd, int cmd_idx)
 {
-	// show_func(__func__, MY_START, NULL);
-	show_pointer(__func__, D_FREE, "", cmd);
 	int	i;
 	int	j;
 
@@ -99,7 +76,6 @@ int	free_commands(t_command *cmd, int cmd_idx)
 			ft_lstclear(&cmd[i].in.heredoc, free);
 	}
 	free(cmd);
-	// show_func(__func__, SUCCESS, NULL);
 	return (1);
 }
 
@@ -108,11 +84,8 @@ int	free_commands(t_command *cmd, int cmd_idx)
 /// @param path 	Path to be freed
 void	free_cmds_path(t_script *script, char **path)
 {
-	// show_func(__func__, MY_START, NULL);
 	free_commands(script->cmds, script->cmd_count);
-	free_array(path);
-	// free_array_name(path, "path");
-	// show_func(__func__, SUCCESS, NULL);
+	free_array(path, 0);
 }
 
 /// @brief 			Shows error and program sourcing it and exit(1) freeing
@@ -123,9 +96,7 @@ void	free_cmds_path(t_script *script, char **path)
 /// @param path 	Path to be freed
 void	exit_forks(char *msg, int errms, t_script *s, char **path)
 {
-	// show_func(__func__, MY_START, NULL);
 	return_error(msg, errms, 1);
 	free_cmds_path(s, path);
-	//show_func(__func__, SUCCESS, NULL);
 	exit(1);
 }

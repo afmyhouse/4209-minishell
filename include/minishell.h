@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:28:06 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/07 22:38:46 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/08 00:08:59 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,6 +258,13 @@ void	sig_handler_heredoc(int signum);
 /* ************************************************************************** */
 ///	300_parser.c
 /* ************************************************************************** */
+/// @brief 				Builds an error message string to be displayed and
+///						frees the tokens list, cmds list and returns 1.
+/// @param cmds 		Commands list
+/// @param cmd_count 	Number of commands
+/// @param tk 			Head of the token list
+/// @return 			1
+int		back_to_loop(t_command *cmds, int cmd_count, t_token **tk);
 
 /// @brief 		This function iterates through a linked list of tokens and
 ///				fills the command structure based on the type of token it
@@ -968,22 +975,33 @@ void	bi_export_upd_var(t_script *s, int n, int i);
 /// @param s 	Script structure with commans and args
 /// @param n 	Index of command to be executed
 /// @param i 	Index of argument to be checked
-void	bi_export_new_var(t_script *s, int n, int i);
 
+void	bi_export_new_var(t_script *s, int n, int i);
 /// @brief 			Export PERMANENT environment variables
 /// @param s 		Script structure with commans and args
 /// @param n 		Index of command to be executed
 /// @return 		SUCCESS or ERROR
 int		bi_export(t_script *s, int n);
 
-/// @brief 		Alphatecially ordered array from start n of the string till the
-/// 			terminator t, order after j strings
-/// @param a 	Array to order
-/// @param t 	Order seg terminator
-/// @param n 	Order seg starting Index
-/// @param j 	Order seg compare starting Index
+/* ************************************************************************** */
+///	845_bi_export_status.c
+/* ************************************************************************** */
+
+
+/// @brief 		Export array method : ordered and declare statement
+/// @param str 	Variable to be printed
+void	export_print(char *str);
+
+/// @brief 		Alphatecially ordered array
+/// @param src 	Array to order
 /// @return 	Ordered array
 char	**ordered_array(char **d, char t, int n, int j);
+
+/// @brief 		Export the environment variables
+/// @param s 	Script structure with commans and args
+/// @param n 	Index of command to be executed
+/// @return 	SUCCESS or ERROR
+int		export_status(t_script *s, int n);
 
 /* ************************************************************************** */
 ///	850_bi_unset.c
@@ -1084,8 +1102,7 @@ int		bi_append(t_script *s, int n, int i);
 /* ************************************************************************** */
 /// @brief 			Frees the environment variables
 /// @param my_envp	Environment variables
-void	free_array(char **array);
-void	free_array_name(char **array, char *name);
+int		free_array(char **array, int err);
 
 /// @brief 		Frees the token list
 /// @param head	Head of the token list
@@ -1126,19 +1143,12 @@ int		export_error(const char *msg, int system);
 /// @return			SUCCESS
 int		return_error(const char *msg, int errms, int errbash);
 
-/// @brief 		Alphatecially ordered array
-/// @param src 	Array to order
-/// @return 	Ordered array
-//char	**ordered_array(char **s, char t);
 
 /* ************************************************************************** */
 ///	999_debug.c
 /* ************************************************************************** */
-
 void	execute_show(t_script *s);
-
 void	show_func_msg(const char *msg);
-
 /// @brief 				Shows the function name and status
 /// @param func_name	Name of the function
 /// @param status		Status of the function
@@ -1148,12 +1158,8 @@ int		show_func(const char *func_name, int status, char *msg);
 /// @param envp			Environment variables
 /// @return				void
 void	show_array(char **array, const char *name);
-
 void	show_token_list(t_token *token);
-
-char *ft_var_address(const char *varname, void *var);
-
-void show_pointer(const char *func, int status, const char *msg, void *ptr);
-
+char	*ft_var_address(const char *varname, void *var);
+void	show_pointer(const char *func, int status, const char *msg, void *ptr);
 
 #endif

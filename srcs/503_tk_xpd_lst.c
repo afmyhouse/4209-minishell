@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 19:10:37 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/02 01:13:53 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/07 23:03:06 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 /// @return		SUCCESS or ERROR
 int	var_name_checker(char c)
 {
-	// show_func(__func__, MY_START, NULL);
 	if (ft_isalnum(c) || c == '_')
 		return (SUCCESS);
 	return (ERROR);
@@ -30,7 +29,6 @@ int	var_name_checker(char c)
 /// @return		SUCCESS or ERROR
 int	var_firstchar(char c)
 {
-	// show_func(__func__, MY_START, NULL);
 	if (ft_isalpha(c) || c == '_')
 		return (SUCCESS);
 	return (ERROR);
@@ -46,16 +44,13 @@ t_token	*tk_addnew(const char *str, int size, t_token_type type)
 {
 	t_token	*tk;
 
-	// tk = (t_token *)malloc(sizeof(t_token));
 	tk = ft_calloc(1, sizeof(t_token));
 	if (!tk)
 	{
 		return_error("", errno, 1);
 		return (NULL);
 	}
-	show_pointer(__func__, D_MALLOC, "tk", tk);
 	tk->content = ft_substr(str, 0, size);
-	show_pointer(__func__, D_MALLOC, "tk->content", tk->content);
 	tk->size = size;
 	tk->type = type;
 	tk->next = NULL;
@@ -68,7 +63,6 @@ t_token	*tk_addnew(const char *str, int size, t_token_type type)
 /// @return			last token list node
 t_token	*tk_lst_last_getter(t_token *ltk)
 {
-	// show_func(__func__, MY_START, NULL);
 	if (!ltk)
 		return (NULL);
 	while (ltk)
@@ -87,7 +81,6 @@ t_token	*tk_lst_last_getter(t_token *ltk)
 void	tk_lst_addback(t_token **ltk, t_token *ntk)
 {
 	t_token	*token_lst_last;
-	// show_func(__func__, MY_START, NULL);
 
 	if (*ltk)
 	{
