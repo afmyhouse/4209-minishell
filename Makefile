@@ -6,7 +6,7 @@
 #    By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/24 21:23:27 by antoda-s          #+#    #+#              #
-#    Updated: 2024/03/07 23:20:45 by antoda-s         ###   ########.fr        #
+#    Updated: 2024/03/10 19:21:57 by antoda-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,8 +53,11 @@ FILES	+=	610_env_getter.c
 FILES	+=	700_exec_start.c
 FILES	+=	705_exec_type.c
 FILES	+=	710_exec_one.c
+FILES	+=	711_exec_bi.c
+FILES	+=	712_exec_ve.c
 FILES	+=	720_exec_many.c
 FILES	+=	730_exec_childs.c
+FILES	+=	731_exec_go.c
 FILES	+=	740_exec_redirs.c
 FILES	+=	750_exec_heredoc.c
 FILES	+=	760_exec_pipes.c

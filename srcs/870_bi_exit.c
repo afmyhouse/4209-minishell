@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 00:10:23 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/08 00:10:03 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/09 12:13:06 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,11 @@ int	exit_error_args(const char *msg, int system)
 	return (system);
 }
 
+/// @brief 		Exit function with error message
+/// @param s 	Script structure with commans and args
+/// @param arg 	Argument to be checked
+/// @param msg 	Message to be shown
+/// @param sys 	System error
 void	exit_go(t_script *s, char *arg, char *msg, int sys)
 {
 	ft_putstr_fd("exit\n", 2);

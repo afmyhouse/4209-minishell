@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:28:06 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/08 00:08:59 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/09 12:13:43 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1047,7 +1047,14 @@ int		exit_error_args(const char *msg, int system);
 /// @param msg 		Message to show
 /// @param system 	Shows system error if true
 /// @return 		system errno
-int		exit_error_notnum(const char *msg, int system);
+//int		exit_error_notnum(const char *msg, int system);
+
+/// @brief 		Exit function with error message
+/// @param s 	Script structure with commans and args
+/// @param arg 	Argument to be checked
+/// @param msg 	Message to be shown
+/// @param sys 	System error
+void	exit_go(t_script *s, char *arg, char *msg, int sys);
 
 /// @brief 			Builtin exit command
 /// @param args		Builtin command arguments

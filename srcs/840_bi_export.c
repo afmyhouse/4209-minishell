@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 23:46:39 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/08 00:58:43 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/08 18:24:57 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	bi_export_upd_var(t_script *s, int n, int i)
 	env_var_setter(val, var, &s->envp);
 	if (env_var_index_getter(var, s->envt) != -1)
 		s->envt = env_del_one(var, s->envt, 0);
-	free (var);
-	free (val);
+	free(var);
+	free(val);
 }
 
 /// @brief  	Checks if export NEW environment variables or update existing
@@ -102,7 +102,7 @@ int	bi_export(t_script *s, int n)
 				bi_export_new_var(s, n, i);
 		}
 		else
-			export_error(s->cmds[n].argv[i], 1);
+			return (export_error(s->cmds[n].argv[i], 1));
 		i++;
 	}
 	return (SUCCESS);

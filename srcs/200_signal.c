@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:38:24 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/07 22:50:57 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/08 18:01:46 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,7 @@ void	signal_setter(void)
 /// @return			void
 void	sig_handler(int signum)
 {
-	if (signum == SIGQUIT)
-	{
-		write(1, "Quit: 3\n", 8);
-		rl_on_new_line();
-		write(1, "\r", 1);
-	}
-	else if (signum == SIGINT)
+	if (signum == SIGINT)
 	{
 		rl_replace_line("", 0);
 		write(1, "\n", 1);
