@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 23:44:19 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/11 00:18:25 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:04:04 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ int	change_dir(char *path, char ***envp)
 	ret = chdir(path);
 	if (ret == -1)
 	{
-		free(pwd);
+		ft_free(pwd);
 		pwd = ft_strjoin("Minishell: cd: ", path);
 		return_error(pwd, 1, 1);
-		free (pwd);
-		return (1);
+		ft_free(pwd);
+		return (ERROR);
 	}
 	env_var_setter(pwd, "OLDPWD", envp);
 	ft_free(pwd);

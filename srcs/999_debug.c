@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:29:02 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/11 00:06:06 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/11 09:46:13 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int show_func(const char *func_name, int status, char *msg)
 			write(STDERR_FILENO, debug_msg[i].msg, debug_msg[i].len);
 			show_func_msg(msg);
 		}
-		printf("\n");
+		// printf("\n");
 	}
 	else if (DEBUG_FREE && (status == D_FREE || status == D_MALLOC))
 	{
@@ -137,7 +137,7 @@ int show_func(const char *func_name, int status, char *msg)
 			write(STDERR_FILENO, debug_msg[i].msg, debug_msg[i].len);
 			show_func_msg(msg);
 		}
-		printf("\n");
+		// printf("\n");
 	}
 	return (status);
 }
@@ -154,10 +154,10 @@ void	show_array(char **envx, const char *name)
 		return ;
 	while (envx[i])
 	{
-		printf("%s : %s%p%s : %p : %s[%i] = %s%s\n", __func__, SHGRN, envx + i, SHBLU, envx[i], name, i, envx[i], SRST);
+		ft_printf("%s : %s%p%s : %p : %s[%i] = %s%s\n", __func__, SHGRN, envx + i, SHBLU, envx[i], name, i, envx[i], SRST);
 		i++;
 	}
-	printf("%s : %s%p%s : %p : %s[%i] = %s%s\n", __func__, SHGRN, envx + i, SHBLU, envx[i], name, i, envx[i], SRST);
+	ft_printf("%s : %s%p%s : %p : %s[%i] = %s%s\n", __func__, SHGRN, envx + i, SHBLU, envx[i], name, i, envx[i], SRST);
 	// show_func(__func__, SUCCESS, NULL);
 }
 
@@ -168,17 +168,17 @@ void show_token_list(t_token *token)
 	tk_ptr = token;
 	if (!tk_ptr || !DEBUG_ARRAY)
 		return ;
-	printf("%s**********************************************************%s\n", SBHGRN, SRST);
+	ft_printf("%s**********************************************************%s\n", SBHGRN, SRST);
 	while (tk_ptr)
 	{
-		printf("%s%p%s\n", SBHYLW, tk_ptr, SRST);
-		printf("%s-> token->content = '%s%s%s'%s\n",
+		ft_printf("%s%p%s\n", SBHYLW, tk_ptr, SRST);
+		ft_printf("%s-> token->content = '%s%s%s'%s\n",
 			SBHPPL, SBWHT, tk_ptr->content, SBHPPL, SRST);
-		printf("%s-> token->size = '%s%d%s'%s\n",
+		ft_printf("%s-> token->size = '%s%d%s'%s\n",
 			SBHPPL, SBWHT, tk_ptr->size, SBHPPL, SRST);
-		printf("%s-> token->type = '%s%d%s'%s\n",
+		ft_printf("%s-> token->type = '%s%d%s'%s\n",
 			SBHPPL, SBWHT, tk_ptr->type, SBHPPL, SRST);
-		printf("%s**********************************************************%s\n", SBHGRN, SRST);
+		ft_printf("%s**********************************************************%s\n", SBHGRN, SRST);
 		tk_ptr = tk_ptr->next;
 	}
 }

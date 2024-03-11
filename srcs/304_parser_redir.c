@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:28:14 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/10 23:50:03 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/11 11:42:08 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,9 @@ int	redir(t_token *tk, t_redirection *file)
 		return (SUCCESS);
 	ret = open(file->name, file->flag, 0644);
 	if (ret == -1)
-		return (return_error(file->name, 0, 1));
+		return (return_error(file->name, 1, 1));
+		// return (return_error(file->name, 1, 1));
+		// return (return_error(file->name, 1, 1));
 	close(ret);
 	return (SUCCESS);
 }

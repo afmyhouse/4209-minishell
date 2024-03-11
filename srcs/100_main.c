@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:27:05 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/10 23:49:00 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:13:25 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	ms_loop(t_script *s)
 /// @return
 int	main(int argc, char **argv, char **envp)
 {
-	show_func(__func__, MY_START, NULL);
+	ft_printf("%s%s\n", SBHRED, __func__, SRST);
 	t_script	s;
 
 	(void)argc;

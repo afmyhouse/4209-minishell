@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:25:54 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/10 23:44:24 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/11 16:15:24 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,14 @@ int	exec_one(t_script *s, char **path)
 	id = CMD_EX;
 	if (s->cmds[0].argv[0])
 		id = exec_type(s->cmds[0].argv[0]);
-	if (id == CMD_EXIT)
-	{
-		free_array(path, 0);
-		if (exec_bi(id, s, 0))
-			return (ERROR);
-	}
-	else if (id == CMD_EQ)
+	// if (id == CMD_EXIT)
+	// {
+	// 	free_array(path, 0);
+	// 	if (exec_bi(id, s, 0))
+	// 		return (ERROR);
+	// }
+	// else
+	if (id == CMD_EQ)
 		id = bi_equal_check(s, 0, 0);
 	if (id == CMD_CD || (id == CMD_UNSET && s->cmds[0].argv[1])
 		|| (id == CMD_EXPORT && s->cmds[0].argv[1]) || id == CMD_EXIT

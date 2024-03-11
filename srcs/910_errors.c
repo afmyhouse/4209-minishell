@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 22:37:00 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/10 23:52:35 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/11 11:43:02 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 int	export_error(const char *msg, int errms)
 {
 	show_func(__func__, MY_START, NULL);
-
 	char	*msgr;
 	char	*msgt;
 	int		status;
@@ -44,7 +43,8 @@ int	return_error(const char *msg, int errms, int errbash)
 	g_exit_status = errms;
 	if (errbash)
 	{
-		g_exit_status = errno;
+		if (!errms)
+			g_exit_status = errno;
 		perror(msg);
 	}
 	else

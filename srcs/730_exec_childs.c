@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:11:17 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/10 23:45:05 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/11 01:56:07 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	ex_child_n(t_script *s, char **path, int *pipein, int i)
 	else if (pipe_std_setter(pipein, STDIN_FILENO) == -1)
 	{
 		pipe_closer(pipein, NULL);
-		exit_forks("pipe_std_setter", 1, s, path);
+		exit_forks("pipe setter failed to set stdou/stdin", 1, s, path);
 	}
 	if (s->cmds[i].out.name)
 		out_redir(s, i, path);
