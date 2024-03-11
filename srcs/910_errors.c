@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 22:37:00 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/02 01:13:53 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/10 23:52:35 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 /// @return			SUCCESS
 int	export_error(const char *msg, int errms)
 {
-	// show_func(__func__, MY_START, NULL);
+	show_func(__func__, MY_START, NULL);
 
 	char	*msgr;
 	char	*msgt;
@@ -38,7 +38,7 @@ int	export_error(const char *msg, int errms)
 /// @return			SUCCESS
 int	return_error(const char *msg, int errms, int errbash)
 {
-	// show_func(__func__, MY_START, NULL);
+	show_func(__func__, MY_START, NULL);
 	if (!errbash)
 		ft_putstr_fd("Minishell: ", 2);
 	g_exit_status = errms;
@@ -49,20 +49,6 @@ int	return_error(const char *msg, int errms, int errbash)
 	}
 	else
 		ft_putendl_fd(msg, 2);
-	//show_func(__func__, SUCCESS, NULL);
+	show_func(__func__, SUCCESS, NULL);
 	return (1);
 }
-// void ft_strswap(char **s1, char **s2)
-// {
-// 	char	*tmp;
-
-// 	if (!s1 || !s2)
-// 		return ;
-// 	tmp = *s1;
-// 	*s1 = *s2;
-// 	*s2 = tmp;
-// }
-
-
-
-

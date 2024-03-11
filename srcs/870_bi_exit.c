@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 00:10:23 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/09 12:13:06 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/10 23:47:19 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 /// @return			SUCSESS or ERROR
 int	ft_is_str_digit(char *str)
 {
+	show_func(__func__, MY_START, NULL);
 	int	i;
 
 	i = 0;
@@ -35,6 +36,7 @@ int	ft_is_str_digit(char *str)
 /// @return			SUCCESS
 int	exit_error_args(const char *msg, int system)
 {
+	show_func(__func__, MY_START, NULL);
 	ft_putstr_fd("exit\n", 2);
 	ft_putstr_fd("Minishell: exit: ", 2);
 	ft_putstr_fd(msg, 2);
@@ -49,6 +51,7 @@ int	exit_error_args(const char *msg, int system)
 /// @param sys 	System error
 void	exit_go(t_script *s, char *arg, char *msg, int sys)
 {
+	show_func(__func__, MY_START, NULL);
 	ft_putstr_fd("exit\n", 2);
 	if (sys > 0 && (arg || msg))
 	{
@@ -70,6 +73,7 @@ void	exit_go(t_script *s, char *arg, char *msg, int sys)
 /// @return			exit status or ERROR
 int	bi_exit(t_script *s, int n)
 {
+	show_func(__func__, MY_START, NULL);
 	char	*trim;
 
 	trim = NULL;

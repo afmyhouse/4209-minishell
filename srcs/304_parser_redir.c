@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:28:14 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/07 23:00:36 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/10 23:50:03 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 /// @param tk 	pointert o command struct hed
 void	fnames_clear(t_command *cmds, int max, t_token *tk)
 {
+	show_func(__func__, MY_START, NULL);
 	int	i;
 
 	(void)tk;

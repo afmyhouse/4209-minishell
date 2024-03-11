@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:26:48 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/08 00:06:58 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/10 23:22:01 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ int	free_commands(t_command *cmd, int cmd_idx)
 		if (cmd[i].in.heredoc)
 			ft_lstclear(&cmd[i].in.heredoc, free);
 	}
-	free(cmd);
+	if (cmd)
+		free(cmd);
 	return (1);
 }
 

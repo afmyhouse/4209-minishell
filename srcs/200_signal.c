@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:38:24 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/08 18:01:46 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/10 23:49:17 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 /// @param		No parameter required
 void	signal_setter(void)
 {
+	show_func(__func__, MY_START, NULL);
 	signal(SIGINT, sig_handler);
 	signal(SIGQUIT, SIG_IGN);
 }
@@ -26,6 +27,7 @@ void	signal_setter(void)
 /// @return			void
 void	sig_handler(int signum)
 {
+	show_func(__func__, MY_START, NULL);
 	if (signum == SIGINT)
 	{
 		rl_replace_line("", 0);
@@ -42,6 +44,7 @@ void	sig_handler(int signum)
 /// @return			void
 void	sig_handler_fork(int signum)
 {
+	show_func(__func__, MY_START, NULL);
 	if (signum == SIGQUIT)
 	{
 		write(1, "Quit: 3\n", 8);
@@ -61,6 +64,7 @@ void	sig_handler_fork(int signum)
 /// @return			void
 void	sig_handler_heredoc(int signum)
 {
+	show_func(__func__, MY_START, NULL);
 	if (signum == SIGINT)
 		exit(130);
 }

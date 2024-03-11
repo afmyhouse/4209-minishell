@@ -6,13 +6,12 @@
 #    By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/24 21:23:27 by antoda-s          #+#    #+#              #
-#    Updated: 2024/03/10 19:21:57 by antoda-s         ###   ########.fr        #
+#    Updated: 2024/03/10 23:54:35 by antoda-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # name
 NAME 		= minishell
-NAMET 		= test
 
 # libs and includes
 LIBFT 		= libft.a
@@ -26,9 +25,6 @@ INCLUDES 	= ./include/
 # sources and objects dirs
 SRCDIR 	= srcs/
 OBJDIR 	= build/
-
-SRCDIRT 	= s-tester/
-OBJDIRT 	= builder/
 
 # sources and objects base project
 # FILES	=	main.c 				# Top level function
@@ -76,21 +72,14 @@ FILES	+=	900_free.c
 FILES	+=	910_errors.c
 FILES	+=	999_debug.c
 
-TEST	=	test.c
-TEST	+=	test1.c
-TEST	+=	test2.c
-
 SRC = $(addprefix $(SRCDIR), $(FILES))
 OBJ = $(addprefix $(OBJDIR), $(FILES:.c=.o))
 
-SRCT = $(addprefix $(SRCDIRT), $(TEST))
-OBJT = $(addprefix $(OBJDIRT), $(TEST:.c=.o))
-
 #compilation
 CC 			= cc
-#CF 			= -Wall -Wextra -Werror -g
-#CF 			= -Wall -Wextra -Werror -g -fsanitize=address
-CF 			= -Wall -Wextra -Werror -g -fsanitize=leak
+CF 			= -Wall -Wextra -Werror -g
+CFA 			= -Wall -Wextra -Werror -g -fsanitize=address
+CFL 			= -Wall -Wextra -Werror -g -fsanitize=leak
 I_HEADER	= -I include
 I_LIBFT 	= -I libft
 LNK_LIBFT 	= -L $(LFT_PATH) -lft
@@ -132,7 +121,7 @@ all: $(LIBFT) $(OBJ) $(NAME)
 $(NAME):
 	@printf "\n$(_SUCCESS) $(GRN)$(NAME) objects ready!                $(WTH)\n"
 	@printf "\n$(_INFO) $(CYN)Generating $(NAME) executable...$(WTH)\n"
-	$(CC) $(CF) $(OBJ) $(LNK_LIBFT) $(LNK_READLINE) -o $@
+	$(CC) $(CFL) $(OBJ) $(LNK_LIBFT) $(LNK_READLINE) -o $@
 	@printf "$(GRN)█$(WHT)"
 
 mkbuilddir:

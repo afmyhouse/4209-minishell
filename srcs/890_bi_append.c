@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 00:14:30 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/07 23:28:43 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/10 23:47:38 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 /// @param i 		Index of argument to be checked
 void	bi_append_new(t_script *s, int n, int i)
 {
+	show_func(__func__, MY_START, NULL);
 	char	*var;
 	char	*valn;
 	char	*valo;
@@ -42,6 +43,7 @@ void	bi_append_new(t_script *s, int n, int i)
 /// @return 		SUCCESS or ERROR
 int	bi_append(t_script *s, int n, int i)
 {
+	show_func(__func__, MY_START, NULL);
 	if (!s->envp || !s->cmds[n].argv[0])
 		return (ERROR);
 	while (s->cmds[n].argv[i])

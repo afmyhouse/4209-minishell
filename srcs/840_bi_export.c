@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 23:46:39 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/08 18:24:57 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/10 23:46:32 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 /// @return		SUCCESS or ERROR
 int	var_name_check(char *var)
 {
+	show_func(__func__, MY_START, NULL);
 	int	i;
 
 	i = 0;
@@ -39,6 +40,7 @@ int	var_name_check(char *var)
 /// @param i 	Index of argument to be checked
 void	bi_export_upd_var(t_script *s, int n, int i)
 {
+	show_func(__func__, MY_START, NULL);
 	char	*val;
 	char	*var;
 
@@ -60,6 +62,7 @@ void	bi_export_upd_var(t_script *s, int n, int i)
 /// @param i 	Index of argument to be checked
 void	bi_export_new_var(t_script *s, int n, int i)
 {
+	show_func(__func__, MY_START, NULL);
 	char	*val;
 	char	*var;
 	int		j;
@@ -86,6 +89,7 @@ void	bi_export_new_var(t_script *s, int n, int i)
 /// @return 		SUCCESS or ERROR
 int	bi_export(t_script *s, int n)
 {
+	show_func(__func__, MY_START, NULL);
 	int	i;
 
 	if (!s->envp || !s->cmds[n].argv[1] || !s->cmds[n].argv[1][0])

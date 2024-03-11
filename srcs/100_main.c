@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:27:05 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/07 23:56:45 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/10 23:49:00 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	g_exit_status;
 /// @return 	array copy of system environment variables
 char	**envp_init(char **envp)
 {
+	show_func(__func__, MY_START, NULL);
 	char	**ms_envp;
 	int		i;
 
@@ -49,10 +50,11 @@ char	**envp_init(char **envp)
 /// @param s 	struct with pparams to initialize
 void	struct_init(t_script *s)
 {
-		s->cmd_count = 0;
-		s->exit_status = 0;
-		s->fd[0] = STDIN_FILENO;
-		s->fd[1] = STDOUT_FILENO;
+	show_func(__func__, MY_START, NULL);
+	s->cmd_count = 0;
+	s->exit_status = 0;
+	s->fd[0] = STDIN_FILENO;
+	s->fd[1] = STDOUT_FILENO;
 }
 
 /// @brief 				Initializes the shell and keeps looping until exit
@@ -60,6 +62,7 @@ void	struct_init(t_script *s)
 /// @return				void
 int	ms_loop(t_script *s)
 {
+	show_func(__func__, MY_START, NULL);
 	int		status;
 	char	*line_buffer;
 
@@ -94,6 +97,7 @@ int	ms_loop(t_script *s)
 /// @return
 int	main(int argc, char **argv, char **envp)
 {
+	show_func(__func__, MY_START, NULL);
 	t_script	s;
 
 	(void)argc;

@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:11:17 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/10 19:21:19 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/10 23:45:11 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 /// @param i 		Index of the command to execute
 void	exec_go(t_script *s, char **path, int id, int i)
 {
+	show_func(__func__, MY_START, NULL);
 	char		*tmp;
 	char		*msg;
 	struct stat	buf;

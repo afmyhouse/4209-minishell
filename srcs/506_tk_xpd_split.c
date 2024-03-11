@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 19:00:01 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/07 23:48:54 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/10 23:51:36 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 ///				alloced string with identifier name
 char	*tk_var_xpd_dolar(char *otk, int *i)
 {
+	show_func(__func__, MY_START, NULL);
 	int		j;
 	char	*res;
 
@@ -45,6 +46,7 @@ char	*tk_var_xpd_dolar(char *otk, int *i)
 ///				alloced string with identifier name
 void	tk_var_xpd_dquote(char *otk, char ***ntks, int *spl, int *i)
 {
+	show_func(__func__, MY_START, NULL);
 	int	j;
 	int	xpd;
 
@@ -82,6 +84,7 @@ void	tk_var_xpd_dquote(char *otk, char ***ntks, int *spl, int *i)
 ///				alloced string with identifier name
 void	tk_var_xpd_squote(char *otk, char ***ntks, int *spl, int *i)
 {
+	show_func(__func__, MY_START, NULL);
 	int	j;
 
 	j = *i;
@@ -101,6 +104,7 @@ void	tk_var_xpd_squote(char *otk, char ***ntks, int *spl, int *i)
 ///				alloced string with identifier name
 void	tk_var_xpd_else(char *otk, char ***ntks, int *spl, int *i)
 {
+	show_func(__func__, MY_START, NULL);
 	int	j;
 
 	j = *i;

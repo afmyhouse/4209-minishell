@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 19:00:01 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/07 23:58:29 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/10 23:51:58 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 /// @return			Updated environment variables
 char	**env_del_one(char *del, char **envx, int j)
 {
+	show_func(__func__, MY_START, NULL);
 	char	**new_array;
 	char	*tmp;
 	int		i;
@@ -54,6 +55,7 @@ char	**env_del_one(char *del, char **envx, int j)
 /// @return			Updated environment variables
 char	**env_add_one(char **envx, char *new)
 {
+	show_func(__func__, MY_START, NULL);
 	char	**new_array;
 	int		i;
 
@@ -82,6 +84,7 @@ char	**env_add_one(char **envx, char *new)
 /// @return			Index of the variable
 int	env_var_index_getter(char *var, char **envx)
 {
+	show_func(__func__, MY_START, NULL);
 	int	i;
 
 	if (!envx)
@@ -104,6 +107,7 @@ int	env_var_index_getter(char *var, char **envx)
 /// @return 			0 if success, -1 if error
 int	env_var_setter(char *val, char *var, char ***envx)
 {
+	show_func(__func__, MY_START, NULL);
 	int		i;
 	char	*var_new;
 

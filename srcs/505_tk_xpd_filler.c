@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 19:00:01 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/07 23:06:02 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/10 23:51:23 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 /// @return 		pointer to the newly created array
 char	*tk_xpd_var_filler(char *ntk, t_script *s)
 {
+	show_func(__func__, MY_START, NULL);
 	int		i;
 	char	*tmp;
 
@@ -50,6 +51,7 @@ char	*tk_xpd_var_filler(char *ntk, t_script *s)
 /// @return 	pointer to the newly created array
 char	*tk_xpd_filler(char ***ntks, t_script *s)
 {
+	show_func(__func__, MY_START, NULL);
 	int		i;
 	char	*tmp;
 	char	*tmp2;

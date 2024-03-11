@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:28:14 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/10 19:11:01 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/11 00:04:49 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 /// @return 			1
 int	back_to_loop(t_command *cmds, int cmd_count, t_token **tk)
 {
+	show_func(__func__, MY_START, NULL);
 	free_commands(cmds, cmd_count);
 	free_tokens(tk);
 	return (1);
@@ -35,6 +36,7 @@ int	back_to_loop(t_command *cmds, int cmd_count, t_token **tk)
 /// @return		0 if success, 1 if failure
 int	parse_commands(t_token *tk, t_command *cmd, int i, int j)
 {
+	show_func(__func__, MY_START, NULL);
 	while (tk)
 	{
 		cmd[i].argv = ft_calloc((cmd[i].argc + 1), sizeof(char *));
@@ -68,12 +70,13 @@ int	parse_commands(t_token *tk, t_command *cmd, int i, int j)
 /// @return
 int	parser(t_script *s, char **line_buffer)
 {
+	show_func(__func__, MY_START, NULL);
 	t_token	*tk;
 
 	tk = NULL;
 	*line_buffer = readline("\001\033[1;94m\002Minishell > \001\033[0m\002");
 	if (!*line_buffer)
-		exit_go(s, NULL, NULL, 0);
+		*line_buffer = ft_strdup("exit");
 	add_history(*line_buffer);
 	if (tk_builder(line_buffer, &tk, s) == ERROR)
 		return (free_tokens(&tk));

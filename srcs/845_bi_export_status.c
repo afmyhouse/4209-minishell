@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 23:46:39 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/08 00:03:21 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/10 23:46:42 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 /// @param str 	Variable to be printed
 void	export_print(char *str)
 {
+	show_func(__func__, MY_START, NULL);
 	char	*s1;
 	char	*s2;
 
@@ -44,6 +45,7 @@ void	export_print(char *str)
 /// @return 	Ordered array
 char	**ordered_array(char **d, char t, int n, int j)
 {
+	show_func(__func__, MY_START, NULL);
 	int	i;
 	int	len_i;
 	int	len_j;
@@ -72,6 +74,7 @@ char	**ordered_array(char **d, char t, int n, int j)
 /// @return 	SUCCESS or ERROR
 int	export_status(t_script *s, int n)
 {
+	show_func(__func__, MY_START, NULL);
 	int		i;
 	char	**order;
 

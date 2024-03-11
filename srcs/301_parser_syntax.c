@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:28:14 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/07 22:59:38 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/10 23:49:50 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 /// @return				Error message string
 int	syntax_error_msg(char *tk_content, int errms, int errsys)
 {
+	show_func(__func__, MY_START, NULL);
 	char	*msgr;
 	char	*msgt;
 	int		status;
@@ -38,6 +39,7 @@ int	syntax_error_msg(char *tk_content, int errms, int errsys)
 /// @return		0 if success, 1 if failure
 int	syntax_checker(t_token *tk)
 {
+	show_func(__func__, MY_START, NULL);
 	if (tk && tk->type == TK_PIPE)
 		return (syntax_error_msg(tk->content, 2, 0));
 	while (tk)
