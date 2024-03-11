@@ -6,12 +6,14 @@
 #    By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/24 21:23:27 by antoda-s          #+#    #+#              #
-#    Updated: 2024/03/10 23:54:35 by antoda-s         ###   ########.fr        #
+#    Updated: 2024/03/11 00:47:44 by antoda-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # name
 NAME 		= minishell
+NAME_A 		= minishell
+NAME_L 		= minishell
 
 # libs and includes
 LIBFT 		= libft.a
@@ -133,25 +135,23 @@ $(OBJDIR)%.o: $(SRCDIR)%.c | mkbuilddir
 	$(CC) $(CF) -c $(I_LIBFT) $(I_HEADER) $< -o $@
 	@printf "$(YLW)█$(WHT)"
 
+sana: $(LIBFT) $(OBJ) $(NAME_A)
+	@printf "\n$(_SUCCESS) $(GRN)$(NAME) executable ready!$(WTH)\n\n"
 
-
-test: $(LIBFT) $(OBJT) $(NAMET)
-
-$(NAMET):
-	@printf "\n$(GRN)$(NAMET) objects ready!$(WTH)\n\n"
-	@printf "\n$(CYN)Generating $(NAMET) executable...$(WTH)\n"
-	@$(CC) $(CF) $(OBJT) $(LNK_LIBFT) $(LNK_READLINE) -o $@
+$(NAME_A):
+	@printf "\n$(_SUCCESS) $(GRN)$(NAME) objects ready!                $(WTH)\n"
+	@printf "\n$(_INFO) $(CYN)Generating $(NAME) address sanitizer executable...$(WTH)\n"
+	$(CC) $(CFA) $(OBJ) $(LNK_LIBFT) $(LNK_READLINE) -o $@
 	@printf "$(GRN)█$(WHT)"
-	@printf "\n$(GRN)$(NAMET) ready!$(WTH)\n\n"
 
+sanl: $(LIBFT) $(OBJ) $(NAME_L)
+	@printf "\n$(_SUCCESS) $(GRN)$(NAME) executable ready!$(WTH)\n\n"
 
-buildt:
-	@mkdir -p $(OBJDIRT)
-	@printf "\n$(CYN)Compiling test files...$(WTH)\n"
-
-$(OBJDIRT)%.o: $(SRCDIRT)%.c | buildt
-	@$(CC) $(CF) -c $(I_LIBFT) $(I_HEADER) $< -o $@
-	@printf "$(YLW)█$(WHT)"
+$(NAME_L):
+	@printf "\n$(_SUCCESS) $(GRN)$(NAME) objects ready!                $(WTH)\n"
+	@printf "\n$(_INFO) $(CYN)Generating $(NAME) leak sanitizer executable...$(WTH)\n"
+	$(CC) $(CFL) $(OBJ) $(LNK_LIBFT) $(LNK_READLINE) -o $@
+	@printf "$(GRN)█$(WHT)"
 
 $(LIBFT):
 	@printf "\n$(_INFO) $(CYN)Generating Libft...$(WTH)\n"
@@ -159,6 +159,10 @@ $(LIBFT):
 #	@printf "$(_INFO) $(GRN)Libft created!$(WTH)\n\n"
 
 re: fclean all
+
+rea: fclean sana
+
+rel: fclean sanl
 
 # rebonus: fclean bonus
 
