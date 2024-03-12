@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:28:14 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/12 01:33:24 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/12 17:32:09 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,19 @@ int	syntax_error_msg(char *tk_content, int errms, int errsys)
 int	syntax_checker(t_token *tk)
 {
 	show_func(__func__, MY_START, NULL);
-	if (tk && tk->type == TK_PIPE && !tk->next)
+	if (tk && tk->type == TK_PIPE)
 		return (syntax_error_msg(tk->content, 2, 0));
 	while (tk)
 	{
-		if (!tk->next && (tk->type == TK_PIPE))
+		if (!tk->next && (tk->type == TK_PIPE || tk->type == TK_OR))
 			return (syntax_error_msg(tk->content, 2, 0));
 
 		if (!tk->next && (tk->type == TK_I || tk->type == TK_O))
 			return (syntax_error_msg("newline", 2, 0));
 
-		if (tk->type == TK_PIPE && tk->next
-			&& tk->next->type == TK_PIPE)
-			return (syntax_error_msg("||", 2, 0));
+		// if (tk->type == TK_PIPE && tk->next
+		// 	&& tk->next->type == TK_PIPE)
+		// 	return (syntax_error_msg("|", 2, 0));
 
 		if ((tk->type == TK_O || tk->type == TK_I)
 			&& (tk->next && tk->next->type != TK_NAME))

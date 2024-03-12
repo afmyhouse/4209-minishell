@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:28:14 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/12 01:51:24 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/12 16:59:50 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ void	fnames_clear(t_command *cmds, int max, t_token *tk)
 	return ;
 }
 
+int	redir_error(char *name)
+{
+	ft_putstr_fd("Minishell: ", STDERR_FILENO);
+	return (return_error(name, 1, 1));
+}
 /// @brief 			This function sets the open flags and opens the files
 ///					based on the type of redirection token it encounters
 ///					('<', '<<', '>', '>>').
@@ -53,7 +58,8 @@ int	redir(t_token *tk, t_redirection *file)
 		file->flag = (O_CREAT | O_APPEND | O_RDWR);
 	else if (!ft_strncmp(tk->content, "<<", 2))
 		fill_heredoc(file);
-	else if (!ft_strncmp(tk->content, ">", 1) || !ft_strncmp(tk->content, ">|", 2))
+	else if (!ft_strncmp(tk->content, ">", 1)
+	|| !ft_strncmp(tk->content, ">|", 2))
 		file->flag = (O_CREAT | O_TRUNC | O_RDWR);
 	else if (!ft_strncmp(tk->content, "<", 1))
 		file->flag = O_RDONLY;
@@ -61,7 +67,7 @@ int	redir(t_token *tk, t_redirection *file)
 		return (SUCCESS);
 	ret = open(file->name, file->flag, 0644);
 	if (ret == -1)
-		return (return_error(file->name, 1, 1));
+		return (redir_error(file->name));
 	close(ret);
 	return (SUCCESS);
 }
