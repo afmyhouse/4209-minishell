@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:28:06 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/09 12:13:43 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/12 00:42:37 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,19 @@ extern int	g_exit_status;
 /// @brief 				Enum to hold the token types
 /// @param TK_WS		Empty token
 /// @param TK_PIPE	Pipe token
-/// @param TK_R_IN	Redirection input token
-/// @param TK_R_OUT	Redirection output token
+/// @param TK_I	Redirection input token
+/// @param TK_O	Redirection output token
 /// @param TK_NAME	Name token
 typedef enum e_token_type
 {
-	TK_WS,
+	TK_I,
+	TK_O,
 	TK_PIPE,
-	TK_R_IN,
-	TK_R_OUT,
 	TK_NAME,
 	TK_EQUAL,
 	TK_OR,
-	TK_AND
+	TK_AND,
+	TK_WS,
 }			t_token_type;
 
 typedef enum e_cmd_type

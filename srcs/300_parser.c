@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:28:14 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/11 00:04:49 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/12 00:42:05 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ int	parse_commands(t_token *tk, t_command *cmd, int i, int j)
 		{
 			if (tk->type == TK_NAME)
 				cmd[i].argv[j++] = ft_strdup(tk->content);
-			else if (tk->type == TK_R_IN && redir(tk, &cmd[i].in))
+			else if (tk->type == TK_I && redir(tk, &cmd[i].in))
 				return (free_commands(cmd, i + 1));
-			else if (tk->type == TK_R_OUT && redir(tk, &cmd[i].out))
+			else if (tk->type == TK_O && redir(tk, &cmd[i].out))
 				return (free_commands(cmd, i + 1));
-			if (tk->type == TK_R_IN || tk->type == TK_R_OUT)
+			if (tk->type == TK_I || tk->type == TK_O)
 				tk = tk->next;
 			if (tk)
 				tk = tk->next;

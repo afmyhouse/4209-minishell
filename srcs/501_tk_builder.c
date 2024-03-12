@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 19:10:37 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/10 23:50:27 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/12 01:27:43 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ t_ops	tk_type_getter(const char *s)
 	show_func(__func__, MY_START, NULL);
 	t_ops		blank;
 	int			i;
-	const t_ops	ops[14] = {{">>", 2, TK_R_OUT}, {"<<", 2, TK_R_IN},
-	{"|", 1, TK_PIPE}, {">", 1, TK_R_OUT}, {"<", 1, TK_R_IN},
+	const t_ops	ops[16] = {{">>", 2, TK_O}, {"<<", 2, TK_I}, {">|", 2, TK_O},
+	{"<>", 2, TK_O},{">", 1, TK_O}, {"<", 1, TK_I},
 	{" ", 1, TK_WS}, {"\n", 1, TK_WS}, {"\v", 1, TK_WS},
 	{"\t", 1, TK_WS}, {"\r", 1, TK_WS}, {"\f", 1, TK_WS},
-	{"||", 2, TK_OR}, {"&&", 2, TK_AND}, {NULL, 1, 0}};
+	{"||", 2, TK_OR}, {"&&", 2, TK_AND}, {"|", 1, TK_PIPE}, {NULL, 1, 0}};
 
 	blank = (t_ops){0, 0, 0};
 	i = -1;
