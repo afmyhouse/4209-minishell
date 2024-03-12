@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:43:00 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/11 00:00:20 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/12 00:13:37 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	bi_echo(t_script *s, int n)
 	{
 		ft_putstr_fd(s->cmds[n].argv[i], STDOUT_FILENO);
 		i++;
-		if (s->cmds[n].argv[i] && s->cmds[n].argv[i - 1][0] != '\0')
+		if (i < (s->cmds[n].argc))
 			write (STDOUT_FILENO, " ", 1);
 	}
 	ft_putchar_fd(term, STDOUT_FILENO);
