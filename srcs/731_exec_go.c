@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:11:17 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/12 00:16:49 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/12 00:26:00 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,14 @@ void	exec_go(t_script *s, char **path, int id, int i)
 			return ;
 		stat(s->cmds[i].argv[0], &buf);
 		exec_ve(path, s->cmds[i].argv, s->envp);
-		// if (S_ISDIR(buf.st_mode))
 		if (S_ISDIR(buf.st_mode) && s->cmds[i].argv[0][0] == '.')
 			errno = EISDIR;
-		// if (ft_strchr(s->cmds[i].argv[0], '/') != NULL)
-		// 	exec_ve_err_127(s, path, i);
 		if (ft_strchr(s->cmds[i].argv[0], '/') != NULL
 			|| (errno == ENOENT && !path))
 			exec_ve_err(s, path, i);
 		else if (errno != ENOENT)
 			perror(s->cmds[i].argv[0]);
 		else
-		// {
-		// 	ft_putstr_fd(s->cmds[i].argv[0], 2);
-		// 	ft_putendl_fd(": command not found", 2);
-		// }
 			ft_printf("%s: command not found\n", s->cmds[i].argv[0]);
 		free_cmds_path(s, path);
 		exit(127);
