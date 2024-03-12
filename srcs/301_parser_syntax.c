@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:28:14 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/12 17:32:09 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/12 18:34:38 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,22 +46,19 @@ int	syntax_checker(t_token *tk)
 	{
 		if (!tk->next && (tk->type == TK_PIPE || tk->type == TK_OR))
 			return (syntax_error_msg(tk->content, 2, 0));
-
 		if (!tk->next && (tk->type == TK_I || tk->type == TK_O))
 			return (syntax_error_msg("newline", 2, 0));
-
-		// if (tk->type == TK_PIPE && tk->next
-		// 	&& tk->next->type == TK_PIPE)
-		// 	return (syntax_error_msg("|", 2, 0));
-
+		if (tk->next && ((tk->type == TK_PIPE && tk->next->type == TK_PIPE)
+				|| (tk->type == TK_PIPE && tk->next->type == TK_OR)
+				|| (tk->type == TK_OR && tk->next->type == TK_OR)
+				|| (tk->type == TK_OR && tk->next->type == TK_PIPE)))
+			return (syntax_error_msg(tk->next->content, 2, 0));
 		if ((tk->type == TK_O || tk->type == TK_I)
 			&& (tk->next && tk->next->type != TK_NAME))
 			return (syntax_error_msg(tk->next->content, 2, 0));
-
 		if ((tk->type == TK_O || tk->type == TK_I)
 			&& (tk->next && (!ft_strncmp(tk->next->content, "&", 1))))
 			return (syntax_error_msg("newline", 2, 0));
-
 		tk = tk->next;
 	}
 	return (SUCCESS);

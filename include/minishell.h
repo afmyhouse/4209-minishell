@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:28:06 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/12 00:42:37 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/12 18:17:47 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -744,6 +744,10 @@ int		exec_one_fork(t_script *s, char **path);
 /// @param path 	Commands execution path
 /// @return 		SUCCESS or ERROR
 int		exec_one(t_script *s, char **path);
+
+int	exec_or(t_script *s, char **path);
+
+int	exec_and(t_script *s, char **path);
 
 /* ************************************************************************** */
 ///	720exec_many.c
