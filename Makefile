@@ -6,14 +6,14 @@
 #    By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/24 21:23:27 by antoda-s          #+#    #+#              #
-#    Updated: 2024/03/13 16:52:07 by antoda-s         ###   ########.fr        #
+#    Updated: 2024/03/13 17:04:33 by antoda-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # name
 NAME 		= minishell
-NAME_A 		= minishell
-NAME_L 		= minishell
+NAME_A 		= minishell_a
+NAME_L 		= minishell_l
 
 # libs and includes
 LIBFT 		= libft.a
