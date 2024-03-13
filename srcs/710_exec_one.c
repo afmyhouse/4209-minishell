@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:25:54 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/12 18:23:52 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/13 21:35:28 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,13 @@ int	exec_one_fork(t_script *s, char **path)
 	int	pid;
 	int	status;
 
-	if (s->cmds[0].in.flag == -1)
-		signal(SIGQUIT, SIG_IGN);
-	else
-		signal(SIGQUIT, sig_handler_fork);
-	signal(SIGINT, sig_handler_fork);
+	signal_setter_loop();
+
+	// if (s->cmds[0].in.flag == -1)
+	// 	signal(SIGQUIT, SIG_IGN);
+	// else
+	// 	signal(SIGQUIT, sig_handler_fork);
+	// signal(SIGINT, sig_handler_fork);
 	pid = fork();
 	if (pid == -1)
 		return (return_error("", errno, 1));

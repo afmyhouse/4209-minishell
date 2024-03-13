@@ -6,14 +6,14 @@
 #    By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/24 21:23:27 by antoda-s          #+#    #+#              #
-#    Updated: 2024/03/11 00:47:44 by antoda-s         ###   ########.fr        #
+#    Updated: 2024/03/13 21:55:04 by antoda-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # name
 NAME 		= minishell
-NAME_A 		= minishell
-NAME_L 		= minishell
+NAME_A 		= minishell_a
+NAME_L 		= minishell_l
 
 # libs and includes
 LIBFT 		= libft.a
@@ -123,7 +123,7 @@ all: $(LIBFT) $(OBJ) $(NAME)
 $(NAME):
 	@printf "\n$(_SUCCESS) $(GRN)$(NAME) objects ready!                $(WTH)\n"
 	@printf "\n$(_INFO) $(CYN)Generating $(NAME) executable...$(WTH)\n"
-	$(CC) $(CFL) $(OBJ) $(LNK_LIBFT) $(LNK_READLINE) -o $@
+	$(CC) $(CF) $(OBJ) $(LNK_LIBFT) $(LNK_READLINE) -o $@
 	@printf "$(GRN)█$(WHT)"
 
 mkbuilddir:

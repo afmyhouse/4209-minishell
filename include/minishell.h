@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:28:06 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/12 18:17:47 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/13 22:06:44 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ typedef struct s_script
 	int				exit_status;
 	char			**envp;
 	char			**envt;
+	//char			**path;
 	struct termios	termios_p;
 	int				fd[2];
 }				t_script;
@@ -225,6 +226,10 @@ int		main(int argc, char **argv, char **envp);
 /// @attention 	Error encountered while testing setter
 /// @param		No parameter required
 void	signal_setter(void);
+
+/// @brief		Signal processing functions setter for loop
+/// @param		No parameter required
+void	signal_setter_loop(void);
 
 /// @brief 			Handles signal SIGINT (Ctrl+C) and SIGQUIT (Ctrl+\)
 ///					Instead of exiting, the sig handler provides a new line

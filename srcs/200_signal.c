@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:38:24 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/10 23:49:17 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/13 22:01:36 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,15 @@ void	signal_setter(void)
 	show_func(__func__, MY_START, NULL);
 	signal(SIGINT, sig_handler);
 	signal(SIGQUIT, SIG_IGN);
+}
+
+/// @brief		Signal processing functions setter for loop
+/// @param		No parameter required
+void	signal_setter_loop(void)
+{
+	show_func(__func__, MY_START, NULL);
+	signal(SIGINT, sig_handler_fork);
+	signal(SIGQUIT, sig_handler_fork);
 }
 
 /// @brief 			Handles signal SIGINT (Ctrl+C) and SIGQUIT (Ctrl+\)
@@ -47,14 +56,18 @@ void	sig_handler_fork(int signum)
 	show_func(__func__, MY_START, NULL);
 	if (signum == SIGQUIT)
 	{
-		write(1, "Quit: 3\n", 8);
+		//write(1, "Quit: (core dumped)\n", 20);
+		g_exit_status = 131;
 		rl_on_new_line();
-		write(1, "\r", 1);
+		g_exit_status = 131;
+		//write(1, "\r", 1);
 	}
 	else if (signum == SIGINT)
 	{
 		write(1, "\n", 1);
+		// g_exit_status = 130;
 		rl_on_new_line();
+		g_exit_status = 130;
 	}
 }
 

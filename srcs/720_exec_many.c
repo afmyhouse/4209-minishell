@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:26:05 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/12 18:33:15 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/13 21:58:15 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,8 @@ int	exec_many(t_script *s, char **path)
 	int	pipe2[2];
 	int	cmd;
 
-	signal(SIGINT, sig_handler_fork);
+	signal_setter_loop();
+	// signal(SIGINT, sig_handler_fork);
 	if (exec_cmd_1(s, path, pipe1) == 1)
 		return (ERROR);
 	cmd = exec_cmd_loop(s, path, pipe1, pipe2);
