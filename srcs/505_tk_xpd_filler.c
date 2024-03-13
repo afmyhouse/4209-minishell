@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 19:00:01 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/10 23:51:23 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/13 16:42:05 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,10 @@ char	*tk_xpd_filler(char ***ntks, t_script *s)
 			(*ntks)[i] = tk_xpd_var_filler(tmp2, s);
 			if (!(*ntks)[i])
 				(*ntks)[i] = ft_strdup("");
-		}
-		else
+		}/*******
+		else if ((*ntks)[i][0] == '~' && !(*ntks)[i][1])
+			(*ntks)[i] = env_var_getter("HOME", s->envp, s->envt);
+		else********/
 			(*ntks)[i] = tk_xpd_unquote(tmp2);
 		tmp = ft_strjoin_free(tmp, (*ntks)[i]);
 	}
