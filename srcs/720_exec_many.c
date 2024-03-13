@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:26:05 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/12 18:33:15 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:00:34 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,5 +157,6 @@ int	exec_many(t_script *s, char **path)
 	wait(&g_exit_status);
 	if (WIFSIGNALED(g_exit_status))
 		g_exit_status = WIFEXITED(g_exit_status);
+		// g_exit_status = 128 + WTERMSIG(g_exit_status);
 	return (SUCCESS);
 }

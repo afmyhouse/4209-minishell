@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:28:14 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/12 18:34:59 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/12 00:42:05 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	args_counter(t_token *tk, t_script *s)
 		s->cmds[i].argc = 0;
 		tmp = tk;
 		while (tk && tk->type != TK_PIPE)
-		// while (tk && (tk->type != TK_PIPE && tk->type != TK_OR))
 		{
 			if (tk->type == TK_NAME && (tmp->type != TK_I
 					&& tmp->type != TK_O))

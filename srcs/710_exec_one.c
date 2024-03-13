@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:25:54 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/12 18:23:52 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/11 16:15:24 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,13 @@ int	exec_one(t_script *s, char **path)
 	id = CMD_EX;
 	if (s->cmds[0].argv[0])
 		id = exec_type(s->cmds[0].argv[0]);
+	// if (id == CMD_EXIT)
+	// {
+	// 	free_array(path, 0);
+	// 	if (exec_bi(id, s, 0))
+	// 		return (ERROR);
+	// }
+	// else
 	if (id == CMD_EQ)
 		id = bi_equal_check(s, 0, 0);
 	if (id == CMD_CD || (id == CMD_UNSET && s->cmds[0].argv[1])
@@ -66,36 +73,4 @@ int	exec_one(t_script *s, char **path)
 		return (free_array(path, ERROR));
 	bi_env_upd(s, 0);
 	return (free_array(path, SUCCESS));
-}
-
-int	exec_or(t_script *s, char **path)
-{
-	int	n;
-
-	n = 0;
-	printf("%s%s : n= %d : s->cmd_count = %d : g_exit_status = %d%s\n",
-		SBHRED, __func__, n, s->cmd_count, g_exit_status, SRST);
-	while (n < s->cmd_count)
-	{
-		if (!exec_one(s, path))
-			break ;
-		n++;
-		printf("%s%s : n= %d : s->cmd_count = %d : g_exit_status = %d%s\n",
-			SBHRED, __func__, n, s->cmd_count, g_exit_status, SRST);
-	}
-	return (SUCCESS);
-}
-
-int	exec_and(t_script *s, char **path)
-{
-	int	n;
-
-	n = 0;
-	while (n < s->cmd_count)
-	{
-		if (exec_one(s, path))
-			break ;
-		n++;
-	}
-	return (SUCCESS);
 }
