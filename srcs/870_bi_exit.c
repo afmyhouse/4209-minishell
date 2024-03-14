@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 00:10:23 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/14 01:00:59 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/14 15:00:13 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,15 +88,15 @@ int	bi_exit(t_script *s, int n)
 	char	*trim;
 
 	trim = NULL;
-	ft_putstr_fd("n = ", 2);
-	ft_putnbr_fd(n, 2);
-	ft_putstr_fd("\n", 2);
+	// ft_putstr_fd("n = ", 2);
+	// ft_putnbr_fd(n, 2);
+	// ft_putstr_fd("\n", 2);
 	if (n > 0)
 	{
-		ft_putstr_fd("", STDOUT_FILENO);
+		// ft_putstr_fd("", STDOUT_FILENO);
 		return (SUCCESS);
 	}
-	ft_putstr_fd("exited in loop crossed here !!!\n", 2);
+	// ft_putstr_fd("exited in loop crossed here !!!\n", 2);
 		// return (exit_loop(s));
 	// env_var_setter("minishell", "_", &s->envp);
 	if (s->cmds[n].argc == 1)

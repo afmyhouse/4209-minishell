@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:11:17 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/14 01:15:39 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/14 15:32:18 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,7 @@ void	ex_child_1(t_script *s, char **path, int *pipeout)
 	if (s->cmds[0].argv[0])
 		exec_go(s, s->path, exec_type(s->cmds[0].argv[0]), 0);
 	free_exit(s, 0);
-	// free_cmds_path(s, s->path);
-	// free_array(s->envt, 0);
-	// free_array(s->envp, 0);
-	exit(0);
+	exit(SUCCESS);
 }
 
 /// @brief 			Executes the command in the middle of a pipe
@@ -68,14 +65,8 @@ void	ex_child_i(t_script *s, char **path, int **pipes, int i)
 	pipe_closer(pipes[0], pipes[1]);
 	if (s->cmds[i].argv[0])
 		exec_go(s, s->path, exec_type(s->cmds[i].argv[0]), i);
-	show_func(__func__, SHOW_MSG, ft_strdup(s->cmds[i].argv[0]));
-
+	free (pipes);
 	free_exit(s, 0);
-	// free_cmds_path(s, s->path);
-	// free_array(s->envt, 0);
-	// free_array(s->envp, 0);
-	show_func(__func__, SHOW_MSG, ft_strdup("Exiting"));
-	// show_func(__func__, SHOW_MSG, ft_strdup(s->cmds[i].argv[0]));
 	exit(SUCCESS);
 }
 
@@ -101,8 +92,5 @@ void	ex_child_n(t_script *s, char **path, int *pipein, int i)
 	if (s->cmds[i].argv[0])
 		exec_go(s, s->path, exec_type(s->cmds[i].argv[0]), i);
 	free_exit(s, 0);
-	// free_cmds_path(s, s->path);
-	// free_array(s->envt, 0);
-	// free_array(s->envp, 0);
 	exit(0);
 }
