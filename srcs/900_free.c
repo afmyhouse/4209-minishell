@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:26:48 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/13 23:11:55 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:22:48 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int	free_exit(t_script *s, int errms)
 	free_array(s->path, 0);
 	free_array(s->envt, 0);
 	free_array(s->envp, 0);
+	free (s->home);
 	return (errms);
 }
 

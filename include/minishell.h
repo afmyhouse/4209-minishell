@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:28:06 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/13 23:12:40 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/14 15:58:52 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,7 @@ typedef struct s_script
 	char			**envp;
 	char			**envt;
 	char			**path;
+	char			*home;
 	struct termios	termios_p;
 	int				fd[2];
 }				t_script;
