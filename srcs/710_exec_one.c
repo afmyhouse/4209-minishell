@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:25:54 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/13 21:35:28 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/13 22:37:39 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,13 @@ int	exec_one_fork(t_script *s, char **path)
 	int	pid;
 	int	status;
 
+	(void) path;
 	signal_setter_loop();
-
-	// if (s->cmds[0].in.flag == -1)
-	// 	signal(SIGQUIT, SIG_IGN);
-	// else
-	// 	signal(SIGQUIT, sig_handler_fork);
-	// signal(SIGINT, sig_handler_fork);
 	pid = fork();
 	if (pid == -1)
 		return (return_error("", errno, 1));
 	if (pid == 0)
-		ex_child_1(s, path, NULL);
+		ex_child_1(s, s->path, NULL);
 	wait(&status);
 	if (WIFEXITED(status))
 		g_exit_status = WEXITSTATUS(status);
@@ -52,6 +47,7 @@ int	exec_one(t_script *s, char **path)
 	show_func(__func__, MY_START, NULL);
 	int	id;
 
+	(void) path;
 	id = CMD_EX;
 	if (s->cmds[0].argv[0])
 		id = exec_type(s->cmds[0].argv[0]);
@@ -62,12 +58,12 @@ int	exec_one(t_script *s, char **path)
 		|| id == CMD_EQ)
 	{
 		if (exec_bi(id, s, 0))
-			return (free_array(path, ERROR));
+			return (free_array(s->path, ERROR));
 	}
-	else if (exec_one_fork(s, path))
-		return (free_array(path, ERROR));
+	else if (exec_one_fork(s, s->path))
+		return (free_array(s->path, ERROR));
 	bi_env_upd(s, 0);
-	return (free_array(path, SUCCESS));
+	return (free_array(s->path, SUCCESS));
 }
 
 int	exec_or(t_script *s, char **path)

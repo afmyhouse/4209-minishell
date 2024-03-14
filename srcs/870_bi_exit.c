@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 00:10:23 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/13 22:05:43 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/14 01:00:59 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	exit_error_args(const char *msg, int system)
 void	exit_go(t_script *s, char *arg, char *msg, int sys)
 {
 	show_func(__func__, MY_START, NULL);
-	ft_putstr_fd("exit\n", 2);
+	ft_putstr_fd("exit\n", 1);
 	if (sys > 0 && (arg || msg))
 	{
 		ft_putstr_fd("Minishell: exit: ", 2);
@@ -65,7 +65,18 @@ void	exit_go(t_script *s, char *arg, char *msg, int sys)
 	free_commands(s->cmds, s->cmd_count);
 	free_array(s->envp, 0);
 	free_array(s->envt, 0);
+	free_array(s->path, 0);
 	exit(sys);
+}
+int exit_loop(t_script *s)
+{
+	show_func(__func__, MY_START, NULL);
+	ft_putstr_fd("", 2);
+	free_commands(s->cmds, s->cmd_count);
+	free_array(s->envp, 0);
+	free_array(s->envt, 0);
+	free_array(s->path, 0);
+	return (0);
 }
 
 /// @brief 			Builtin exit command limited to 9223372036854775807
@@ -77,7 +88,17 @@ int	bi_exit(t_script *s, int n)
 	char	*trim;
 
 	trim = NULL;
-	env_var_setter("minishell", "_", &s->envp);
+	ft_putstr_fd("n = ", 2);
+	ft_putnbr_fd(n, 2);
+	ft_putstr_fd("\n", 2);
+	if (n > 0)
+	{
+		ft_putstr_fd("", STDOUT_FILENO);
+		return (SUCCESS);
+	}
+	ft_putstr_fd("exited in loop crossed here !!!\n", 2);
+		// return (exit_loop(s));
+	// env_var_setter("minishell", "_", &s->envp);
 	if (s->cmds[n].argc == 1)
 		exit_go(s, NULL, NULL, 0);
 	else if (s->cmds[n].argc > 2)

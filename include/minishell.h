@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:28:06 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/13 22:06:44 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/13 23:12:40 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ typedef struct s_script
 	int				exit_status;
 	char			**envp;
 	char			**envt;
-	//char			**path;
+	char			**path;
 	struct termios	termios_p;
 	int				fd[2];
 }				t_script;
@@ -1130,6 +1130,10 @@ int		free_tokens(t_token **head);
 /// @param cmd_idx 	quantity of nodes to clear and free
 /// @return 		SUCCESS or ERROR ?? needs coherence check
 int		free_commands(t_command *cmd, int cmd_idx);
+
+/// @brief 		Frees the path, envt, envp and the commands
+/// @param s 	Struct with pointer to be freed
+int		free_exit(t_script *s, int errms);
 
 /// @brief 			Frees the path and the commands
 /// @param script 	Script to be freed

@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:27:05 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/11 12:13:25 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/13 22:46:17 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ char	**envp_init(char **envp)
 void	struct_init(t_script *s)
 {
 	show_func(__func__, MY_START, NULL);
+	s->path = NULL;
 	s->cmd_count = 0;
 	s->exit_status = 0;
 	s->fd[0] = STDIN_FILENO;
@@ -97,7 +98,7 @@ int	ms_loop(t_script *s)
 /// @return
 int	main(int argc, char **argv, char **envp)
 {
-	ft_printf("%s%s\n", SBHRED, __func__, SRST);
+	//ft_printf("%s%s\n", SBHRED, __func__, SRST);
 	t_script	s;
 
 	(void)argc;

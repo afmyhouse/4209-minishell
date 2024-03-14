@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:26:48 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/10 23:22:01 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/13 23:11:55 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,17 @@ int	free_commands(t_command *cmd, int cmd_idx)
 	if (cmd)
 		free(cmd);
 	return (1);
+}
+
+/// @brief 		Frees the path, envt, envp and the commands
+/// @param s 	Struct with pointer to be freed
+int	free_exit(t_script *s, int errms)
+{
+	free_commands(s->cmds, s->cmd_count);
+	free_array(s->path, 0);
+	free_array(s->envt, 0);
+	free_array(s->envp, 0);
+	return (errms);
 }
 
 /// @brief 			Frees the path and the commands

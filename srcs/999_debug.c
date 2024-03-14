@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:29:02 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/11 09:46:13 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/13 22:45:26 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	show_func_msg(const char *msg)
 	if (DEBUG_ALL)
 	{
 		if (!msg)
-			write(STDERR_FILENO, "\n", 2);
+			write(STDERR_FILENO, "\n", 1);
 		else
 		{
 			write(STDERR_FILENO, "-> ", 3);
@@ -139,6 +139,7 @@ int show_func(const char *func_name, int status, char *msg)
 		}
 		// printf("\n");
 	}
+	ft_free(msg);
 	return (status);
 }
 

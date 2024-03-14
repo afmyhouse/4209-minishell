@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   710_exec_one.c                                     :+:      :+:    :+:   */
+/*   715_exec_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:25:54 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/12 18:23:52 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/13 22:20:37 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,12 @@ int	exec_one(t_script *s, char **path)
 		|| id == CMD_EQ)
 	{
 		if (exec_bi(id, s, 0))
-			return (free_array(path, ERROR));
+			return (free_array(s->path, ERROR));
 	}
-	else if (exec_one_fork(s, path))
-		return (free_array(path, ERROR));
+	else if (exec_one_fork(s, s->path))
+		return (free_array(s->path, ERROR));
 	bi_env_upd(s, 0);
-	return (free_array(path, SUCCESS));
+	return (free_array(s->path, SUCCESS));
 }
 
 int	exec_or(t_script *s, char **path)

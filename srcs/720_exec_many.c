@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:26:05 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/13 21:58:15 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/14 01:18:30 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,20 @@ int	exec_cmd_1(t_script *s, char **path, int *pipeout)
 	show_func(__func__, MY_START, NULL);
 	int	pid;
 
+	(void) path;
 	if (pipe(pipeout) == -1)
 	{
-		free (path);
+		free (s->path);
 		return (return_error("", errno, 1));
 	}
 	pid = fork();
 	if (pid == -1)
 	{
-		free (path);
+		free (s->path);
 		return (return_error("", errno, 1));
 	}
 	if (pid == 0)
-		ex_child_1(s, path, pipeout);
+		ex_child_1(s, s->path, pipeout);
 	close(pipeout[1]);
 	return (SUCCESS);
 }
@@ -50,19 +51,22 @@ int	exec_cmd_i(t_script *s, char **path, int **pipes, int i)
 	show_func(__func__, MY_START, NULL);
 	int	pid;
 
+	(void) path;
 	if (!pipes)
 		return (return_error("", errno, 1));
 	pid = fork();
 	if (pid == -1)
 	{
-		free(path);
+		free(s->path);
 		return (return_error("", errno, 1));
 	}
 	if (pid == 0)
-		ex_child_i(s, path, pipes, i);
+		ex_child_i(s, s->path, pipes, i);
+	show_func(__func__, SHOW_MSG, ft_strdup("Closing pipes"));
 	close(pipes[0][0]);
 	close(pipes[1][1]);
 	free(pipes);
+	show_func(__func__, SHOW_MSG, ft_strdup("Closed pipes"));
 	return (SUCCESS);
 }
 
@@ -78,17 +82,18 @@ int	exec_cmd_n(t_script *s, char **path, int *pipein)
 	int	i;
 	int	pid;
 
+	(void) path;
 	i = s->cmd_count - 1;
 	pid = fork();
 	if (pid == -1)
 	{
-		free (path);
+		free (s->path);
 		return (return_error("", errno, 1));
 	}
 	if (pid == 0)
-		ex_child_n(s, path, pipein, i);
+		ex_child_n(s, s->path, pipein, i);
 	pipe_closer(pipein, NULL);
-	return (free_array(path, SUCCESS));
+	return (free_array(s->path, SUCCESS));
 }
 
 /// @brief 			Selects the pipe for each inbetween command "i" and calls
@@ -105,20 +110,21 @@ int	exec_cmd_loop(t_script *s, char **path, int *pipe1, int *pipe2)
 	int	cmd_idx;
 	int	**pipes;
 
+	(void) path;
 	i = 0;
 	cmd_idx = 0;
 	while (++i < s->cmd_count - 1)
 	{
 		if (cmd_idx % 2 == 0)
 		{
-			pipes = pipe_init(path, pipe1, pipe2);
-			if (exec_cmd_i(s, path, pipes, i) == 1)
+			pipes = pipe_init(s->path, pipe1, pipe2);
+			if (exec_cmd_i(s, s->path, pipes, i) == 1)
 				return (-1);
 		}
 		else
 		{
-			pipes = pipe_init(path, pipe2, pipe1);
-			if (exec_cmd_i(s, path, pipes, i) == 1)
+			pipes = pipe_init(s->path, pipe2, pipe1);
+			if (exec_cmd_i(s, s->path, pipes, i) == 1)
 				return (-1);
 		}
 		cmd_idx++;
@@ -141,16 +147,17 @@ int	exec_many(t_script *s, char **path)
 	int	pipe2[2];
 	int	cmd;
 
+	(void) path;
 	signal_setter_loop();
 	// signal(SIGINT, sig_handler_fork);
-	if (exec_cmd_1(s, path, pipe1) == 1)
+	if (exec_cmd_1(s, s->path, pipe1) == 1)
 		return (ERROR);
-	cmd = exec_cmd_loop(s, path, pipe1, pipe2);
+	cmd = exec_cmd_loop(s, s->path, pipe1, pipe2);
 	if (cmd == -1)
 		return (ERROR);
-	if (cmd % 2 == 1 && exec_cmd_n(s, path, pipe2) == 1)
+	if (cmd % 2 == 1 && exec_cmd_n(s, s->path, pipe2) == 1)
 		return (1);
-	else if (cmd % 2 == 0 && exec_cmd_n(s, path, pipe1) == 1)
+	else if (cmd % 2 == 0 && exec_cmd_n(s, s->path, pipe1) == 1)
 		return (ERROR);
 	wait(&g_exit_status);
 	while (cmd-- > 0)
