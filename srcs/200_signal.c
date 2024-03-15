@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:38:24 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/13 22:09:41 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/14 18:36:08 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ void	sig_handler_fork(int signum)
 	show_func(__func__, MY_START, NULL);
 	if (signum == SIGQUIT)
 	{
-		//write(1, "Quit: (core dumped)\n", 20);
+		write(1, "Quit\n", 5);
 		//g_exit_status = 131;
 		rl_on_new_line();
 		g_exit_status = 131;
-		//write(1, "\r", 1);
+		write(1, "\r", 1);
 	}
 	else if (signum == SIGINT)
 	{

@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 00:26:42 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/13 22:18:48 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/14 18:37:50 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,9 @@ int	execute(t_script *s)
 	// char	**path;
 	show_func(__func__, MY_START, NULL);
 
+	/**********************/
 	execute_show(s);
+	/**********************/
 	s->path = split_path(s->envp);
 	if (s->cmd_count == 1)
 	{

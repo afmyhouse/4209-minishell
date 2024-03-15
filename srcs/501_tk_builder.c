@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 19:10:37 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/14 17:27:58 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/14 18:26:20 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,13 +121,11 @@ int	tk_builder(char **line, t_token **tk, t_script *s)
 	tk_ptr = *tk;
 	while (tk_ptr)
 	{
-		printf("tk_ptr->content = '%s'\n", tk_ptr->content);
 		content = tk_ptr->content;
-		if (content[0] == '~' && ft_strlen(content) == 1)
+		if (content[0] == '~' && ft_strlen(content) == 1 && s->home)
 			tk_ptr->content = ft_strdup(s->home);
 		else
 			tk_ptr->content = tk_env_var_expander(content, s);
-
 		ft_free(content);
 		tk_ptr = tk_ptr->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 23:44:19 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/14 16:25:10 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/14 18:12:23 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,26 +56,14 @@ int	bi_cd(t_script *s, int n)
 	{
 		home = env_var_getter("HOME", s->envp, NULL);
 		if (home == NULL)
-		{
-			//free(home);
 			return (return_error("cd: HOME not set", 1, 0));
-		}
 		status = change_dir(home, &s->envp);
 		free(home);
 		return (status);
 	}
-	// if (s->cmds[n].argv[1][0] == '~' && ft_strlen(s->cmds[n].argv[1]) == 1)
-	// {
-	// 	ft_putstr_fd(s->home, 2);
-	// 	return (change_dir(s->home, &s->envp));
-	// }
 	if (s->cmds[n].argc > 2)
 		return (return_error("cd: too many arguments", 1, 0));
 	if (s->cmds[n].argv[1][0] == '\0')
-	{
 		return (change_dir(".", &s->envp));
-		//return (status);
-	}
 	return (change_dir(s->cmds[n].argv[1], &s->envp));
-	//return (status);
 }
