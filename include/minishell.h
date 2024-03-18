@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:28:06 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/12 00:42:37 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/18 23:10:26 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,10 @@ typedef struct s_script
 	int				exit_status;
 	char			**envp;
 	char			**envt;
+	char			**path;
+	char			*home;
 	struct termios	termios_p;
+	int				mshlvl;
 	int				fd[2];
 }				t_script;
 
@@ -220,11 +223,22 @@ int		main(int argc, char **argv, char **envp);
 /* ************************************************************************** */
 ///	200_signal.c
 /* ************************************************************************** */
-
 /// @brief 		Signal processing functions
 /// @attention 	Error encountered while testing setter
 /// @param		No parameter required
 void	signal_setter(void);
+
+void 	signal_selector(t_script *s);
+void	sig_handler_parent(int signum);
+
+/// @brief 		Signal processing functions
+/// @attention 	Error encountered while testing setter
+/// @param		No parameter required
+void	signal_setter_parent(void);
+
+/// @brief		Signal processing functions setter for loop
+/// @param		No parameter required
+void	signal_setter_fork(void);
 
 /// @brief 			Handles signal SIGINT (Ctrl+C) and SIGQUIT (Ctrl+\)
 ///					Instead of exiting, the sig handler provides a new line
@@ -745,6 +759,10 @@ int		exec_one_fork(t_script *s, char **path);
 /// @return 		SUCCESS or ERROR
 int		exec_one(t_script *s, char **path);
 
+int	exec_or(t_script *s, char **path);
+
+int	exec_and(t_script *s, char **path);
+
 /* ************************************************************************** */
 ///	720exec_many.c
 /* ************************************************************************** */
@@ -797,21 +815,22 @@ int		exec_many(t_script *s, char **path);
 /// @param s 		Script contents and parameters including redirect info
 /// @param path 	Commands execution path
 /// @param pipeout	Pointer to the pipe to output result
-void	ex_child_1(t_script *s, char **path, int *pipeout);
+void	ex_child_1(t_script *s, int *pipeout);
 
 /// @brief 			Executes the command in the middle of a pipe
 /// @param s 		Script contents and parameters including redirect info
 /// @param path 	Commands execution path
 /// @param pipes 	Pointer to the pipes, IN and OUT
 /// @param i 		Index of the command to execute
-void	ex_child_i(t_script *s, char **path, int **pipes, int i);
+void	ex_child_i(t_script *s, int **pipes, int i);
 
 /// @brief 			Executes the last command in a pipe
 /// @param s 		Script contents and parameters including redirect info
 /// @param path 	Commands execution path
 /// @param pipein 	Pointer to the pipe
 /// @param i
-void	ex_child_n(t_script *s, char **path, int *pipein, int i);
+// void	ex_child_n(t_script *s, char **path, int *pipein, int i);
+void	ex_child_n(t_script *s, int *pipein, int i);
 
 /// @brief 			Executes the command (execeve or bi )
 /// @param s 		Script contents and parameters including redirect info
@@ -1122,6 +1141,10 @@ int		free_tokens(t_token **head);
 /// @return 		SUCCESS or ERROR ?? needs coherence check
 int		free_commands(t_command *cmd, int cmd_idx);
 
+/// @brief 		Frees the path, envt, envp and the commands
+/// @param s 	Struct with pointer to be freed
+int		free_exit(t_script *s, int errms);
+
 /// @brief 			Frees the path and the commands
 /// @param script 	Script to be freed
 /// @param path 	Path to be freed
@@ -1143,6 +1166,12 @@ void	exit_forks(char *msg, int errms, t_script *s, char **path);
 /// @param system	Shows system error if true
 /// @return			SUCCESS
 int		export_error(const char *msg, int system);
+
+/// @brief 			Shows error and program sourcing it
+/// @param msg		Message to show
+/// @param system	Shows system error if true
+/// @return			SUCCESS
+int	flags_error(const char *msg, char *flags, int errms);
 
 /// @brief 			Shows error and program sourcing it
 /// @param msg		Message to show

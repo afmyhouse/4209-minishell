@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:25:54 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/10 23:44:38 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/13 23:26:37 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,15 @@ void	exec_ve_path(char **path, char **cmd, char **env)
 	ret = -1;
 	while (ret == -1 && path[i])
 	{
-		free(tmp);
+		ft_free(tmp);
 		tmp = ft_strjoin(path[i], *cmd);
 		if (!tmp)
 			break ;
 		ret = execve(tmp, cmd, env);
 		i++;
 	}
-	if (tmp)
-		free(tmp);
+	// if (tmp)
+	ft_free(tmp);
 }
 
 /// @brief 			Executes a command using the absolute path or the PATH
@@ -49,8 +49,6 @@ void	exec_ve_path(char **path, char **cmd, char **env)
 void	exec_ve(char **path, char **cmd, char **env)
 {
 	show_func(__func__, MY_START, NULL);
-	// char	*msg;
-
 	if (*cmd[0] == '.' || *cmd[0] == '/')
 	{
 		exec_ve_abs(cmd, env);
@@ -59,10 +57,5 @@ void	exec_ve(char **path, char **cmd, char **env)
 	if (path)
 		exec_ve_path(path, cmd, env);
 	else
-	{
 		return ;
-		// msg = ft_strjoin(*cmd, ": command1 not found");
-		// return_error(msg, 127, 0);
-		// free(msg);
-	}
 }

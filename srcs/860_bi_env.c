@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 00:09:56 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/10 23:46:52 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/18 09:28:24 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,14 @@ int	bi_env(t_script *s, int n)
 {
 	show_func(__func__, MY_START, NULL);
 	int	count;
+	int	i;
 
 	env_var_setter("env", "_", &s->envp);
 	(void)n;
+	i = 0;
+	while (s->cmds[n].argv[++i])
+		if (s->cmds[n].argv[i][0] == '-')
+			return (flags_error(s->cmds[n].argv[0], s->cmds[n].argv[i], 0));
 	count = 0;
 	while (s->envp[count] != NULL)
 	{

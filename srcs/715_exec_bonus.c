@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   710_exec_one.c                                     :+:      :+:    :+:   */
+/*   715_exec_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:25:54 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/18 23:04:13 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/18 22:01:55 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@ int	exec_one_fork(t_script *s, char **path)
 {
 	show_func(__func__, MY_START, NULL);
 	int	pid;
-	// int	status;
+	int	status;
 
-	(void) path;
 	if (s->cmds[0].in.flag == -1)
 		signal(SIGQUIT, SIG_IGN);
 	else
@@ -32,17 +31,11 @@ int	exec_one_fork(t_script *s, char **path)
 	if (pid == -1)
 		return (return_error("", errno, 1));
 	if (pid == 0)
-	{
-		signal_setter_fork();
+		// ex_child_1(s, s->path, NULL);
 		ex_child_1(s, NULL);
-	}
-	wait(&g_exit_status);
-	if (WIFSIGNALED(g_exit_status))
-		g_exit_status = 128 + WTERMSIG(g_exit_status);
-	// wait(&status);
-	// // signal_setter();
-	// if (WIFEXITED(status))
-	// 	g_exit_status = WEXITSTATUS(status);
+	wait(&status);
+	if (WIFEXITED(status))
+		g_exit_status = WEXITSTATUS(status);
 	return (SUCCESS);
 }
 
@@ -58,7 +51,6 @@ int	exec_one(t_script *s, char **path)
 	show_func(__func__, MY_START, NULL);
 	int	id;
 
-	(void) path;
 	id = CMD_EX;
 	if (s->cmds[0].argv[0])
 		id = exec_type(s->cmds[0].argv[0]);

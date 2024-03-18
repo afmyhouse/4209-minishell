@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:11:17 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/12 00:26:00 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/13 23:55:25 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@ void	exec_ve_err(t_script *s, char **path, int i)
 {
 	char	*msg;
 
+	(void) path;
 	msg = ft_strjoin("Minishell: ", s->cmds[i].argv[0]);
 	return_error(msg, 127, 1);
-	free (msg);
-	free_cmds_path(s, path);
+	ft_free(msg);
+	free_exit(s, 0);
 	if (errno == 21)
 		exit (126);
 	exit(127);
@@ -35,22 +36,24 @@ void	exec_go(t_script *s, char **path, int id, int i)
 	show_func(__func__, MY_START, NULL);
 	struct stat	buf;
 
+	(void) path;
+	memset(&buf, 0, sizeof(struct stat));
 	if (id == CMD_EX)
 	{
 		if (!s->cmds[i].argv[0][0])
 			return ;
 		stat(s->cmds[i].argv[0], &buf);
-		exec_ve(path, s->cmds[i].argv, s->envp);
+		exec_ve(s->path, s->cmds[i].argv, s->envp);
 		if (S_ISDIR(buf.st_mode) && s->cmds[i].argv[0][0] == '.')
 			errno = EISDIR;
 		if (ft_strchr(s->cmds[i].argv[0], '/') != NULL
-			|| (errno == ENOENT && !path))
-			exec_ve_err(s, path, i);
+			|| (errno == ENOENT && !s->path))
+			exec_ve_err(s, s->path, i);
 		else if (errno != ENOENT)
 			perror(s->cmds[i].argv[0]);
 		else
 			ft_printf("%s: command not found\n", s->cmds[i].argv[0]);
-		free_cmds_path(s, path);
+		free_exit(s, 0);
 		exit(127);
 	}
 	else

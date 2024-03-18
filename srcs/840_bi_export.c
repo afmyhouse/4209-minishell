@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 23:46:39 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/10 23:46:32 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/18 09:29:52 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	bi_export_new_var(t_script *s, int n, int i)
 		env_var_setter(NULL, var, &s->envp);
 }
 
+
 /// @brief 			Export PERMANENT environment variables
 /// @param s 		Script structure with commans and args
 /// @param n 		Index of command to be executed
@@ -95,9 +96,15 @@ int	bi_export(t_script *s, int n)
 	if (!s->envp || !s->cmds[n].argv[1] || !s->cmds[n].argv[1][0])
 		return (export_status(s, n));
 	bi_append(s, n, 1);
-	i = 1;
-	while (s->cmds[n].argv[i])
+	i = 0;
+	while (s->cmds[n].argv[++i])
+		if (s->cmds[n].argv[i][0] == '-')
+			return (flags_error(s->cmds[n].argv[0], s->cmds[n].argv[i], 0));
+	i = 0;
+	while (s->cmds[n].argv[++i])
 	{
+		if (s->cmds[n].argv[i][0] == '-')
+			return (flags_error(s->cmds[n].argv[0], s->cmds[n].argv[i], 0));
 		if (var_name_check(s->cmds[n].argv[i]) == SUCCESS)
 		{
 			if (ft_strchr(s->cmds[n].argv[i], '='))
@@ -107,7 +114,6 @@ int	bi_export(t_script *s, int n)
 		}
 		else
 			return (export_error(s->cmds[n].argv[i], 1));
-		i++;
 	}
 	return (SUCCESS);
 }
