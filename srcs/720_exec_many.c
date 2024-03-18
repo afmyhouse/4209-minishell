@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:26:05 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/18 15:00:42 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/18 23:20:36 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int	exec_cmd_1(t_script *s, char **path, int *pipeout)
 		return (return_error("", errno, 1));
 	}
 	if (pid == 0)
-		ex_child_1(s, s->path, pipeout);
+		// ex_child_1(s, s->path, NULL);
+		ex_child_1(s, pipeout);
 	close(pipeout[1]);
 	return (SUCCESS);
 }
@@ -61,7 +62,8 @@ int	exec_cmd_i(t_script *s, char **path, int **pipes, int i)
 		return (return_error("", errno, 1));
 	}
 	if (pid == 0)
-		ex_child_i(s, s->path, pipes, i);
+		ex_child_i(s, pipes, i);
+		// ex_child_i(s, s->path, pipes, i);
 	show_func(__func__, SHOW_MSG, ft_strdup("Closing pipes"));
 	close(pipes[0][0]);
 	close(pipes[1][1]);
@@ -91,7 +93,7 @@ int	exec_cmd_n(t_script *s, char **path, int *pipein)
 		return (return_error("", errno, 1));
 	}
 	if (pid == 0)
-		ex_child_n(s, s->path, pipein, i);
+		ex_child_n(s, pipein, i);
 	pipe_closer(pipein, NULL);
 	return (free_array(s->path, SUCCESS));
 }
@@ -164,6 +166,7 @@ int	exec_many(t_script *s, char **path)
 		wait(&g_exit_status);
 	wait(&g_exit_status);
 	if (WIFSIGNALED(g_exit_status))
-		g_exit_status = WIFEXITED(g_exit_status);
+		g_exit_status = 128 + WTERMSIG(g_exit_status);
+		//g_exit_status = WIFEXITED(g_exit_status);
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:25:54 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/18 17:37:12 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/18 23:04:13 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,29 @@ int	exec_one_fork(t_script *s, char **path)
 {
 	show_func(__func__, MY_START, NULL);
 	int	pid;
-	int	status;
+	// int	status;
 
 	(void) path;
-	signal_setter_fork();
+	if (s->cmds[0].in.flag == -1)
+		signal(SIGQUIT, SIG_IGN);
+	else
+		signal(SIGQUIT, sig_handler_fork);
+	signal(SIGINT, sig_handler_fork);
 	pid = fork();
 	if (pid == -1)
 		return (return_error("", errno, 1));
-
 	if (pid == 0)
-		ex_child_1(s, s->path, NULL);
-	wait(&status);
-	if (WIFEXITED(status))
-		g_exit_status = WEXITSTATUS(status);
+	{
+		signal_setter_fork();
+		ex_child_1(s, NULL);
+	}
+	wait(&g_exit_status);
+	if (WIFSIGNALED(g_exit_status))
+		g_exit_status = 128 + WTERMSIG(g_exit_status);
+	// wait(&status);
+	// // signal_setter();
+	// if (WIFEXITED(status))
+	// 	g_exit_status = WEXITSTATUS(status);
 	return (SUCCESS);
 }
 

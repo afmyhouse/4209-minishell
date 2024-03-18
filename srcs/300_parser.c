@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:28:14 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/14 18:37:33 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/18 22:59:38 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	parser(t_script *s, char **line_buffer)
 	t_token	*tk;
 
 	tk = NULL;
-	*line_buffer = readline("\001\033[1;94m\002Minishell > \001\033[0m\002");
+	*line_buffer = readline("\001\033[1;94m\002minishell > \001\033[0m\002");
 	if (!*line_buffer)
 		*line_buffer = ft_strdup("exit");
 	add_history(*line_buffer);

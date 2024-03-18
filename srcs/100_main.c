@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:27:05 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/18 17:02:36 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/18 21:17:38 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	update_shlvl(t_script *s)
 	env_var_setter(new_shlvl, "MSHLVL", &s->envp);
 	ft_free(shlvl);
 	ft_free(new_shlvl);
-
 }
 
 /// @brief 		Creates array from system environment variables

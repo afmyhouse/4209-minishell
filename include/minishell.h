@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:28:06 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/18 16:51:21 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/18 23:10:26 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,7 +228,8 @@ int		main(int argc, char **argv, char **envp);
 /// @param		No parameter required
 void	signal_setter(void);
 
-void signal_selector(t_script *s);
+void 	signal_selector(t_script *s);
+void	sig_handler_parent(int signum);
 
 /// @brief 		Signal processing functions
 /// @attention 	Error encountered while testing setter
@@ -814,21 +815,22 @@ int		exec_many(t_script *s, char **path);
 /// @param s 		Script contents and parameters including redirect info
 /// @param path 	Commands execution path
 /// @param pipeout	Pointer to the pipe to output result
-void	ex_child_1(t_script *s, char **path, int *pipeout);
+void	ex_child_1(t_script *s, int *pipeout);
 
 /// @brief 			Executes the command in the middle of a pipe
 /// @param s 		Script contents and parameters including redirect info
 /// @param path 	Commands execution path
 /// @param pipes 	Pointer to the pipes, IN and OUT
 /// @param i 		Index of the command to execute
-void	ex_child_i(t_script *s, char **path, int **pipes, int i);
+void	ex_child_i(t_script *s, int **pipes, int i);
 
 /// @brief 			Executes the last command in a pipe
 /// @param s 		Script contents and parameters including redirect info
 /// @param path 	Commands execution path
 /// @param pipein 	Pointer to the pipe
 /// @param i
-void	ex_child_n(t_script *s, char **path, int *pipein, int i);
+// void	ex_child_n(t_script *s, char **path, int *pipein, int i);
+void	ex_child_n(t_script *s, int *pipein, int i);
 
 /// @brief 			Executes the command (execeve or bi )
 /// @param s 		Script contents and parameters including redirect info

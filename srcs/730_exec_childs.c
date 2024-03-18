@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:11:17 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/14 15:32:18 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/18 23:12:27 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,9 @@
 /// @param s 		Script contents and parameters including redirect info
 /// @param path 	Commands execution path
 /// @param pipeout	Pointer to the pipe to output result
-void	ex_child_1(t_script *s, char **path, int *pipeout)
+void	ex_child_1(t_script *s, int *pipeout)
 {
 	show_func(__func__, MY_START, NULL);
-	(void) path;
 	if (s->cmds[0].in.name)
 		in_redir(s, 0, s->path);
 	if (s->cmds[0].out.name)
@@ -44,10 +43,9 @@ void	ex_child_1(t_script *s, char **path, int *pipeout)
 /// @param path 	Commands execution path
 /// @param pipes 	Pointer to the pipes, IN and OUT
 /// @param i 		Index of the command to execute
-void	ex_child_i(t_script *s, char **path, int **pipes, int i)
+void	ex_child_i(t_script *s, int **pipes, int i)
 {
 	show_func(__func__, MY_START, NULL);
-	(void) path;
 	if (s->cmds[i].in.name)
 		in_redir(s, i, s->path);
 	else if (pipe_std_setter(pipes[0], STDIN_FILENO) == -1)
@@ -75,10 +73,10 @@ void	ex_child_i(t_script *s, char **path, int **pipes, int i)
 /// @param path 	Commands execution path
 /// @param pipein 	Pointer to the pipe
 /// @param i
-void	ex_child_n(t_script *s, char **path, int *pipein, int i)
+// void	ex_child_n(t_script *s, char **path, int *pipein, int i)
+void	ex_child_n(t_script *s, int *pipein, int i)
 {
 	show_func(__func__, MY_START, NULL);
-	(void) path;
 	if (s->cmds[i].in.name)
 		in_redir(s, i, s->path);
 	else if (pipe_std_setter(pipein, STDIN_FILENO) == -1)
