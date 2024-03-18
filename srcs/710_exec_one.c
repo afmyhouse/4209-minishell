@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:25:54 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/13 22:37:39 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/18 17:37:12 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@ int	exec_one_fork(t_script *s, char **path)
 	int	status;
 
 	(void) path;
-	signal_setter_loop();
+	signal_setter_fork();
 	pid = fork();
 	if (pid == -1)
 		return (return_error("", errno, 1));
+
 	if (pid == 0)
 		ex_child_1(s, s->path, NULL);
 	wait(&status);

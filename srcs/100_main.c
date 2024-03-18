@@ -6,13 +6,38 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:27:05 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/14 16:00:00 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/18 17:02:36 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int	g_exit_status;
+
+void	update_shlvl(t_script *s)
+{
+	char	*shlvl;
+	char	*new_shlvl;
+	int		i;
+
+	shlvl = env_var_getter("MSHLVL", s->envp, NULL);
+	if (!shlvl)
+	{
+		env_var_setter("1", "MSHLVL", &s->envp);
+		return ;
+	}
+	i = ft_atoi(shlvl);
+	new_shlvl = ft_itoa(i + 1);
+	if (!new_shlvl)
+	{
+		return_error("", errno, 1);
+		return ;
+	}
+	env_var_setter(new_shlvl, "MSHLVL", &s->envp);
+	ft_free(shlvl);
+	ft_free(new_shlvl);
+
+}
 
 /// @brief 		Creates array from system environment variables
 /// @param envp system environment variables from main (... char **envp)
@@ -98,12 +123,12 @@ int	ms_loop(t_script *s)
 /// @return
 int	main(int argc, char **argv, char **envp)
 {
-	//ft_printf("%s%s\n", SBHRED, __func__, SRST);
 	t_script	s;
 
 	(void)argc;
 	(void)argv;
 	s.envp = envp_init(envp);
+	update_shlvl(&s);
 	s.envt = ft_calloc(1, sizeof(char *));
 	if (!s.envt)
 	{

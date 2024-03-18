@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:28:06 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/18 09:27:55 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/18 16:51:21 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ typedef struct s_script
 	char			**path;
 	char			*home;
 	struct termios	termios_p;
+	int				mshlvl;
 	int				fd[2];
 }				t_script;
 
@@ -222,15 +223,21 @@ int		main(int argc, char **argv, char **envp);
 /* ************************************************************************** */
 ///	200_signal.c
 /* ************************************************************************** */
-
 /// @brief 		Signal processing functions
 /// @attention 	Error encountered while testing setter
 /// @param		No parameter required
 void	signal_setter(void);
 
+void signal_selector(t_script *s);
+
+/// @brief 		Signal processing functions
+/// @attention 	Error encountered while testing setter
+/// @param		No parameter required
+void	signal_setter_parent(void);
+
 /// @brief		Signal processing functions setter for loop
 /// @param		No parameter required
-void	signal_setter_loop(void);
+void	signal_setter_fork(void);
 
 /// @brief 			Handles signal SIGINT (Ctrl+C) and SIGQUIT (Ctrl+\)
 ///					Instead of exiting, the sig handler provides a new line
