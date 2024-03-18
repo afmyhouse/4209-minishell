@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:26:05 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/18 23:20:36 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/18 23:45:17 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	exec_cmd_1(t_script *s, char **path, int *pipeout)
 		return (return_error("", errno, 1));
 	}
 	if (pid == 0)
-		// ex_child_1(s, s->path, NULL);
 		ex_child_1(s, pipeout);
 	close(pipeout[1]);
 	return (SUCCESS);
@@ -63,12 +62,9 @@ int	exec_cmd_i(t_script *s, char **path, int **pipes, int i)
 	}
 	if (pid == 0)
 		ex_child_i(s, pipes, i);
-		// ex_child_i(s, s->path, pipes, i);
-	show_func(__func__, SHOW_MSG, ft_strdup("Closing pipes"));
 	close(pipes[0][0]);
 	close(pipes[1][1]);
 	free(pipes);
-	show_func(__func__, SHOW_MSG, ft_strdup("Closed pipes"));
 	return (SUCCESS);
 }
 
@@ -77,14 +73,13 @@ int	exec_cmd_i(t_script *s, char **path, int **pipes, int i)
 /// @param path 	Commands execution path
 /// @param pipein 	Pointer to the pipe with input data, resulted from previous
 /// @param pid 		NOTHING
-//void	exec_cmd_n(t_script *s, char **path, int *pipein, int pid)
-int	exec_cmd_n(t_script *s, char **path, int *pipein)
+int	exec_cmd_n(t_script *s, int *pipein)
 {
 	show_func(__func__, MY_START, NULL);
 	int	i;
 	int	pid;
 
-	(void) path;
+	//(void) path;
 	i = s->cmd_count - 1;
 	pid = fork();
 	if (pid == -1)
@@ -157,9 +152,9 @@ int	exec_many(t_script *s, char **path)
 	cmd = exec_cmd_loop(s, s->path, pipe1, pipe2);
 	if (cmd == -1)
 		return (ERROR);
-	if (cmd % 2 == 1 && exec_cmd_n(s, s->path, pipe2) == 1)
+	if (cmd % 2 == 1 && exec_cmd_n(s, pipe2) == 1)
 		return (1);
-	else if (cmd % 2 == 0 && exec_cmd_n(s, s->path, pipe1) == 1)
+	else if (cmd % 2 == 0 && exec_cmd_n(s, pipe1) == 1)
 		return (ERROR);
 	wait(&g_exit_status);
 	while (cmd-- > 0)

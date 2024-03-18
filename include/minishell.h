@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:28:06 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/18 23:10:26 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/18 23:43:03 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -787,7 +787,7 @@ int		exec_cmd_i(t_script *s, char **path, int **pipes, int i);
 /// @param pipein 	Pointer to the pipe with input data, resulted from previous
 /// @param pid 		NOTHING
 //void	exec_cmd_n(t_script *s, char **path, int *pipein, int pid)
-int		exec_cmd_n(t_script *s, char **path, int *pipein);
+int		exec_cmd_n(t_script *s, int *pipein);
 
 /// @brief 			Selects the pipe for each inbetween command "i" and calls
 /// 				the function to execute the command "i".
