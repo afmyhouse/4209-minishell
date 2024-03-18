@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:28:06 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/14 15:58:52 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/18 09:27:55 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1157,6 +1157,12 @@ void	exit_forks(char *msg, int errms, t_script *s, char **path);
 /// @param system	Shows system error if true
 /// @return			SUCCESS
 int		export_error(const char *msg, int system);
+
+/// @brief 			Shows error and program sourcing it
+/// @param msg		Message to show
+/// @param system	Shows system error if true
+/// @return			SUCCESS
+int	flags_error(const char *msg, char *flags, int errms);
 
 /// @brief 			Shows error and program sourcing it
 /// @param msg		Message to show

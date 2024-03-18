@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 23:46:53 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/10 23:46:47 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/18 09:28:55 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,12 @@ int	bi_unset(t_script *s, int n)
 	env_var_setter(s->cmds[n].argv[s->cmds[n].argc - 1], "_", &s->envp);
 	if (!s->envp || !s->cmds[n].argv[1])
 		return (ERROR);
-	i = 1;
-	while (s->cmds[n].argv[i])
+	i = 0;
+	while (s->cmds[n].argv[++i])
+		if (s->cmds[n].argv[i][0] == '-')
+			return (flags_error(s->cmds[n].argv[0], s->cmds[n].argv[i], 0));
+	i = 0;
+	while (s->cmds[n].argv[++i])
 	{
 		var = s->cmds[n].argv[i];
 		if (!ft_strchr(var, '='))
@@ -36,7 +40,7 @@ int	bi_unset(t_script *s, int n)
 			if (env_var_index_getter(var, s->envt) >= 0)
 				s->envt = env_del_one(var, s->envt, 0);
 		}
-		i++;
+		//i++;
 	}
 	return (SUCCESS);
 }
