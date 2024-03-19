@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 23:46:53 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/18 09:28:55 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 00:04:03 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 /// @return			Updated environment variables
 int	bi_unset(t_script *s, int n)
 {
-	show_func(__func__, MY_START, NULL);
 	int		i;
 	char	*var;
 

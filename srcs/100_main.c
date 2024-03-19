@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:27:05 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/18 21:17:38 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 00:04:03 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	update_shlvl(t_script *s)
 /// @return 	array copy of system environment variables
 char	**envp_init(char **envp)
 {
-	show_func(__func__, MY_START, NULL);
 	char	**ms_envp;
 	int		i;
 
@@ -74,7 +73,6 @@ char	**envp_init(char **envp)
 /// @param s 	struct with pparams to initialize
 void	struct_init(t_script *s)
 {
-	show_func(__func__, MY_START, NULL);
 	s->path = NULL;
 	s->cmd_count = 0;
 	s->exit_status = 0;
@@ -87,7 +85,6 @@ void	struct_init(t_script *s)
 /// @return				void
 int	ms_loop(t_script *s)
 {
-	show_func(__func__, MY_START, NULL);
 	int		status;
 	char	*line_buffer;
 

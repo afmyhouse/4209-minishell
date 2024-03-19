@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:38:24 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/18 23:03:26 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 00:04:03 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 /// @param		No parameter required
 // void	signal_setter_parent(void)
 // {
-// 	show_func(__func__, MY_START, NULL);
-// 	// signal(SIGINT, SIG_IGN);
+// // 	// signal(SIGINT, SIG_IGN);
 // 	// signal(SIGQUIT, SIG_IGN);
 // 	signal(SIGINT, sig_handler_parent);
 // 	signal(SIGQUIT, sig_handler_parent);
@@ -41,7 +40,6 @@
 /// @param		No parameter required
 void	signal_setter(void)
 {
-	show_func(__func__, MY_START, NULL);
 	// printf("%s : \n", __func__);
 	signal(SIGINT, sig_handler);
 	signal(SIGQUIT, SIG_IGN);
@@ -51,7 +49,6 @@ void	signal_setter(void)
 /// @param		No parameter required
 void	signal_setter_fork(void)
 {
-	show_func(__func__, MY_START, NULL);
 	// printf("%s : \n", __func__);
 	signal(SIGINT, sig_handler_fork);
 	signal(SIGQUIT, sig_handler_fork);
@@ -63,7 +60,6 @@ void	signal_setter_fork(void)
 /// @return			void
 void	sig_handler(int signum)
 {
-	show_func(__func__, MY_START, NULL);
 	// printf("%s : pid = %d\n", __func__, getpid());
 	if (signum == SIGINT)
 	{
@@ -82,7 +78,6 @@ void	sig_handler(int signum)
 /// @return			void
 void	sig_handler_fork(int signum)
 {
-	show_func(__func__, MY_START, NULL);
 	// printf("%s : pid = %d\n", __func__, getpid());
 	if (signum == SIGQUIT)
 	{
@@ -106,8 +101,7 @@ void	sig_handler_fork(int signum)
 
 // void	sig_handler_parent(int signum)
 // {
-// 	show_func(__func__, MY_START, NULL);
-// 	// printf("%s : pid = %d\n", __func__, getpid());
+// // 	// printf("%s : pid = %d\n", __func__, getpid());
 // 	if (signum == SIGQUIT)
 // 	{
 // 		write(1, "Quit\n", 5);
@@ -133,7 +127,6 @@ void	sig_handler_fork(int signum)
 /// @return			void
 void	sig_handler_heredoc(int signum)
 {
-	show_func(__func__, MY_START, NULL);
 	if (signum == SIGINT)
 		exit(130);
 }

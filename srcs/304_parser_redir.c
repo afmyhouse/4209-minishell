@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:28:14 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/12 16:59:50 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 00:06:07 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 /// @param tk 	pointert o command struct hed
 void	fnames_clear(t_command *cmds, int max, t_token *tk)
 {
-	show_func(__func__, MY_START, NULL);
 	int	i;
 
 	(void)tk;
@@ -36,7 +35,7 @@ void	fnames_clear(t_command *cmds, int max, t_token *tk)
 
 int	redir_error(char *name)
 {
-	ft_putstr_fd("Minishell: ", STDERR_FILENO);
+	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	return (return_error(name, 1, 1));
 }
 /// @brief 			This function sets the open flags and opens the files

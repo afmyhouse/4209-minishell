@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:28:14 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/10 23:50:07 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 00:04:03 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 /// @param file	Struct linked list node
 void	fill_heredoc(t_redirection *file)
 {
-	show_func(__func__, MY_START, NULL);
 	t_list	*tmp;
 
 	tmp = ft_lstnew(ft_strdup(file->name));

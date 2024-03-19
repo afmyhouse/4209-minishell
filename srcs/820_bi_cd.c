@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 23:44:19 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/14 18:12:23 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 00:06:56 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 /// @return 		SUCCESS or ERROR
 int	change_dir(char *path, char ***envp)
 {
-	show_func(__func__, MY_START, NULL);
 	int		ret;
 	char	*pwd;
 
@@ -28,7 +27,7 @@ int	change_dir(char *path, char ***envp)
 	if (ret == -1)
 	{
 		ft_free(pwd);
-		pwd = ft_strjoin("Minishell: cd: ", path);
+		pwd = ft_strjoin("minishell: cd: ", path);
 		return_error(pwd, 1, 1);
 		ft_free(pwd);
 		return (ERROR);
@@ -47,7 +46,6 @@ int	change_dir(char *path, char ***envp)
 /// @return			SUCCESS or ERROR
 int	bi_cd(t_script *s, int n)
 {
-	show_func(__func__, MY_START, NULL);
 	char	*home;
 	int		status;
 

@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 19:10:37 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/10 23:51:47 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 00:04:03 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 /// @return		ERROR (unclosed), SUCCES (closed)
 int	tk_quotes_checker(char **str)
 {
-	show_func(__func__, MY_START, NULL);
 	char	*tmp;
 
 	tmp = *str;
@@ -47,7 +46,6 @@ int	tk_quotes_checker(char **str)
 /// @return		A new unquoted string
 char	*tk_xpd_unquote(char *str)
 {
-	show_func(__func__, MY_START, NULL);
 	char	*ret;
 	int		len;
 
@@ -73,7 +71,6 @@ char	*tk_xpd_unquote(char *str)
 /// @return			NOTHING
 void	tk_trim_spaces(t_token *tk)
 {
-	show_func(__func__, MY_START, NULL);
 	char	*tmp;
 
 	while (tk)

@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 00:26:42 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/14 18:37:50 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 00:04:03 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static int	get_path_index(char **envp)
 {
-	show_func(__func__, MY_START, NULL);
 	int	i;
 
 	i = 0;
@@ -31,7 +30,6 @@ static int	get_path_index(char **envp)
 
 char	**split_path(char **envp)
 {
-	show_func(__func__, MY_START, NULL);
 	int		i;
 	char	**path;
 	char	*tmp;
@@ -56,7 +54,6 @@ char	**split_path(char **envp)
 int	execute(t_script *s)
 {
 	// char	**path;
-	show_func(__func__, MY_START, NULL);
 
 	/**********************/
 	execute_show(s);

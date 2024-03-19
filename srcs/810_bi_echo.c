@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:43:00 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/12 00:13:37 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 00:04:03 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 /// @return 		1 if true, 0 if false
 int	bi_echo_flag(char *str)
 {
-	show_func(__func__, MY_START, NULL);
 	int	i;
 
 	i = 1;
@@ -38,7 +37,6 @@ int	bi_echo_flag(char *str)
 //int	bi_echo(t_command cmds)
 int	bi_echo(t_script *s, int n)
 {
-	show_func(__func__, MY_START, NULL);
 	int		i;
 	char	term;
 
@@ -66,7 +64,6 @@ int	bi_echo(t_script *s, int n)
 /// @return			SUCCESS if success, ERROR if error
 int	bi_env_upd(t_script *s, int n)
 {
-	show_func(__func__, MY_START, NULL);
 	int	i;
 
 	i = s->cmds[n].argc - 1;

@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:26:05 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/18 23:45:17 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 00:17:50 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 /// @return 		SUCCESS or ERROR
 int	exec_cmd_1(t_script *s, char **path, int *pipeout)
 {
-	show_func(__func__, MY_START, NULL);
 	int	pid;
 
 	(void) path;
@@ -48,7 +47,6 @@ int	exec_cmd_1(t_script *s, char **path, int *pipeout)
 /// @param pid 		NOTHING
 int	exec_cmd_i(t_script *s, char **path, int **pipes, int i)
 {
-	show_func(__func__, MY_START, NULL);
 	int	pid;
 
 	(void) path;
@@ -75,7 +73,6 @@ int	exec_cmd_i(t_script *s, char **path, int **pipes, int i)
 /// @param pid 		NOTHING
 int	exec_cmd_n(t_script *s, int *pipein)
 {
-	show_func(__func__, MY_START, NULL);
 	int	i;
 	int	pid;
 
@@ -102,7 +99,6 @@ int	exec_cmd_n(t_script *s, int *pipein)
 /// @return 		SUCCESS or ERROR
 int	exec_cmd_loop(t_script *s, char **path, int *pipe1, int *pipe2)
 {
-	show_func(__func__, MY_START, NULL);
 	int	i;
 	int	cmd_idx;
 	int	**pipes;
@@ -139,14 +135,12 @@ int	exec_cmd_loop(t_script *s, char **path, int *pipe1, int *pipe2)
 /// @return 		SUCCESS or ERROR
 int	exec_many(t_script *s, char **path)
 {
-	show_func(__func__, MY_START, NULL);
 	int	pipe1[2];
 	int	pipe2[2];
 	int	cmd;
 
 	(void) path;
 	signal_setter_fork();
-	// signal(SIGINT, sig_handler_fork);
 	if (exec_cmd_1(s, s->path, pipe1) == 1)
 		return (ERROR);
 	cmd = exec_cmd_loop(s, s->path, pipe1, pipe2);
@@ -162,6 +156,7 @@ int	exec_many(t_script *s, char **path)
 	wait(&g_exit_status);
 	if (WIFSIGNALED(g_exit_status))
 		g_exit_status = 128 + WTERMSIG(g_exit_status);
-		//g_exit_status = WIFEXITED(g_exit_status);
+	else if (WIFEXITED(g_exit_status))
+		g_exit_status = WEXITSTATUS(g_exit_status);
 	return (SUCCESS);
 }

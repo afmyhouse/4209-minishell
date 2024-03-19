@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:25:54 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/13 23:26:37 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 00:04:03 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,12 @@
 
 void	exec_ve_abs(char **cmd, char **env)
 {
-	show_func(__func__, MY_START, NULL);
 	if (execve(*cmd, cmd, env) == -1)
 		g_exit_status = errno;
 }
 
 void	exec_ve_path(char **path, char **cmd, char **env)
 {
-	show_func(__func__, MY_START, NULL);
 	char	*tmp;
 	int		i;
 	int		ret;
@@ -48,7 +46,6 @@ void	exec_ve_path(char **path, char **cmd, char **env)
 /// @param env 		Environment variables
 void	exec_ve(char **path, char **cmd, char **env)
 {
-	show_func(__func__, MY_START, NULL);
 	if (*cmd[0] == '.' || *cmd[0] == '/')
 	{
 		exec_ve_abs(cmd, env);

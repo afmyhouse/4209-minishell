@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 22:37:00 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/18 23:56:36 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 00:05:42 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 /// @return			SUCCESS
 int	export_error(const char *msg, int errms)
 {
-	show_func(__func__, MY_START, NULL);
 	char	*msgr;
 	char	*msgt;
 	int		status;
@@ -37,7 +36,6 @@ int	export_error(const char *msg, int errms)
 /// @return			SUCCESS
 int	flags_error(const char *cmd, char *flag, int errms)
 {
-	show_func(__func__, MY_START, NULL);
 	char	*msgr;
 	char	*msgt;
 	int		status;
@@ -58,9 +56,8 @@ int	flags_error(const char *cmd, char *flag, int errms)
 /// @return			SUCCESS
 int	return_error(const char *msg, int errms, int errbash)
 {
-	show_func(__func__, MY_START, NULL);
 	if (!errbash)
-		ft_putstr_fd("Minishell: ", 2);
+		ft_putstr_fd("minishell: ", 2);
 	g_exit_status = errms;
 	if (errbash)
 	{

@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 16:48:24 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/10 23:45:32 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 00:06:15 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 /// @param msg 		Content to be printed
 void	error_message_heredoc(char *msg)
 {
-	show_func(__func__, MY_START, NULL);
-	ft_putstr_fd("Minishell: warning: here-document delimited", 2);
+	ft_putstr_fd("minishell: warning: here-document delimited", 2);
 	ft_putstr_fd(" by end-of-file (wanted '", 2);
 	ft_putstr_fd(msg, 2);
 	ft_putendl_fd("\')", 2);
@@ -31,7 +30,6 @@ void	error_message_heredoc(char *msg)
 /// @param pipe Pointer to the pipe to output result
 void	loop_heredoc(t_list *h, int pipe)
 {
-	show_func(__func__, MY_START, NULL);
 	char	*tmp;
 	char	*bis;
 
@@ -66,7 +64,6 @@ void	loop_heredoc(t_list *h, int pipe)
 /// @param path Commands execution path
 void	heredoc(t_script *s, int i, char **path)
 {
-	show_func(__func__, MY_START, NULL);
 	int		pipe_tmp[2];
 
 	if (pipe(pipe_tmp) == -1)

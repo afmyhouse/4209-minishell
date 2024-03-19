@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:26:05 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/10 23:45:42 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 00:04:03 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 /// @return 		Pointer to the pipes array x 2 pipes
 int	**pipe_init(char **path, int *pipe1, int *pipe2)
 {
-	show_func(__func__, MY_START, NULL);
 	int	**pipes;
 
 	pipes = malloc(sizeof(int *) * 2);
@@ -45,7 +44,6 @@ int	**pipe_init(char **path, int *pipe1, int *pipe2)
 /// @param pb 	pipe b, initial pipe of an even cmd i (in a list from 1 to n-1)
 void	pipe_closer(int *pa, int *pb)
 {
-	show_func(__func__, MY_START, NULL);
 	if (pa)
 	{
 		close(pa[0]);
@@ -66,7 +64,6 @@ void	pipe_closer(int *pa, int *pb)
 /// @return
 int	pipe_std_setter(int *pipe, int end)
 {
-	show_func(__func__, MY_START, NULL);
 	if (pipe[end] != end)
 		return (dup2(pipe[end], end));
 	return (SUCCESS);
