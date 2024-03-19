@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 19:00:01 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/19 00:04:03 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 10:54:40 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,17 +105,7 @@ void	tk_var_xpd_else(char *otk, char ***ntks, int *spl, int *i)
 
 	j = *i;
 	(*i)++;
-	while (otk[*i] && otk[*i] != '$'
-		&& otk[*i] != '\"' && otk[*i] != '\'')
-	{
-		if (otk[*i] == '~')
-		{
-			printf("otk[%i] = %c\n", *i, otk[*i]);
-			// (*ntks)[(*spl)++] = ft_substr(otk, j, *i - j);
-			// (*ntks)[(*spl)++] = ft_strdup("HOME");
-			//(*ntks)[(*spl)++] = ft_substr(otk, j, *i - j);
-		}
+	while (otk[*i] && otk[*i] != '$' && otk[*i] != '\"' && otk[*i] != '\'')
 		(*i)++;
-	}
 	(*ntks)[*spl] = ft_substr(otk, j, *i - j);
 }

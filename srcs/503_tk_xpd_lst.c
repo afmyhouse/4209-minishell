@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 19:10:37 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/19 00:04:03 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 10:48:36 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_token	*tk_lst_last_getter(t_token *ltk)
 }
 
 /// @attention	>token builder< set of functions
-/// @brief 					Adds a new token to the end of the token list
+/// @brief 		Adds a new token to the end of the token list
 /// @param ltk	Pointer to token list
 /// @param ntk	Pointer to new token
 void	tk_lst_addback(t_token **ltk, t_token *ntk)

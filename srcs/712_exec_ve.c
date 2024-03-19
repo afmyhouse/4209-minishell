@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:25:54 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/19 00:04:03 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 11:02:31 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	exec_ve_path(char **path, char **cmd, char **env)
 		ret = execve(tmp, cmd, env);
 		i++;
 	}
-	// if (tmp)
 	ft_free(tmp);
 }
 

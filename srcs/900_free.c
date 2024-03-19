@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:26:48 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/14 18:30:46 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 11:13:43 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,17 +101,3 @@ void	free_cmds_path(t_script *script, char **path)
 	free_array(path, 0);
 }
 
-/// @brief 			Shows error and program sourcing it and exit(1) freeing
-/// 				allocated vars
-/// @param msg 		Message to show
-/// @param errms 	Error message
-/// @param s 		Script to be freed
-/// @param path 	Path to be freed
-void	exit_forks(char *msg, int errms, t_script *s, char **path)
-{
-	(void) path;
-	return_error(msg, errms, 1);
-	free_exit(s, 1);//, s->path);
-	//free_cmds_path(s, s->path);
-	exit(1);
-}

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   715_exec_bonus.c                                   :+:      :+:    :+:   */
+/*   0715_exec_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:25:54 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/18 22:01:55 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 11:02:58 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	exec_one_fork(t_script *s, char **path)
 	if (pid == -1)
 		return (return_error("", errno, 1));
 	if (pid == 0)
-		// ex_child_1(s, s->path, NULL);
 		ex_child_1(s, NULL);
 	wait(&status);
 	if (WIFEXITED(status))
@@ -69,34 +68,34 @@ int	exec_one(t_script *s, char **path)
 	return (free_array(s->path, SUCCESS));
 }
 
-int	exec_or(t_script *s, char **path)
-{
-	int	n;
+// int	exec_or(t_script *s, char **path)
+// {
+// 	int	n;
 
-	n = 0;
-	printf("%s%s : n= %d : s->cmd_count = %d : g_exit_status = %d%s\n",
-		SBHRED, __func__, n, s->cmd_count, g_exit_status, SRST);
-	while (n < s->cmd_count)
-	{
-		if (!exec_one(s, path))
-			break ;
-		n++;
-		printf("%s%s : n= %d : s->cmd_count = %d : g_exit_status = %d%s\n",
-			SBHRED, __func__, n, s->cmd_count, g_exit_status, SRST);
-	}
-	return (SUCCESS);
-}
+// 	n = 0;
+// 	printf("%s%s : n= %d : s->cmd_count = %d : g_exit_status = %d%s\n",
+// 		SBHRED, __func__, n, s->cmd_count, g_exit_status, SRST);
+// 	while (n < s->cmd_count)
+// 	{
+// 		if (!exec_one(s, path))
+// 			break ;
+// 		n++;
+// 		printf("%s%s : n= %d : s->cmd_count = %d : g_exit_status = %d%s\n",
+// 			SBHRED, __func__, n, s->cmd_count, g_exit_status, SRST);
+// 	}
+// 	return (SUCCESS);
+// }
 
-int	exec_and(t_script *s, char **path)
-{
-	int	n;
+// int	exec_and(t_script *s, char **path)
+// {
+// 	int	n;
 
-	n = 0;
-	while (n < s->cmd_count)
-	{
-		if (exec_one(s, path))
-			break ;
-		n++;
-	}
-	return (SUCCESS);
-}
+// 	n = 0;
+// 	while (n < s->cmd_count)
+// 	{
+// 		if (exec_one(s, path))
+// 			break ;
+// 		n++;
+// 	}
+// 	return (SUCCESS);
+// }

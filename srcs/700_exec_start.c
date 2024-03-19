@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 00:26:42 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/19 00:04:03 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 11:44:56 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,18 +53,14 @@ char	**split_path(char **envp)
 /// @return 		SUCCESS or ERROR
 int	execute(t_script *s)
 {
-	// char	**path;
-
-	/**********************/
-	execute_show(s);
-	/**********************/
 	s->path = split_path(s->envp);
 	if (s->cmd_count == 1)
 	{
-		if (exec_one(s, s->path))
+		if (exec_one(s))
 			return (ERROR);
 	}
-	else if (exec_many(s, s->path))
+	// else if (exec_many(s, s->path))
+	else if (exec_many(s))
 		return (ERROR);
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &s->termios_p);
 	return (SUCCESS);

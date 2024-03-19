@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:28:14 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/19 00:04:03 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 10:47:25 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	cmds_counter(t_token *tk)
 	{
 		if (!count)
 			count = 1;
-		// if (tk->type == TK_PIPE || tk->type == TK_OR)
 		if (tk->type == TK_PIPE)
 			count ++;
 		tk = tk->next;

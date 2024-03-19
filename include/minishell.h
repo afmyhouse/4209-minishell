@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:28:06 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/18 23:43:03 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 11:44:24 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -748,7 +748,8 @@ void	exec_ve(char **path, char **cmd, char **env);
 /// @param s 		Script contents and parameters including redirect info
 /// @param path		Commands execution path
 /// @return			SUCCESS or ERROR
-int		exec_one_fork(t_script *s, char **path);
+// int		exec_one_fork(t_script *s, char **path);
+int		exec_one_fork(t_script *s);
 
 /// @brief 			Executes a single command script and checks if the command
 ///					is a builtin that doesnt need a fork (cd, unset, exit),
@@ -757,7 +758,7 @@ int		exec_one_fork(t_script *s, char **path);
 /// @param s 		Script contents and parameters including redirect info
 /// @param path 	Commands execution path
 /// @return 		SUCCESS or ERROR
-int		exec_one(t_script *s, char **path);
+int		exec_one(t_script *s);
 
 int	exec_or(t_script *s, char **path);
 
@@ -806,7 +807,8 @@ int		exec_cmd_loop(t_script *s, char **path, int *pipe1, int *pipe2);
 /// @param s 		Script contents and parameters including redirect info
 /// @param path 	Commands execution path
 /// @return 		SUCCESS or ERROR
-int		exec_many(t_script *s, char **path);
+// int		exec_many(t_script *s, char **path);
+int		exec_many(t_script *s);
 
 /* ************************************************************************** */
 ///	730exec_childs.c

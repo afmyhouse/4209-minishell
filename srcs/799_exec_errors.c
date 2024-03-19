@@ -6,12 +6,15 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 23:43:45 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/19 00:04:03 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 11:15:30 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/// @brief 		displays error message on fork error
+/// @param path	array to free
+/// @return		status
 int	fork_error(char **path)
 {
 	write(2, "Error: fork failed\n", 19);
@@ -19,9 +22,26 @@ int	fork_error(char **path)
 	return (free_array(path, ERROR));
 }
 
+/// @brief 		displays error message on pipe error
+/// @param path	array to free
+/// @return		status
 int	pipe_error(char **path)
 {
 	write(2, "Error: pipe failed\n", 19);
 	g_exit_status = 1;
 	return (free_array(path, ERROR));
+}
+
+/// @brief 			Shows error and program sourcing it and exit(1) freeing
+/// 				allocated vars
+/// @param msg 		Message to show
+/// @param errms 	Error message
+/// @param s 		Script to be freed
+/// @param path 	Path to be freed
+void	exit_forks(char *msg, int errms, t_script *s, char **path)
+{
+	(void) path;
+	return_error(msg, errms, 1);
+	free_exit(s, 1);
+	exit(1);
 }

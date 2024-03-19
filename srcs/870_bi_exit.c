@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 00:10:23 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/19 00:06:29 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 11:12:23 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,21 +60,8 @@ void	exit_go(t_script *s, char *arg, char *msg, int sys)
 	}
 	errno = sys;
 	free_exit(s, sys);
-	// free_commands(s->cmds, s->cmd_count);
-	// free_array(s->envp, 0);
-	// free_array(s->envt, 0);
-	// free_array(s->path, 0);
 	exit(sys);
 }
-// int exit_loop(t_script *s)
-// {
-// // 	ft_putstr_fd("", 2);
-// 	free_commands(s->cmds, s->cmd_count);
-// 	free_array(s->envp, 0);
-// 	free_array(s->envt, 0);
-// 	free_array(s->path, 0);
-// 	return (0);
-// }
 
 /// @brief 			Builtin exit command limited to 9223372036854775807
 /// @param args		Builtin command arguments
@@ -84,17 +71,8 @@ int	bi_exit(t_script *s, int n)
 	char	*trim;
 
 	trim = NULL;
-	// ft_putstr_fd("n = ", 2);
-	// ft_putnbr_fd(n, 2);
-	// ft_putstr_fd("\n", 2);
 	if (n > 0)
-	{
-		// ft_putstr_fd("", STDOUT_FILENO);
 		return (SUCCESS);
-	}
-	// ft_putstr_fd("exited in loop crossed here !!!\n", 2);
-		// return (exit_loop(s));
-	// env_var_setter("minishell", "_", &s->envp);
 	if (s->cmds[n].argc == 1)
 		exit_go(s, NULL, NULL, 0);
 	else if (s->cmds[n].argc > 2)

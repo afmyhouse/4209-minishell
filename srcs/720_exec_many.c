@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:26:05 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/19 00:17:50 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 11:45:12 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ int	exec_cmd_n(t_script *s, int *pipein)
 	int	i;
 	int	pid;
 
-	//(void) path;
 	i = s->cmd_count - 1;
 	pid = fork();
 	if (pid == -1)
@@ -133,13 +132,14 @@ int	exec_cmd_loop(t_script *s, char **path, int *pipe1, int *pipe2)
 /// @param s 		Script contents and parameters including redirect info
 /// @param path 	Commands execution path
 /// @return 		SUCCESS or ERROR
-int	exec_many(t_script *s, char **path)
+// int	exec_many(t_script *s, char **path)
+int	exec_many(t_script *s)
 {
 	int	pipe1[2];
 	int	pipe2[2];
 	int	cmd;
 
-	(void) path;
+	//(void) path;
 	signal_setter_fork();
 	if (exec_cmd_1(s, s->path, pipe1) == 1)
 		return (ERROR);

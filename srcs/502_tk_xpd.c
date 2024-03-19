@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 19:00:01 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/19 00:04:03 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 10:58:47 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	tk_var_xpd_splits_count(char *otk)
 /// @brief 		Initializes the array of expanded token
 ///				1st it fecths nmumber of splits
 /// 			2nd mallocs necessary memory
-/// @param otk 	char sequence to be splited -> copied into the new created array
+/// @param otk 	char sequence to be splited -> copied into new created array
 /// @return		pointer to the newly created array
 char	**tk_var_xpd_init(char *otk)
 {
@@ -107,7 +107,6 @@ char	*tk_env_var_expander(char *otk, t_script *s)
 	ntks = NULL;
 	ntks = tk_var_xpd(otk);
 	res = tk_xpd_filler(&ntks, s);
-	//show_array(ntks, "ntks");
 	free(ntks);
 	return (res);
 }
