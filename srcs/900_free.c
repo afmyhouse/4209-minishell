@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:26:48 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/19 14:15:46 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:17:31 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,14 +89,15 @@ int	free_exit(t_script *s, int errms)
 	free_array(s->envt, 0);
 	free_array(s->envp, 0);
 	ft_free (s->home);
+	ft_free (s->hd);
 	return (errms);
 }
 
 /// @brief 			Frees the path and the commands
 /// @param script 	Script to be freed
 /// @param path 	Path to be freed
-void	free_cmds_path(t_script *script, char **path)
+void	free_cmds_path(t_script *s)
 {
-	free_commands(script->cmds, script->cmd_count);
-	free_array(path, 0);
+	free_commands(s->cmds, s->cmd_count);
+	free_array(s->path, 0);
 }

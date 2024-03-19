@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:27:05 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/19 14:39:15 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:07:52 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ char	**envp_init(char **envp)
 void	struct_init(t_script *s)
 {
 	s->path = NULL;
+	s->hd = NULL;
 	s->cmd_count = 0;
 	s->exit_status = 0;
 }

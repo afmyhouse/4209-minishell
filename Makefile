@@ -6,14 +6,12 @@
 #    By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/24 21:23:27 by antoda-s          #+#    #+#              #
-#    Updated: 2024/03/19 14:45:50 by antoda-s         ###   ########.fr        #
+#    Updated: 2024/03/19 18:32:20 by antoda-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # name
 NAME 		= minishell
-NAME_A 		= minishell_a
-NAME_L 		= minishell_l
 
 # libs and includes
 LIBFT 		= libft.a
@@ -32,6 +30,7 @@ OBJDIR 	= build/
 # FILES	=	main.c 				# Top level function
 FILES	=	100_main.c
 FILES	+=	200_signal.c
+FILES	+=	205_signal_hd.c
 FILES	+=	300_parser.c
 FILES	+=	301_parser_syntax.c
 FILES	+=	302_parser_cmd.c
@@ -72,16 +71,13 @@ FILES	+=	880_bi_equal.c
 FILES	+=	890_bi_append.c
 FILES	+=	900_free.c
 FILES	+=	910_errors.c
-#FILES	+=	999_debug.c
 
 SRC = $(addprefix $(SRCDIR), $(FILES))
 OBJ = $(addprefix $(OBJDIR), $(FILES:.c=.o))
 
 #compilation
 CC 			= cc
-CF 			= -Wall -Wextra -Werror -g
-CFA 			= -Wall -Wextra -Werror -g -fsanitize=address
-CFL 			= -Wall -Wextra -Werror -g -fsanitize=leak
+CF 			= -Wall -Wextra -Werror
 I_HEADER	= -I include
 I_LIBFT 	= -I libft
 LNK_LIBFT 	= -L $(LFT_PATH) -lft
@@ -95,7 +91,7 @@ LF 			= --leak-check=full \
         		--track-origins=yes \
         		--verbose \
         		--log-file=$(LEAKS_FILE) \
-        		./$(NAME) # args??
+        		./$(NAME)
 
 # common commands
 RM 			= rm -f
@@ -117,10 +113,10 @@ _WARNING	=	$(WTH)[$(YLW)WARNING$(WTH)]
 _ERROR		=	$(WTH)[$(RED)ERROR$(WTH)]
 
 # rules
-all: $(LIBFT) $(OBJ) $(NAME)
+all: $(LIBFT) $(NAME)
 	@printf "\n$(_SUCCESS) $(GRN)$(NAME) executable ready!$(WTH)\n\n"
 
-$(NAME):
+$(NAME): $(OBJ)
 	@printf "\n$(_SUCCESS) $(GRN)$(NAME) objects ready!                $(WTH)\n"
 	@printf "\n$(_INFO) $(CYN)Generating $(NAME) executable...$(WTH)\n"
 	$(CC) $(CF) $(OBJ) $(LNK_LIBFT) $(LNK_READLINE) -o $@
@@ -135,36 +131,12 @@ $(OBJDIR)%.o: $(SRCDIR)%.c | mkbuilddir
 	$(CC) $(CF) -c $(I_LIBFT) $(I_HEADER) $< -o $@
 	@printf "$(YLW)█$(WHT)"
 
-sana: $(LIBFT) $(OBJ) $(NAME_A)
-	@printf "\n$(_SUCCESS) $(GRN)$(NAME) executable ready!$(WTH)\n\n"
-
-$(NAME_A):
-	@printf "\n$(_SUCCESS) $(GRN)$(NAME) objects ready!                $(WTH)\n"
-	@printf "\n$(_INFO) $(CYN)Generating $(NAME) address sanitizer executable...$(WTH)\n"
-	$(CC) $(CFA) $(OBJ) $(LNK_LIBFT) $(LNK_READLINE) -o $@
-	@printf "$(GRN)█$(WHT)"
-
-sanl: $(LIBFT) $(OBJ) $(NAME_L)
-	@printf "\n$(_SUCCESS) $(GRN)$(NAME) executable ready!$(WTH)\n\n"
-
-$(NAME_L):
-	@printf "\n$(_SUCCESS) $(GRN)$(NAME) objects ready!                $(WTH)\n"
-	@printf "\n$(_INFO) $(CYN)Generating $(NAME) leak sanitizer executable...$(WTH)\n"
-	$(CC) $(CFL) $(OBJ) $(LNK_LIBFT) $(LNK_READLINE) -o $@
-	@printf "$(GRN)█$(WHT)"
-
 $(LIBFT):
 	@printf "\n$(_INFO) $(CYN)Generating Libft...$(WTH)\n"
 	@make -s -C $(LFT_PATH)
 #	@printf "$(_INFO) $(GRN)Libft created!$(WTH)\n\n"
 
 re: fclean all
-
-rea: fclean sana
-
-rel: fclean sanl
-
-# rebonus: fclean bonus
 
 leaks:
 	$(LEAKS) $(LF)
@@ -197,13 +169,6 @@ fcleant:
 	@$(RM) -rf $(NAMET)
 	@printf "$(GRN)$(NAMET) and additional files removed!$(WTH)\n\n"
 
-
-# install:
-# 	sudo apt-get install gcc make xorg libxext-dev libbsd-dev -y
-# 	@printf "$(GRN)All dependencies ready!$(WTH)\n\n"
-
-.PHONY: show clean fclean re rebonus all bonus build
-
 show:
 	@echo ""
 	@echo "$(YLW)ALL PATHS (*invoked with > make show*) $(WTH)]"
@@ -220,5 +185,7 @@ show:
 	@echo "$(CYN)██ Objects files        : $(WTH)$(notdir $(OBJ))"
 	@echo "$(YLW)██ Executable file      : $(WTH)$(notdir $(NAME))"
 	@echo ""
+
+.PHONY: all mkbuilddir re leaks cleanleaks clean fclean fcleant show
 
 .SILENT:

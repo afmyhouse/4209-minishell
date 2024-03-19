@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:38:24 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/19 14:53:02 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:32:46 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,4 @@ void	sig_handler_fork(int signum)
 		rl_on_new_line();
 		g_exit_status = 130;
 	}
-}
-
-/// @brief 			Handles the signal SIGINT (Ctrl + C) when in heredoc
-///					Exits with status 130 : Command terminated by user
-/// @param signum	The signal number
-/// @return			void
-void	sig_handler_heredoc(int signum)
-{
-	if (signum == SIGINT)
-		exit(130);
 }

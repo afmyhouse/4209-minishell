@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 00:10:23 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/19 11:12:23 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:28:38 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_is_str_digit(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if ((str[i] < 48 || str[i] > 57) && str[0] != '-')
+		if ((str[i] < 48 || str[i] > 57) && str[0] != '-' && str[0] != '+')
 			return (ERROR);
 		i++;
 	}

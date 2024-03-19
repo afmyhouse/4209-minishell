@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 16:48:24 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/19 14:07:05 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:18:03 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,11 @@ void	error_message_heredoc(char *msg)
 /// 			as the input redirection.
 /// @param h 	Pointer to the heredoc linked list
 /// @param pipe Pointer to the pipe to output result
-void	loop_heredoc(t_list *h, int pipe)
+void	loop_heredoc(t_list *h, int pipe, char **hd)
 {
 	char	*tmp;
-	char	*bis;
 
-	bis = ft_strdup("");
+	*hd = ft_strdup("");
 	while (h)
 	{
 		tmp = readline("> ");
@@ -48,13 +47,13 @@ void	loop_heredoc(t_list *h, int pipe)
 		if (!h->next)
 		{
 			tmp = ft_strjoin_free(tmp, ft_strdup("\n"));
-			bis = ft_strjoin_free(bis, tmp);
+			*hd = ft_strjoin_free(*hd, tmp);
 		}
 		else
 			free(tmp);
 	}
-	write(pipe, bis, ft_strlen(bis));
-	free(bis);
+	write(pipe, *hd, ft_strlen(*hd));
+	ft_free(*hd);
 }
 
 /// @brief		This function first initializes a pipe in which we can write
@@ -68,19 +67,18 @@ void	heredoc(t_script *s, int i)
 
 	if (pipe(pipe_tmp) == -1)
 	{
-		free_cmds_path(s, s->path);
+		free_cmds_path(s);
 		exit((return_error("", errno, 1)));
 	}
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, sig_handler_heredoc);
-	loop_heredoc(s->cmds[i].in.heredoc, pipe_tmp[1]);
+	signal_setter_heredoc(s);
+	loop_heredoc(s->cmds[i].in.heredoc, pipe_tmp[1], &s->hd);
 	if (pipe_tmp[0] != STDIN_FILENO)
 	{
 		if (dup2(pipe_tmp[0], STDIN_FILENO) == -1)
 		{
 			write(2, "Error: dup2 failed\n", 19);
 			pipe_closer(pipe_tmp, NULL);
-			free_cmds_path(s, s->path);
+			free_cmds_path(s);
 			exit(ERROR);
 		}
 	}

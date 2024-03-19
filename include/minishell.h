@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:28:06 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/19 14:52:56 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:17:48 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,6 @@
 # include <readline/history.h>
 # include "../libft/libft.h"
 # include "../include/error.h"
-//# include "../include/colors.h"
-//# include "../include/settings.h"
-//# include "../include/debug.h"
 
 # define MAX_PATH_LEN 4096
 
@@ -69,6 +66,7 @@ typedef enum e_token_type
 	TK_WS,
 }			t_token_type;
 
+/// @brief 	selection of type of execution command
 typedef enum e_cmd_type
 {
 	CMD_EX,
@@ -164,8 +162,9 @@ typedef struct s_script
 	char			**envt;
 	char			**path;
 	char			*home;
-	struct termios	termios_p;
+	char			*hd;
 	int				mshlvl;
+	struct termios	termios_p;
 }				t_script;
 
 /* ************************************************************************** */
@@ -225,6 +224,7 @@ void	signal_setter(void);
 /// @brief		Signal processing functions setter for loop
 /// @param		No parameter required
 void	signal_setter_fork(void);
+void	signal_setter_heredoc(t_script *s);
 
 /// @brief 			Handles signal SIGINT (Ctrl+C) and SIGQUIT (Ctrl+\)
 ///					Instead of exiting, the sig handler provides a new line
@@ -242,7 +242,8 @@ void	sig_handler_fork(int signum);
 ///					Exits with status 130 Command terminated by user
 /// @param signum	The signal number
 /// @return			void
-void	sig_handler_heredoc(int signum);
+void	sig_handler_heredoc(int signum, t_script *s);
+// void	sig_handler_heredoc(int signum);
 
 /* ************************************************************************** */
 //																			  */
@@ -861,7 +862,7 @@ void	error_message_heredoc(char *msg);
 /// 			as the input redirection.
 /// @param h 	Pointer to the heredoc linked list
 /// @param pipe Pointer to the pipe to output result;
-void	loop_heredoc(t_list *h, int pipe);
+void	loop_heredoc(t_list *h, int pipe, char **hd);
 
 /// @brief		This function first initializes a pipe in which we can write
 /// 			the content that we'll read from the user.
@@ -1126,7 +1127,7 @@ int		free_exit(t_script *s, int errms);
 /// @brief 			Frees the path and the commands
 /// @param script 	Script to be freed
 /// @param path 	Path to be freed
-void	free_cmds_path(t_script *script, char **path);
+void	free_cmds_path(t_script *script);
 
 /// @brief 			Shows error and program sourcing it and exit(1) freeing
 /// 				allocated vars

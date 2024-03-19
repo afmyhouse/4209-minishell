@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 23:53:58 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/02/29 16:59:34 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:29:18 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ long double	ft_atoll(const char *nptr)
 
 	signal = 1.0;
 	number = 0.0;
-	while (ft_isspace(*nptr))
+	while (ft_isspace(*nptr) || ft_issign(*nptr == 1))
 		nptr++;
 	if (ft_issign(*nptr))
 		signal *= (long double)ft_issign(*nptr++);
