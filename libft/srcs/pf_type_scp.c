@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 14:13:52 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/11/17 17:37:27 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 14:26:22 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	ft_pf_type_s(t_printf *f)
 		return ;
 	i = ft_pf_type_s2s(f, res, ds, dl);
 	res = ft_strrev(res, i);
-	// res = ft_pf_tools_strrev(res, i);
 	if ((*f).f_align)
 		i = ft_pf_fwp_wal2s(f, res, i);
 	else
@@ -142,7 +141,6 @@ int	ft_pf_type_p2s(t_printf *f, char *res, unsigned long long arg)
 	{
 		i = ft_strlcpy(res, "(nil)", 34);
 		res = ft_strrev(res, i);
-		// res = ft_pf_tools_strrev(res, i);
 	}
 	else
 	{

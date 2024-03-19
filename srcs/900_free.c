@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:26:48 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/19 11:13:43 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 14:15:46 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,4 +100,3 @@ void	free_cmds_path(t_script *script, char **path)
 	free_commands(script->cmds, script->cmd_count);
 	free_array(path, 0);
 }
-

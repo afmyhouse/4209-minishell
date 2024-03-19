@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 22:37:00 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/19 00:05:42 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 14:46:15 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,5 @@ int	return_error(const char *msg, int errms, int errbash)
 	}
 	else
 		ft_putendl_fd(msg, 2);
-	show_func(__func__, SUCCESS, NULL);
 	return (1);
 }

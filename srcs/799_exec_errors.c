@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 23:43:45 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/19 11:15:30 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 13:55:01 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,8 @@ int	pipe_error(char **path)
 /// @param errms 	Error message
 /// @param s 		Script to be freed
 /// @param path 	Path to be freed
-void	exit_forks(char *msg, int errms, t_script *s, char **path)
+void	exit_forks(char *msg, int errms, t_script *s)
 {
-	(void) path;
 	return_error(msg, errms, 1);
 	free_exit(s, 1);
 	exit(1);

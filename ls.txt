@@ -1,0 +1,14 @@
+a09.c
+build
+clean_list.txt
+include
+libft
+ls.txt
+Makefile
+minishell
+prompts.txt
+readline.supp
+readme.md
+srcs
+tls.txt
+valgrind_supp.txt

@@ -6,12 +6,11 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:38:13 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/02/28 13:27:52 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 14:28:10 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
-
 
 int	ft_basei(char base)
 {

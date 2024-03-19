@@ -6,13 +6,16 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 00:26:42 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/19 11:44:56 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 14:37:51 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	get_path_index(char **envp)
+/// @brief 		get the index of the PATH envp array item
+/// @param envp array with PATH entry
+/// @return		SUCCESS(index) / ERROR(-1)
+int	get_path_index(char **envp)
 {
 	int	i;
 
@@ -28,6 +31,9 @@ static int	get_path_index(char **envp)
 	return (-1);
 }
 
+/// @brief 		create san array with the envp PATH varaiable
+/// @param envp array with PATH entry
+/// @return 	SUCCES(path array pointer) / ERROR(NULL)
 char	**split_path(char **envp)
 {
 	int		i;
@@ -59,7 +65,6 @@ int	execute(t_script *s)
 		if (exec_one(s))
 			return (ERROR);
 	}
-	// else if (exec_many(s, s->path))
 	else if (exec_many(s))
 		return (ERROR);
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &s->termios_p);

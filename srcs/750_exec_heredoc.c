@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 16:48:24 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/19 00:06:15 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 14:07:05 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@ void	loop_heredoc(t_list *h, int pipe)
 /// @param s 	Script contents and parameters including redirect info
 /// @param i 	Index of the command to be executed
 /// @param path Commands execution path
-void	heredoc(t_script *s, int i, char **path)
+void	heredoc(t_script *s, int i)
 {
 	int		pipe_tmp[2];
 
 	if (pipe(pipe_tmp) == -1)
 	{
-		free_cmds_path(s, path);
+		free_cmds_path(s, s->path);
 		exit((return_error("", errno, 1)));
 	}
 	signal(SIGQUIT, SIG_IGN);
@@ -80,7 +80,7 @@ void	heredoc(t_script *s, int i, char **path)
 		{
 			write(2, "Error: dup2 failed\n", 19);
 			pipe_closer(pipe_tmp, NULL);
-			free_cmds_path(s, path);
+			free_cmds_path(s, s->path);
 			exit(ERROR);
 		}
 	}

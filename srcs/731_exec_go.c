@@ -6,17 +6,16 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:11:17 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/19 00:06:49 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 14:02:02 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exec_ve_err(t_script *s, char **path, int i)
+void	exec_ve_err(t_script *s, int i)
 {
 	char	*msg;
 
-	(void) path;
 	msg = ft_strjoin("minishell: ", s->cmds[i].argv[0]);
 	return_error(msg, 127, 1);
 	ft_free(msg);
@@ -31,11 +30,10 @@ void	exec_ve_err(t_script *s, char **path, int i)
 /// @param path 	Commands execution path
 /// @param id 		Command type
 /// @param i 		Index of the command to execute
-void	exec_go(t_script *s, char **path, int id, int i)
+void	exec_go(t_script *s, int id, int i)
 {
 	struct stat	buf;
 
-	(void) path;
 	memset(&buf, 0, sizeof(struct stat));
 	if (id == CMD_EX)
 	{
@@ -47,7 +45,7 @@ void	exec_go(t_script *s, char **path, int id, int i)
 			errno = EISDIR;
 		if (ft_strchr(s->cmds[i].argv[0], '/') != NULL
 			|| (errno == ENOENT && !s->path))
-			exec_ve_err(s, s->path, i);
+			exec_ve_err(s, i);
 		else if (errno != ENOENT)
 			perror(s->cmds[i].argv[0]);
 		else

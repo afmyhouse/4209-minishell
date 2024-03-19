@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 18:07:19 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/19 00:04:03 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 14:07:08 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 /// @param s 	Script contents and parameters including redirect info
 /// @param i 	Index of the command to be executed
 /// @param path Commands execution path
-void	in_redir(t_script *s, int i, char **path)
+void	in_redir(t_script *s, int i)
 {
 	int	fdin;
 
@@ -28,15 +28,15 @@ void	in_redir(t_script *s, int i, char **path)
 	{
 		fdin = open(s->cmds[i].in.name, s->cmds[i].in.flag);
 		if (fdin == -1)
-			exit_forks(s->cmds[i].in.name, 1, s, path);
+			exit_forks(s->cmds[i].in.name, 1, s);
 		else if (fdin != STDIN_FILENO && dup2(fdin, STDIN_FILENO) == -1)
 		{
 			close(fdin);
-			exit_forks("Error: dup2 failed", 1, s, path);
+			exit_forks("Error: dup2 failed", 1, s);
 		}
 	}
 	else
-		heredoc(s, i, path);
+		heredoc(s, i);
 }
 
 /// @brief 		After fork this fucntion is called to prepare redirect to a file
@@ -44,17 +44,18 @@ void	in_redir(t_script *s, int i, char **path)
 /// @param s 	Script contents and parameters including redirect info
 /// @param i 	Index of the command to be executed
 /// @param path Commands execution path
-void	out_redir(t_script *s, int i, char **path)
+// void	out_redir(t_script *s, int i, char **path)
+void	out_redir(t_script *s, int i)
 {
 	int	fdout;
 
 	fdout = open(s->cmds[i].out.name, s->cmds[i].out.flag, 0644);
 	if (fdout == -1)
-		exit_forks(s->cmds[i].out.name, 1, s, path);
+		exit_forks(s->cmds[i].out.name, 1, s);
 	else if (fdout != STDOUT_FILENO && dup2(fdout, STDOUT_FILENO) == -1)
 	{
 		close(fdout);
-		exit_forks("Error: dup2 failed", 1, s, path);
+		exit_forks("Error: dup2 failed", 1, s);
 	}
 	close(fdout);
 }

@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:25:54 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/19 11:40:17 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 14:16:38 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	exec_one_fork(t_script *s)
 {
 	int	pid;
 
-	//(void) path;
 	if (s->cmds[0].in.flag == -1)
 		signal(SIGQUIT, SIG_IGN);
 	else
@@ -54,7 +53,6 @@ int	exec_one(t_script *s)
 {
 	int	id;
 
-	//(void) path;
 	id = CMD_EX;
 	if (s->cmds[0].argv[0])
 		id = exec_type(s->cmds[0].argv[0]);
@@ -67,7 +65,6 @@ int	exec_one(t_script *s)
 		if (exec_bi(id, s, 0))
 			return (free_array(s->path, ERROR));
 	}
-	// else if (exec_one_fork(s, s->path))
 	else if (exec_one_fork(s))
 		return (free_array(s->path, ERROR));
 	bi_env_upd(s, 0);

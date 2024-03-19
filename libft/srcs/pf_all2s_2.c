@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 14:13:52 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/11/17 17:37:27 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 14:27:43 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,5 @@ int	ft_pf_tools_f2s_mantissa(t_printf *f, char dot, char *arg_arr, char *str)
 	while ((*f).p_num--)
 		str[i++] = ft_itoc_base(arg_arr[j++], (char)((*f).at + 23));
 	str = ft_strrev(str, i);
-	// str = ft_pf_tools_strrev(str, i);
 	return (i);
 }

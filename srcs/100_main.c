@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:27:05 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/19 00:04:03 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 14:39:15 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,6 @@ void	struct_init(t_script *s)
 	s->path = NULL;
 	s->cmd_count = 0;
 	s->exit_status = 0;
-	s->fd[0] = STDIN_FILENO;
-	s->fd[1] = STDOUT_FILENO;
 }
 
 /// @brief 				Initializes the shell and keeps looping until exit

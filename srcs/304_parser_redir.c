@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:28:14 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/19 00:06:07 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 14:21:32 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	redir_error(char *name)
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	return (return_error(name, 1, 1));
 }
+
 /// @brief 			This function sets the open flags and opens the files
 ///					based on the type of redirection token it encounters
 ///					('<', '<<', '>', '>>').
@@ -58,7 +59,7 @@ int	redir(t_token *tk, t_redirection *file)
 	else if (!ft_strncmp(tk->content, "<<", 2))
 		fill_heredoc(file);
 	else if (!ft_strncmp(tk->content, ">", 1)
-	|| !ft_strncmp(tk->content, ">|", 2))
+		|| !ft_strncmp(tk->content, ">|", 2))
 		file->flag = (O_CREAT | O_TRUNC | O_RDWR);
 	else if (!ft_strncmp(tk->content, "<", 1))
 		file->flag = O_RDONLY;

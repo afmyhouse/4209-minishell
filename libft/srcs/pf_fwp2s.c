@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 14:13:52 by antoda-s          #+#    #+#             */
-/*   Updated: 2023/11/17 17:26:11 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/19 14:27:02 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,12 @@ int	ft_pf_fwp_war2s(t_printf *f, char *ds, int i)
 			ds[j++] = (*f).f_stype;
 		if ((*f).f_zpad == '0')
 			ds = ft_strrev(ds + i, j) - i;
-			// ds = ft_pf_tools_strrev(ds + i, j) - i;
 	}
 	while (j < (*f).w_num)
 		ds[j++] = (*f).f_zpad;
 	if ((*f).f_zpad == '0')
 		ds = ft_strrev(ds + i, j) - i;
-		// ds = ft_pf_tools_strrev(ds + i, j) - i;
 	ds = ft_strrev(ds, j);
-	// ds = ft_pf_tools_strrev(ds, j);
 	return (0);
 }
 
@@ -92,7 +89,6 @@ int	ft_pf_fwp_wal2s(t_printf *f, char *ds, int i)
 	if ((type == 'a' || type == 'A') && (*f).f_stype)
 		ds[i++] = (*f).f_stype;
 	ds = ft_strrev(ds, i);
-	// ds = ft_pf_tools_strrev(ds, i);
 	while (i < (*f).w_num)
 		ds[i++] = (*f).f_zpad;
 	return (0);
