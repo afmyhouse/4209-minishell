@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 22:37:00 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/18 09:31:43 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/18 23:56:36 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	flags_error(const char *cmd, char *flag, int errms)
 	int		status;
 
 	msgt = ft_strjoin(flag, "': flags and options not allowed");
-	msgr = ft_strjoin(": `", msgt);
+	msgr = ft_strjoin(": '", msgt);
 	free(msgt);
 	msgt = ft_strjoin(cmd, msgr);
 	status = return_error(msgt, errms, 0);
