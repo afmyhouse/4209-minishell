@@ -6,7 +6,7 @@
 #    By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/24 21:23:27 by antoda-s          #+#    #+#              #
-#    Updated: 2024/03/19 18:32:20 by antoda-s         ###   ########.fr        #
+#    Updated: 2024/03/20 16:59:23 by antoda-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ FILES	+=	303_parser_argc.c
 FILES	+=	304_parser_redir.c
 FILES	+=	305_parser_heredoc.c
 FILES	+=	400_termios.c
+FILES	+=	500_tk_blank.c
 FILES	+=	501_tk_builder.c
 FILES	+=	502_tk_xpd.c
 FILES	+=	503_tk_xpd_lst.c

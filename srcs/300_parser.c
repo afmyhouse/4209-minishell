@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:28:14 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/19 10:58:04 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/20 17:07:56 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int	parser(t_script *s, char **line_buffer)
 	add_history(*line_buffer);
 	if (tk_builder(line_buffer, &tk, s) == ERROR)
 		return (free_tokens(&tk));
+	tk_rm_blank(&tk);
 	if (syntax_checker(tk))
 		return (free_tokens(&tk));
 	s->cmd_count = cmds_counter(tk);

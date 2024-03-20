@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 19:10:37 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/19 14:24:45 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/20 17:02:26 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,24 @@
 ///				token after a pipe.
 /// @param head Head of the token list
 /// @return		clean content
-void	tk_rm_blank(t_token *head)
-{
-	t_token	*tmp;
+// void	tk_rm_blank(t_token *head)
+// {
+// 	t_token	*tmp;
 
-	while (head)
-	{
-		if (head->type != TK_PIPE && head->next && !head->next->content[0])
-		{
-			tmp = head->next->next;
-			free(head->next->content);
-			free(head->next);
-			head->next = tmp;
-		}
-		else
-			head = head->next;
-	}
-	return ;
-}
+// 	while (head)
+// 	{
+// 		if (head->type != TK_PIPE && head->next && !head->next->content[0])
+// 		{
+// 			tmp = head->next->next;
+// 			free(head->next->content);
+// 			free(head->next);
+// 			head->next = tmp;
+// 		}
+// 		else
+// 			head = head->next;
+// 	}
+// 	return ;
+// }
 
 /// @attention	>token builder< set of functions
 /// @brief 		Searches for a token type by token char set

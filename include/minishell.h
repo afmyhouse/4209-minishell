@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:28:06 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/19 18:17:48 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/20 17:00:42 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -389,7 +389,7 @@ void	termios_setter(struct termios *termios_p);
 ///				token after a pipe.
 /// @param head Head of the token list
 /// @return		clean content
-void	tk_rm_blank(t_token *head);
+void	tk_rm_blank(t_token **tk);
 
 /// @attention	>token builder< set of functions
 /// @brief 		Searches for a token type by token char set
