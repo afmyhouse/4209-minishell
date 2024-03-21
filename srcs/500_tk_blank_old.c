@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 19:10:37 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/21 14:47:32 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/20 17:13:11 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,30 +31,26 @@ char	ft_strset(const char *str, const char *set)
 /// @param c	separator to comply removal
 void	tk_blank_split(t_token **tk_p, t_token *tk, char c )
 {
-	char	*str1;
-	char	*str2;
+	char	*str;
 	char	*tmp;
 	t_token	*tk_new;
 
 	if (!c)
 		return ;
 	*tk_p = NULL;
-	str1 = tk->content;
-	while (str1 && *str1 && c)
+	str = tk->content;
+	while (str && *str && c)
 	{
-		tk_new = tk_addnew(str1, ft_strchr(str1, c) - str1, TK_NAME);
+		tk_new = tk_addnew(str, ft_strchr(str, c) - str, TK_NAME);
 		tk_lst_addback(tk_p, tk_new);
-		str2 = ft_strtrim(ft_strchr(str1, c), " \t\v\r\n\f");
-		if (ft_strncmp(str1, tk->content, ft_strlen(tk->content)))
-			ft_free(str1);
-		str1 = str2;
-		c = ft_strset(str1, " \t\v\r\n\f");
+		str = ft_strtrim(ft_strchr(str, c), " \t\v\r\n\f");
+		c = ft_strset(str, " \t\v\r\n\f");
 	}
 	tmp = tk->content;
-	tk->content = str1;
-	tk->size = ft_strlen(str1);
+	tk->content = str;
+	tk->size = ft_strlen(str);
 	tk_new->next = tk;
-	ft_free(tmp);
+	free(tmp);
 	return ;
 }
 
@@ -75,9 +71,9 @@ void	tk_rm_blank(t_token **tk)
 	tk_n = (*tk);
 	while (tk_n)
 	{
-		if (tk_n->type == TK_NAME && tk_n->rm)
-			tk_blank_split(tk_p, tk_n,
-				ft_strset((*tk)->content, " \t\v\r\n\f"));
+		if (tk_n->type == TK_NAME && !ft_strchr((*tk)->content, '='))
+			tk_blank_split(tk_p, tk_n, ft_strset((*tk)->content,
+					" \t\v\r\n\f"));
 		tk_p = &(tk_n->next);
 		tk_n = tk_n->next;
 	}

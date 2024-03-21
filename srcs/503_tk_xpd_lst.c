@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 19:10:37 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/19 10:48:36 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/21 14:43:01 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,10 @@ t_token	*tk_addnew(const char *str, int size, t_token_type type)
 	tk->content = ft_substr(str, 0, size);
 	tk->size = size;
 	tk->type = type;
+	if (tk->content[0] == '\"' || ft_strchr(tk->content, '='))
+		tk->rm = 0;
+	else
+		tk->rm = 1;
 	tk->next = NULL;
 	return (tk);
 }

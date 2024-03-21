@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:28:06 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/20 17:00:42 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/21 14:36:00 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ typedef enum e_token_type
 	TK_I,
 	TK_O,
 	TK_PIPE,
-	TK_NAME,
 	TK_EQUAL,
 	TK_OR,
 	TK_AND,
 	TK_WS,
+	TK_NAME
 }			t_token_type;
 
 /// @brief 	selection of type of execution command
@@ -110,6 +110,7 @@ typedef struct s_token
 	char			*content;
 	int				size;
 	t_token_type	type;
+	int				rm;
 	struct s_token	*next;
 }				t_token;
 

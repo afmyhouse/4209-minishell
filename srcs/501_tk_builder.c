@@ -6,36 +6,11 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 19:10:37 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/20 17:02:26 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/21 14:43:34 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/// @attention	>token builder< set of functions
-/// @brief 		This function is here to treat off cases where a $ expansion
-///				would lead to empty name tokens with the exception for an empty
-///				token after a pipe.
-/// @param head Head of the token list
-/// @return		clean content
-// void	tk_rm_blank(t_token *head)
-// {
-// 	t_token	*tmp;
-
-// 	while (head)
-// 	{
-// 		if (head->type != TK_PIPE && head->next && !head->next->content[0])
-// 		{
-// 			tmp = head->next->next;
-// 			free(head->next->content);
-// 			free(head->next);
-// 			head->next = tmp;
-// 		}
-// 		else
-// 			head = head->next;
-// 	}
-// 	return ;
-// }
 
 /// @attention	>token builder< set of functions
 /// @brief 		Searches for a token type by token char set
@@ -46,8 +21,8 @@ t_ops	tk_type_getter(const char *s)
 {
 	t_ops		blank;
 	int			i;
-	const t_ops	ops[16] = {{">>", 2, TK_O}, {"<<", 2, TK_I}, {">|", 2, TK_O},
-	{"<>", 2, TK_O}, {">", 1, TK_O}, {"<", 1, TK_I},
+	const t_ops	ops[16] = {{"<<", 2, TK_I}, {"<", 1, TK_I}, {">>", 2, TK_O},
+	{">|", 2, TK_O}, {"<>", 2, TK_O}, {">", 1, TK_O},
 	{" ", 1, TK_WS}, {"\n", 1, TK_WS}, {"\v", 1, TK_WS},
 	{"\t", 1, TK_WS}, {"\r", 1, TK_WS}, {"\f", 1, TK_WS},
 	{"||", 2, TK_OR}, {"&&", 2, TK_AND}, {"|", 1, TK_PIPE}, {NULL, 1, 0}};
