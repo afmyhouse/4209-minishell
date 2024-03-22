@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:26:48 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/22 21:53:07 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/22 22:35:58 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,18 +85,12 @@ int	free_commands(t_command *cmd, int cmd_idx)
 int	free_exit(t_script *s, int errms)
 {
 	free_commands(s->cmds, s->cmd_count);
-	show_func(__func__, INFO, "s->path", *s->path);
 	free_array(s->path, 0);
-	show_func(__func__, INFO, "s->envt", *s->envt);
 	free_array(s->envt, 0);
-	show_func(__func__, INFO, "s->envp", *s->envp);
 	free_array(s->envp, 0);
-	show_func(__func__, INFO, "s->home", s->home);
 	ft_free (s->home);
-	show_func(__func__, INFO, "FREE ->", s->hd);
 	if (s->hd)
 		ft_free (s->hd);
-	show_func(__func__, SUCCESS, "FREE ->", "COMPLETE");
 	return (errms);
 }
 

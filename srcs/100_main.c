@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:27:05 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/22 21:52:34 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/22 22:37:24 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	update_shlvl(t_script *s)
 		return ;
 	}
 	env_var_setter(new_shlvl, "MSHLVL", &s->envp);
-	show_func(__func__, SUCCESS, "MSHLVL", "READY");
 	ft_free(shlvl);
 	ft_free(new_shlvl);
 }

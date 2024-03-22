@@ -6,7 +6,7 @@
 #    By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/24 21:23:27 by antoda-s          #+#    #+#              #
-#    Updated: 2024/03/22 19:31:36 by antoda-s         ###   ########.fr        #
+#    Updated: 2024/03/22 22:36:57 by antoda-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,8 +72,6 @@ FILES	+=	880_bi_equal.c
 FILES	+=	890_bi_append.c
 FILES	+=	900_free.c
 FILES	+=	910_errors.c
-FILES	+=	999_debug_func.c
-FILES	+=	999_debug_vars.c
 
 SRC = $(addprefix $(SRCDIR), $(FILES))
 OBJ = $(addprefix $(OBJDIR), $(FILES:.c=.o))
