@@ -6,24 +6,11 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 19:10:37 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/21 14:47:32 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/22 21:53:48 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/// @brief 		detects the occurrence of char from set in string str
-/// @param str	string to process
-/// @param set	set of chars
-/// @return		char found or 0
-char	ft_strset(const char *str, const char *set)
-{
-	if (!str || !set)
-		return ('\0');
-	while (*set && !ft_strchr(str, *set))
-		set++;
-	return (*set);
-}
 
 /// @brief 		Remove blanks from composed litrals + vars
 /// @param tk_p	head of tokenor previous token
@@ -68,6 +55,7 @@ void	tk_rm_blank(t_token **tk)
 {
 	t_token	**tk_p;
 	t_token	*tk_n;
+	char	c;
 
 	if (!*tk || !tk)
 		return ;
@@ -76,8 +64,11 @@ void	tk_rm_blank(t_token **tk)
 	while (tk_n)
 	{
 		if (tk_n->type == TK_NAME && tk_n->rm)
-			tk_blank_split(tk_p, tk_n,
-				ft_strset((*tk)->content, " \t\v\r\n\f"));
+		{
+			c = ft_strset(tk_n->content, " \t\v\r\n\f");
+			if (c)
+				tk_blank_split(tk_p, tk_n, c);
+		}
 		tk_p = &(tk_n->next);
 		tk_n = tk_n->next;
 	}

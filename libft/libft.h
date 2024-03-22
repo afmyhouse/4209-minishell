@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 15:21:17 by hmaciel-          #+#    #+#             */
-/*   Updated: 2024/02/28 13:12:08 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/22 18:46:18 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,21 @@ void			ft_strswap(char **s1, char **s2);
 char			*ft_strrev(char *str, int j);
 char			**ft_split(char const *s, char c);
 char			**ft_split_set(char *str, char *charset);
+/// @brief 		Locates the first occurrence of char `c` in the string `s`
+/// @param s	String to search
+/// @param c	Character to search for
+/// @return		Pointer to the located character, or NULL if not found
 char			*ft_strchr(const char *s, int c);
+/// @brief 		Locates the first occurrence of char `c` in the string `s`
+/// @param s	String to search
+/// @param c	Character to search for
+/// @return		Pointer to the located character, or NULL if not found
+int				ft_strchr_i(const char *s, int c);
+/// @brief 		Detects the occurrence of char from set in string s
+/// @param str	string to process
+/// @param set	set of chars
+/// @return		char found or 0
+char			ft_strset(const char *s, const char *set);
 char			*ft_strdup(const char *s);
 char			*ft_strjoin_free(char *s1, char *s2);
 char			*ft_strjoin(char const *s1, char const *s2);

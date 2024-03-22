@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:28:06 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/21 14:36:00 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/22 18:54:32 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # include <readline/history.h>
 # include "../libft/libft.h"
 # include "../include/error.h"
+# include "../include/colors.h"
+# include "../include/debug.h"
 
 # define MAX_PATH_LEN 4096
 
@@ -1168,13 +1170,13 @@ void	show_func_msg(const char *msg);
 /// @param func_name	Name of the function
 /// @param status		Status of the function
 /// @return				Status of the function
-int		show_func(const char *func_name, int status, char *msg);
+int		show_func(const char *func_name, int status, char *msg1, char *msg2);
 /// @brief 				This function prints the environment variables
 /// @param envp			Environment variables
 /// @return				void
 void	show_array(char **array, const char *name);
 void	show_token_list(t_token *token);
 char	*ft_var_address(const char *varname, void *var);
-void	show_pointer(const char *func, int status, const char *msg, void *ptr);
+void	show_ptr(const char *func, int status, const char *msg, void *ptr);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 16:48:24 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/19 18:18:03 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/22 21:53:07 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	loop_heredoc(t_list *h, int pipe, char **hd)
 			free(tmp);
 	}
 	write(pipe, *hd, ft_strlen(*hd));
-	ft_free(*hd);
 }
 
 /// @brief		This function first initializes a pipe in which we can write
