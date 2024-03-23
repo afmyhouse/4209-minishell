@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 00:10:23 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/22 21:53:07 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/23 00:02:56 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,6 @@ int	ft_is_str_digit(char *str)
 		i++;
 	}
 	return (SUCCESS);
-}
-
-/// @brief 			Shows error and program sourcing it
-/// @param msg		Message to show
-/// @param system	Shows system error if true
-/// @return			SUCCESS
-int	exit_error_args(const char *msg, int system)
-{
-	ft_putstr_fd("exit\n", 2);
-	ft_putstr_fd("minishell: exit: ", 2);
-	ft_putstr_fd(msg, 2);
-	errno = system;
-	return (system);
 }
 
 /// @brief 		Exit function with error message

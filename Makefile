@@ -6,7 +6,7 @@
 #    By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/24 21:23:27 by antoda-s          #+#    #+#              #
-#    Updated: 2024/03/22 19:31:36 by antoda-s         ###   ########.fr        #
+#    Updated: 2024/03/23 00:05:56 by antoda-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ FILES	+=	504_tk_xpd_count.c
 FILES	+=	505_tk_xpd_filler.c
 FILES	+=	506_tk_xpd_split.c
 FILES	+=	507_tk_quotes.c
+FILES	+=	508_tk_var_name.c
 FILES	+=	600_env_setter.c
 FILES	+=	610_env_getter.c
 FILES	+=	700_exec_start.c
@@ -59,7 +60,6 @@ FILES	+=	731_exec_go.c
 FILES	+=	740_exec_redirs.c
 FILES	+=	750_exec_heredoc.c
 FILES	+=	760_exec_pipes.c
-FILES	+=	799_exec_errors.c
 FILES	+=	810_bi_echo.c
 FILES	+=	820_bi_cd.c
 FILES	+=	830_bi_pwd.c
@@ -71,7 +71,8 @@ FILES	+=	870_bi_exit.c
 FILES	+=	880_bi_equal.c
 FILES	+=	890_bi_append.c
 FILES	+=	900_free.c
-FILES	+=	910_errors.c
+FILES	+=	910_errors_bi.c
+FILES	+=	911_errors_exec.c
 FILES	+=	999_debug_func.c
 FILES	+=	999_debug_vars.c
 
