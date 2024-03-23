@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   799_exec_errors.c                                  :+:      :+:    :+:   */
+/*   911_exec_errors.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 23:43:45 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/22 21:53:07 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/22 23:59:15 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,14 @@ void	exit_forks(char *msg, int errms, t_script *s)
 	return_error(msg, errms, 1);
 	free_exit(s, 1);
 	exit(1);
+}
+
+/// @brief 			This function notifies heredoc error message
+/// @param msg 		Content to be printed
+void	error_message_heredoc(char *msg)
+{
+	ft_putstr_fd("minishell: warning: here-document delimited", 2);
+	ft_putstr_fd(" by end-of-file (wanted '", 2);
+	ft_putstr_fd(msg, 2);
+	ft_putendl_fd("\')", 2);
 }

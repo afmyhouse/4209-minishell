@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:28:06 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/22 22:35:01 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/23 00:13:15 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,9 @@ typedef struct s_script
 /* ************************************************************************** */
 ///	100_main.c
 /* ************************************************************************** */
+/// @brief 		Updates the shell level variable (MSHLVL)
+/// @param s 	Struct with pparams to initialize
+void	update_shlvl(t_script *s);
 /// @brief 		Creates array from system environment variables
 /// @param envp system environment variables from main (... char **envp)
 /// @return 	array copy of system environment variables
@@ -224,7 +227,6 @@ void	signal_setter(void);
 /// @brief		Signal processing functions setter for loop
 /// @param		No parameter required
 void	signal_setter_fork(void);
-void	signal_setter_heredoc(t_script *s);
 
 /// @brief 			Handles signal SIGINT (Ctrl+C) and SIGQUIT (Ctrl+\)
 ///					Instead of exiting, the sig handler provides a new line
@@ -238,12 +240,18 @@ void	sig_handler(int signum);
 /// @return			void
 void	sig_handler_fork(int signum);
 
+/* ************************************************************************** */
+///	205_signal_hd.c
+/* ************************************************************************** */
+/// @brief		Signal processing functions setter
+/// @param		No parameter required
+void	signal_setter_heredoc(t_script *s);
+
 /// @brief 			Handles the signal SIGINT when in heredoc
 ///					Exits with status 130 Command terminated by user
 /// @param signum	The signal number
 /// @return			void
 void	sig_handler_heredoc(int signum, t_script *s);
-// void	sig_handler_heredoc(int signum);
 
 /* ************************************************************************** */
 //																			  */
@@ -284,7 +292,7 @@ int		parse_commands(t_token *head, t_command *cmd, int i, int j);
 int		parser(t_script *script, char **line_buffer);
 
 /* ************************************************************************** */
-///	301ms_syntax.c
+///	301_parser_syntax.c
 /* ************************************************************************** */
 /// @brief 				Builds an error message string to be displayed
 ///						when a syntax error is encountered.
@@ -301,7 +309,7 @@ int		syntax_error_msg(char *tk_content, int errms, int errsys);
 int		syntax_checker(t_token *tk);
 
 /* ************************************************************************** */
-///	302ms_cmd.c
+///	302_parser_cmd.c
 /* ************************************************************************** */
 /// @brief			This function simply counts the number of pipes in our
 ///					linked list of tokens to determine the number of chained
@@ -311,7 +319,7 @@ int		syntax_checker(t_token *tk);
 int		cmds_counter(t_token *head);
 
 /* ************************************************************************** */
-///	303ms_argc.c
+///	303_parser_argc.c
 /* ************************************************************************** */
 /// @brief			Determines the amount of arguments each command
 ///					has so the argv can be malloced to the right size in the
@@ -322,8 +330,13 @@ int		cmds_counter(t_token *head);
 void	args_counter(t_token *head, t_script *script);
 
 /* ************************************************************************** */
-///	304ms_redir.c
+///	304_parser_redir.c
 /* ************************************************************************** */
+/// @brief 			Checks if the redirection token is valid
+/// @param name 	Name of the file
+/// @return 		1 if failure, 0 if success
+int		redir_error(char *name);
+
 /// @brief 			Iniatilzes file names direction and remove quotes from names
 /// @param cmds Struct witj info about files
 /// @param max 		max number of files
@@ -339,7 +352,7 @@ void	fnames_clear(t_command *cmds, int max, t_token *head);
 int		redir(t_token *head, t_redirection *file);
 
 /* ************************************************************************** */
-///	305ms_heredoc.c
+///	305_parser_heredoc.c
 /* ************************************************************************** */
 /// @brief 		Creates a node in the file linked list withe file name
 ///				and adds it to the back of list
@@ -358,7 +371,7 @@ void	fill_heredoc(t_redirection *file);
 //																			  */
 /* ************************************************************************** */
 /* ************************************************************************** */
-///	400ms_termios.c
+///	400_termios.c
 /* ************************************************************************** */
 /// @brief 				Gets the terminal settings
 /// @param termios_p	Pointer to the termios settings structure
@@ -381,8 +394,14 @@ void	termios_setter(struct termios *termios_p);
 //																			  */
 /* ************************************************************************** */
 /* ************************************************************************** */
-///	501ms_tk_builder.c
+///	500_tk_blank.c
 /* ************************************************************************** */
+/// @brief 		Remove blanks from composed litrals + vars
+/// @param tk_p	head of tokenor previous token
+/// @param tk	token
+/// @param c	separator to comply removal
+void	tk_blank_split(t_token **tk_p, t_token *tk, char c );
+
 /// @attention	>token builder< set of functions
 /// @brief 		This function is here to treat off cases where a $ expansion
 ///				would lead to empty name tokens with the exception for an empty
@@ -391,6 +410,9 @@ void	termios_setter(struct termios *termios_p);
 /// @return		clean content
 void	tk_rm_blank(t_token **tk);
 
+/* ************************************************************************** */
+///	501_tk_builder.c
+/* ************************************************************************** */
 /// @attention	>token builder< set of functions
 /// @brief 		Searches for a token type by token char set
 /// @param s	String to be searched for token char set
@@ -417,7 +439,7 @@ int		tk_getter(char *str, t_token **tk_lst);
 int		tk_builder(char **line, t_token **tk, t_script *s);
 
 /* ************************************************************************** */
-///	502ms_tk_xpd.c
+///	502_tk_xpd.c
 /* ************************************************************************** */
 /// @attention	>token builder< set of functions
 /// @brief 		it takes a char sequence and cpounts the number of splits needed
@@ -453,20 +475,8 @@ char	**tk_var_xpd(char *otk);
 char	*tk_env_var_expander(char *otk, t_script *s);
 
 /* ************************************************************************** */
-///	503ms_tk_lst.c
+///	503_tk_lst.c
 /* ************************************************************************** */
-/// @attention	>token builder< set of functions
-/// @brief		checks if char is a valid identifier char ('_', alpha, digit)
-/// @param c 	char to be checked
-/// @return		SUCCESS or ERROR
-int		var_name_checker(char c);
-
-/// @attention	>token builder< set of functions
-/// @brief		checks if char is a valid 1st identifier char ('_' or alpha)
-/// @param c 	char to be checked
-/// @return		SUCCESS or ERROR
-int		var_firstchar(char c);
-
 /// @attention	>token builder< set of functions
 /// @brief 		Creates a new token node with {content, type, size, next}
 /// @param str	String to be transformed into a toke
@@ -488,7 +498,7 @@ t_token	*tk_lst_last_getter(t_token *ltk);
 void	tk_lst_addback(t_token **ltk, t_token *ntk);
 
 /* ************************************************************************** */
-///	504ms_tk_xpd_count.c
+///	504_tk_xpd_count.c
 /* ************************************************************************** */
 /// @attention	>token builder< set of functions
 /// @brief 		check is a '$' char is followed by valid valid identifier char
@@ -526,7 +536,7 @@ void	tk_var_xpd_squote_c(char *otk, int *i);
 void	tk_var_xpd_else_c(char *otk, int *i);
 
 /* ************************************************************************** */
-///	505ms_tk_xpd_filler.c
+///	505_tk_xpd_filler.c
 /* ************************************************************************** */
 /// @attention	>token builder< set of functions
 /// @brief
@@ -543,7 +553,7 @@ char	*tk_xpd_var_filler(char *ntk, t_script *s);
 char	*tk_xpd_filler(char ***ntks, t_script *s);
 
 /* ************************************************************************** */
-///506ms_tk_split.c
+///506_tk_split.c
 /* ************************************************************************** */
 
 /// @attention	>token builder< set of functions
@@ -586,7 +596,7 @@ void	tk_var_xpd_squote(char *otk, char ***ntks, int *spl, int *i);
 void	tk_var_xpd_else(char *otk, char ***ntks, int *spl, int *i);
 
 /* ************************************************************************** */
-///507ms_tk_quotes.c
+///507_tk_quotes.c
 /* ************************************************************************** */
 /// @brief 		fetchs for closed / unclosed quotes type " or '
 ///				the function must be called with the arg str (string)
@@ -619,6 +629,21 @@ char	*tk_xpd_unquote(char *str);
 void	tk_trim_spaces(t_token *tk);
 
 /* ************************************************************************** */
+///	508_tk_var_name.c
+/* ************************************************************************** */
+/// @attention	>token builder< set of functions
+/// @brief		checks if char is a valid identifier char ('_', alpha, digit)
+/// @param c 	char to be checked
+/// @return		SUCCESS or ERROR
+int		var_name_checker(char c);
+
+/// @attention	>token builder< set of functions
+/// @brief		checks if char is a valid 1st identifier char ('_' or alpha)
+/// @param c 	char to be checked
+/// @return		SUCCESS or ERROR
+int		var_firstchar(char c);
+
+/* ************************************************************************** */
 //																			  */
 //		 ####     ####     ####												  */
 //		#        #    #   #    #											  */
@@ -630,7 +655,7 @@ void	tk_trim_spaces(t_token *tk);
 //																			  */
 /* ************************************************************************** */
 /* ************************************************************************** */
-///	600ms_env.c
+///	600_env_setter.c
 /* ************************************************************************** */
 /// @brief 			This function deletes an environment variable and returns a
 ///					new malloced array without the deleted variable
@@ -660,6 +685,9 @@ int		env_var_index_getter(char *var, char **envx);
 /// @return 	0 if success, -1 if error
 int		env_var_setter(char *val, char *var, char ***envx);
 
+/* ************************************************************************** */
+///	610_env_getter.c
+/* ************************************************************************** */
 /// @brief		This function iterates over the environment variables to
 ///				find whether or not the given variable (str) is defined and
 ///				returns the content or an empty freeable string.
@@ -688,7 +716,7 @@ char	*env_var_getter(char *var, char **envp, char **envt);
 //																			  */
 /* ************************************************************************** */
 /* ************************************************************************** */
-///	700exec_start.c
+///	700_exec_start.c
 /* ************************************************************************** */
 /// @brief 		get the index of the PATH envp array item
 /// @param envp array with PATH entry
@@ -706,7 +734,7 @@ char	**split_path(char **envp);
 int		execute(t_script *s);
 
 /* ************************************************************************** */
-///	705exec_type.c
+///	705_exec_type.c
 /* ************************************************************************** */
 /// @brief 		Checks is a script started with bi_equal is not followed by
 /// 			a valid command or naything different from var=value
@@ -723,21 +751,8 @@ int		bi_equal_check(t_script *s, int n, int i);
 int		exec_type(char *cmd);
 
 /* ************************************************************************** */
-///	710exec_one.c
+///	710_exec_one.c
 /* ************************************************************************** */
-/// @brief 			Executes a builtin command according to its id
-/// @param id 		Builtin command id
-/// @param s 		Script contents and parameters including redirect info
-/// @param i 		Index of the command to execute
-/// @return 		SUCCESS or ERROR
-int		exec_bi(int id, t_script *s, int i);
-
-/// @brief 			Executes a command using the absolute path or the PATH
-/// @param path 	Commands execution path
-/// @param cmd 		Command to execute
-/// @param env 		Environment variables
-void	exec_ve(char **path, char **cmd, char **env);
-
 /// @brief 			Executes a single command script in a fork
 /// @param s 		Script contents and parameters including redirect info
 /// @param path		Commands execution path
@@ -755,7 +770,37 @@ int		exec_one_fork(t_script *s);
 int		exec_one(t_script *s);
 
 /* ************************************************************************** */
-///	720exec_many.c
+///	711_exec_bi.c
+/* ************************************************************************** */
+/// @brief 			Executes a builtin command according to its id
+/// @param id 		Builtin command id
+/// @param s 		Script contents and parameters including redirect info
+/// @param i 		Index of the command to execute
+/// @return 		SUCCESS or ERROR
+int		exec_bi(int id, t_script *s, int i);
+
+/* ************************************************************************** */
+///	712_exec_ve.c
+/* ************************************************************************** */
+/// @brief 		Executes a command using the absolute path
+/// @param cmd 	Command to execute
+/// @param env 	Environment variables
+void	exec_ve_abs(char **cmd, char **env);
+
+/// @brief 		Executes a command using the PATH
+/// @param path Commands execution path
+/// @param cmd 	Command to execute
+/// @param env 	Environment variables
+void	exec_ve_path(char **path, char **cmd, char **env);
+
+/// @brief 			Executes a command using the absolute path or the PATH
+/// @param path 	Commands execution path
+/// @param cmd 		Command to execute
+/// @param env 		Environment variables
+void	exec_ve(char **path, char **cmd, char **env);
+
+/* ************************************************************************** */
+///	720_exec_many.c
 /* ************************************************************************** */
 /// @brief 			Executes the first command in a pipped script
 /// @param s 		Script contents and parameters including redirect info
@@ -799,7 +844,7 @@ int		exec_cmd_loop(t_script *s, int *pipe1, int *pipe2);
 int		exec_many(t_script *s);
 
 /* ************************************************************************** */
-///	730exec_childs.c
+///	730_exec_childs.c
 /* ************************************************************************** */
 /// @brief 			Executes the first command in a pipe
 /// @param s 		Script contents and parameters including redirect info
@@ -822,6 +867,9 @@ void	ex_child_i(t_script *s, int **pipes, int i);
 // void	ex_child_n(t_script *s, char **path, int *pipein, int i);
 void	ex_child_n(t_script *s, int *pipein, int i);
 
+/* ************************************************************************** */
+///	731_exec_go.c
+/* ************************************************************************** */
 /// @brief 			Executes the command (execeve or bi )
 /// @param s 		Script contents and parameters including redirect info
 /// @param path 	Commands execution path
@@ -830,7 +878,7 @@ void	ex_child_n(t_script *s, int *pipein, int i);
 void	exec_go(t_script *s, int id, int i);
 
 /* ************************************************************************** */
-///	740exec_redirs.c
+///	740_exec_redirs.c
 /* ************************************************************************** */
 /// @brief 		After fork, child process calls this fucntion prepare redirect
 ///				from a file.
@@ -850,12 +898,8 @@ void	in_redir(t_script *s, int i);
 void	out_redir(t_script *s, int i);
 
 /* ************************************************************************** */
-///	750exec_heredoc.c
+///	750_exec_heredoc.c
 /* ************************************************************************** */
-/// @brief 			This function notifies heredoc error message
-/// @param msg 		Content to be printed
-void	error_message_heredoc(char *msg);
-
 /// @brief		This function reads the user's input until it finds the
 /// 			delimiters set in heredoc linked list. It stores the input only
 /// 			for the last delimiter and places it in the pipe for later use
@@ -898,12 +942,6 @@ void	pipe_closer(int *pa, int *pb);
 /// @param end 		The extremity we have to dup.
 /// @return
 int		pipe_std_setter(int *pipe, int end);
-
-/* ************************************************************************** */
-///	799exec_errors.c
-/* ************************************************************************** */
-int		fork_error(char **path_env);
-int		pipe_error(char **path_env);
 
 /* ************************************************************************** */
 //																			  */
@@ -979,8 +1017,8 @@ void	bi_export_upd_var(t_script *s, int n, int i);
 /// @param s 	Script structure with commans and args
 /// @param n 	Index of command to be executed
 /// @param i 	Index of argument to be checked
-
 void	bi_export_new_var(t_script *s, int n, int i);
+
 /// @brief 			Export PERMANENT environment variables
 /// @param s 		Script structure with commans and args
 /// @param n 		Index of command to be executed
@@ -1014,12 +1052,6 @@ int		export_status(t_script *s, int n);
 /// @return			Updated environment variables
 int		bi_unset(t_script *s, int n);
 
-/// @brief 			Remove a variable from the TEMPORARY environment
-/// @param s 		Arguments passed to unset command
-/// @param n 		Current argument (variable)
-/// @return			Updated environment variables
-int		bi_unset_envt(t_script *s, int n);
-
 /* ************************************************************************** */
 ///	860_bi_env.c
 /* ************************************************************************** */
@@ -1036,12 +1068,6 @@ int		bi_env(t_script *s, int n);
 /// @param str		Builtin 'exit' argument string
 /// @return			SUCSESS or ERROR
 int		ft_is_str_digit(char *str);
-
-/// @brief 			Shows error and program sourcing it
-/// @param msg		Message to show
-/// @param system	Shows system error if true
-/// @return			SUCCESS
-int		exit_error_args(const char *msg, int system);
 
 /// @brief 			Shows exit() NOT numeric arg error
 /// @param msg 		Message to show
@@ -1085,6 +1111,14 @@ int		bi_equal(t_script *s, int n);
 /* ************************************************************************** */
 ///	890_bi_append.c
 /* ************************************************************************** */
+/// @brief 			get command arg <var>+=<vn> and built a bi_equal command arg
+/// 				#1 if <var> does exists	  ->	<var>=<v1><v2>
+///					#2 if <var> doesn't exist ->	<var>=<v2>
+/// @param s 		Script structure with commans and args
+/// @param n 		Index of command to be executed
+/// @param i 		Index of argument to be checked
+void	bi_append_new(t_script *s, int n, int i);
+
 /// @brief 			Looks for += embedded signs and call bi_append_new
 /// @param s 		Script structure with commans and args
 /// @param n 		Index of command to be executed
@@ -1103,7 +1137,7 @@ int		bi_append(t_script *s, int n, int i);
 //																			  */
 /* ************************************************************************** */
 /* ************************************************************************** */
-///	900free.c
+///	900_free.c
 /* ************************************************************************** */
 /// @brief 			Frees the environment variables
 /// @param my_envp	Environment variables
@@ -1129,22 +1163,20 @@ int		free_exit(t_script *s, int errms);
 /// @param path 	Path to be freed
 void	free_cmds_path(t_script *script);
 
-/// @brief 			Shows error and program sourcing it and exit(1) freeing
-/// 				allocated vars
-/// @param msg 		Message to show
-/// @param errms 	Error message
-/// @param s 		Script to be freed
-/// @param path 	Path to be freed
-void	exit_forks(char *msg, int errms, t_script *s);
-
 /* ************************************************************************** */
-///	910errors.c
+///	910_errors_bi.c
 /* ************************************************************************** */
 /// @brief 			Shows error and program sourcing it
 /// @param msg		Message to show
 /// @param system	Shows system error if true
 /// @return			SUCCESS
 int		export_error(const char *msg, int system);
+
+/// @brief 			Shows error and program sourcing it
+/// @param msg		Message to show
+/// @param system	Shows system error if true
+/// @return			SUCCESS
+int		exit_error_args(const char *msg, int system);
 
 /// @brief 			Shows error and program sourcing it
 /// @param msg		Message to show
@@ -1157,6 +1189,31 @@ int		flags_error(const char *msg, char *flags, int errms);
 /// @param system	Shows system error if true
 /// @return			SUCCESS
 int		return_error(const char *msg, int errms, int errbash);
+
+/* ************************************************************************** */
+///	911_errors_exec.c
+/* ************************************************************************** */
+/// @brief 		displays error message on fork error
+/// @param path	array to free
+/// @return		status
+int		fork_error(char **path);
+
+/// @brief 		displays error message on pipe error
+/// @param path	array to free
+/// @return		status
+int		pipe_error(char **path);
+
+/// @brief 			Shows error and program sourcing it and exit(1) freeing
+/// 				allocated vars
+/// @param msg 		Message to show
+/// @param errms 	Error message
+/// @param s 		Script to be freed
+/// @param path 	Path to be freed
+void	exit_forks(char *msg, int errms, t_script *s);
+
+/// @brief 			This function notifies heredoc error message
+/// @param msg 		Content to be printed
+void	error_message_heredoc(char *msg);
 
 /* ************************************************************************** */
 ///	999_debug.c

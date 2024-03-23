@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:28:14 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/22 21:55:04 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/22 23:40:14 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ void	fnames_clear(t_command *cmds, int max, t_token *tk)
 	return ;
 }
 
+/// @brief 			Checks if the redirection token is valid
+/// @param name 	Name of the file
+/// @return 		1 if failure, 0 if success
 int	redir_error(char *name)
 {
 	ft_putstr_fd("minishell: ", STDERR_FILENO);

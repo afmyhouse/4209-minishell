@@ -6,18 +6,25 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:25:54 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/22 21:53:07 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/22 23:49:21 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/// @brief 		Executes a command using the absolute path
+/// @param cmd 	Command to execute
+/// @param env 	Environment variables
 void	exec_ve_abs(char **cmd, char **env)
 {
 	if (execve(*cmd, cmd, env) == -1)
 		g_exit_status = errno;
 }
 
+/// @brief 		Executes a command using the PATH
+/// @param path Commands execution path
+/// @param cmd 	Command to execute
+/// @param env 	Environment variables
 void	exec_ve_path(char **path, char **cmd, char **env)
 {
 	char	*tmp;

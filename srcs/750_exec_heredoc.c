@@ -6,21 +6,11 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 16:48:24 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/22 21:53:07 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/22 23:53:26 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/// @brief 			This function notifies heredoc error message
-/// @param msg 		Content to be printed
-void	error_message_heredoc(char *msg)
-{
-	ft_putstr_fd("minishell: warning: here-document delimited", 2);
-	ft_putstr_fd(" by end-of-file (wanted '", 2);
-	ft_putstr_fd(msg, 2);
-	ft_putendl_fd("\')", 2);
-}
 
 /// @brief		This function reads the user's input until it finds the
 /// 			delimiters set in heredoc linked list. It stores the input only

@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:27:05 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/22 22:37:24 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/23 00:14:34 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	g_exit_status;
 
+/// @brief 		Updates the shell level variable (MSHLVL)
+/// @param s 	Struct with pparams to initialize
 void	update_shlvl(t_script *s)
 {
 	char	*shlvl;
