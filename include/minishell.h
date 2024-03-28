@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:28:06 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/23 00:13:15 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:02:57 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1170,25 +1170,25 @@ void	free_cmds_path(t_script *script);
 /// @param msg		Message to show
 /// @param system	Shows system error if true
 /// @return			SUCCESS
-int		export_error(const char *msg, int system);
+int		error_export(const char *msg, int system);
 
 /// @brief 			Shows error and program sourcing it
 /// @param msg		Message to show
 /// @param system	Shows system error if true
 /// @return			SUCCESS
-int		exit_error_args(const char *msg, int system);
+int		error_exit_args(const char *msg, int system);
 
 /// @brief 			Shows error and program sourcing it
 /// @param msg		Message to show
 /// @param system	Shows system error if true
 /// @return			SUCCESS
-int		flags_error(const char *msg, char *flags, int errms);
+int		error_bi_flags(const char *msg, char *flags, int errms);
 
 /// @brief 			Shows error and program sourcing it
 /// @param msg		Message to show
 /// @param system	Shows system error if true
 /// @return			SUCCESS
-int		return_error(const char *msg, int errms, int errbash);
+int		error_return(const char *msg, int errms, int errbash);
 
 /* ************************************************************************** */
 ///	911_errors_exec.c
@@ -1196,12 +1196,12 @@ int		return_error(const char *msg, int errms, int errbash);
 /// @brief 		displays error message on fork error
 /// @param path	array to free
 /// @return		status
-int		fork_error(char **path);
+int		error_fork(char **path);
 
 /// @brief 		displays error message on pipe error
 /// @param path	array to free
 /// @return		status
-int		pipe_error(char **path);
+int		error_pipe(char **path);
 
 /// @brief 			Shows error and program sourcing it and exit(1) freeing
 /// 				allocated vars
@@ -1214,23 +1214,5 @@ void	exit_forks(char *msg, int errms, t_script *s);
 /// @brief 			This function notifies heredoc error message
 /// @param msg 		Content to be printed
 void	error_message_heredoc(char *msg);
-
-/* ************************************************************************** */
-///	999_debug.c
-/* ************************************************************************** */
-void	execute_show(t_script *s);
-void	show_func_msg(const char *msg);
-/// @brief 				Shows the function name and status
-/// @param func_name	Name of the function
-/// @param status		Status of the function
-/// @return				Status of the function
-int		show_func(const char *func_name, int status, char *msg1, char *msg2);
-/// @brief 				This function prints the environment variables
-/// @param envp			Environment variables
-/// @return				void
-void	show_array(char **array, const char *name);
-void	show_token_list(t_token *token);
-char	*ft_var_address(const char *varname, void *var);
-void	show_ptr(const char *func, int status, const char *msg, void *ptr);
 
 #endif

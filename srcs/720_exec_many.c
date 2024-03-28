@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:26:05 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/22 21:53:07 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:02:57 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ int	exec_cmd_1(t_script *s, char **path, int *pipeout)
 	if (pipe(pipeout) == -1)
 	{
 		free (s->path);
-		return (return_error("", errno, 1));
+		return (error_return("", errno, 1));
 	}
 	pid = fork();
 	if (pid == -1)
 	{
 		free (s->path);
-		return (return_error("", errno, 1));
+		return (error_return("", errno, 1));
 	}
 	if (pid == 0)
 		ex_child_1(s, pipeout);
@@ -51,12 +51,12 @@ int	exec_cmd_i(t_script *s, char **path, int **pipes, int i)
 
 	(void) path;
 	if (!pipes)
-		return (return_error("", errno, 1));
+		return (error_return("", errno, 1));
 	pid = fork();
 	if (pid == -1)
 	{
 		free(s->path);
-		return (return_error("", errno, 1));
+		return (error_return("", errno, 1));
 	}
 	if (pid == 0)
 		ex_child_i(s, pipes, i);
@@ -81,7 +81,7 @@ int	exec_cmd_n(t_script *s, int *pipein)
 	if (pid == -1)
 	{
 		free (s->path);
-		return (return_error("", errno, 1));
+		return (error_return("", errno, 1));
 	}
 	if (pid == 0)
 		ex_child_n(s, pipein, i);

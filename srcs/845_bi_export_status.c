@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 23:46:39 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/22 21:53:07 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:02:57 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,6 @@ int	export_status(t_script *s, int n)
 		free_array(order, 0);
 	}
 	else if (s->cmds[n].argv[1][0] == '\0')
-		return (return_error("Syntax error", 1, 2));
+		return (error_return("Syntax error", 1, 2));
 	return (SUCCESS);
 }

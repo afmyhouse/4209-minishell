@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:28:14 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/22 21:54:40 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:02:57 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	parse_commands(t_token *tk, t_command *cmd, int i, int j)
 	{
 		cmd[i].argv = ft_calloc((cmd[i].argc + 1), sizeof(char *));
 		if (!cmd[i].argv)
-			return (return_error("", errno, 1));
+			return (error_return("", errno, 1));
 		j = 0;
 		while (tk && tk->type != TK_PIPE)
 		{
@@ -83,7 +83,7 @@ int	parser(t_script *s, char **line_buffer)
 	s->cmd_count = cmds_counter(tk);
 	s->cmds = ft_calloc(s->cmd_count, sizeof(t_command));
 	if (!s->cmds)
-		return (return_error("", errno, 1));
+		return (error_return("", errno, 1));
 	if (s->cmd_count == 0)
 		return (back_to_loop(s->cmds, s->cmd_count, &tk));
 	args_counter(tk, s);

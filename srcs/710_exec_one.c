@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:25:54 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/22 21:53:07 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:02:57 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	exec_one_fork(t_script *s)
 	signal(SIGINT, sig_handler_fork);
 	pid = fork();
 	if (pid == -1)
-		return (return_error("", errno, 1));
+		return (error_return("", errno, 1));
 	if (pid == 0)
 	{
 		signal_setter_fork();

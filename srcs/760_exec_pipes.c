@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:26:05 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/22 21:53:07 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:00:47 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	**pipe_init(char **path, int *pipe1, int *pipe2)
 		return (NULL);
 	if (pipe(pipe2) == -1)
 	{
-		pipe_error(path);
+		error_pipe(path);
 		return (NULL);
 	}
 	pipes[0] = pipe1;

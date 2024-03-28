@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 22:37:00 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/23 00:08:31 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:02:57 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 /// @param msg		Message to show
 /// @param system	Shows system error if true
 /// @return			SUCCESS
-int	export_error(const char *msg, int errms)
+int	error_export(const char *msg, int errms)
 {
 	char	*msgr;
 	char	*msgt;
@@ -25,7 +25,7 @@ int	export_error(const char *msg, int errms)
 	msgt = ft_strjoin(msg, "': not a valid identifier");
 	msgr = ft_strjoin("export: `", msgt);
 	free(msgt);
-	status = return_error(msgr, errms, 0);
+	status = error_return(msgr, errms, 0);
 	free(msgr);
 	return (status);
 }
@@ -34,7 +34,7 @@ int	export_error(const char *msg, int errms)
 /// @param msg		Message to show
 /// @param system	Shows system error if true
 /// @return			SUCCESS
-int	exit_error_args(const char *msg, int system)
+int	error_exit_args(const char *msg, int system)
 {
 	ft_putstr_fd("exit\n", 2);
 	ft_putstr_fd("minishell: exit: ", 2);
@@ -47,7 +47,7 @@ int	exit_error_args(const char *msg, int system)
 /// @param msg		Message to show
 /// @param system	Shows system error if true
 /// @return			SUCCESS
-int	flags_error(const char *cmd, char *flag, int errms)
+int	error_bi_flags(const char *cmd, char *flag, int errms)
 {
 	char	*msgr;
 	char	*msgt;
@@ -57,7 +57,7 @@ int	flags_error(const char *cmd, char *flag, int errms)
 	msgr = ft_strjoin(": '", msgt);
 	free(msgt);
 	msgt = ft_strjoin(cmd, msgr);
-	status = return_error(msgt, errms, 0);
+	status = error_return(msgt, errms, 0);
 	free(msgt);
 	free(msgr);
 	return (status);
@@ -67,7 +67,7 @@ int	flags_error(const char *cmd, char *flag, int errms)
 /// @param msg		Message to show
 /// @param system	Shows system error if true
 /// @return			SUCCESS
-int	return_error(const char *msg, int errms, int errbash)
+int	error_return(const char *msg, int errms, int errbash)
 {
 	if (!errbash)
 		ft_putstr_fd("minishell: ", 2);

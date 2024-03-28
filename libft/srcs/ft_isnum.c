@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_isnum.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 16:12:42 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/25 17:18:06 by antoda-s         ###   ########.fr       */
+/*   Created: 2024/03/25 15:07:43 by antoda-s          #+#    #+#             */
+/*   Updated: 2024/03/25 17:08:05 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-/// @see		ft_memset
-/// @brief 		Fills a byte string with zeros.
-/// @param s	Pointer to string
-/// @param n	Number of bytes to fill
-void ft_bzero(void *s, size_t n)
+/// @brief 			Checks is a string is a decimal number with sign
+/// @param str		String representing the number to validate
+/// @return			TRUE or FALSE
+int	ft_isnum(char *str)
 {
-	ft_memset(s, 0, n);
-	return;
+	int	i;
+
+	i = 0;
+	if (ft_issign(str[i]))
+		i++;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (FALSE);
+		i++;
+	}
+	return (TRUE);
 }

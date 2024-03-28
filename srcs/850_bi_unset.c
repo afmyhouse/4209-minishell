@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 23:46:53 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/22 21:53:07 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:02:42 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	bi_unset(t_script *s, int n)
 	i = 0;
 	while (s->cmds[n].argv[++i])
 		if (s->cmds[n].argv[i][0] == '-')
-			return (flags_error(s->cmds[n].argv[0], s->cmds[n].argv[i], 0));
+			return (error_bi_flags(s->cmds[n].argv[0], s->cmds[n].argv[i], 0));
 	i = 0;
 	while (s->cmds[n].argv[++i])
 	{

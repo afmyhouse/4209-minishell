@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 19:00:01 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/22 21:53:07 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:02:57 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	**env_del_one(char *del, char **envx, int j)
 	new_array = ft_calloc(i, sizeof(char *));
 	if (!new_array)
 	{
-		(return_error("", errno, 1));
+		(error_return("", errno, 1));
 		return (NULL);
 	}
 	i = -1;
@@ -64,7 +64,7 @@ char	**env_add_one(char **envx, char *new)
 	new_array = ft_calloc(i, sizeof(char *));
 	if (!new_array)
 	{
-		return_error("", errno, 1);
+		error_return("", errno, 1);
 		return (NULL);
 	}
 	i = -1;

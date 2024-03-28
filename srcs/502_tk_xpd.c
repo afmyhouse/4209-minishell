@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 19:00:01 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/22 23:29:31 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:02:57 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	**tk_var_xpd_init(char *otk)
 	ntks = ft_calloc(spl + 1, sizeof(char *));
 	if (!ntks)
 	{
-		return_error("", errno, 1);
+		error_return("", errno, 1);
 		return (NULL);
 	}
 	ntks[spl] = NULL;

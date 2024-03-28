@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 15:21:17 by hmaciel-          #+#    #+#             */
-/*   Updated: 2024/03/22 18:46:18 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/25 17:21:15 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,18 +88,60 @@ typedef struct s_printf
 
 void			ft_free_arr(char **str);
 void			ft_free(char *str);
+
+/// @see		ft_isspace, ft_issign, ft_isdigit
+/// @brief 		Converts the initial portion of the string pointed to by nptr
+/// @param nptr	Pointer to string
+/// @return		The converted integer
 int				ft_atoi(const char *nptr);
+
+/// @see		ft_isspace, ft_issign, ft_isdigit
+/// @brief 		Converts the initial portion of the string pointed to by nptr
+///				to long int
+/// @param nptr	The string to convert
+/// @return		The converted long int
 long			ft_atol(const char *nptr);
+
+/// @see		ft_isspace, ft_issign, ft_isdigit
+/// @brief 		Converts the initial portion of the string pointed to by nptr
+///				to long int
+/// @param nptr	The string to convert
+/// @return		The converted long int
 long double		ft_atoll(const char *nptr);
+
+/// @see		malloc
+/// @brief 		Converts a decimal to a string
+/// @param n	The decimal to be converted
+/// @param p	The precision of the decimal
+/// @return		The string representation of the decimal
 char			*ft_ftoa(float f, int p);
+
 /// @brief 		Converts the integer n to a string
 /// @param n	The integer to convert
 ///
 /// @return		The string representation of the integer
 char			*ft_itoa_base(const long int n, char base);
+
+/// @see		ft_memset
+/// @brief 		Fills a byte string with zeros.
+/// @param s	Pointer to string
+/// @param n	Number of bytes to fill
 void			ft_bzero(void *s, size_t n);
+
+/// @brief 		Converts the integer n to a string
+/// @param n	The integer to convert
+/// @return		The string representation of the integer
 char			*ft_itoa(int n);
+
+/// @see				malloc, ft_bzero
+/// @brief 				Allocates memory for an array of Number of elements
+///						of size item_size (bytes) each and returns a pointer to
+///						the begin of allocated memory
+/// @param item_qty		Number of elements
+/// @param item_size	Size of each element
+/// @return				Pointer to allocated memory
 void			*ft_calloc(size_t nmemb, size_t size);
+
 char			*ft_charjoin(char const *s1, char const c);
 int				ft_isalnum(int c);
 int				ft_isalpha(int c);
@@ -108,6 +150,10 @@ int				ft_isdigit(int c);
 int				ft_isprint(int c);
 int				ft_issign(char c);
 int				ft_isspace(int c);
+/// @brief 			Builtin 'exit' command argument checker
+/// @param str		Builtin 'exit' argument string
+/// @return			SUCSESS or ERROR
+int				ft_isnum(char *str);
 void			*ft_memchr(const void *s, int c, size_t n);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
 void			*ft_memcpy(void *dest, const void *src, size_t n);

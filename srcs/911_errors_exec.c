@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   911_exec_errors.c                                  :+:      :+:    :+:   */
+/*   911_errors_exec.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 23:43:45 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/22 23:59:15 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:04:13 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /// @brief 		displays error message on fork error
 /// @param path	array to free
 /// @return		status
-int	fork_error(char **path)
+int	error_fork(char **path)
 {
 	write(2, "Error: fork failed\n", 19);
 	g_exit_status = 1;
@@ -25,7 +25,7 @@ int	fork_error(char **path)
 /// @brief 		displays error message on pipe error
 /// @param path	array to free
 /// @return		status
-int	pipe_error(char **path)
+int	error_pipe(char **path)
 {
 	write(2, "Error: pipe failed\n", 19);
 	g_exit_status = 1;
@@ -40,7 +40,7 @@ int	pipe_error(char **path)
 /// @param path 	Path to be freed
 void	exit_forks(char *msg, int errms, t_script *s)
 {
-	return_error(msg, errms, 1);
+	error_return(msg, errms, 1);
 	free_exit(s, 1);
 	exit(1);
 }

@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 16:48:24 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/22 23:53:26 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:02:57 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	heredoc(t_script *s, int i)
 	if (pipe(pipe_tmp) == -1)
 	{
 		free_cmds_path(s);
-		exit((return_error("", errno, 1)));
+		exit((error_return("", errno, 1)));
 	}
 	signal_setter_heredoc(s);
 	loop_heredoc(s->cmds[i].in.heredoc, pipe_tmp[1], &s->hd);

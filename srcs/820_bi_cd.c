@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 23:44:19 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/22 21:53:07 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:02:57 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	change_dir(char *path, char ***envp)
 	{
 		ft_free(pwd);
 		pwd = ft_strjoin("minishell: cd: ", path);
-		return_error(pwd, 1, 1);
+		error_return(pwd, 1, 1);
 		ft_free(pwd);
 		return (ERROR);
 	}
@@ -54,13 +54,13 @@ int	bi_cd(t_script *s, int n)
 	{
 		home = env_var_getter("HOME", s->envp, NULL);
 		if (home == NULL)
-			return (return_error("cd: HOME not set", 1, 0));
+			return (error_return("cd: HOME not set", 1, 0));
 		status = change_dir(home, &s->envp);
 		free(home);
 		return (status);
 	}
 	if (s->cmds[n].argc > 2)
-		return (return_error("cd: too many arguments", 1, 0));
+		return (error_return("cd: too many arguments", 1, 0));
 	if (s->cmds[n].argv[1][0] == '\0')
 		return (change_dir(".", &s->envp));
 	return (change_dir(s->cmds[n].argv[1], &s->envp));

@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:28:14 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/22 21:53:07 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:02:57 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	syntax_error_msg(char *tk_content, int errms, int errsys)
 	msgt = ft_strjoin("syntax error near unexpected token `", tk_content);
 	msgr = ft_strjoin(msgt, "'");
 	free(msgt);
-	status = return_error(msgr, errms, errsys);
+	status = error_return(msgr, errms, errsys);
 	free(msgr);
 	return (status);
 }

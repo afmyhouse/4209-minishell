@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:27:05 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/23 00:14:34 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:02:57 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	update_shlvl(t_script *s)
 	new_shlvl = ft_itoa(i + 1);
 	if (!new_shlvl)
 	{
-		return_error("", errno, 1);
+		error_return("", errno, 1);
 		return ;
 	}
 	env_var_setter(new_shlvl, "MSHLVL", &s->envp);
@@ -54,7 +54,7 @@ char	**envp_init(char **envp)
 	ms_envp = ft_calloc(i + 1, sizeof(char *));
 	if (!ms_envp)
 	{
-		return_error("", errno, 1);
+		error_return("", errno, 1);
 		return (NULL);
 	}
 	i = -1;
@@ -63,7 +63,7 @@ char	**envp_init(char **envp)
 		ms_envp[i] = ft_strdup(envp[i]);
 		if (!ms_envp[i])
 		{
-			return_error("", errno, 1);
+			error_return("", errno, 1);
 			return (NULL);
 		}
 	}
@@ -129,7 +129,7 @@ int	main(int argc, char **argv, char **envp)
 	s.envt = ft_calloc(1, sizeof(char *));
 	if (!s.envt)
 	{
-		return_error("", errno, 1);
+		error_return("", errno, 1);
 		return (1);
 	}
 	s.envt[0] = NULL;
