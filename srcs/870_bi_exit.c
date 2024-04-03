@@ -6,28 +6,11 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 00:10:23 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/25 17:03:35 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/04/03 23:01:39 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/// @brief 			Builtin 'exit' command argument checker
-/// @param str		Builtin 'exit' argument string
-/// @return			SUCSESS or ERROR
-// int	ft_is_str_digit(char *str)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (str[i])
-// 	{
-// 		if ((str[i] < 48 || str[i] > 57) && str[0] != '-' && str[0] != '+')
-// 			return (ERROR);
-// 		i++;
-// 	}
-// 	return (SUCCESS);
-// }
 
 /// @brief 		Exit function with error message
 /// @param s 	Script structure with commans and args
@@ -66,7 +49,6 @@ int	bi_exit(t_script *s, int n)
 		g_exit_status = error_exit_args("too many arguments\n", 1);
 	else if (s->cmds[n].argc == 2)
 	{
-		// if (ft_is_str_digit(s->cmds[n].argv[1]) == 1)
 		if (!ft_isnum(s->cmds[n].argv[1]))
 			exit_go(s, s->cmds[n].argv[1], ": numeric argument required\n", 2);
 		trim = ft_strtrim_leading(s->cmds[n].argv[1], "0");

@@ -6,7 +6,7 @@
 #    By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/24 21:23:27 by antoda-s          #+#    #+#              #
-#    Updated: 2024/03/23 00:18:39 by antoda-s         ###   ########.fr        #
+#    Updated: 2024/04/03 22:43:01 by antoda-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ OBJDIR 	= build/
 
 # sources and objects base project
 # FILES	=	main.c 				# Top level function
-FILES	=	100_main.c
+FILES	=	000_auth.c
+FILES	+=	100_main.c
 FILES	+=	200_signal.c
 FILES	+=	205_signal_hd.c
 FILES	+=	300_parser.c

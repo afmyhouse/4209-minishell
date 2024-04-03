@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:28:06 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/25 15:02:57 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/04/03 22:52:14 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,9 @@ typedef enum e_cmd_type
 	CMD_UNSET,
 	CMD_ENV,
 	CMD_EXIT,
-	CMD_EQ
+	CMD_EQ,
+	CMD_AUTH,
+	CMD_HELP
 }			t_cmd_type;
 
 /// @brief 				Struct to hold errors from execve
@@ -166,6 +168,31 @@ typedef struct s_script
 	int				mshlvl;
 	struct termios	termios_p;
 }				t_script;
+
+/* ************************************************************************** */
+//																			  */
+//		 ####     ####     ####												  */
+//		#    #   #    #   #    #											  */
+//		#    #   #    #   #    #											  */
+//		#    #   #    #   #    #											  */
+//		#    #   #    #   #    #											  */
+//		#    #   #    #   #    #											  */
+//		 ####     ####     ####												  */
+//																			  */
+/* ************************************************************************** */
+/* ************************************************************************** */
+///	000_auth.c
+/* ************************************************************************** */
+
+/// @brief 		Displays a basic help message the exit instructions
+/// @param 		No parameter required
+/// @return 	0
+int		bi_help(void);
+
+/// @brief 		Displays a message with the authors of the project
+/// @param 		No parameter required
+/// @return 	0
+int		bi_auth(void);
 
 /* ************************************************************************** */
 //																			  */

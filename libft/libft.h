@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 15:21:17 by hmaciel-          #+#    #+#             */
-/*   Updated: 2024/03/25 17:21:15 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/04/03 22:29:57 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,14 @@ typedef struct s_printf
 ///	LIBFT BASE FUNCTIONS
 /* ************************************************************************** */
 
+/// @see		free array
+/// @brief 		Free allocated memory of an array and inicialize pointer to NULL
+/// @param str	Pointer to string
 void			ft_free_arr(char **str);
+
+/// @see		free
+/// @brief 		Free allocated memory of a string and inicialize pointer to NULL
+/// @param str	Pointer to string
 void			ft_free(char *str);
 
 /// @see		ft_isspace, ft_issign, ft_isdigit
@@ -133,19 +140,39 @@ void			ft_bzero(void *s, size_t n);
 /// @return		The string representation of the integer
 char			*ft_itoa(int n);
 
-/// @see				malloc, ft_bzero
-/// @brief 				Allocates memory for an array of Number of elements
-///						of size item_size (bytes) each and returns a pointer to
-///						the begin of allocated memory
-/// @param item_qty		Number of elements
-/// @param item_size	Size of each element
-/// @return				Pointer to allocated memory
-void			*ft_calloc(size_t nmemb, size_t size);
+/// @see		malloc, ft_bzero
+/// @brief 		Allocates memory for an array of Number of elements
+///				of size item_size (bytes) each and returns a pointer to
+///				the begin of allocated memory
+/// @param qty	Quantity of elements
+/// @param size	Size of each element
+/// @return		Pointer to allocated memory
+void			*ft_calloc(size_t qty, size_t size);
 
+/// @brief 		Appends a char to athe end of a string
+/// @param s1 	String to append to
+/// @param c 	Character to append
+/// @return 	Pointer to the new string
 char			*ft_charjoin(char const *s1, char const c);
+
+/// @brief 		tests if a char is alpha of a number
+/// @param c 	character to test
+/// @return 	TRUE if c is alpha or number, FALSE otherwise
 int				ft_isalnum(int c);
+
+/// @brief 		Checks for an alphabetic character.
+/// @param c	Character to check
+/// @return		1 if c is alphabetic, 0 otherwise
 int				ft_isalpha(int c);
+
+/// @brief 		Checks for an ASCII character.
+/// @param c	Character to check
+/// @return		1 if c is ASCII, 0 otherwise
 int				ft_isascii(int c);
+
+/// @brief 		checks if a char is a decimal digit
+/// @param c the char to check
+/// @return 1 if true 0 otherwise
 int				ft_isdigit(int c);
 int				ft_isprint(int c);
 int				ft_issign(char c);

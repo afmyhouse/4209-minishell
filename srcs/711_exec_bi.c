@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:25:54 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/22 21:53:07 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/04/03 22:47:07 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,9 @@ int	exec_bi(int id, t_script *s, int i)
 		g_exit_status = bi_env(s, i);
 	else if (id == CMD_EXIT)
 		return (bi_exit(s, i));
+	else if (id == CMD_AUTH)
+		g_exit_status = bi_auth();
+	else if (id == CMD_HELP)
+		g_exit_status = bi_help();
 	return (SUCCESS);
 }

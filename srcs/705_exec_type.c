@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:25:54 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/22 21:53:07 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/04/03 22:42:05 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,9 @@ int	exec_type(char *cmd)
 		id = CMD_ENV;
 	else if (ft_strncmp(cmd, "exit", 5) == SUCCESS)
 		id = CMD_EXIT;
+	else if (ft_strncmp(cmd, "authors", 8) == SUCCESS)
+		id = CMD_AUTH;
+	else if (ft_strncmp(cmd, "help", 5) == SUCCESS)
+		id = CMD_HELP;
 	return (id);
 }

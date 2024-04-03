@@ -6,7 +6,7 @@
 #    By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/22 12:51:39 by myoung            #+#    #+#              #
-#    Updated: 2024/03/25 18:20:09 by antoda-s         ###   ########.fr        #
+#    Updated: 2024/04/03 22:30:31 by antoda-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ FILES	+= ft_isnum.c
 # NUMBER TO STRING TO NUMBER FUNCTIONS
 FILES	+= ft_atoi.c
 FILES	+= ft_atol.c
+FILES	+= ft_atoll.c
 FILES	+= ft_itoa_base.c
 FILES	+= ft_itoa.c
 # LIST MANAGEMENT FUNCTIONS
