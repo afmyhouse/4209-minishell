@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 19:10:37 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/22 23:24:01 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/04/04 00:50:44 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 /// @return		SUCCESS or ERROR
 int	var_name_checker(char c)
 {
+	show_func(__func__, FSTART, NULL);
 	if (ft_isalnum(c) || c == '_')
 		return (SUCCESS);
 	return (ERROR);
@@ -29,6 +30,7 @@ int	var_name_checker(char c)
 /// @return		SUCCESS or ERROR
 int	var_firstchar(char c)
 {
+	show_func(__func__, FSTART, NULL);
 	if (ft_isalpha(c) || c == '_')
 		return (SUCCESS);
 	return (ERROR);

@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:28:14 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/22 22:35:27 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/04/04 00:50:19 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 /// @return		Number of cmds
 int	cmds_counter(t_token *tk)
 {
+	show_func(__func__, FSTART, NULL);
 	int	count;
 
 	count = 0;

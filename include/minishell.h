@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:28:06 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/04/03 22:52:14 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/04/04 00:44:29 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../libft/libft.h"
+# include "colors.h"
+# include "debug.h"
+# include "error.h"
 
 # define MAX_PATH_LEN 4096
 
@@ -1241,5 +1244,30 @@ void	exit_forks(char *msg, int errms, t_script *s);
 /// @brief 			This function notifies heredoc error message
 /// @param msg 		Content to be printed
 void	error_message_heredoc(char *msg);
+
+/* ************************************************************************** */
+///	999_debug.c !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+/* ************************************************************************** */
+void	execute_show(t_script *s);
+
+void	show_func_msg(const char *msg);
+
+/// @brief 				Shows the function name and status
+/// @param func_name	Name of the function
+/// @param status		Status of the function
+/// @return				Status of the function
+int		show_func(const char *func_name, int status, char *msg);
+
+/// @brief 				This function prints the environment variables
+/// @param envp			Environment variables
+/// @return				void
+void	show_array(char **array, const char *name);
+
+void	show_token_list(t_token *token);
+
+char	*ft_var_address(const char *varname, void *var);
+
+void	show_pointer(const char *func, int status, const char *msg, void *ptr);
+
 
 #endif

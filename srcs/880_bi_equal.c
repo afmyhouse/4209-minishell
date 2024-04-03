@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 00:14:30 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/25 15:02:10 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/04/04 00:52:03 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 /// @param i 		Index of argument to be checked
 void	bi_equal_upd(t_script *s, int n, int i)
 {
+	show_func(__func__, FSTART, NULL);
 	char	*var;
 	char	*val;
 
@@ -35,6 +36,7 @@ void	bi_equal_upd(t_script *s, int n, int i)
 /// @param i 		Index of argument to be checked
 void	bi_equal_new(t_script *s, int n, int i)
 {
+	show_func(__func__, FSTART, NULL);
 	char	*var;
 	char	*val;
 
@@ -52,6 +54,7 @@ void	bi_equal_new(t_script *s, int n, int i)
 /// @return 		SUCCESS or ERROR
 int	bi_equal(t_script *s, int n)
 {
+	show_func(__func__, FSTART, NULL);
 	int		i;
 	char	*var;
 

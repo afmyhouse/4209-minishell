@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 23:46:04 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/25 15:02:42 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/04/04 00:51:48 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 /// @return			SUCCESS or ERROR
 int	bi_pwd(t_script *s, int n)
 {
+	show_func(__func__, FSTART, NULL);
 	int		i;
 	char	*buf;
 

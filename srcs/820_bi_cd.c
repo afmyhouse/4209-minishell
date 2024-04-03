@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 23:44:19 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/25 15:02:57 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/04/04 00:51:44 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 /// @return 		SUCCESS or ERROR
 int	change_dir(char *path, char ***envp)
 {
+	show_func(__func__, FSTART, NULL);
 	int		ret;
 	char	*pwd;
 
@@ -46,6 +47,7 @@ int	change_dir(char *path, char ***envp)
 /// @return			SUCCESS or ERROR
 int	bi_cd(t_script *s, int n)
 {
+	show_func(__func__, FSTART, NULL);
 	char	*home;
 	int		status;
 

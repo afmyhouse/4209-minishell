@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 00:26:42 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/22 21:53:07 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/04/04 00:50:56 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 /// @return		SUCCESS(index) / ERROR(-1)
 int	get_path_index(char **envp)
 {
+	show_func(__func__, FSTART, NULL);
 	int	i;
 
 	i = 0;
@@ -36,6 +37,7 @@ int	get_path_index(char **envp)
 /// @return 	SUCCES(path array pointer) / ERROR(NULL)
 char	**split_path(char **envp)
 {
+	show_func(__func__, FSTART, NULL);
 	int		i;
 	char	**path;
 	char	*tmp;
@@ -59,6 +61,7 @@ char	**split_path(char **envp)
 /// @return 		SUCCESS or ERROR
 int	execute(t_script *s)
 {
+	show_func(__func__, FSTART, NULL);
 	s->path = split_path(s->envp);
 	if (s->cmd_count == 1)
 	{

@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:11:17 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/22 21:53:07 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/04/04 00:51:18 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 /// @param pipeout	Pointer to the pipe to output result
 void	ex_child_1(t_script *s, int *pipeout)
 {
+	show_func(__func__, FSTART, NULL);
 	if (s->cmds[0].in.name)
 		in_redir(s, 0);
 	if (s->cmds[0].out.name)
@@ -44,6 +45,7 @@ void	ex_child_1(t_script *s, int *pipeout)
 /// @param i 		Index of the command to execute
 void	ex_child_i(t_script *s, int **pipes, int i)
 {
+	show_func(__func__, FSTART, NULL);
 	if (s->cmds[i].in.name)
 		in_redir(s, i);
 	else if (pipe_std_setter(pipes[0], STDIN_FILENO) == -1)
@@ -73,6 +75,7 @@ void	ex_child_i(t_script *s, int **pipes, int i)
 /// @param i
 void	ex_child_n(t_script *s, int *pipein, int i)
 {
+	show_func(__func__, FSTART, NULL);
 	if (s->cmds[i].in.name)
 		in_redir(s, i);
 	else if (pipe_std_setter(pipein, STDIN_FILENO) == -1)

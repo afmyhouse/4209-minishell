@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 19:10:37 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/25 15:02:57 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/04/04 00:50:35 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 /// @return		pointer to the new added token
 t_token	*tk_addnew(const char *str, int size, t_token_type type)
 {
+	show_func(__func__, FSTART, NULL);
 	t_token	*tk;
 
 	tk = ft_calloc(1, sizeof(t_token));
@@ -46,6 +47,7 @@ t_token	*tk_addnew(const char *str, int size, t_token_type type)
 /// @return			last token list node
 t_token	*tk_lst_last_getter(t_token *ltk)
 {
+	show_func(__func__, FSTART, NULL);
 	if (!ltk)
 		return (NULL);
 	while (ltk)
@@ -63,6 +65,7 @@ t_token	*tk_lst_last_getter(t_token *ltk)
 /// @param ntk	Pointer to new token
 void	tk_lst_addback(t_token **ltk, t_token *ntk)
 {
+	show_func(__func__, FSTART, NULL);
 	t_token	*token_lst_last;
 
 	if (*ltk)

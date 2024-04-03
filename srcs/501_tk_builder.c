@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 19:10:37 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/25 15:02:57 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/04/04 00:50:31 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 ///				and token type
 t_ops	tk_type_getter(const char *s)
 {
+	show_func(__func__, FSTART, NULL);
 	t_ops		blank;
 	int			i;
 	const t_ops	ops[16] = {{"<<", 2, TK_I}, {"<", 1, TK_I}, {">>", 2, TK_O},
@@ -44,6 +45,7 @@ t_ops	tk_type_getter(const char *s)
 /// @return		1 if success, 0 if error
 int	tk_getter(char *str, t_token **tk_lst)
 {
+	show_func(__func__, FSTART, NULL);
 	t_ops	ptr;
 	char	*prev;
 
@@ -81,6 +83,7 @@ int	tk_getter(char *str, t_token **tk_lst)
 /// @return		SUCCESS if valid, ERROR if invalid
 int	tk_builder(char **line, t_token **tk, t_script *s)
 {
+	show_func(__func__, FSTART, NULL);
 	t_token	*tk_ptr;
 	char	*content;
 

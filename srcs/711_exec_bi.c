@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:25:54 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/04/03 22:47:07 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/04/04 00:51:12 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 /// @return 		SUCCESS or ERROR
 int	exec_bi(int id, t_script *s, int i)
 {
+	show_func(__func__, FSTART, NULL);
 	if (id == CMD_EQ)
 		g_exit_status = bi_equal(s, i);
 	else if (id == CMD_ECHO)

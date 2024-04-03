@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 22:37:00 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/25 15:02:57 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/04/04 00:52:12 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 /// @return			SUCCESS
 int	error_export(const char *msg, int errms)
 {
+	show_func(__func__, FSTART, NULL);
 	char	*msgr;
 	char	*msgt;
 	int		status;
@@ -36,6 +37,7 @@ int	error_export(const char *msg, int errms)
 /// @return			SUCCESS
 int	error_exit_args(const char *msg, int system)
 {
+	show_func(__func__, FSTART, NULL);
 	ft_putstr_fd("exit\n", 2);
 	ft_putstr_fd("minishell: exit: ", 2);
 	ft_putstr_fd(msg, 2);
@@ -49,6 +51,7 @@ int	error_exit_args(const char *msg, int system)
 /// @return			SUCCESS
 int	error_bi_flags(const char *cmd, char *flag, int errms)
 {
+	show_func(__func__, FSTART, NULL);
 	char	*msgr;
 	char	*msgt;
 	int		status;
@@ -69,6 +72,7 @@ int	error_bi_flags(const char *cmd, char *flag, int errms)
 /// @return			SUCCESS
 int	error_return(const char *msg, int errms, int errbash)
 {
+	show_func(__func__, FSTART, NULL);
 	if (!errbash)
 		ft_putstr_fd("minishell: ", 2);
 	g_exit_status = errms;

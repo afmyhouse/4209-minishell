@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:25:54 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/25 15:02:57 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/04/04 00:51:03 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 // int	exec_one_fork(t_script *s, char **path)
 int	exec_one_fork(t_script *s)
 {
+	show_func(__func__, FSTART, NULL);
 	int	pid;
 
 	if (s->cmds[0].in.flag == -1)
@@ -51,6 +52,7 @@ int	exec_one_fork(t_script *s)
 /// @return 		SUCCESS or ERROR
 int	exec_one(t_script *s)
 {
+	show_func(__func__, FSTART, NULL);
 	int	id;
 
 	id = CMD_EX;

@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 19:00:01 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/22 21:53:07 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/04/04 00:50:48 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 /// @return		Content of the variable
 char	*envx_var_getter(char *var, char **envx)
 {
+	show_func(__func__, FSTART, NULL);
 	char	*tmp;
 	char	*ret;
 	int		len;
@@ -50,6 +51,7 @@ char	*envx_var_getter(char *var, char **envx)
 /// @return		Content of the variable
 char	*env_var_getter(char *var, char **envp, char **envt)
 {
+	show_func(__func__, FSTART, NULL);
 	char	*ret;
 
 	ret = envx_var_getter(var, envp);

@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:38:24 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/22 21:52:54 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/04/04 00:51:35 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 /// @param		No parameter required
 void	signal_setter_heredoc(t_script *s)
 {
+	show_func(__func__, FSTART, NULL);
 	sig_handler_heredoc(-1, s);
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, (void *)sig_handler_heredoc);
@@ -27,6 +28,7 @@ void	signal_setter_heredoc(t_script *s)
 /// @return			void
 void	sig_handler_heredoc(int signum, t_script *s)
 {
+	show_func(__func__, FSTART, NULL);
 	static t_script	*tmp;
 
 	if (signum == -1)

@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:27:05 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/04/03 23:55:49 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/04/04 00:49:19 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	g_exit_status;
 /// @param s 	Struct with pparams to initialize
 void	update_shlvl(t_script *s)
 {
+	show_func(__func__, FSTART, NULL);
 	char	*shlvl;
 	char	*new_shlvl;
 	int		i;
@@ -45,6 +46,7 @@ void	update_shlvl(t_script *s)
 /// @return 	array copy of system environment variables
 char	**envp_init(char **envp)
 {
+	show_func(__func__, FSTART, NULL);
 	char	**ms_envp;
 	int		i;
 
@@ -75,6 +77,7 @@ char	**envp_init(char **envp)
 /// @param s 	struct with pparams to initialize
 void	struct_init(t_script *s)
 {
+	show_func(__func__, FSTART, NULL);
 	s->path = NULL;
 	s->hd = NULL;
 	s->cmd_count = 0;
@@ -86,6 +89,7 @@ void	struct_init(t_script *s)
 /// @return				void
 int	ms_loop(t_script *s)
 {
+	show_func(__func__, FSTART, NULL);
 	int		status;
 	char	*line_buffer;
 
@@ -122,6 +126,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_script	s;
 
+	show_func(__func__, FSTART, NULL);
 	(void)argc;
 	(void)argv;
 	s.envp = envp_init(envp);

@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:28:14 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/25 15:02:57 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/04/04 00:50:22 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 /// @param tk 	pointert o command struct hed
 void	fnames_clear(t_command *cmds, int max, t_token *tk)
 {
+	show_func(__func__, FSTART, NULL);
 	int	i;
 
 	(void)tk;
@@ -38,6 +39,7 @@ void	fnames_clear(t_command *cmds, int max, t_token *tk)
 /// @return 		1 if failure, 0 if success
 int	redir_error(char *name)
 {
+	show_func(__func__, FSTART, NULL);
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	return (error_return(name, 1, 1));
 }
@@ -50,6 +52,7 @@ int	redir_error(char *name)
 /// @return			0 if success, 1 if failure
 int	redir(t_token *tk, t_redirection *file)
 {
+	show_func(__func__, FSTART, NULL);
 	int	ret;
 
 	if (file->name)

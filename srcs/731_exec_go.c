@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:11:17 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/25 15:02:57 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/04/04 00:51:21 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	exec_ve_err(t_script *s, int i)
 {
+	show_func(__func__, FSTART, NULL);
 	char	*msg;
 
 	msg = ft_strjoin("minishell: ", s->cmds[i].argv[0]);
@@ -32,6 +33,7 @@ void	exec_ve_err(t_script *s, int i)
 /// @param i 		Index of the command to execute
 void	exec_go(t_script *s, int id, int i)
 {
+	show_func(__func__, FSTART, NULL);
 	struct stat	buf;
 
 	memset(&buf, 0, sizeof(struct stat));

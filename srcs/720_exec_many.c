@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:26:05 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/25 15:02:57 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/04/04 00:51:16 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 /// @return 		SUCCESS or ERROR
 int	exec_cmd_1(t_script *s, char **path, int *pipeout)
 {
+	show_func(__func__, FSTART, NULL);
 	int	pid;
 
 	(void) path;
@@ -47,6 +48,7 @@ int	exec_cmd_1(t_script *s, char **path, int *pipeout)
 /// @param pid 		NOTHING
 int	exec_cmd_i(t_script *s, char **path, int **pipes, int i)
 {
+	show_func(__func__, FSTART, NULL);
 	int	pid;
 
 	(void) path;
@@ -73,6 +75,7 @@ int	exec_cmd_i(t_script *s, char **path, int **pipes, int i)
 /// @param pid 		NOTHING
 int	exec_cmd_n(t_script *s, int *pipein)
 {
+	show_func(__func__, FSTART, NULL);
 	int	i;
 	int	pid;
 
@@ -98,6 +101,7 @@ int	exec_cmd_n(t_script *s, int *pipein)
 /// @return 		SUCCESS or ERROR
 int	exec_cmd_loop(t_script *s, int *pipe1, int *pipe2)
 {
+	show_func(__func__, FSTART, NULL);
 	int	i;
 	int	cmd_idx;
 	int	**pipes;
@@ -133,6 +137,7 @@ int	exec_cmd_loop(t_script *s, int *pipe1, int *pipe2)
 /// @return 		SUCCESS or ERROR
 int	exec_many(t_script *s)
 {
+	show_func(__func__, FSTART, NULL);
 	int	pipe1[2];
 	int	pipe2[2];
 	int	cmd;

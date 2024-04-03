@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 19:00:01 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/22 21:53:07 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/04/04 00:50:37 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 /// @return		addressed memory arg <i> is updated
 void	tk_var_xpd_dolar_c(char *otk, int *i)
 {
+	show_func(__func__, FSTART, NULL);
 	(*i)++;
 	if (otk[*i] && var_firstchar(otk[*i]) == SUCCESS)
 		while (otk[*i] && var_name_checker(otk[*i]) == SUCCESS)
@@ -37,6 +38,7 @@ void	tk_var_xpd_dolar_c(char *otk, int *i)
 /// @return 	addressed memory <splits> and <i> updated
 void	tk_var_xpd_dquote_c(char *otk, int *spl, int *i)
 {
+	show_func(__func__, FSTART, NULL);
 	int	xpd;
 
 	xpd = 0;
@@ -70,6 +72,7 @@ void	tk_var_xpd_dquote_c(char *otk, int *spl, int *i)
 /// @return		addressed memory arg <i> is updated
 void	tk_var_xpd_squote_c(char *otk, int *i)
 {
+	show_func(__func__, FSTART, NULL);
 	(*i)++;
 	while (otk[*i] && otk[*i] != '\'')
 		(*i)++;
@@ -84,6 +87,7 @@ void	tk_var_xpd_squote_c(char *otk, int *i)
 /// @return		addressed memory arg <i> is updated
 void	tk_var_xpd_else_c(char *otk, int *i)
 {
+	show_func(__func__, FSTART, NULL);
 	(*i)++;
 	while (otk[*i] && otk[*i] != '$'
 		&& otk[*i] != '\"' && otk[*i] != '\'')

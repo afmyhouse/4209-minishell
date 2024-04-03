@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 16:48:24 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/25 15:02:57 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/04/04 00:51:27 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 /// @param pipe Pointer to the pipe to output result
 void	loop_heredoc(t_list *h, int pipe, char **hd)
 {
+	show_func(__func__, FSTART, NULL);
 	char	*tmp;
 
 	*hd = ft_strdup("");
@@ -52,6 +53,7 @@ void	loop_heredoc(t_list *h, int pipe, char **hd)
 /// @param path Commands execution path
 void	heredoc(t_script *s, int i)
 {
+	show_func(__func__, FSTART, NULL);
 	int		pipe_tmp[2];
 
 	if (pipe(pipe_tmp) == -1)

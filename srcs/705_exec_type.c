@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:25:54 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/04/03 22:42:05 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/04/04 00:51:00 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 /// @return		Command id validated
 int	bi_equal_check(t_script *s, int n, int i)
 {
+	show_func(__func__, FSTART, NULL);
 	char	**new_array;
 	int		j;
 
@@ -51,6 +52,7 @@ int	bi_equal_check(t_script *s, int n, int i)
 /// @return 		Command id
 int	exec_type(char *cmd)
 {
+	show_func(__func__, FSTART, NULL);
 	int	id;
 
 	id = CMD_EX;

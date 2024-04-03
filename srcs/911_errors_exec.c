@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 23:43:45 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/25 15:04:13 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/04/04 00:52:15 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 /// @return		status
 int	error_fork(char **path)
 {
+	show_func(__func__, FSTART, NULL);
 	write(2, "Error: fork failed\n", 19);
 	g_exit_status = 1;
 	return (free_array(path, ERROR));
@@ -27,6 +28,7 @@ int	error_fork(char **path)
 /// @return		status
 int	error_pipe(char **path)
 {
+	show_func(__func__, FSTART, NULL);
 	write(2, "Error: pipe failed\n", 19);
 	g_exit_status = 1;
 	return (free_array(path, ERROR));
@@ -40,6 +42,7 @@ int	error_pipe(char **path)
 /// @param path 	Path to be freed
 void	exit_forks(char *msg, int errms, t_script *s)
 {
+	show_func(__func__, FSTART, NULL);
 	error_return(msg, errms, 1);
 	free_exit(s, 1);
 	exit(1);
@@ -49,6 +52,7 @@ void	exit_forks(char *msg, int errms, t_script *s)
 /// @param msg 		Content to be printed
 void	error_message_heredoc(char *msg)
 {
+	show_func(__func__, FSTART, NULL);
 	ft_putstr_fd("minishell: warning: here-document delimited", 2);
 	ft_putstr_fd(" by end-of-file (wanted '", 2);
 	ft_putstr_fd(msg, 2);

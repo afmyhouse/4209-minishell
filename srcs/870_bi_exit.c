@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 00:10:23 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/04/03 23:01:39 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/04/04 00:52:01 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 /// @param sys 	System error
 void	exit_go(t_script *s, char *arg, char *msg, int sys)
 {
+	show_func(__func__, FSTART, NULL);
 	ft_putstr_fd("exit\n", 1);
 	if (sys > 0 && (arg || msg))
 	{
@@ -38,6 +39,7 @@ void	exit_go(t_script *s, char *arg, char *msg, int sys)
 /// @return			exit status or ERROR
 int	bi_exit(t_script *s, int n)
 {
+	show_func(__func__, FSTART, NULL);
 	char	*trim;
 
 	trim = NULL;

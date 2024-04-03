@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 18:07:19 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/22 21:53:07 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/04/04 00:51:24 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 /// @param path Commands execution path
 void	in_redir(t_script *s, int i)
 {
+	show_func(__func__, FSTART, NULL);
 	int	fdin;
 
 	if (s->cmds[i].in.flag >= 0)
@@ -47,6 +48,7 @@ void	in_redir(t_script *s, int i)
 // void	out_redir(t_script *s, int i, char **path)
 void	out_redir(t_script *s, int i)
 {
+	show_func(__func__, FSTART, NULL);
 	int	fdout;
 
 	fdout = open(s->cmds[i].out.name, s->cmds[i].out.flag, 0644);

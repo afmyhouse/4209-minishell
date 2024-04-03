@@ -6,7 +6,7 @@
 /*   By: antoda-s <antoda-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 19:10:37 by antoda-s          #+#    #+#             */
-/*   Updated: 2024/03/22 21:53:48 by antoda-s         ###   ########.fr       */
+/*   Updated: 2024/04/04 00:50:28 by antoda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 /// @param c	separator to comply removal
 void	tk_blank_split(t_token **tk_p, t_token *tk, char c )
 {
+	show_func(__func__, FSTART, NULL);
 	char	*str1;
 	char	*str2;
 	char	*tmp;
@@ -53,6 +54,7 @@ void	tk_blank_split(t_token **tk_p, t_token *tk, char c )
 /// @return		clean content
 void	tk_rm_blank(t_token **tk)
 {
+	show_func(__func__, FSTART, NULL);
 	t_token	**tk_p;
 	t_token	*tk_n;
 	char	c;
