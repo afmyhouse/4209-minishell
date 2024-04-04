@@ -91,9 +91,17 @@ make -n
 ```bash
 echo $MSHLVL
 ```
-> must dispaly the current minishell instance
+> must dispaly the current minishell instance (when runing from bash it should be 1)
 
-### Simple Command
+```bash
+./minishell
+```
+```bash
+echo $MSHLVL
+```
+> must dispaly the current minishell instance (the previous instance should be previous instance + 1)
+
+### Some Simple Commands
 
 ```bash
 /bin/ls
@@ -102,7 +110,7 @@ echo $MSHLVL
 ```bash
 date
 ```
-> Wed  7 Jul 2021 11:00:00 AM -03
+> Wed  03 Mar 2024 1:43:66 WEST 
 ```bash
 ifconfig
 ```
@@ -110,7 +118,7 @@ ifconfig
 ```bash
 who
 ```
-> antoda-s- tty2         2023-06-20 10:46 (tty2)
+> antoda-s- tty2         2024-03-13 21:53 (tty2)
 ```bash
 [empty]
 ```
