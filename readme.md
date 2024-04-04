@@ -7,12 +7,13 @@ This is a shell implementation called Minishell. It is a command-line interprete
 This project was developed in colaboration with [fpinho-d](https://github.com/filipepinholiveira).
 
 ## Two Branchs
-There are 2 branchs on this project. If you are start your 'minishell' project now,  the 'debug' branch is useful as it has debugging functionalities that you might find helpful to navigate the code while getting feedback about the where teh code goes and the variables and pointers values.
+There are 2 branchs on this project. 
+If you are starting your 'minishell' journey,  the 'debug' branch is useful as it has debugging functionalities that you might find helpful to navigate the code while getting feedback about the where teh code goes and the variables and pointers values.
 ```
 git clone 
 ```
 ```
-git checkout main_debug
+git checkout debug
 ```
 ```
 make
