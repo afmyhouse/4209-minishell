@@ -755,6 +755,6 @@ cd -
 ```
 > append to a file
 
-### Grade: X/100
+### Grade: 112/100
 ### Used tests
 - minishell_tester: https://github.com/kichkiro/minishell_tester
