@@ -1,8 +1,8 @@
 # minishell
 
-CREDITS on this MD file: https://github.com/waltergcc
-
-This is a shell implementation called Minishell. It is a command-line interpreter that provides a basic shell environment and supports various features such as command execution, input parsing, redirections, pipes, environment variables, built-in commands, and signal handling.
+This is a basic shell implementation called Minishell., made in C language 
+It is a bash-like command-line interpreter which behaves as a basic bash environment.
+It supports various features such as command execution, input parsing, redirections, pipes, environment variables, built-in commands, and signal handling.
 
 This project was developed in colaboration with [fpinho-d](https://github.com/filipepinholiveira).
 
@@ -19,6 +19,7 @@ git checkout debug
 make
 ```
 And you are ready to try it with some feedback about the program flow.
+If you want to get the feeling of it without any 'noise' then you shoul try the main branch version which is exactly like the debug version but withou any feedback besides the expected behaviour of a shell.
 
 ## Words of Wisdom
 ### Focus on the requirement :dart:
@@ -40,7 +41,7 @@ Our reference shell is Bash, but running certain commands in other shells may pr
 - **Pipes:** It implements pipes `|` to connect the output of one command to the input of the next command in a pipeline.
 - **Environment variables:** Minishell handles the expansion of environment variables (`$` followed by a sequence of characters) to their respective values.
 - **Special variables:** It supports the special variable `$?` which expands to the exit status of the most recently executed foreground pipeline.
-- **Signal handling:** Minishell handles signals such as `ctrl-C` (SIGINT), `ctrl-D` (EOF), and `ctrl-\` (SIGQUIT) according to the specified behavior in the subject.
+- **Signal handling:** Minishell handles signals such as `ctrl-C` (SIGINT), `ctrl-D` (EOF), and `ctrl-\` (SIGQUIT) according to the specified behavior in the subject of this project.
 - **Built-in commands:** It provides several built-in commands, including `echo`, `cd`, `pwd`, `export`, `unset`, `env`, and `exit`, with their respective options and arguments.
 
 ## Implementation Details
