@@ -86,6 +86,13 @@ make -n
 ```
 > gcc -Wall -Wextra -Werror -c src/main.c -o obj/main.o
 
+### minishell instance
+
+```bash
+echo $MSHLVL
+```
+> must dispaly the current minishell instance
+
 ### Simple Command
 
 ```bash
