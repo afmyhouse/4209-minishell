@@ -6,6 +6,13 @@ This is a shell implementation called Minishell. It is a command-line interprete
 
 This project was developed in colaboration with [fpinho-d](https://github.com/filipepinholiveira).
 
+## Two Branchs
+There are 2 branchs on this project. If you are start your 'minishell' project now,  the main_debug is useful as it has debuging functionalities that you might fuind helpfull to navigate the code.
+git clone 
+git checkout main_debug
+make
+And you are ready to try it with some feedback about the program flow.
+
 ## Words of Wisdom
 ### Focus on the requirement :dart:
 Please implement only what the subject explicitly requests. Anything that is not requested is not a requirement, and each additional implementation increases development time and adds unnecessary complexity to the project.
